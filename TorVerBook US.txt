@@ -11,11 +11,11 @@ Sceglierne 3 a testa o aggiungerne altre, alla fine ricaricarle rinominandole "C
 
 5)As a user, I want to exchange my book with someone's else book, so that I can get a book I need.
 
-6)As a buyer, I want to save my favorite insertion, so that I don't have to search them again.
+6)As a buyer, I want to save my favorite ads, so that I don't have to search them again.
 
-7)As a user, I want to highlight the insertions, so that I can have more chance to sell the book.
+7)As a user, I want to highlight the ads, so that I can have more chance to sell the book.
 
-8)As a seller, I want to mark as sold an insertions, so that I can see unselled books.
+8)As a seller, I want to mark as sold an ad, so that I can see unsold books.
 
 9)(Forse questa, ma spiegherebbe lo UC (search a book))As a buyer, I want to search a book for sale, so that I can make a 
   price comparison with other sites, shops.

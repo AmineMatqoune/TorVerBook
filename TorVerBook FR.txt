@@ -1,0 +1,12 @@
+Scegliere 3 a testa tra queste, al massimo aggiungine altre e committa nella repo del progetto con "Cognome-FR.txt"
+
+1)The system shall save user's favorite ads (when requested).
+
+2)The system shall provide the possibility to filter* the search of books.
+	*filter is based on "Title", "Course", "Location" etc...
+
+3)The system shall provide the possibility to both seller and buyer to contact each other via e-mail, phone number and chat.
+
+4)The system shall remove all the ads marked as sold by the seller.
+
+5)The system shall place highlighted ads on the top of the search list.
