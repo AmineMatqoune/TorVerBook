@@ -3,10 +3,12 @@ Scegliere 3 a testa tra queste, al massimo aggiungine altre e committa nella rep
 1)The system shall save user's favorite ads (when requested).
 
 2)The system shall provide the possibility to filter* the search of books.
-	*filter is based on "Title", "Course", "Location" etc...
+	*filter is based on "Title", "College Course", "Price".
 
 3)The system shall provide the possibility to both seller and buyer to contact each other via e-mail, phone number and chat.
 
-4)The system shall remove all the ads marked as sold by the seller.
+4)The system shall decrease by 1 the quantity of books when the ad (relative to the book) is marked as sold by the seller.
 
 5)The system shall place highlighted ads on the top of the search list.
+
+6)The system shall provide the possibility to rank the seller of a book with a rating between 1 and 5 stars.
