@@ -1,0 +1,15 @@
+language: 
+     java
+
+jdk: 
+     -openjdk8
+
+addons:
+     sonarcloud:
+     organization: "aminematqoune"
+     token: 
+         secure: "0078bb7695392c5ef550a9f1cc7309f47f279454"
+
+script: 
+     - ant build
+     - sonar-scanner
