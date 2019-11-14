@@ -3,21 +3,22 @@ Sceglierne 3 a testa o aggiungerne altre, alla fine ricaricarle rinominandole "C
 1)As a buyer, I want to contact* a book-seller, so that I can buy a book.
 	contact*: via e-mail, phone number, chat.
 
-2)As a buyer, I want to see a list of books specifying my course, so that I can buy them.
+2)As a buyer, I want to see a list of books specifying parameters*, so that I can buy them.
+	parameters: title, price, college course.
 
 3)As a buyer, I want to contact via e-mail, phone number and chat the book-seller, so that I can meet him and buy the book.
 
-4)As a seller, I want to sell books, so that I can earn money.
+//4)As a seller, I want to sell books, so that I can earn money.*
 
-5)As a user, I want to exchange my book with someone's else book, so that I can get a book I need.
+4)As a user, I want to exchange my book with someone's else book, so that I can get a book I need.
 
-6)As a buyer, I want to save my favorite ads, so that I don't have to search them again.
+5)As a buyer, I want to save favorite ads, so that I don't have to search them again.
 
-7)As a user, I want to highlight the ads, so that I can have more chance to sell the book.
+6)As a user, I want to highlight the ads, so that I can have more chance to sell the book.
 
-8)As a seller, I want to mark as sold an ad, so that I can see unsold books.
+//8)As a seller, I want to mark as sold an ad, so that I can see unsold books.
 
-9)(Forse questa, ma spiegherebbe lo UC (search a book))As a buyer, I want to search a book for sale, so that I can make a 
+//9)(Forse questa, ma spiegherebbe lo UC (search a book))As a buyer, I want to search a book for sale, so that I can make a 
   price comparison with other sites, shops.
 
 Altre possibili US sono quella di:
