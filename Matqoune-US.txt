@@ -1,0 +1,8 @@
+User Stories:
+
+1-As a buyer, I want to save favorite ads, so that I don't have to search them again.
+
+2-As a buyer, I want to see a list of books specifying parameters*, so that I can buy them.
+	parameters: title, price, college course.
+
+3-As a user, I want to exchange my book with someone's else book, so that I can get a book I need.

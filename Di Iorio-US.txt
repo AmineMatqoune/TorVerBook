@@ -1,0 +1,9 @@
+User Stories:
+
+1-As a buyer, I want to contact* a book-seller, so that I can buy a book.
+	contact*: via e-mail, phone number, chat.
+
+2-As a user, I want to highlight the ads, so that I can have more chance to sell the book.
+
+3-As a buyer, I want to contact via e-mail, phone number and chat the book-seller, so that I can meet him
+and buy the book.
