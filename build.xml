@@ -5,7 +5,7 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="TorVerBook">
     <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../eclipse/java-2019-09/eclipse/"/>
+    <property name="ECLIPSE_HOME" value="../../../eclipse/java-2019-09/eclipse/"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
@@ -48,10 +48,5 @@
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
-    </target>
-    <target name="testClass">
-        <java classname="testClass" failonerror="true" fork="yes">
-            <classpath refid="TorVerBook.classpath"/>
-        </java>
     </target>
 </project>
