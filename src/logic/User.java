@@ -6,10 +6,10 @@ import java.util.List;
 public final class User extends Account{
 	
 	//User's account info
-	protected int numAds;
-	protected int rank;
+	private int numAds;
+	private int rank;
 	
-	List<Ad> listOfAd;
+	private List<Ad> listOfAd;
 	List<Message> listOfMessage = null;
 	List<User> listOfRelatedUser = null;
 	List<Review> listOfReview = null;
@@ -45,11 +45,9 @@ public final class User extends Account{
 		listOfRelatedUser.add(u);
 	}
 	
-	public void deleteAd() {}
+	public void deleteAd(Ad ad) {}
 	
-	public void markAsSold() {}
-	
-	public void sendEmail() {}
+	public void markAsSold(Ad ad) {}
 	
 	public void sendMessage(String mex, User dest) {
 		Message m = new Message(mex, dest);

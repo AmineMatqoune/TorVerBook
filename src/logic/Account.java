@@ -1,11 +1,15 @@
 package logic;
 
+import java.util.Calendar;
+
 public class Account implements AccountInterface{
 	
 	//User's info
 	protected String name;
 	protected String surname;
 	protected String address;
+	protected Calendar birthDate;
+	protected String birthPlace;
 	protected int age;
 		
 	//User's account info
@@ -30,21 +34,29 @@ public class Account implements AccountInterface{
 	public String getSurname() {
 		return this.surname;
 	}
+	
+	public String getAddress() {
+		return this.address;
+	}
+	
+	public Calendar getBirthDate() {
+		return this.birthDate;
+	}
 
+	public String getBirthPlace() {
+		return this.birthPlace;
+	}
+	
 	public int getAge() {
 		return this.age;
 	}
 
-	public String getAddress() {
-		return this.address;
-	}
-
-	public String getEmail() {		
-		return this.email;
-	}
-
 	public String getUsername() {
 		return this.username;
+	}
+	
+	public String getEmail() {		
+		return this.email;
 	}
 
 	public String getPwdHash() {
