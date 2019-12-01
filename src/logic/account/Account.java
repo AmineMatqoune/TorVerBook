@@ -2,7 +2,7 @@ package logic.account;
 
 import java.util.Calendar;
 
-public class Account implements AccountInterface{
+public abstract class Account implements AccountInterface{
 	
 	//User's info
 	protected String name;

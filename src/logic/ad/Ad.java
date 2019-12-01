@@ -61,13 +61,13 @@ public final class Ad {
 	//behaviour operations
 	public void markAsSold() {}
 	
-	public void highlight(Highlight hl) {
+	public void addHighlight(Highlight hl) {
 		//personalize (call private method below)
 	}
 	
-	private void setFont() {}
+	private void setFont(String font) {}
 	
-	private void setThickness() {}
+	private void setThickness(int t) {}
 	
 	private boolean isConvalidated() {
 		return this.isConvalidated;

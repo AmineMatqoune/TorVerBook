@@ -5,7 +5,7 @@ import logic.ad.*;
 import java.awt.Color;
 import java.util.Calendar;
 
-public class Highlight {
+public final class Highlight implements HighlightInterface{
 	
 	//highlight info for user
 	private HighlightType hlType;
@@ -75,10 +75,6 @@ public class Highlight {
 		return this.getThickness();
 	}
 	
-	public int getPrice() {
-		return this.pricePerDay /* *numOfDays*/;
-	}
-	
 	public Calendar getStartDate() {
 		return this.startDate;
 	}
@@ -91,18 +87,28 @@ public class Highlight {
 		return this.font;
 	}
 	
-	//behavioural methods
-	protected void linkToAd() {} //è del controller quest'operazione?
+	//behavioural methods inherited from interface
+	@Override
+	public void addToAd(Ad ad) {} //è del controller quest'operazione?
 	
-	protected void getPeriod() {
-		//return finishDate-startDate?
-	}
-	
-	protected boolean isExpired() {
+	@Override
+	public boolean isExpired() {
 		return (Boolean)null;
 	}
 	
-	protected Ad getRelatedAd() { //è del controller quest'operazione?
+	@Override
+	public void remove() {}
+	
+	@Override
+	public int getPrice(int days) {return 0;}
+	
+	@Override
+	public void getPeriod() {
+		//return finishDate-startDate?
+	}
+	
+	@Override
+	public Ad getRelatedAd() { //è del controller quest'operazione?
 		return this.relatedAd;
 	}
 }
