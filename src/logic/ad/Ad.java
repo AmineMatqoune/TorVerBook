@@ -4,7 +4,7 @@ import java.util.Calendar;
 import logic.account.*;
 import logic.highlight.*;
 
-//Class for the entity Ad with getter, setter, init and behaviour operations
+//Class for the entity Ad with getter, setter, init and behavioural operations
 
 public final class Ad {
 	
@@ -14,6 +14,7 @@ public final class Ad {
 	private String title;
 	private AdCategory category;
 	private double price;
+	private int quantity;
 	private AdType type;
 	private boolean isSold;
 	
@@ -48,6 +49,10 @@ public final class Ad {
 	
 	public double getPrice() {
 		return this.price;
+	}
+	
+	public double getQuantity(){
+		return this.quantity;
 	}
 	
 	public AdType getType() {

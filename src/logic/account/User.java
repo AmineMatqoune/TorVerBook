@@ -13,13 +13,12 @@ public final class User extends Account{
 	private int numAds;
 	private int rank;
 	
-	private List<Ad> listOfAd;
-	List<Message> listOfMessage = null;
-	List<User> listOfRelatedUser = null;
-	List<Review> listOfReview = null;
+	private List<Ad> ownAd;
+	List<User> relatedUser = null;
+	List<Review> ownReview = null;
 	
-	public User(String name, String surname, String address, int age, String username, String email, String pwdHash) {
-		super(name, surname, address, age, username, email, pwdHash);
+	public User(String name, String surname, String address, String username, String email, String pwdHash) {
+		super(name, surname, address, username, email, pwdHash);
 		loadOwnAds();
 		loadOwnReviews();
 		loadRelatedUsers();
@@ -39,14 +38,19 @@ public final class User extends Account{
 	
 	public void addAd(Ad ad) {}
 	
-	public void addToFavoriteList(Ad ad) {}
+	public void removeAd(Ad ad){}
+	
+	public void saveInFavoriteList(Ad ad) {}
 	
 	private void addRelatedUser(User u) {
-		if(listOfRelatedUser == null) {
-			listOfRelatedUser = new ArrayList<>();
+		if(relatedUser == null) {
+			relatedUser = new ArrayList<>();
 		}
 		
-		listOfRelatedUser.add(u);
+		relatedUser.add(u);
+	}
+	
+	public void changeProfileSettings(String name, String surname, String address, int age, String username, String email, String pwdHash){
 	}
 	
 	public void deleteAd(Ad ad) {}
@@ -58,4 +62,6 @@ public final class User extends Account{
 		m.send();
 		this.addRelatedUser(dest);
 	}
+	
+	public void sendEmail(){}
 }

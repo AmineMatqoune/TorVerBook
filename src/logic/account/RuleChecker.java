@@ -21,10 +21,11 @@ public final class RuleChecker extends Account{
 	
 	//methods for RuleChecker's actions
 	
-	public RuleChecker(String name, String surname, String address, int age, String username, String email, String pwdHash) {
-		super(name, surname, address, age, username, email, pwdHash);
+	public RuleChecker(String name, String surname, String address, String username, String email, String pwdHash) {
+		super(name, surname, address, username, email, pwdHash);
 		loadOwnInfo();
 		loadAds();
+		loadReviews();
 	}
 	
 	public void loadAds() {

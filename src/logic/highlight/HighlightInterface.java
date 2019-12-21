@@ -4,7 +4,7 @@ import logic.ad.Ad;
 
 public interface HighlightInterface {
 	
-		public void addToAd(Ad ad);
+		public void linkToAd(Ad ad);
 		
 		public boolean isExpired();
 		

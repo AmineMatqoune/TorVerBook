@@ -39,7 +39,7 @@ public final class Highlight implements HighlightInterface{
 		font = "Times New Roman";
 		textColor = Color.BLACK;
 		bgColor = Color.GREEN;
-		levelOfVisibility = 2;
+		levelOfVisibility = 0;
 	}
 	
 	private void initMediumHighlight() {
@@ -51,7 +51,7 @@ public final class Highlight implements HighlightInterface{
 		font = "Arial";
 		textColor = Color.BLUE;
 		bgColor = Color.WHITE;	
-		levelOfVisibility = 2;
+		levelOfVisibility = 1;
 	}
 	
 	private void initSuperHighlight() {
@@ -89,7 +89,7 @@ public final class Highlight implements HighlightInterface{
 	
 	//behavioural methods inherited from interface
 	@Override
-	public void addToAd(Ad ad) {} //è del controller quest'operazione?
+	public void linkToAd(Ad ad) {} //è del controller quest'operazione?
 	
 	@Override
 	public boolean isExpired() {
