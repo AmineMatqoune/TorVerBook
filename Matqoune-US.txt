@@ -1,8 +1,8 @@
 User Stories:
 
-1-As a buyer, I want to save favorite ads, so that I don't have to search them again.
+1-As a user, I want to save favorite ads from the lsit, so that I don't have to search them again.
 
-2-As a buyer, I want to see a list of books specifying parameters*, so that I can buy them.
+2-As a user, I want to filter the list of books specifying 3 parameters*, so that I can see a list of books i'm interested in.
 	parameters: title, price, college course.
 
 3-As a user, I want to exchange my book with someone's else book, so that I can get a book I need.
