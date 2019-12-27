@@ -3,9 +3,9 @@ package logic.account;
 import java.util.ArrayList;
 import java.util.List;
 
-import logic.Message;
-import logic.Review;
 import logic.ad.Ad;
+import stuff.Message;
+import stuff.Review;
 
 public final class User extends Account{
 	

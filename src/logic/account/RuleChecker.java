@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import logic.Review;
 import logic.ad.Ad;
+import stuff.Review;
 
 
 public final class RuleChecker extends Account{
