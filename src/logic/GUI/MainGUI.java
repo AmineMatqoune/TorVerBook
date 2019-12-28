@@ -1,27 +1,24 @@
 package logic.GUI;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MainGUI extends Application {
+public class MainGui extends Application{
 
-	Stage myStage;	
-	
+	public static void main(String[] args) {
+		launch(args);
+	}
+
 	@Override
 	public void start(Stage stage) throws Exception {
-		this.myStage = stage;
-		this.myStage.setTitle("TorVerBook");
-		this.myStage.setResizable(false);
-		this.myStage.setHeight(900);
-		this.myStage.setWidth(1600);
-		this.myStage.centerOnScreen();
-		this.myStage.show();
-		settaScene(new BaseScene().getScene());
+		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+		
+		stage.setTitle("TorVerBook - Login");
+		stage.setResizable(false);
+		stage.setScene(new Scene(root, 1600, 900));
+		stage.show();		
 	}
-
-	public void settaScene(Scene scene) {
-		myStage.setScene(scene);
-	}
-
 }
