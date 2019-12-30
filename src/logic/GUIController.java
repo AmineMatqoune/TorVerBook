@@ -17,7 +17,7 @@ public class GUIController {
 	
 	public void loadLogin() {
 		base = new BaseScene();
-		main.settaScene(base.getScene());
+		main.setScene(base.getScene());
 	}
 	
 }

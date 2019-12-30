@@ -2,22 +2,348 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.GUI.SignInController">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: 0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.GUI.LoginController">
    <children>
-      <Label layoutX="603.0" layoutY="38.0" text="TorVerBook">
-         <font>
-            <Font name="Comic Sans MS Bold" size="70.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnLanguage" layoutX="1467.0" layoutY="75.0" mnemonicParsing="false" onAction="#changeLanguage" prefHeight="30.0" prefWidth="80.0" text="ENG">
+      <Label layoutY="-5.0" prefHeight="150.0" prefWidth="1600.0" style="-fx-background-color: #024a00;" />
+      <Button fx:id="btnLanguage" layoutX="1495.0" layoutY="34.0" mnemonicParsing="false" onAction="#changeLanguage" prefHeight="30.0" prefWidth="80.0" text="ENG">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Button>
-      <Label layoutX="625.0" layoutY="328.0" text="BRAVOOOOOOOOOOOOOOOOOOOOOOOOOO" />
-      <Button fx:id="registerBtn" layoutX="473.0" layoutY="519.0" mnemonicParsing="false" onAction="#register" text="REGISDTRAAAAA" />      
+      <Label layoutX="603.0" layoutY="21.0" text="TorVerBook" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="70.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutY="172.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="272.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="172.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutY="372.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="372.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="472.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutY="572.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      
+      <Label layoutY="151.0" prefHeight="17.0" prefWidth="1600.0" style="-fx-background-color: #024a00;" />
+      
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="672.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutY="772.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="100.0" layoutY="872.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="772.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="200.0" layoutY="572.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="300.0" layoutY="472.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="300.0" layoutY="872.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="300.0" layoutY="672.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="300.0" layoutY="272.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" layoutY="172.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" layoutY="372.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" layoutY="572.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="400.0" layoutY="772.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="500.0" layoutY="872.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="500.0" layoutY="672.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="500.0" layoutY="272.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="600.0" layoutY="772.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="700.0" layoutY="872.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="500.0" layoutY="472.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="600.0" layoutY="572.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="600.0" layoutY="372.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="600.0" layoutY="172.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1500.0" layoutY="872.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="900.0" layoutY="672.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1100.0" layoutY="672.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1300.0" layoutY="672.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="700.0" layoutY="272.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="900.0" layoutY="272.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1100.0" layoutY="272.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1300.0" layoutY="272.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="800.0" layoutY="172.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1000.0" layoutY="172.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1200.0" layoutY="172.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1400.0" layoutY="172.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="800.0" layoutY="772.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1000.0" layoutY="772.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1300.0" layoutY="872.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1100.0" layoutY="872.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="900.0" layoutY="872.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="700.0" layoutY="472.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="900.0" layoutY="472.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1100.0" layoutY="472.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1300.0" layoutY="472.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1200.0" layoutY="772.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1400.0" layoutY="772.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="800.0" layoutY="572.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1000.0" layoutY="572.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1200.0" layoutY="572.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="700.0" layoutY="672.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1500.0" layoutY="472.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1400.0" layoutY="572.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1500.0" layoutY="682.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1000.0" layoutY="372.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1200.0" layoutY="372.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1400.0" layoutY="372.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="800.0" layoutY="372.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="1500.0" layoutY="272.0" opacity="0.02">
+         <image>
+            <Image url="@../../../../../Desktop/logo_blu.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
