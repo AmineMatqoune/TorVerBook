@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
 public class LogInScene {
 	
 	private Scene myScene;
-	private final String font = "Arial";
+	private static final String font = "Arial";
 	
 	public LogInScene() {		
 		Pane pane = new Pane();
@@ -28,8 +28,7 @@ public class LogInScene {
 	        ImageView imageView = new ImageView(image);
 	        imageView.setOpacity(0.045);
 	        pane.getChildren().add(imageView);
-	        
-		} catch (FileNotFoundException e) {
+	    } catch (FileNotFoundException e) {
 			System.err.println("Error while loading logo.png: " + e.getMessage());
 		}
 		
@@ -100,11 +99,14 @@ public class LogInScene {
         label4.setLayoutY(570);
         pane.getChildren().add(label4);
         
-        Button siginButton = new Button("Sig-in");
-        siginButton.setFont(new Font(font, 24));
-        siginButton.setLayoutX(1245);
-        siginButton.setLayoutY(618);
-        pane.getChildren().add(siginButton);
+        Button signInButton = new Button("Sign-in");
+        signInButton.setFont(new Font(font, 24));
+        signInButton.setLayoutX(1245);
+        signInButton.setLayoutY(618);
+        signInButton.setOnMouseClicked(event->{
+			guiManager.loadSignIn();
+		});
+        pane.getChildren().add(signInButton);
         
         String desc = "Torverbook è una piattaforma ideata da studenti \n\ndell'università di tor vergata al fine di consentire lo scambio,\n\n "
         		+ "l'acquisto e la vendita di libri universitari. Il sistema offre la \n\npossibilità di cercare, anche tramite dei filtri, "

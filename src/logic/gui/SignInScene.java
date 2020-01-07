@@ -13,12 +13,14 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import logic.controller.GuiController;
 
 public class SignInScene{
 	
-	private final String font = "Arial";
-	private final String fontBold = "Arial Bold";
+	private static final String font = "Arial";
+	private static final String fontBold = "Arial Bold";
 	private Scene myScene;
+	private GuiController guiManager;
 	
 	public SignInScene() {
 		
