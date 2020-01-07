@@ -10,22 +10,20 @@ public class MainGui extends Application{
 	public Scene myScene;
 	public LogInScene login;
 	
-	public MainGui(String[] args) {
-		launch(args);
-		login = new LogInScene();
-		setScene(login.getScene());
-	}
-	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		myStage = primaryStage;
-		myStage.setTitle("TorVerBook - LogIn");
+		myStage.setTitle("TorVerBook");
 		myStage.setWidth(1600);
 		myStage.setHeight(900);
 		myStage.setResizable(false);
+		
+		login = new LogInScene();
+		myStage.setScene(login.getScene());
+		myStage.show();
 	}
 
-	public void setScene(Scene scene) {
+	public void loadScene(Scene scene) {
 		myStage.setScene(scene);
 	}	
 }
