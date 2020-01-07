@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 
 public class LogInController {
 	
+	private static LogInController instance = null;
+	
+	public Scene myScene;
 	public Button btnLanguage;
 	public Button login;
 	public Button signin;
@@ -25,6 +28,10 @@ public class LogInController {
 	public TextField username;
 	public PasswordField password;
 	
+	private LogInController() {
+		
+	}
+	
 	public void changeLanguage() { //apply observer GoF
 		if(btnLanguage.getText().equals("ITA"))
 			btnLanguage.setText("ENG");
@@ -33,19 +40,21 @@ public class LogInController {
 	}
 	
 	public void checkLogin() {
-		System.out.println("Hai provato ad accedere con credenziali: " + username.getText() + " - " + password.getText());
 		errorUsername.setText("Wrong username");
 		errorPwd.setText("Wrong Password");
 	}
 	
-	public void signIn(ActionEvent event) throws IOException{
-		System.out.println("Vuoi fare la registrazione");
-		
+	public void signIn(ActionEvent event) throws IOException{		
 		Parent signInParent = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
 		Scene signInScene = new Scene(signInParent);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(signInScene);
+	}
 	
+	public static LogInController getInstance() {
+		if(instance == null)
+			instance = new LogInController();
+		return instance;
 	}
 
 }

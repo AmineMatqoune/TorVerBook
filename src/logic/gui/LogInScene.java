@@ -12,13 +12,17 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import logic.controller.GuiController;
+import logic.controller.LogInController;
 
 public class LogInScene {
 	
-	private Scene myScene;
+	//private LogInController myController = LogInController.getInstance();
+	
+	public Scene myScene;
 	private static final String font = "Arial";
 	
-	public LogInScene() {		
+	public LogInScene() {	
 		Pane pane = new Pane();
 		myScene = new Scene(pane, 1600, 900);
 
@@ -91,6 +95,9 @@ public class LogInScene {
         loginButton.setFont(new Font(font, 24));
         loginButton.setLayoutX(1240);
         loginButton.setLayoutY(498);
+        loginButton.setOnMouseClicked(event->{
+        	//myController.checkLogin();
+        });
         pane.getChildren().add(loginButton);
         
         Label label4 = new Label("Don't have an account yet?");
@@ -103,9 +110,6 @@ public class LogInScene {
         signInButton.setFont(new Font(font, 24));
         signInButton.setLayoutX(1245);
         signInButton.setLayoutY(618);
-        signInButton.setOnMouseClicked(event->{
-			guiManager.loadSignIn();
-		});
         pane.getChildren().add(signInButton);
         
         String desc = "Torverbook è una piattaforma ideata da studenti \n\ndell'università di tor vergata al fine di consentire lo scambio,\n\n "

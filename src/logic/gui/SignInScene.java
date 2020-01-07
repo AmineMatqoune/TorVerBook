@@ -20,10 +20,9 @@ public class SignInScene{
 	private static final String font = "Arial";
 	private static final String fontBold = "Arial Bold";
 	private Scene myScene;
-	private GuiController guiManager;
 	
-	public SignInScene() {
-		
+	public SignInScene(GuiController myController) {
+		System.out.println("SignIn Creata");
 		Pane pane = new Pane();
 		myScene = new Scene(pane, 1600, 900);
 		
