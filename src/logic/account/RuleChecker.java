@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import logic.ad.Ad;
-import stuff.Review;
+import logic.stuff.Review;
 
 
 public final class RuleChecker extends Account{

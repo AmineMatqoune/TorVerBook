@@ -1,4 +1,4 @@
-package logic.GUI;
+package logic.controller;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController {
+public class LogInController {
 	
 	public Button btnLanguage;
 	public Button login;

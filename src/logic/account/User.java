@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logic.ad.Ad;
-import stuff.Message;
-import stuff.Review;
+import logic.stuff.Message;
+import logic.stuff.Review;
 
 public final class User extends Account{
 	

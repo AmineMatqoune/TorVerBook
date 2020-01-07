@@ -1,4 +1,4 @@
-package logic.GUI;
+package logic.controller;
 
 import javafx.scene.control.Button;
 
