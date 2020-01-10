@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: 0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.GUI.LoginController">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="1601.0" layoutX="1.0" layoutY="151.0" opacity="0.045">
+         <image>
+            <Image url="@../../Images/logo.jpeg" />
+         </image>
+      </ImageView>
+      <Label layoutY="-5.0" prefHeight="150.0" prefWidth="1600.0" style="-fx-background-color: #024a00;" />
+      <Button fx:id="btnLanguage" layoutX="1495.0" layoutY="34.0" mnemonicParsing="false" onAction="#changeLanguage" prefHeight="30.0" prefWidth="80.0" text="ENG">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+      </Button>
+      <Label layoutX="603.0" layoutY="21.0" text="TorVerBook" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="70.0" />
+         </font>
+      </Label>
+      <Label layoutY="143.0" prefHeight="17.0" prefWidth="1600.0" style="-fx-background-color: #f7e178;" />
+      <Label layoutY="151.0" prefHeight="17.0" prefWidth="1600.0" style="-fx-background-color: #024a00;" />
+      
+      <Pane layoutX="1.0" layoutY="143.0" prefHeight="17.0" prefWidth="1600.0">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="400.0" layoutX="600.0" layoutY="54.0">
+               <image>
+                  <Image url="@../../Images/quad.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="600.0" fitWidth="400.0" layoutX="100.0" layoutY="54.0">
+               <image>
+                  <Image url="@../../Images/quad.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="224.0" layoutY="87.0" text="Personal Info">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="124.0" layoutY="210.0" text="Name">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="124.0" layoutY="285.0" text="Surname">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="124.0" layoutY="360.0" text="Birthdate">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <TextField layoutX="260.0" layoutY="363.0" prefHeight="25.0" prefWidth="40.0" />
+            <TextField layoutX="323.0" layoutY="363.0" prefHeight="25.0" prefWidth="40.0" />
+            <TextField layoutX="384.0" layoutY="363.0" prefHeight="25.0" prefWidth="80.0" />
+            <Label layoutX="309.0" layoutY="362.0" text="/">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="370.0" layoutY="362.0" text="/">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <TextField layoutX="260.0" layoutY="211.0" prefHeight="25.0" prefWidth="200.0" />
+            <TextField layoutX="260.0" layoutY="438.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="124.0" layoutY="435.0" text="Phone num.">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <TextField layoutX="260.0" layoutY="286.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="634.0" layoutY="204.0" text="Username">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="627.0" layoutY="279.0" text="E-mail">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="634.0" layoutY="354.0" text="Password">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <TextField layoutX="770.0" layoutY="205.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="627.0" layoutY="432.0" text="Password">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <TextField layoutX="770.0" layoutY="280.0" prefHeight="25.0" prefWidth="200.0" />
+            <PasswordField layoutX="770.0" layoutY="355.0" prefHeight="25.0" prefWidth="200.0" />
+            <PasswordField layoutX="770.0" layoutY="435.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="1216.0" layoutY="87.0" text="University Info">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="775.0" layoutY="693.0" mnemonicParsing="false" text="Sign-In" underline="true">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font></Button>
+            <Label layoutX="727.0" layoutY="87.0" text="Account Info">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
