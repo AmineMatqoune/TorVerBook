@@ -1,7 +1,6 @@
 package logic.controller;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,8 +14,6 @@ import javafx.stage.Stage;
 
 public class LogInController {
 	
-	private static LogInController instance = null;
-	
 	public Scene myScene;
 	public Button btnLanguage;
 	public Button login;
@@ -28,7 +25,7 @@ public class LogInController {
 	public TextField username;
 	public PasswordField password;
 	
-	private LogInController() {
+	public LogInController() {
 		
 	}
 	
@@ -49,12 +46,6 @@ public class LogInController {
 		Scene signInScene = new Scene(signInParent);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(signInScene);
-	}
-	
-	public static LogInController getInstance() {
-		if(instance == null)
-			instance = new LogInController();
-		return instance;
 	}
 
 }

@@ -1,0 +1,24 @@
+Crea tabella Utente:
+CREATE TABLE Utente (
+	Username varchar(20) PRIMARY KEY,
+	Name varchar(15) NOT NULL,
+	Surname varchar(15) NOT NULL,
+	Birthdate DATE NOT NULL,
+	PhoneNumber varchar(10),
+	Email varchar(30) NOT NULL,
+	Password varchar(30) NOT NULL,
+	isBanned BOOLEAN NOT NULL);
+
+Crea tabella RuleChecker:
+CREATE TABLE RuleChecker (
+	Username varchar(20) PRIMARY KEY,
+	Name varchar(15) NOT NULL,
+	Surname varchar(15) NOT NULL,
+	Birthdate DATE NOT NULL,
+	PhoneNumber varchar(10),
+	Email varchar(30) NOT NULL,
+	Password varchar(30) NOT NULL,
+	Salary int default 1000,
+	WorkStartTime DATE NOT NULL,
+	WorkFinishTime DATE DEFAULT NULL);
+	
