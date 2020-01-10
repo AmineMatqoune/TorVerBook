@@ -6,7 +6,6 @@ import logic.gui.MainGui;
 public class Main {
 	
 	public static void main(String[] args) {
-		Application.launch(MainGui.class, args);
-		
+		Application.launch(MainGui.class, args);		
 	}
 }
