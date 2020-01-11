@@ -1,11 +1,11 @@
 Crea tabella Utente:
-CREATE TABLE Utente (
+CREATE TABLE User (
 	Username varchar(20) PRIMARY KEY,
 	Name varchar(15) NOT NULL,
 	Surname varchar(15) NOT NULL,
 	Birthdate DATE NOT NULL,
 	PhoneNumber varchar(10),
-	Email varchar(30) NOT NULL,
+	Email varchar(30) NOT NULL UNIQUE,
 	Password varchar(30) NOT NULL,
 	isBanned BOOLEAN NOT NULL);
 
@@ -16,9 +16,15 @@ CREATE TABLE RuleChecker (
 	Surname varchar(15) NOT NULL,
 	Birthdate DATE NOT NULL,
 	PhoneNumber varchar(10),
-	Email varchar(30) NOT NULL,
+	Email varchar(30) NOT NULL UNIQUE,
 	Password varchar(30) NOT NULL,
 	Salary int default 1000,
 	WorkStartTime DATE NOT NULL,
 	WorkFinishTime DATE DEFAULT NULL);
+
+RIEMPI UTENTE CON: insert into User values ('Ludo98', 'Ludovico', 'Di Iorio', '1998-03-10', '3902574252', 'ludovico.98@libero.it', 'ludo.pwd', FALSE);
+		   insert into User values ('Amine139', 'Amine', 'Matqoune', '1998-09-13', '3890438560', 'aminematqoune@gmail.com', 'amine.pwd', FALSE);
+
+RIEMPI RULECHECKER CON: insert into RuleChecker values ('RC5342', 'Carlo', 'Rossi', '1975-05-24', '3288235756', 'carlorossi@email.it', 'carlo.pwd', 1500, '1995-02-23', '2025-12-01');
+		
 	

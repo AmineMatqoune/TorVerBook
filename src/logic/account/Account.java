@@ -7,7 +7,6 @@ public abstract class Account {
 	//User's info
 	protected String name;
 	protected String surname;
-	protected String address;
 	protected Calendar birthDate;
 	protected String birthPlace;
 	protected String phoneNumber;
@@ -17,10 +16,9 @@ public abstract class Account {
 	protected String email;
 	protected String pwdHash;
 	
-	public Account(String name, String surname, String address, String username, String email, String pwdHash) {
+	public Account(String name, String surname, String username, String email, String pwdHash) {
 		this.name = name;
 		this.surname = surname;
-		this.address = address;
 		this.username = username;
 		this.email = email;
 		this.pwdHash = pwdHash;
@@ -33,11 +31,7 @@ public abstract class Account {
 	public String getSurname() {
 		return this.surname;
 	}
-	
-	public String getAddress() {
-		return this.address;
-	}
-	
+
 	public Calendar getBirthDate() {
 		return this.birthDate;
 	}

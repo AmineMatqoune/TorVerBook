@@ -12,19 +12,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import logic.account.User;
 import logic.dao.UserDAO;
+import logic.gui.MyPopup;
 
 public class LogInController {
 	
+	private UserDAO userDao = new UserDAO();
+	private User user;
+	
+	public AnchorPane pane;
 	public Scene myScene;
 	public Button btnLanguage;
 	public Button login;
 	public Button signin;
-	
 	public Label errorUsername;
 	public Label errorPwd;
-	
 	public TextField usernameField;
 	public PasswordField passwordField;
 	
@@ -35,18 +41,23 @@ public class LogInController {
 			btnLanguage.setText("ITA");
 	}
 	
-	public void checkLogin() {
+	public void checkLogin() {		
 		try {
-			if(new UserDAO().verifyCredentials(usernameField.getText(), passwordField.getText()))
-				System.out.println("Sei loggato come: " + usernameField.getText() + " - " + passwordField.getText());
+			//if log-in is succesfull, create user object and load homepage
+			if(userDao.logIn(usernameField.getText(), passwordField.getText())) {
+				user = userDao.getUserObject();
+				System.out.println("Benvenuto " + user.getName() + " - " + user.getSurname());
+			}
+			//Notify log-in error
 			else {
 				errorUsername.setText("Wrong username");
 				errorPwd.setText("Wrong Password");
 			}
+			//exception maagement
 		} catch (SQLException e) {
-			System.err.println("Error while interacting with DB");
-			e.printStackTrace();
-			System.exit(0);
+			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
+		} catch (ClassNotFoundException e) {
+			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 		}
 	}
 	

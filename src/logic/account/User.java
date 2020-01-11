@@ -20,8 +20,8 @@ public final class User extends Account{
 	List<Review> ownReview = null;
 	
 	//L'utente dev'essere Singleton
-	public User(String name, String surname, String address, String username, String email, String pwdHash) {
-		super(name, surname, address, username, email, pwdHash);
+	public User(String name, String surname, String username, String email, String pwdHash) {
+		super(name, surname, username, email, pwdHash);
 		loadOwnAds();
 		loadOwnReviews();
 		loadRelatedUsers();
