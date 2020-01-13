@@ -43,7 +43,7 @@ public class LogInController {
 	
 	public void checkLogin() {		
 		try {
-			//if log-in is succesfull, create user object and load homepage
+			//if log-in is successfull, create user object and load homepage
 			if(userDao.logIn(usernameField.getText(), passwordField.getText())) {
 				user = userDao.getUserObject();
 				System.out.println("Benvenuto " + user.getName() + " - " + user.getSurname());

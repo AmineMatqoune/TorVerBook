@@ -12,6 +12,7 @@ public class UserDAO {
 	
 	private ResultSet result;
 	
+	//login case
 	public boolean logIn (String username, String password) throws SQLException, ClassNotFoundException {
 		dbManager = DBManager.getInstance();
 		result = dbManager.logIn(username, password);
@@ -20,6 +21,13 @@ public class UserDAO {
 		if(result != null)
 			return result.first();
 		return false;
+	}
+	
+	//signin case
+	public void registerUser(String name, String surname, String dd, String mm, String yyyy, String phoneNumber, String username, String email, String password) throws SQLException, ClassNotFoundException {
+		dbManager = DBManager.getInstance();
+		
+		dbManager.insertNewUser(name, surname, dd, mm, yyyy, phoneNumber, username, email, password);
 	}
 	
 	public User getUserObject() throws SQLException {

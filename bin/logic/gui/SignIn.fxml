@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="750.0" maxWidth="1200.0" minHeight="750.0" minWidth="1200.0" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.controller.SignInController">
+<AnchorPane fx:id="pane" maxHeight="750.0" maxWidth="1200.0" minHeight="750.0" minWidth="1200.0" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.controller.SignInController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1200.0" opacity="0.1" pickOnBounds="true" preserveRatio="false">
          <image>
@@ -65,14 +65,14 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="LabelNameError" layoutX="200.0" layoutY="328.0" prefHeight="43.0" prefWidth="200.0" text="LabelNameError" />
-      <Label fx:id="LabelSurnameError" layoutX="200.0" layoutY="429.0" prefHeight="43.0" prefWidth="200.0" text="LabelSurnameError" />
-      <Label fx:id="LabelBirthdateError" layoutX="209.0" layoutY="525.0" prefHeight="43.0" prefWidth="200.0" text="LabelBirthdateError" />
-      <Label fx:id="LabelPhoneNumberError" layoutX="200.0" layoutY="625.0" prefHeight="43.0" prefWidth="200.0" text="LabelPhoneNumberError" />
-      <Label fx:id="LabelUserameError" layoutX="958.0" layoutY="328.0" prefHeight="43.0" prefWidth="200.0" text="LabelUsernameError" />
-      <Label fx:id="LabelEmailError" layoutX="961.0" layoutY="426.0" prefHeight="43.0" prefWidth="200.0" text="LabelEmailError" />
-      <Label fx:id="LabelPasswordError1" layoutX="958.0" layoutY="525.0" prefHeight="43.0" prefWidth="200.0" text="LabelPasswordError1" />
-      <Label fx:id="LabelPasswordError2" layoutX="961.0" layoutY="629.0" prefHeight="43.0" prefWidth="200.0" text="LabelPasswordError2" />
+      <Label fx:id="labelNameError" layoutX="200.0" layoutY="328.0" prefHeight="43.0" prefWidth="200.0" text="name max 15 char" />
+      <Label fx:id="labelSurnameError" layoutX="200.0" layoutY="429.0" prefHeight="43.0" prefWidth="200.0" text="surname max 15 char" />
+      <Label fx:id="labelBirthdateError" layoutX="201.0" layoutY="525.0" prefHeight="43.0" prefWidth="200.0" text="valid date" />
+      <Label fx:id="labelPhoneNumberError" layoutX="200.0" layoutY="625.0" prefHeight="43.0" prefWidth="200.0" text="10 digits" />
+      <Label fx:id="labelUserameError" layoutX="961.0" layoutY="327.0" prefHeight="43.0" prefWidth="200.0" text="username max 20 char" />
+      <Label fx:id="labelEmailError" layoutX="961.0" layoutY="426.0" prefHeight="43.0" prefWidth="200.0" text="email max 30 char" />
+      <Label fx:id="labelPasswordError1" layoutX="960.0" layoutY="525.0" prefHeight="43.0" prefWidth="200.0" text="password max 30 char" />
+      <Label fx:id="labelPasswordError2" layoutX="961.0" layoutY="629.0" prefHeight="43.0" prefWidth="200.0" text="same password above" />
       <Label layoutX="14.0" layoutY="111.0" text="◀ Back to Log-in" textFill="WHITE" underline="true">
          <font>
             <Font name="Arial Bold" size="24.0" />
@@ -83,18 +83,18 @@
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="200.0" layoutY="315.0" prefHeight="25.0" prefWidth="200.0" promptText="Name" />
-      <TextField layoutX="200.0" layoutY="415.0" prefHeight="25.0" prefWidth="200.0" promptText="Surname" />
-      <TextField layoutX="200.0" layoutY="512.0" prefHeight="25.0" prefWidth="40.0" promptText="dd" />
-      <TextField layoutX="255.0" layoutY="512.0" prefHeight="25.0" prefWidth="40.0" promptText="mm" />
-      <TextField layoutX="311.0" layoutY="512.0" prefHeight="25.0" prefWidth="89.0" promptText="yyy" />
-      <TextField layoutX="200.0" layoutY="612.0" prefHeight="25.0" prefWidth="200.0" promptText="Phone Number" />
+      <TextField fx:id="nameField" layoutX="200.0" layoutY="315.0" prefHeight="25.0" prefWidth="200.0" promptText="Name" />
+      <TextField fx:id="surnameField" layoutX="200.0" layoutY="415.0" prefHeight="25.0" prefWidth="200.0" promptText="Surname" />
+      <TextField fx:id="ddField" layoutX="200.0" layoutY="512.0" prefHeight="25.0" prefWidth="40.0" promptText="dd" />
+      <TextField fx:id="mmField" layoutX="255.0" layoutY="512.0" prefHeight="25.0" prefWidth="40.0" promptText="mm" />
+      <TextField fx:id="yyyyField" layoutX="311.0" layoutY="512.0" prefHeight="25.0" prefWidth="89.0" promptText="yyy" />
+      <TextField fx:id="phoneNumberField" layoutX="200.0" layoutY="612.0" prefHeight="25.0" prefWidth="200.0" promptText="Phone Number" />
       <Label layoutX="811.0" layoutY="237.0" text="Account Info">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="961.0" layoutY="315.0" prefHeight="25.0" prefWidth="200.0" promptText="Username" />
+      <TextField fx:id="usernameField" layoutX="961.0" layoutY="315.0" prefHeight="25.0" prefWidth="200.0" promptText="Username" />
       <Label layoutX="719.0" layoutY="416.0" text="E-mail">
          <font>
             <Font name="Arial" size="24.0" />
@@ -110,10 +110,10 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <PasswordField layoutX="961.0" layoutY="616.0" prefHeight="25.0" prefWidth="200.0" promptText="Confirm Password" />
-      <PasswordField layoutX="961.0" layoutY="512.0" prefHeight="25.0" prefWidth="200.0" promptText="Password" />
-      <TextField layoutX="961.0" layoutY="412.0" prefHeight="25.0" prefWidth="200.0" promptText="E-Mail" />
-      <Button layoutX="538.0" layoutY="663.0" mnemonicParsing="false" prefWidth="150.0" text="Sign-In">
+      <TextField fx:id="emailField" layoutX="961.0" layoutY="412.0" prefHeight="25.0" prefWidth="200.0" promptText="E-Mail" />
+      <PasswordField fx:id="passwordField" layoutX="961.0" layoutY="512.0" prefHeight="25.0" prefWidth="200.0" promptText="Password" />
+      <PasswordField fx:id="confirmPasswordField" layoutX="961.0" layoutY="616.0" prefHeight="25.0" prefWidth="200.0" promptText="Confirm Password" />
+      <Button fx:id="btnSignIn" layoutX="526.0" layoutY="662.0" mnemonicParsing="false" onAction="#signIn" prefWidth="150.0" text="Sign-In">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>

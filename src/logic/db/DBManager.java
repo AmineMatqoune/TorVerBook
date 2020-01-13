@@ -1,11 +1,11 @@
 package logic.db;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 
 public class DBManager {
 	
@@ -23,7 +23,7 @@ public class DBManager {
 	public DBManager() throws SQLException, ClassNotFoundException{
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
-		stmt = (Statement) conn.createStatement();
+		stmt = conn.createStatement();
 	}
 	
 	public ResultSet logIn(String username, String password) throws SQLException {
@@ -34,6 +34,11 @@ public class DBManager {
 			return result;
 		return null;
 	}
+	
+	public boolean insertNewUser(String name, String surname, String dd, String mm, String yyyy, String phoneNumber, String username, String email, String password) throws SQLException{
+		return !stmt.execute(QueriesGenerator.getSignInCommand(name, surname, dd, mm, yyyy, phoneNumber, username, email, password));
+	}
+	
 	public void close() throws SQLException {
 		stmt.close();
 		conn.close();
