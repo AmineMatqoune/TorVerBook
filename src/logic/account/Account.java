@@ -1,27 +1,27 @@
 package logic.account;
 
-import java.util.Calendar;
+import java.util.Date;
+
 
 public abstract class Account {
 	
 	//User's info
 	protected String name;
 	protected String surname;
-	protected Calendar birthDate;
-	protected String birthPlace;
+	protected Date birthDate;
 	protected String phoneNumber;
 		
 	//User's account info
 	protected String username;
 	protected String email;
-	protected String pwdHash;
+	protected String password;
 	
-	public Account(String name, String surname, String username, String email, String pwdHash) {
+	public Account(String name, String surname, String username, String email, String password) {
 		this.name = name;
 		this.surname = surname;
 		this.username = username;
 		this.email = email;
-		this.pwdHash = pwdHash;
+		this.password = password;
 	}
 	
 	public String getName() {
@@ -32,12 +32,8 @@ public abstract class Account {
 		return this.surname;
 	}
 
-	public Calendar getBirthDate() {
+	public Date getBirthDate() {
 		return this.birthDate;
-	}
-
-	public String getBirthPlace() {
-		return this.birthPlace;
 	}
 
 	public String getUsername() {
@@ -52,7 +48,7 @@ public abstract class Account {
 		return this.phoneNumber;
 	}
 
-	public String getPwdHash() {
-		return this.pwdHash;
+	public String getPassword() {
+		return this.password;
 	}
 }

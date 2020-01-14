@@ -46,7 +46,7 @@ public class LogInController {
 			//if log-in is successfull, create user object and load homepage
 			if(userDao.logIn(usernameField.getText(), passwordField.getText())) {
 				user = userDao.getUserObject();
-				System.out.println("Benvenuto " + user.getName() + " - " + user.getSurname());
+				//loadHomePage
 			}
 			//Notify log-in error
 			else {
@@ -61,11 +61,16 @@ public class LogInController {
 		}
 	}
 	
-	public void loadSignIn(ActionEvent event) throws IOException{		
-		Parent signInParent = FXMLLoader.load(getClass().getResource("/logic/gui/SignIn.fxml"));
-		Scene signInScene = new Scene(signInParent);
-		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-		window.setScene(signInScene);
+	public void loadSignIn(ActionEvent event) {		
+		try {
+			Parent signInParent = FXMLLoader.load(getClass().getResource("/logic/gui/SignIn.fxml"));
+			Scene signInScene = new Scene(signInParent);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(signInScene);
+		} catch (IOException e) {
+			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
+		}
+		
 	}
 
 }

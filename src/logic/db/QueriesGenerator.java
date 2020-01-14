@@ -1,14 +1,16 @@
 package logic.db;
 
+import logic.account.User;
+
 public class QueriesGenerator {
 	
 	public static String getLogInQuery(String username, String password) {
-		return "SELECT * FROM Usfder WHERE Username = '" + username + "'"
+		return "SELECT * FROM User WHERE Username = '" + username + "'"
 				+ " AND Password = '" + password + "';";
 	}
 	
-	public static String getSignInCommand(String name, String surname, String dd, String mm, String yyyy, String phoneNumber, String username, String email, String password) {
-		return "INSERT INTO User VALUES ('" + username + "', '" + name + "', '" + surname + "', '" + yyyy + "-" + mm + "-" + dd + "', '" + phoneNumber + "', "
-				+ "'" + email + "', '" + password + "', FALSE)";
+	public static String getSignInCommand(User user) {
+		return "INSERT INTO User VALUES ('" + user.getUsername() + "', '" + user.getName() + "', '" + user.getSurname() + "', '" + user.getBirthDateString() + "', '" + user.getPhoneNumber() + "', "
+				+ "'" + user.getEmail() + "', '" + user.getPassword() + "', FALSE)";
 	}
 }

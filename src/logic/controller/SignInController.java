@@ -1,14 +1,21 @@
 package logic.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+import logic.account.User;
 import logic.bean.SignInBean;
 import logic.dao.UserDAO;
 import logic.gui.MyPopup;
@@ -50,14 +57,47 @@ public class SignInController {
 	public void signIn() {
 		//if user inputs are correct, proceed with the sign-in
 		try {
-			if(new SignInBean().checkInfo(nameField.getText(), surnameField.getText(),ddField.getText(), mmField.getText(), yyyyField.getText(), phoneNumberField.getText(), usernameField.getText(), emailField.getText(), passwordField.getText(), confirmPasswordField.getText()))
-				new UserDAO().registerUser(nameField.getText(), surnameField.getText(), ddField.getText(), mmField.getText(), yyyyField.getText(), phoneNumberField.getText(), usernameField.getText(), emailField.getText(), passwordField.getText());
+			if(!passwordField.getText().equals(confirmPasswordField.getText())) {
+				notifyInputError();
+				return;
+			}
+			
+			//if password fields are same, proceed creating a temporary user object and check information consistency
+			SignInBean signUpBean = new SignInBean();
+			
+			User user = new User(nameField.getText(), surnameField.getText(), usernameField.getText(), emailField.getText(), passwordField.getText());
+			
+			if(signUpBean.checkInfo(user)) {
+				//user inputs are correct, check if birthDate is a valid date
+				SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+				dateFormat.setLenient(false);
+				Date date = dateFormat.parse(mmField.getText() + "-" + ddField.getText() + "-" + yyyyField.getText());
+				user.setBirthDate(date);
+				user.setPhoneNumber(phoneNumberField.getText());
+
+				//if date doesn't throwed any ParseException, it means that user inserted a valid date, so we can finally sign-up the new user
+				new UserDAO().registerUser(user);
+				
+				//return to log-in page
+				loadLogIn();
+			}
 			else 
 				notifyInputError();
 		} catch (SQLException e) {
 			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 			notifyInputError();
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException | ParseException e) {
+			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
+		}
+	}
+
+	private void loadLogIn() {
+		try {
+			Parent logInParent = FXMLLoader.load(getClass().getResource("/logic/gui/LogIn.fxml"));
+			Scene logInScene = new Scene(logInParent);
+			Stage window = (Stage)pane.getScene().getWindow();
+			window.setScene(logInScene);
+		} catch (IOException e) {
 			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 		}
 	}

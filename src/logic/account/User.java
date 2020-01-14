@@ -1,6 +1,7 @@
 package logic.account;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import logic.ad.Ad;
@@ -14,14 +15,16 @@ public final class User extends Account{
 	private int rank;
 	private boolean isBanned;
 	
+	private String birthDateString;
+	
 	private List<Ad> ownAd;
 	List<Message> listMessage = null;
 	List<User> relatedUser = null;
 	List<Review> ownReview = null;
 	
 	//L'utente dev'essere Singleton
-	public User(String name, String surname, String username, String email, String pwdHash) {
-		super(name, surname, username, email, pwdHash);
+	public User(String name, String surname, String username, String email, String password) {
+		super(name, surname, username, email, password);
 		loadOwnAds();
 		loadOwnReviews();
 		loadRelatedUsers();
@@ -64,4 +67,22 @@ public final class User extends Account{
 	}
 	
 	public void sendEmail(){}
+	
+	public void setBirthDate(String date) {
+		//yyyy-mm-dd format
+		birthDateString = date;
+	}
+	
+	public void setBirthDate(Date date) {
+		birthDate = date;
+		birthDateString = (date.getYear() + 1900) + "-" + (date.getMonth() + 1) + "-" + date.getDay();
+	}
+	
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
+	public String getBirthDateString() {
+		return this.birthDateString;
+	}
 }

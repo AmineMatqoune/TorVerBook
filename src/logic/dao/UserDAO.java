@@ -7,9 +7,9 @@ import logic.account.User;
 import logic.db.DBManager;
 
 public class UserDAO {
-
-	private DBManager dbManager;	
 	
+	private DBManager dbManager;	
+	private static User newUser;
 	private ResultSet result;
 	
 	//login case
@@ -18,19 +18,32 @@ public class UserDAO {
 		result = dbManager.logIn(username, password);
 
 		//if exists 1 row in result, we succesfully logged in
-		if(result != null)
-			return result.first();
+		if(result.first()) {
+			createUserObject();
+			return true;
+		}
+			
 		return false;
 	}
 	
 	//signin case
-	public void registerUser(String name, String surname, String dd, String mm, String yyyy, String phoneNumber, String username, String email, String password) throws SQLException, ClassNotFoundException {
+	public void registerUser(User user) throws SQLException, ClassNotFoundException {
 		dbManager = DBManager.getInstance();
 		
-		dbManager.insertNewUser(name, surname, dd, mm, yyyy, phoneNumber, username, email, password);
+		if(dbManager.insertNewUser(user)) {
+			newUser = user;
+		}
 	}
 	
-	public User getUserObject() throws SQLException {
-		return new User(result.getString("Name"), result.getString("Surname"), result.getString("Username"), result.getString("Email"), result.getString("Password"));
+	private User createUserObject() throws SQLException {
+		//create UserObject
+		newUser = new User(result.getString("Name"), result.getString("Surname"), result.getString("Username"), result.getString("Email"), result.getString("Password"));
+		newUser.setPhoneNumber(result.getString("PhoneNumber"));
+		newUser.setBirthDate(result.getString("Birthdate"));
+		return newUser;
+	}
+	
+	public User getUserObject() {
+		return newUser;
 	}
 }

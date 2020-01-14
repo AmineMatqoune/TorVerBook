@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import logic.account.User;
+
 public class DBManager {
 	
 	private static String driverClass = "com.mysql.jdbc.Driver";
@@ -35,8 +37,8 @@ public class DBManager {
 		return null;
 	}
 	
-	public boolean insertNewUser(String name, String surname, String dd, String mm, String yyyy, String phoneNumber, String username, String email, String password) throws SQLException{
-		return !stmt.execute(QueriesGenerator.getSignInCommand(name, surname, dd, mm, yyyy, phoneNumber, username, email, password));
+	public boolean insertNewUser(User user) throws SQLException{
+		return !stmt.execute(QueriesGenerator.getSignInCommand(user));
 	}
 	
 	public void close() throws SQLException {
