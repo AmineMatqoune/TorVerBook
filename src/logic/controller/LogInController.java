@@ -46,6 +46,7 @@ public class LogInController {
 			//if log-in is successfull, create user object and load homepage
 			if(userDao.logIn(usernameField.getText(), passwordField.getText())) {
 				user = userDao.getUserObject();
+				System.out.println("Benvenuto: " + user.getUsername());
 				//loadHomePage
 			}
 			//Notify log-in error
@@ -54,11 +55,9 @@ public class LogInController {
 				errorPwd.setText("Wrong Password");
 			}
 			//exception maagement
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
-		} catch (ClassNotFoundException e) {
-			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
-		}
+		} 
 	}
 	
 	public void loadSignIn(ActionEvent event) {		

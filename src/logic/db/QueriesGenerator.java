@@ -2,7 +2,7 @@ package logic.db;
 
 import logic.account.User;
 
-public class QueriesGenerator {
+public interface QueriesGenerator {
 	
 	public static String getLogInQuery(String username, String password) {
 		return "SELECT * FROM User WHERE Username = '" + username + "'"
