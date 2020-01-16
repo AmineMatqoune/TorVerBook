@@ -7,7 +7,9 @@ CREATE TABLE User (
 	PhoneNumber varchar(10),
 	Email varchar(30) NOT NULL UNIQUE,
 	Password varchar(30) NOT NULL,
-	isBanned BOOLEAN NOT NULL);
+	isBanned BOOLEAN NOT NULL
+	NumViolations TINYINT DEFAULT 0,
+	Money INT DEFAULT 0);
 
 Crea tabella RuleChecker:
 CREATE TABLE RuleChecker (
@@ -21,6 +23,61 @@ CREATE TABLE RuleChecker (
 	Salary int default 1000,
 	WorkStartTime DATE NOT NULL,
 	WorkFinishTime DATE DEFAULT NULL);
+
+Crea tabella HighLight:
+CREATE TABLE HighLight(
+	Type varchar(10) PRIMARY KEY,
+	Thickness smallint NOT NULL,
+	PricePerDay TINYINT NOT NULL,
+	Font varchar(20),
+	Visibility tinyint,
+	TextColor varchar(10),
+	BackgrounColor varchar(10));
+
+Crea tabella Ad:
+Crea tabella Ad(
+	ID int AUTO_INCREMENT,
+	Date date,
+	Description varchar(300),
+	Title varchar(100),
+	Price tinyint,
+	isSold boolean DEFAULT FALSE,
+	Quantity tinyint,
+	StartHighlight date,
+	FinishHighlight date,
+	isConvalidated boolean DEFAULT FALSE,
+	Highlight varchar(10) references HighLight(Type) on delete set null on update cascade,
+	User varchar(20) references User(Username) on delete no action on update cascade NOT NULL,
+	RuleChecker varchar(20) references RuleChecker(Username) on delete no action on update cascade DEFAULT NULL,
+	PRIMARY KEY (ID),
+	CHECK (isConvalidated = TRUE AND RuleChecker != NULL);
+
+Crea tabella FavouriteList:
+CREATE TABLE FavouriteList(
+	ID_Ad int references Ad(ID) on update cascade on delete no action,
+	User varchar(20) references User(Username) on update cascade on delete no action,
+	PRIMARY KEY (ID_Ad, User));
+
+Crea tabella Review:
+CREATE TABLE Review(
+	WriterUser varchar(20) references User(Username) on delete no action on update cascade,
+	ReceiverUser varchar(20) references User(Username) on delete no action on update cascade,
+	Text varchar(300) NOT NULL,
+	Time date,
+	Rank decimal(2,1) NOT NULL DEFAULT 0,
+	isConvalidated boolean NOT NULL DEFAULT FALSE,
+	RuleChecker varchar(20) DEFAULT NULL,
+	PRIMARY KEY (WriterUser, ReceiverUser),
+	CHECK (isConvalidated = TRUE AND RuleChecker != NULL));
+
+Crea tabella Messaggio:
+CREATE TABLE Message(
+	WriterUser varchar(20) references User(Username) on delete no action on update cascade,
+	ReceiverUser varchar(20) references User(Username) on delete no action on update cascade,
+	ID int AUTO_INCREMENT,
+	Text varchar(200) NOT NULL,
+	Time date,
+	PRIMARY KEY (WriterUser, ReceiverUser, ID));
 
 RIEMPI UTENTE CON: insert into User values ('Ludo98', 'Ludovico', 'Di Iorio', '1998-03-10', '3902574252', 'ludovico.98@libero.it', 'ludo.pwd', FALSE);
 		   insert into User values ('Amine139', 'Amine', 'Matqoune', '1998-09-13', '3890438560', 'aminematqoune@gmail.com', 'amine.pwd', FALSE);

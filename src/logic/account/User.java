@@ -11,9 +11,10 @@ import logic.stuff.Review;
 public final class User extends Account{
 	
 	//User's account info
-	private int numAds;
 	private int rank;
 	private boolean isBanned;
+	private int numOfViolations;
+	private int money;
 	
 	private String birthDateString;
 	

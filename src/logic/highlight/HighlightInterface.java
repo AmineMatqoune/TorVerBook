@@ -13,6 +13,4 @@ public interface HighlightInterface {
 		public int getPrice(int days);
 		
 		public void getPeriod();
-		
-		public Ad getRelatedAd();
 }

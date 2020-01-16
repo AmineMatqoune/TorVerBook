@@ -1,9 +1,7 @@
 package logic.highlight;
 
 import logic.ad.*;
-
 import java.awt.Color;
-import java.util.Calendar;
 
 public final class Highlight implements HighlightInterface{
 	
@@ -11,12 +9,9 @@ public final class Highlight implements HighlightInterface{
 	private HighlightType hlType;
 	private int thickness;
 	private int pricePerDay;
-	private Calendar startDate;
-	private Calendar finishDate;
 	private String font;
 	
 	//highlight info for system
-	private Ad relatedAd;
 	private int levelOfVisibility;
 	private Color textColor;
 	private Color bgColor;
@@ -34,8 +29,6 @@ public final class Highlight implements HighlightInterface{
 		hlType = HighlightType.BASE;
 		thickness = 10;
 		pricePerDay = 0;
-		startDate = null;
-		finishDate = null;
 		font = "Times New Roman";
 		textColor = Color.BLACK;
 		bgColor = Color.GREEN;
@@ -46,8 +39,6 @@ public final class Highlight implements HighlightInterface{
 		hlType = HighlightType.MEDIUM;
 		thickness = 15;
 		pricePerDay = 1;
-		startDate = null;
-		finishDate = null;
 		font = "Arial";
 		textColor = Color.BLUE;
 		bgColor = Color.WHITE;	
@@ -58,8 +49,6 @@ public final class Highlight implements HighlightInterface{
 		hlType = HighlightType.SUPER;
 		thickness = 20;
 		pricePerDay = 2;
-		startDate = null;
-		finishDate = null;
 		font = "Verdana";
 		textColor = Color.RED;
 		bgColor = Color.YELLOW;
@@ -73,14 +62,6 @@ public final class Highlight implements HighlightInterface{
 	
 	public int getThickness() {
 		return this.getThickness();
-	}
-	
-	public Calendar getStartDate() {
-		return this.startDate;
-	}
-	
-	public Calendar getFinishDate() {
-		return this.finishDate;
 	}
 	
 	public String getFont() {
@@ -105,10 +86,5 @@ public final class Highlight implements HighlightInterface{
 	@Override
 	public void getPeriod() {
 		//return finishDate-startDate?
-	}
-	
-	@Override
-	public Ad getRelatedAd() { //è del controller quest'operazione?
-		return this.relatedAd;
 	}
 }

@@ -17,12 +17,12 @@ public final class Ad {
 	private int quantity;
 	private AdType type;
 	private boolean isSold;
+	private Calendar startDateHighlight;
+	private Calendar finishDateHighlight;
 	
 	//Ad's info for system
 	private long id;
 	private User myUser;
-	private String adFont;
-	private int thickness;
 	private boolean isConvalidated;
 	
 	public Ad(User owner, long id) {
@@ -69,10 +69,6 @@ public final class Ad {
 	public void addHighlight(Highlight hl) {
 		//personalize (call private method below)
 	}
-	
-	private void setFont(String font) {}
-	
-	private void setThickness(int t) {}
 	
 	private boolean isConvalidated() {
 		return this.isConvalidated;
