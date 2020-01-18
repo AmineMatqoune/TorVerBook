@@ -30,9 +30,9 @@ public class MyPopup {
         button.setLayoutX(108);
         button.setLayoutY(161);
         
-        button.setOnMouseClicked(event ->{
-        	System.exit(0);
-        });
+        button.setOnMouseClicked(event ->
+        	System.exit(0)
+        );
         
         pane.getChildren().add(label);
         pane.getChildren().add(button);

@@ -16,13 +16,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import logic.account.User;
-import logic.bean.SignInBean;
+import logic.bean.SignUpBean;
 import logic.dao.UserDAO;
 import logic.gui.MyPopup;
 
-public class SignInController {
+public class SignUpController {
 	
-	public AnchorPane pane;
+	private SignUpBean signUpBean;
+	
+	public AnchorPane pane; 
 	
 	public TextField nameField;
 	public TextField surnameField;
@@ -54,26 +56,33 @@ public class SignInController {
 			btnLanguage.setText("ITA");
 	}
 	
-	public void signIn() {
-		//if user inputs are correct, proceed with the sign-in
+	public void signUp() {
+		signUpBean.printC();
+		signUpBean = new SignUpBean();
+		signUpBean.printC();
+		System.out.println(signUpBean.getPassword());
+		System.out.println(signUpBean.getConfirmPassword());
+		System.out.println(signUpBean.getUsername());
+		/*if user inputs are correct, proceed with the sign-up
 		try {
-			if(!passwordField.getText().equals(confirmPasswordField.getText())) {
+			
+			/*if(!signUpBean.getPassword().equals(signUpBean.getConfirmPassword())) {
 				notifyInputError();
 				return;
 			}
 			
 			//if password fields are same, proceed creating a temporary user object and check information consistency
-			SignInBean signUpBean = new SignInBean();
-			
-			User user = new User(nameField.getText(), surnameField.getText(), usernameField.getText(), emailField.getText(), passwordField.getText());
+			SignUpBean signUpBean = new SignUpBean();
+			User user = new User(signUpBean.getName(), signUpBean.getSurname(), signUpBean.getUsername(), signUpBean.getEmail(), signUpBean.getPassword());
 			
 			if(signUpBean.checkInfo(user)) {
-				//user inputs are correct, check if birthDate is a valid date
+				
+				//user inputs are correct, check if birthDate is a valid date				
 				SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
 				dateFormat.setLenient(false);
-				Date date = dateFormat.parse(mmField.getText() + "-" + ddField.getText() + "-" + yyyyField.getText());
+				Date date = dateFormat.parse(signUpBean.getMonth() + "-" + signUpBean.getDay() + "-" + signUpBean.getYear());
 				user.setBirthDate(date);
-				user.setPhoneNumber(phoneNumberField.getText());
+				user.setPhoneNumber(signUpBean.getPhoneNumber());
 
 				//if date doesn't throwed any ParseException, it means that user inserted a valid date, so we can finally sign-up the new user
 				new UserDAO().registerUser(user);
@@ -88,7 +97,7 @@ public class SignInController {
 			notifyInputError();
 		} catch (ClassNotFoundException | ParseException e) {
 			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
-		}
+		}*/
 	}
 
 	private void loadLogIn() {
@@ -103,6 +112,7 @@ public class SignInController {
 	}
 
 	private void notifyInputError() {
+		/*
 		labelNameError.setTextFill(Color.RED);
 		labelSurnameError.setTextFill(Color.RED);
 		labelBirthdateError.setTextFill(Color.RED);
@@ -110,7 +120,11 @@ public class SignInController {
 		labelUserameError.setTextFill(Color.RED);
 		labelEmailError.setTextFill(Color.RED);
 		labelPasswordError1.setTextFill(Color.RED);
-		labelPasswordError2.setTextFill(Color.RED);
+		labelPasswordError2.setTextFill(Color.RED);*/
+		System.err.println("ERRORE!");
 	}
+	
+	
+	
 
 }

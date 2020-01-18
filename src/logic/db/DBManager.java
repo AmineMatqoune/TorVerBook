@@ -12,7 +12,7 @@ import logic.account.User;
 public class DBManager {
 	
 	private static String driverClass = "com.mysql.jdbc.Driver";
-	private static String dbUrl = "jdbc:mysql://localhost:3306/TorVerBook";
+	private static String dbUrl = "jdbc:mysql://localhost:3306/torverbook";
 	private static String user = "root";
 	private static String pwd = "";
 	
@@ -22,23 +22,18 @@ public class DBManager {
 	
 	private static DBManager instance = null;
 	
-	public DBManager() throws SQLException, ClassNotFoundException{
+	private DBManager() throws SQLException, ClassNotFoundException{
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
 	}
 	
 	public ResultSet logIn(String username, String password) throws SQLException {
-		result = stmt.executeQuery(QueriesGenerator.getLogInQuery(username, password));
-		
-		//Se user esiste
-		if(result.first())
-			return result;
-		return null;
+		return result = stmt.executeQuery(QueriesGenerator.getLogInQuery(username, password));
 	}
 	
 	public boolean insertNewUser(User user) throws SQLException{
-		return !stmt.execute(QueriesGenerator.getSignInCommand(user));
+		return !stmt.execute(QueriesGenerator.getSignUpCommand(user));
 	}
 	
 	public void close() throws SQLException {
