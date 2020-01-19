@@ -1,20 +1,28 @@
 package logic.bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javafx.stage.Stage;
+
 import logic.account.User;
+import logic.gui.MyPopup;
 import logic.gui.SignUpScene;
 
 public class SignUpBean {
 	
-	int c = 5;
-	private SignUpScene signUpScene = null;
+	private SignUpScene signUpScene;
+	
+	private Date date;
 	
 	public SignUpBean() {
-		c = 8;
 		signUpScene = SignUpScene.getInstance();
 	}
 	
 	public boolean checkInfo(User user) {
 		boolean expression = false;
+		
 		if((user.getName().length() > 15) || user.getName().equals(""))
 			return expression;
 		if((user.getSurname().length() > 15) || user.getSurname().equals(""))
@@ -26,18 +34,28 @@ public class SignUpBean {
 		if((user.getPassword().length() > 30) || user.getPassword().equals(""))
 			return expression;
 		
+		try {
+			//user inputs are correct, check if birthDate is a valid date, if so, set user's birthdate			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			dateFormat.setLenient(false);
+			date = dateFormat.parse(getYear() + "-" + getMonth() + "-" + getDay());
+		} catch (ParseException e) {
+			new MyPopup(e.getMessage(), (Stage)signUpScene.getScene().getWindow());
+			return expression;
+		}
+		
 		//no syntax errors found, return true
 		return !expression;
 		
 		//crea metodo per far ricevere al signupController "birthdate"
 	}
 	
-	public void printC() {
-		System.out.println(c);
-	}
-	
 	public String getName() {
 		return signUpScene.getName();
+	}
+	
+	public Date getBirthDate() {
+		return date;
 	}
 	
 	public String getSurname() {
@@ -69,15 +87,11 @@ public class SignUpBean {
 	}
 	
 	public String getPassword() {
-		System.out.println("Ao damme la pwd : ");
-		return "aa";
-		//return signUpScene.getPwd();
+		return signUpScene.getPwd();
 	}
 	
 	public String getConfirmPassword() {
-		System.out.println("Ao damme la conf pwd");
-		return "aa";
-		//return signUpScene.getConfirmPwd();
+		return signUpScene.getConfirmPwd();
 	}
 
 }

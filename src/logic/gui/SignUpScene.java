@@ -14,7 +14,6 @@ import logic.controller.SignUpController;
 public class SignUpScene extends BaseScene{
 
 	private static SignUpScene instance = null; // riferimento all' istanza
-	private Scene scene;
 	
 	private TextField nameField;
 	private TextField surnameField;
@@ -27,6 +26,15 @@ public class SignUpScene extends BaseScene{
 	private PasswordField passwordField;
 	private PasswordField confirmPasswordField;
 	
+	private Label labelNameError;
+	private Label labelSurnameError;
+	private Label labelBirthdateError;
+	private Label labelPhoneNumberError;
+	private Label labelUsernameError;
+	private Label labelEmailError;
+	private Label labelPasswordError1;
+	private Label labelPasswordError2;
+	
 	private static final String TEXT_FONT = "Arial";
 	
 	private GUIController guiController = GUIController.getInstance();
@@ -34,7 +42,6 @@ public class SignUpScene extends BaseScene{
 
 	private SignUpScene() {
 		super();
-		scene = super.getScene();
 		Pane pane = (Pane) scene.getRoot();
 		
 		Label label1 = new Label("Personal Info");
@@ -57,6 +64,13 @@ public class SignUpScene extends BaseScene{
 		nameField.setPromptText("Name");
 		pane.getChildren().add(nameField);
 		
+		labelNameError = new Label("Name: max 15 char");
+		labelNameError.setLayoutX(300);
+		labelNameError.setLayoutY(270);
+		labelNameError.setPrefHeight(25);
+		labelNameError.setPrefWidth(200);
+		pane.getChildren().add(labelNameError);
+		
 		Label label3 = new Label("Surname");
 		label3.setFont(new Font(TEXT_FONT, 24));
 		label3.setLayoutX(100);
@@ -70,6 +84,13 @@ public class SignUpScene extends BaseScene{
 		surnameField.setLayoutY(350);
 		surnameField.setPromptText("Surname");
 		pane.getChildren().add(surnameField);
+		
+		labelSurnameError = new Label("Surname: max 15 char");
+		labelSurnameError.setLayoutX(300);
+		labelSurnameError.setLayoutY(370);
+		labelSurnameError.setPrefHeight(43);
+		labelSurnameError.setPrefWidth(200);
+		pane.getChildren().add(labelSurnameError);
 		
 		Label label4 = new Label("Birthdate");
 		label4.setFont(new Font(TEXT_FONT, 24));
@@ -113,6 +134,13 @@ public class SignUpScene extends BaseScene{
 		yyyyField.setPromptText("yyyy");
 		pane.getChildren().add(yyyyField);
 		
+		labelBirthdateError = new Label("Valid date");
+		labelBirthdateError.setLayoutX(300);
+		labelBirthdateError.setLayoutY(470);
+		labelBirthdateError.setPrefHeight(43);
+		labelBirthdateError.setPrefWidth(200);
+		pane.getChildren().add(labelBirthdateError);
+		
 		Label label5 = new Label("Phone num.");
 		label5.setFont(new Font(TEXT_FONT, 24));
 		label5.setLayoutX(100);
@@ -126,6 +154,13 @@ public class SignUpScene extends BaseScene{
 		phoneNumberField.setLayoutY(550);
 		phoneNumberField.setPromptText("Phone number");
 		pane.getChildren().add(phoneNumberField);
+		
+		labelPhoneNumberError = new Label("10 digits");
+		labelPhoneNumberError.setLayoutX(300);
+		labelPhoneNumberError.setLayoutY(570);
+		labelPhoneNumberError.setPrefHeight(43);
+		labelPhoneNumberError.setPrefWidth(200);
+		pane.getChildren().add(labelPhoneNumberError);
 		
 		Label label6 = new Label("Account Info");
 		label6.setFont(new Font(TEXT_FONT, 24));
@@ -147,6 +182,13 @@ public class SignUpScene extends BaseScene{
 		usernameField.setPromptText("Username");
 		pane.getChildren().add(usernameField);
 		
+		labelUsernameError = new Label("Username: max 20 char");
+		labelUsernameError.setLayoutX(900);
+		labelUsernameError.setLayoutY(270);
+		labelUsernameError.setPrefHeight(43);
+		labelUsernameError.setPrefWidth(200);
+		pane.getChildren().add(labelUsernameError);
+		
 		Label label8 = new Label("E-mail");
 		label8.setFont(new Font(TEXT_FONT, 24));
 		label8.setLayoutX(700);
@@ -160,6 +202,13 @@ public class SignUpScene extends BaseScene{
 		emailField.setLayoutY(350);
 		emailField.setPromptText("E-mail");
 		pane.getChildren().add(emailField);
+		
+		labelEmailError = new Label("Email: max 30 char");
+		labelEmailError.setLayoutX(900);
+		labelEmailError.setLayoutY(370);
+		labelEmailError.setPrefHeight(43);
+		labelEmailError.setPrefWidth(200);
+		pane.getChildren().add(labelEmailError);
 		
 		Label label9 = new Label("Password");
 		label9.setFont(new Font(TEXT_FONT, 24));
@@ -175,6 +224,13 @@ public class SignUpScene extends BaseScene{
 		passwordField.setPromptText("Password");
 		pane.getChildren().add(passwordField);
 		
+		labelPasswordError1 = new Label("Password: max 30 char");
+		labelPasswordError1.setLayoutX(900);
+		labelPasswordError1.setLayoutY(470);
+		labelPasswordError1.setPrefHeight(43);
+		labelPasswordError1.setPrefWidth(200);
+		pane.getChildren().add(labelPasswordError1);
+		
 		Label label10 = new Label("Confirm password");
 		label10.setFont(new Font(TEXT_FONT, 24));
 		label10.setLayoutX(700);
@@ -189,12 +245,19 @@ public class SignUpScene extends BaseScene{
 		confirmPasswordField.setPromptText("Confirm password");
 		pane.getChildren().add(confirmPasswordField);
 		
+		labelPasswordError2 = new Label("Same password above");
+		labelPasswordError2.setLayoutX(900);
+		labelPasswordError2.setLayoutY(570);
+		labelPasswordError2.setPrefHeight(43);
+		labelPasswordError2.setPrefWidth(200);
+		pane.getChildren().add(labelPasswordError2);
+		
 		Button signUpButton = new Button("Sign-up");
 		signUpButton.setFont(new Font(TEXT_FONT, 24));
 		signUpButton.setLayoutX(550);
 		signUpButton.setLayoutY(620);
 		signUpButton.setOnMouseClicked(event -> 
-				signupController.signUp()
+			attemptSignUp()
 		);
 		pane.getChildren().add(signUpButton);
 		
@@ -235,7 +298,6 @@ public class SignUpScene extends BaseScene{
 	}
 	
 	public String getUsername() {
-		System.out.println("dimmi");
 		return usernameField.getText();
 	}
 	
@@ -244,20 +306,32 @@ public class SignUpScene extends BaseScene{
 	}
 	
 	public String getPwd() {
-		System.out.println("il contenuto è: " + passwordField.getText());
 		return passwordField.getText();
 	}
 	
 	public String getConfirmPwd() {
-		System.out.println("il contenuto di confirm è: " + confirmPasswordField.getText());
 		return confirmPasswordField.getText();
 	}
 	
+	private void attemptSignUp() {
+		if(!signupController.signUp())
+			notifyInputError();
+	}
+	
+	private void notifyInputError() {
+		labelNameError.setTextFill(Color.RED);
+		labelSurnameError.setTextFill(Color.RED);
+		labelBirthdateError.setTextFill(Color.RED);
+		labelPhoneNumberError.setTextFill(Color.RED);
+		labelUsernameError.setTextFill(Color.RED);
+		labelEmailError.setTextFill(Color.RED);
+		labelPasswordError1.setTextFill(Color.RED);
+		labelPasswordError2.setTextFill(Color.RED);
+	}
+	
 	public static SignUpScene getInstance() {
-		System.out.print("instance vale: " + instance == null);
 		if(instance == null)
 			instance = new SignUpScene();
-		System.out.println("sto per ritornare instance che vale: " + instance == null);
 	    return instance;
 	}
 }

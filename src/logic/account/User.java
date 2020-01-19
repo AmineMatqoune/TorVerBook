@@ -1,6 +1,7 @@
 package logic.account;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -76,7 +77,11 @@ public final class User extends Account{
 	
 	public void setBirthDate(Date date) {
 		birthDate = date;
-		birthDateString = (date.getYear() + 1900) + "-" + (date.getMonth() + 1) + "-" + date.getDay();
+		
+		Calendar cal = Calendar.getInstance(); //Some Date's methods are deprecated, that's why we use Calendar type
+		cal.setTime(date);
+		
+		birthDateString = ( String.valueOf(cal.get(Calendar.YEAR)) + "-" +  String.valueOf(1 + cal.get(Calendar.MONTH)) + "-" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
 	}
 	
 	public void setPhoneNumber(String phoneNumber) {
@@ -84,6 +89,6 @@ public final class User extends Account{
 	}
 	
 	public String getBirthDateString() {
-		return this.birthDateString;
+		return birthDateString;
 	}
 }

@@ -9,7 +9,7 @@ import logic.db.DBManager;
 public class UserDAO {
 	
 	private DBManager dbManager;	
-	private static User newUser;
+	private User newUser;
 	private ResultSet result;
 	
 	//login case
@@ -26,13 +26,11 @@ public class UserDAO {
 		return false;
 	}
 	
-	//signin case
 	public void registerUser(User user) throws SQLException, ClassNotFoundException {
 		dbManager = DBManager.getInstance();
-		
-		if(dbManager.insertNewUser(user)) {
+
+		if(dbManager.insertNewUser(user))
 			newUser = user;
-		}
 	}
 	
 	private User createUserObject() throws SQLException {

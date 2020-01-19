@@ -1,6 +1,5 @@
 package logic.gui;
 
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -15,20 +14,17 @@ public class LogInScene extends BaseScene{
 
 	private static LogInScene instance = null;
 	
-	private Scene scene;
-	
 	private TextField usernameField;
 	private PasswordField passwordField;
 	private Label errorUsername;
 	private Label errorPassword;
 	
 	private static final String TEXT_FONT = "Arial";
-	private GUIController guiController = GUIController.getInstance();
+	
 	private LogInController loginController = new LogInController();
 	
 	private LogInScene() {
 		super();
-		scene = super.getScene();
 		Pane pane = (Pane) scene.getRoot();
 		
 		Label label1 = new Label("Username");
@@ -79,7 +75,7 @@ public class LogInScene extends BaseScene{
         signUpButton.setLayoutX(922);
         signUpButton.setLayoutY(549);
         signUpButton.setOnMouseClicked(event -> 
-        	guiController.setSignUpScene((Stage)scene.getWindow())
+        	loadSignUp()
         );
         pane.getChildren().add(signUpButton);
         
@@ -104,19 +100,16 @@ public class LogInScene extends BaseScene{
 	
 	private void attemptLogin() {
 		if(usernameField.getText().equals("") || passwordField.getText().equals(""))
-			notifyError();
+			notifyInputError();
 		else if(!loginController.checkLogin(usernameField.getText(), passwordField.getText()))
-			notifyError();
+			notifyInputError();
 	}
 	
-	/*public void changeLanguage() { //apply observer GoF
-		if(btnLanguage.getText().equals("ITA"))
-			btnLanguage.setText("ENG");
-		else
-			btnLanguage.setText("ITA");
-	}*/
+	private void loadSignUp() {
+		loginController.loadSignUp();
+	}
 	
-	private void notifyError() {
+	private void notifyInputError() {
 		errorUsername.setTextFill(Color.RED);
 		errorPassword.setTextFill(Color.RED);
 		errorUsername.setText("Invalid username");

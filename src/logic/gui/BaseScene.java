@@ -16,7 +16,8 @@ import javafx.stage.Stage;
 
 public abstract class BaseScene {
 	
-	private Scene scene;
+	protected Scene scene;
+	protected Button languageButton;
 	
 	protected BaseScene() {
 		Pane pane = new Pane();
@@ -55,15 +56,25 @@ public abstract class BaseScene {
         label3.setStyle("-fx-background-color: #024a00");
         pane.getChildren().add(label3);
         
-        Button languageButton = new Button("ENG");
+        languageButton = new Button("ENG");
         languageButton.setLayoutX(1050);
         languageButton.setLayoutY(50);
         languageButton.setMnemonicParsing(false);
         languageButton.setFont(new Font("Arial", 16));
         languageButton.setPrefHeight(30);
         languageButton.setPrefWidth(80);
+        languageButton.setOnMouseClicked(event ->
+        	changeLanguage()
+        );
         pane.getChildren().add(languageButton);
     }
+	
+	public void changeLanguage() { //apply observer GoF
+		if(languageButton.getText().equals("ITA"))
+			languageButton.setText("ENG");
+		else
+			languageButton.setText("ITA");
+	}
 	
 	public Scene getScene() {
 		return scene;

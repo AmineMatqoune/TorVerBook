@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 public class MainGui extends Application{
 
-	private GUIController guiController = new GUIController();
+	private GUIController guiController = GUIController.getInstance();
 	private Stage stage;
 	
 	@Override

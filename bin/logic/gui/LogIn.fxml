@@ -17,7 +17,7 @@
          </image>
       </ImageView>
       
-      <Label layoutX="835.0" layoutY="261.0" text="E-mail/Username">
+      <Label layoutX="835.0" layoutY="261.0" text="Username">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
@@ -40,8 +40,8 @@
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Button>
-      <Label fx:id="errorUsername" layoutX="844.0" layoutY="330.0" prefHeight="17.0" prefWidth="275.0" textFill="#f22424" />
-      <Label fx:id="errorPwd" layoutX="845.0" layoutY="426.0" prefHeight="17.0" prefWidth="275.0" textFill="#f22424" />
+      <Label fx:id="errorUsername" layoutX="835.0" layoutY="332.0" prefHeight="17.0" prefWidth="275.0" textFill="#f22424" />
+      <Label fx:id="errorPwd" layoutX="837.0" layoutY="426.0" prefHeight="17.0" prefWidth="275.0" textFill="#f22424" />
       <Label layoutY="-5.0" prefHeight="150.0" prefWidth="1600.0" style="-fx-background-color: #024a00;" />
       <Button fx:id="btnLanguage" layoutX="1490.0" layoutY="50.0" mnemonicParsing="false" onAction="#changeLanguage" prefHeight="30.0" prefWidth="80.0" text="ENG">
          <font>

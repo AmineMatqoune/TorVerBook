@@ -5,8 +5,6 @@ import logic.account.User;
 public interface QueriesGenerator {
 	
 	public static String getLogInQuery(String username, String password) {
-		System.out.println("flag4: " + "SELECT * FROM User WHERE Username = '" + username + "'"
-				+ " AND Password = '" + password + "';");
 		return "SELECT * FROM User WHERE Username = '" + username + "'"
 				+ " AND Password = '" + password + "';";
 		
