@@ -6,9 +6,9 @@ jdk:
 
 addons:
      sonarcloud:
-     organization: "aminematqoune"
-     token: 
-         secure: "cbe3eb57f6bc7b1a367ab6a42a3977711ec2ce26"
+     	organization: "aminematqoune"
+     	token: 
+        	secure: "cbe3eb57f6bc7b1a367ab6a42a3977711ec2ce26"
 
 script: 
      - ant build
