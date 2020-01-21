@@ -1,6 +1,5 @@
 package logic.gui;
 
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -42,6 +41,7 @@ public class SignUpScene extends BaseScene{
 
 	private SignUpScene() {
 		super();
+		
 		Pane pane = (Pane) scene.getRoot();
 		
 		Label label1 = new Label("Personal Info");

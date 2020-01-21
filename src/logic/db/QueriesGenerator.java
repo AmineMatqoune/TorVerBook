@@ -7,11 +7,16 @@ public interface QueriesGenerator {
 	public static String getLogInQuery(String username, String password) {
 		return "SELECT * FROM User WHERE Username = '" + username + "'"
 				+ " AND Password = '" + password + "';";
-		
 	}
 	
 	public static String getSignUpCommand(User user) {
 		return "INSERT INTO User VALUES ('" + user.getUsername() + "', '" + user.getName() + "', '" + user.getSurname() + "', '" + user.getBirthDateString() + "', '" + user.getPhoneNumber() + "', "
 				+ "'" + user.getEmail() + "', '" + user.getPassword() + "', FALSE)";
+	}
+	
+	public static String getUpdateCommand(User user, String actualUsername) {
+		System.out.println("Flag8");
+		return "UPDATE User SET Username = '" + user.getUsername() + "', Name = '" + user.getName() + "', Surname = '" + user.getSurname() + "', Birthdate = '" + user.getBirthDateString() + "', "
+				+ "PhoneNumber = '" + user.getPhoneNumber() + "', Email = '" + user.getEmail() + "', Password = '" + user.getPassword() + "' WHERE Username = '" + actualUsername + "';";
 	}
 }

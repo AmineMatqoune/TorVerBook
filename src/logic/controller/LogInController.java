@@ -12,7 +12,7 @@ import logic.gui.MyPopup;
 public class LogInController {
 	
 	private GUIController guiController = GUIController.getInstance();
-	private UserDAO userDao = new UserDAO();
+	private UserDAO userDao = UserDAO.getInstance();
 	private User user;
 	
 	public boolean checkLogin(String username, String password) {
@@ -34,5 +34,10 @@ public class LogInController {
 	
 	public void loadSignUp() {
 		guiController.setSignUpScene((Stage) LogInScene.getInstance().getScene().getWindow());
+	}
+	
+	//metodo per caricare l'homepage
+	public void loadHomepage() {
+		guiController.setHomepageScene((Stage) LogInScene.getInstance().getScene().getWindow());
 	}
 }

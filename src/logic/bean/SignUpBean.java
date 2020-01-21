@@ -3,9 +3,7 @@ package logic.bean;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javafx.stage.Stage;
-
 import logic.account.User;
 import logic.gui.MyPopup;
 import logic.gui.SignUpScene;

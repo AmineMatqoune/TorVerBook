@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import logic.controller.LogInController;
 
 public class LogInScene extends BaseScene{
@@ -103,6 +102,8 @@ public class LogInScene extends BaseScene{
 			notifyInputError();
 		else if(!loginController.checkLogin(usernameField.getText(), passwordField.getText()))
 			notifyInputError();
+		else
+			loginController.loadHomepage();
 	}
 	
 	private void loadSignUp() {

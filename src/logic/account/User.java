@@ -58,7 +58,12 @@ public final class User extends Account{
 		relatedUser.add(u);
 	}
 	
-	public void changeProfileSettings(String name, String surname, String address, int age, String username, String email, String pwdHash){
+	public void changeProfileSettings(String name, String surname, String username, String email, String pwdHash){
+		this.name = name;
+		this.surname = surname;
+		this.username = username;
+		this.email = email;
+		this.password = pwdHash;
 	}
 	
 	public void deleteAd(Ad ad) {}

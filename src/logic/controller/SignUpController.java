@@ -18,6 +18,7 @@ public class SignUpController {
 	private SignUpScene signUpScene;
 	private GUIController gui;
 	private User user;
+	private UserDAO userDAO = UserDAO.getInstance();
 	
 	public boolean signUp() {
 		signUpBean = new SignUpBean();
@@ -33,7 +34,7 @@ public class SignUpController {
 				if(signUpBean.checkInfo(user)) {
 					//if date doesn't throwed any ParseException, it means that user inserted a valid date, so we can finally sign-up the new user
 					user.setBirthDate(signUpBean.getYear() + "-" + signUpBean.getMonth() + "-" + signUpBean.getDay());
-					new UserDAO().registerUser(user);
+					userDAO.registerUser(user);
 					
 					//return to log-in page
 					loadLogIn();
@@ -54,6 +55,7 @@ public class SignUpController {
 	private void loadLogIn() {
 		signUpScene = SignUpScene.getInstance();
 		gui = GUIController.getInstance();
+		
 		gui.setLogInScene((Stage) signUpScene.getScene().getWindow());
 	}
 }

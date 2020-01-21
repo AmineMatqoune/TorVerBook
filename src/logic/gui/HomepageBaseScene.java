@@ -1,39 +1,41 @@
 package logic.gui;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public class HomepageBaseScene extends BaseScene{
+public abstract class HomepageBaseScene extends BaseScene{
 
-	private Scene scene;
-	private static HomepageBaseScene instance = null;
+	protected Pane centralPane;
+	
+	protected Label homepageLabel = new Label("Homepage");
+	protected Label settingsLabel = new Label("Settings");
+	protected Label addAdLabel = new Label("Add Ad");
+	protected Label myAdsLabel = new Label("My Ads");
+	protected Label favouriteListLabel = new Label("Favourite List");
+	protected Label myReviewLabel = new Label("My Review");
 	
 	public HomepageBaseScene() {
 		super();
-		scene = super.getScene();
 		Pane pane = (Pane) scene.getRoot();
 		
 		Pane leftPane = new Pane();
-		leftPane.setLayoutY(150);
+		leftPane.setLayoutY(151);
 		leftPane.setPrefHeight(600);
 		leftPane.setPrefWidth(300);
 		leftPane.setStyle("-fx-background-color: #024a00");
 		pane.getChildren().add(leftPane);
 		
-		Label homepageLabel = new Label("Homepage");
 		homepageLabel.setAlignment(Pos.CENTER);
 		homepageLabel.setContentDisplay(ContentDisplay.CENTER);
 		homepageLabel.setPrefHeight(100);
 		homepageLabel.setPrefWidth(300);
-		homepageLabel.setTextFill(Color.WHITE);
+		homepageLabel.setTextFill(Color.YELLOW);
 		homepageLabel.setWrapText(true);
 		leftPane.getChildren().add(homepageLabel);
 		
-		Label settingsLabel = new Label("Settings");
 		settingsLabel.setAlignment(Pos.CENTER);
 		settingsLabel.setContentDisplay(ContentDisplay.CENTER);
 		settingsLabel.setLayoutY(100);
@@ -43,7 +45,6 @@ public class HomepageBaseScene extends BaseScene{
 		settingsLabel.setWrapText(true);
 		leftPane.getChildren().add(settingsLabel);
 		
-		Label addAdLabel = new Label("Add Ad");
 		addAdLabel.setAlignment(Pos.CENTER);
 		addAdLabel.setContentDisplay(ContentDisplay.CENTER);
 		addAdLabel.setLayoutY(200);
@@ -53,7 +54,6 @@ public class HomepageBaseScene extends BaseScene{
 		addAdLabel.setWrapText(true);
 		leftPane.getChildren().add(addAdLabel);
 		
-		Label myAdsLabel = new Label("My Ads");
 		myAdsLabel.setAlignment(Pos.CENTER);
 		myAdsLabel.setContentDisplay(ContentDisplay.CENTER);
 		myAdsLabel.setLayoutY(300);
@@ -63,7 +63,6 @@ public class HomepageBaseScene extends BaseScene{
 		myAdsLabel.setWrapText(true);
 		leftPane.getChildren().add(myAdsLabel);
 		
-		Label favouriteListLabel = new Label("Favourite List");
 		favouriteListLabel.setAlignment(Pos.CENTER);
 		favouriteListLabel.setContentDisplay(ContentDisplay.CENTER);
 		favouriteListLabel.setLayoutY(400);
@@ -73,7 +72,6 @@ public class HomepageBaseScene extends BaseScene{
 		favouriteListLabel.setWrapText(true);
 		leftPane.getChildren().add(favouriteListLabel);		
 		
-		Label myReviewLabel = new Label("My Review");
 		myReviewLabel.setAlignment(Pos.CENTER);
 		myReviewLabel.setContentDisplay(ContentDisplay.CENTER);
 		myReviewLabel.setLayoutY(500);
@@ -83,7 +81,7 @@ public class HomepageBaseScene extends BaseScene{
 		myReviewLabel.setWrapText(true);
 		leftPane.getChildren().add(myReviewLabel);
 		
-		Pane centralPane = new Pane();
+		centralPane = new Pane();
 		centralPane.setLayoutY(150);
 		centralPane.setLayoutX(300);
 		centralPane.setPrefHeight(600);
@@ -91,7 +89,7 @@ public class HomepageBaseScene extends BaseScene{
 		pane.getChildren().add(centralPane);
 		
 		Pane rightPane = new Pane();
-		rightPane.setLayoutY(150);
+		rightPane.setLayoutY(168);
 		rightPane.setLayoutX(900);
 		rightPane.setPrefHeight(600);
 		rightPane.setPrefWidth(300);
@@ -136,7 +134,7 @@ public class HomepageBaseScene extends BaseScene{
 		
 		Label usernameLabel3 = new Label("Username 3");
 		usernameLabel3.setAlignment(Pos.TOP_LEFT);
-		usernameLabel3.setLayoutY(200);
+		usernameLabel3.setLayoutY(400);
 		usernameLabel3.setPrefHeight(60);
 		usernameLabel3.setPrefWidth(300);
 		usernameLabel3.setTextFill(Color.WHITE);
@@ -145,7 +143,7 @@ public class HomepageBaseScene extends BaseScene{
 		
 		Label messageLabel3 = new Label("Last message 3");
 		messageLabel3.setAlignment(Pos.TOP_LEFT);
-		messageLabel3.setLayoutY(260);
+		messageLabel3.setLayoutY(460);
 		messageLabel3.setPrefHeight(140);
 		messageLabel3.setPrefWidth(300);
 		messageLabel3.setTextFill(Color.WHITE);
@@ -153,9 +151,9 @@ public class HomepageBaseScene extends BaseScene{
 		rightPane.getChildren().add(messageLabel3);
 	}
 	
-	public static HomepageBaseScene getInstance() {
-		if(instance == null) 
-			instance = new HomepageBaseScene();
-		return instance;
+	//metodo per ottenere il centralPane che verrà poi modificato dalle classi figlie
+	public Pane getCentralPane() {
+		return centralPane;
 	}
+	
 }

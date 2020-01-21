@@ -18,7 +18,6 @@ public class DBManager {
 	
 	private Connection conn;
 	private Statement stmt;
-	private ResultSet result;
 	
 	private static DBManager instance = null;
 	
@@ -29,11 +28,15 @@ public class DBManager {
 	}
 	
 	public ResultSet logIn(String username, String password) throws SQLException {
-		return result = stmt.executeQuery(QueriesGenerator.getLogInQuery(username, password));
+		return stmt.executeQuery(QueriesGenerator.getLogInQuery(username, password));
 	}
 	
 	public boolean insertNewUser(User user) throws SQLException{
 		return !stmt.execute(QueriesGenerator.getSignUpCommand(user));
+	}
+	
+	public boolean updateUserInfo(User user, String actualUsername) throws SQLException {
+		return !stmt.execute(QueriesGenerator.getUpdateCommand(user, actualUsername));
 	}
 	
 	public void close() throws SQLException {
@@ -46,5 +49,4 @@ public class DBManager {
 			instance = new DBManager();
 		return instance;
 	}
-	
 }
