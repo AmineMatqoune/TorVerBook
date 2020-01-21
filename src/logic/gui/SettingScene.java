@@ -7,11 +7,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 import logic.bean.SettingsBean;
 import logic.controller.SettingController;
 
 //classe create per le impostazioni del profilo dell'utente
-public class SettingScene extends HomepageBaseScene{
+public class SettingScene extends DashBoardScene{
 	
 	//SINGLETON come le altri classe per la gui
 	private static SettingScene instance = new SettingScene();
@@ -192,14 +193,14 @@ public class SettingScene extends HomepageBaseScene{
 	private void saveChanges() {
 		if(!settingController.applyChanges()) {
 			notifyInputError();
-		}
-		else {
-			new MyPopup("Salvataggio eseguito!", (Stage) LogInScene.getInstance().getScene().getWindow());
+		} else {
+			//metti tipo che ricarica la homepage o qualche messaggio di info
+			System.out.println("Salvataggio riuscito");
 		}
 	}
 	
 	private void notifyInputError() {
-		new MyPopup("Errore nel salvatggio dei dati!", (Stage) LogInScene.getInstance().getScene().getWindow());
+		new MyPopup("Errore nel salvatggio dei dati!", (Stage) SettingScene.getInstance().getScene().getWindow());
 	}
 
 	//metodi per passare le stringhe dalle textfield alla Bean

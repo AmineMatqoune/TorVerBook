@@ -47,7 +47,6 @@ public class SettingsBean {
 		user = userDAO.getUserObject();
 		return user.getPassword();
 	}
-	//////////////////////////////////////
 	
 	//METODI PER PRENDERE DA SETTINGSSCENE LE STRINGHE MODIFICATE
 	public String getNewName() {

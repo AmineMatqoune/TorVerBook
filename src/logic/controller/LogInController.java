@@ -21,7 +21,7 @@ public class LogInController {
 			if(userDao.logIn(username, password)) {
 				user = userDao.getUserObject();
 				System.out.println("Benvenuto: " + user.getEmail() + " " + user.getBirthDateString());
-				//loadHomePage
+				loadHomepage();
 				return true;
 			}
 			//exception management

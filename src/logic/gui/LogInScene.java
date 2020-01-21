@@ -102,8 +102,6 @@ public class LogInScene extends BaseScene{
 			notifyInputError();
 		else if(!loginController.checkLogin(usernameField.getText(), passwordField.getText()))
 			notifyInputError();
-		else
-			loginController.loadHomepage();
 	}
 	
 	private void loadSignUp() {

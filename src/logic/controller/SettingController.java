@@ -1,9 +1,14 @@
 package logic.controller;
 
 import java.sql.SQLException;
+
+import javafx.stage.Stage;
+
 import logic.account.User;
 import logic.bean.SettingsBean;
 import logic.dao.UserDAO;
+import logic.gui.MyPopup;
+import logic.gui.SettingScene;
 
 public class SettingController {
 	
@@ -15,22 +20,18 @@ public class SettingController {
 		settingsBean = new SettingsBean();
 		
 		//controllo dei dati
-		User userChecker = new User(settingsBean.getNewName(), settingsBean.getNewSurname(), settingsBean.getNewUsername(), settingsBean.getNewEmail(), settingsBean.getNewPassword());
-		userChecker.setBirthDate(settingsBean.getNewBirthdate());
-		userChecker.setPhoneNumber(settingsBean.getNewPhoneNumber());
+		User tmpUser = new User(settingsBean.getNewName(), settingsBean.getNewSurname(), settingsBean.getNewUsername(), settingsBean.getNewEmail(), settingsBean.getNewPassword());
+		tmpUser.setBirthDate(settingsBean.getNewBirthdate());
+		tmpUser.setPhoneNumber(settingsBean.getNewPhoneNumber());
 		
-		if(!settingsBean.checkInfo(userChecker))
+		if(!settingsBean.checkInfo(tmpUser))
 			return false;
 		
-		//aggiorno istanza
-		updateUserDAO(userDAO.getUserObject());
-
-		//agiorno database
+		//aggiorno database
 		try {
-			userDAO.UpdateUserInfoDAO();
+			userDAO.updateUserInfoDAO(tmpUser);
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			System.err.println("Errore nell'aggiornamento delle info dell'utente nel db");
+			new MyPopup(e.getMessage(), (Stage) SettingScene.getInstance().getScene().getWindow());
 		}
 		return true;
 	}

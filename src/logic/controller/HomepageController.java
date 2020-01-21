@@ -11,5 +11,4 @@ public class HomepageController {
 	public void loadSettingPage() {
 		guiController.setSettingsScene((Stage) HomepageScene.getInstance().getScene().getWindow());
 	}
-
 }

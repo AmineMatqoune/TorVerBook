@@ -15,7 +15,6 @@ public interface QueriesGenerator {
 	}
 	
 	public static String getUpdateCommand(User user, String actualUsername) {
-		System.out.println("Flag8");
 		return "UPDATE User SET Username = '" + user.getUsername() + "', Name = '" + user.getName() + "', Surname = '" + user.getSurname() + "', Birthdate = '" + user.getBirthDateString() + "', "
 				+ "PhoneNumber = '" + user.getPhoneNumber() + "', Email = '" + user.getEmail() + "', Password = '" + user.getPassword() + "' WHERE Username = '" + actualUsername + "';";
 	}

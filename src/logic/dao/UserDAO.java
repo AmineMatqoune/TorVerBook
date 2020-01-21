@@ -50,19 +50,14 @@ public class UserDAO {
 		userTemp.setBirthDate(result.getString("Birthdate"));
 	}
 	
-	public void UpdateUserInfoDAO() throws ClassNotFoundException, SQLException {
+	public void updateUserInfoDAO(User user) throws ClassNotFoundException, SQLException {
+		
 		dbManager = DBManager.getInstance();
-		if(dbManager.updateUserInfo(userTemp, newUser.getUsername())) {
+		if(dbManager.updateUserInfo(user, newUser.getUsername())) {
 			//se l'update è andato a buon fine gli attributi di newUser vengono aggiornati
-			newUser.changeProfileSettings(userTemp.getName(), userTemp.getSurname(), userTemp.getUsername(), userTemp.getEmail(), userTemp.getPassword());
-			newUser.setBirthDate(userTemp.getBirthDateString());
-			newUser.setPhoneNumber(userTemp.getPhoneNumber());
-		}
-		else {
-			//altrimenti gli attributi di userTemp vengono riportati a quelli attuali
-			userTemp.changeProfileSettings(newUser.getName(), newUser.getSurname(), newUser.getUsername(), newUser.getEmail(), newUser.getPassword());
-			userTemp.setBirthDate(newUser.getBirthDateString());
-			userTemp.setPhoneNumber(newUser.getPhoneNumber());
+			newUser.changeProfileSettings(user.getName(), user.getSurname(), user.getUsername(), user.getEmail(), user.getPassword());
+			newUser.setBirthDate(user.getBirthDateString());
+			newUser.setPhoneNumber(user.getPhoneNumber());
 		}
 	}
 	
