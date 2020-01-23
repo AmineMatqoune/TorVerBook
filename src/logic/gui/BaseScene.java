@@ -39,7 +39,7 @@ public abstract class BaseScene {
         label1.setStyle("-fx-background-color: #024a00");
         label1.setTextFill(Color.WHITE);
         label1.setAlignment(Pos.CENTER);
-        label1.setFont(new Font("Arial", 70));
+        label1.setFont(new Font("Comic Sans MS Bold", 70));
         pane.getChildren().add(label1);
         
         Label label2 = new Label();

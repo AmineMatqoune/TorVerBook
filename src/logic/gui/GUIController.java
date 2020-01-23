@@ -27,7 +27,6 @@ public class GUIController {
 		System.out.println("----COMPLETATO");
 	}
 	
-	//carica temporaneamente la SettingPage invece della HomePage
 	public void setHomepageScene(Stage stage) {
 		System.out.println("GUIController: setHomepageScene()");
 		homepage = HomepageScene.getInstance();
@@ -39,6 +38,13 @@ public class GUIController {
 		System.out.println("GUIController: setSettingsScene()");
 		settings = SettingScene.getInstance();
 		stage.setScene(settings.getScene());
+		System.out.println("----COMPLETATO");
+	}
+	
+	public void setMyReviewScene(Stage stage) {
+		System.out.println("GUIController: setMyReviewScene()");
+		MyReviewScene myReview = new MyReviewScene();
+		stage.setScene(myReview.getScene());
 		System.out.println("----COMPLETATO");
 	}
 	

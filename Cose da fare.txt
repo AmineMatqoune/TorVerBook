@@ -1,0 +1,4 @@
+Vedi se MyPopup è il costrutto giusto da utilizzare per fare i popup, se si, allora fai generalizzazione di MyPopup in information, error, warning etc..
+Finisci tutte le interfacce con Scene Builder
+Popola il db
+aggiungi alla relazione Ad l'attributo CollegeCourse, così puoi filtrare gli Ad

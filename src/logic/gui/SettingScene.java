@@ -37,7 +37,6 @@ public class SettingScene extends DashBoardScene{
 	private SettingScene() {
 		super();
 		
-		homepageLabel.setTextFill(Color.WHITE);
 		settingsLabel.setTextFill(Color.YELLOW);
 		
 		Label usernameLabel = new Label("USERNAME: " + settingsBean.getUserUsername());

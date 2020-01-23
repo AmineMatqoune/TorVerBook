@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+import logic.controller.HomepageController;
 
 public abstract class DashBoardScene extends BaseScene{
 
@@ -25,6 +28,8 @@ public abstract class DashBoardScene extends BaseScene{
 	protected Label messageLabel2 = new Label("Last message 2");
 	protected Label messageLabel3 = new Label("Last message 3");	
 	
+	protected GUIController guiController = GUIController.getInstance();
+	
 	protected final static String FONT = "Arial";
 	
 	public DashBoardScene() {
@@ -43,8 +48,11 @@ public abstract class DashBoardScene extends BaseScene{
 		homepageLabel.setPrefHeight(100);
 		homepageLabel.setPrefWidth(300);
 		homepageLabel.setFont(new Font(FONT, 36));
-		homepageLabel.setTextFill(Color.YELLOW);
+		homepageLabel.setTextFill(Color.WHITE);
 		homepageLabel.setWrapText(true);
+		homepageLabel.setOnMouseClicked(event ->
+			guiController.setHomepageScene((Stage) pane.getScene().getWindow())
+		);
 		leftPane.getChildren().add(homepageLabel);
 		
 		settingsLabel.setAlignment(Pos.CENTER);
@@ -55,6 +63,9 @@ public abstract class DashBoardScene extends BaseScene{
 		settingsLabel.setFont(new Font(FONT, 36));
 		settingsLabel.setTextFill(Color.WHITE);
 		settingsLabel.setWrapText(true);
+		settingsLabel.setOnMouseClicked(event ->
+			guiController.setSettingsScene((Stage) pane.getScene().getWindow())
+		);
 		leftPane.getChildren().add(settingsLabel);
 		
 		addAdLabel.setAlignment(Pos.CENTER);
@@ -79,7 +90,7 @@ public abstract class DashBoardScene extends BaseScene{
 		
 		favouriteListLabel.setAlignment(Pos.CENTER);
 		favouriteListLabel.setContentDisplay(ContentDisplay.CENTER);
-		favouriteListLabel.setLayoutY(400);
+		favouriteListLabel.setLayoutY(500);
 		favouriteListLabel.setPrefHeight(100);
 		favouriteListLabel.setPrefWidth(300);
 		favouriteListLabel.setFont(new Font(FONT, 36));
@@ -89,12 +100,15 @@ public abstract class DashBoardScene extends BaseScene{
 		
 		myReviewLabel.setAlignment(Pos.CENTER);
 		myReviewLabel.setContentDisplay(ContentDisplay.CENTER);
-		myReviewLabel.setLayoutY(500);
+		myReviewLabel.setLayoutY(400);
 		myReviewLabel.setPrefHeight(100);
 		myReviewLabel.setPrefWidth(300);
 		myReviewLabel.setFont(new Font(FONT, 36));
 		myReviewLabel.setTextFill(Color.WHITE);
 		myReviewLabel.setWrapText(true);
+		myReviewLabel.setOnMouseClicked(event ->
+			guiController.setMyReviewScene((Stage) pane.getScene().getWindow())
+		);
 		leftPane.getChildren().add(myReviewLabel);
 		
 		centralPane = new Pane();

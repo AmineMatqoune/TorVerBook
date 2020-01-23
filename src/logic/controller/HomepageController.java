@@ -6,9 +6,4 @@ import logic.gui.HomepageScene;
 
 public class HomepageController {
 
-	private GUIController guiController = GUIController.getInstance();
-	
-	public void loadSettingPage() {
-		guiController.setSettingsScene((Stage) HomepageScene.getInstance().getScene().getWindow());
-	}
 }
