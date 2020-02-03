@@ -2,15 +2,12 @@ package logic.controller;
 
 
 import java.sql.SQLException;
-
 import javafx.stage.Stage;
-
 import logic.account.User;
 import logic.bean.SignUpBean;
 import logic.dao.UserDAO;
-import logic.gui.GUIController;
-import logic.gui.MyPopup;
 import logic.gui.SignUpScene;
+import logic.gui.popup.ErrorPopup;
 
 public class SignUpController {
 	
@@ -46,7 +43,7 @@ public class SignUpController {
 				return false;
 		} catch (ClassNotFoundException | SQLException e) {
 			signUpScene = SignUpScene.getInstance();
-			new MyPopup(e.getMessage(), (Stage) signUpScene.getScene().getWindow());
+			new ErrorPopup(e.getMessage(), (Stage) signUpScene.getScene().getWindow());
 			return false;
 		} 
 		return true;

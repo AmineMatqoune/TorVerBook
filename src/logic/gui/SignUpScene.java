@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import logic.controller.GUIController;
 import logic.controller.SignUpController;
 
 public class SignUpScene extends BaseScene{

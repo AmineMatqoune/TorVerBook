@@ -1,6 +1,10 @@
 package logic.ad;
 
-import java.util.Calendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javafx.scene.paint.Color;
 import logic.account.*;
 import logic.highlight.*;
 
@@ -9,7 +13,7 @@ import logic.highlight.*;
 public final class Ad {
 	
 	//Ad's info for users
-	private Calendar date;
+	private Date date;
 	private String description;
 	private String title;
 	private AdCategory category;
@@ -17,21 +21,25 @@ public final class Ad {
 	private int quantity;
 	private AdType type;
 	private boolean isSold;
-	private Calendar startDateHighlight;
-	private Calendar finishDateHighlight;
+	private Date startDateHighlight;
+	private Date finishDateHighlight;
 	
 	//Ad's info for system
 	private long id;
 	private User myUser;
 	private boolean isConvalidated;
+	private Highlight myHighlight;
+	
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public Ad(User owner, long id) {
-		//link to own user
-		//setId
+		myUser = owner;
+		this.id = id;
+		format.setLenient(false);
 	}	
 	
 	//getters()
-	public Calendar getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 	
@@ -43,12 +51,16 @@ public final class Ad {
 		return this.title;
 	}
 	
+	public double getPrice() {
+		return this.price;
+	}
+	
 	public AdCategory getCategory() {
 		return this.category;
 	}
 	
-	public double getPrice() {
-		return this.price;
+	public boolean getStatus() {
+		return this.isSold;
 	}
 	
 	public double getQuantity(){
@@ -59,11 +71,115 @@ public final class Ad {
 		return this.type;
 	}
 	
-	public boolean getStatus() {
-		return this.isSold;
+	public User getOwner() {
+		return myUser;
 	}
 	
-	//behaviour operations
+	public String getRGBColor() {
+		return myHighlight.getRGBColor();
+	}
+	
+	//Highlight attribute
+	public String getFont() {
+		return myHighlight.getFont();
+	}
+	
+	public int getThickness() {
+		return myHighlight.getThickness();
+	}
+	
+	public String getStyle() {
+		return myHighlight.getStyle();
+	}
+	
+	public Color getTextColor() {
+		return myHighlight.getTextColor();
+	}
+	
+	//setters()
+	public void setDate(String date) throws ParseException {
+		this.date = format.parse(date);
+	}
+		
+	public void setDescription(String description) {
+		this.description = description;
+	}
+		
+	public void setTitle(String title) {
+		this.title = title;
+	}
+		
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
+	public void setCategory(String category) {
+		switch (category) {
+			case "ALGORITHM":
+				this.category = AdCategory.ALGORITHM;
+				break;
+			case "MATH":
+				this.category = AdCategory.MATH;
+				break;
+			case "HISTORY":
+				this.category = AdCategory.HISTORY;
+				break;
+			case "GEOMETRY":
+				this.category = AdCategory.GEOMETRY;
+				break;
+			case "LAW":
+				this.category = AdCategory.LAW;
+				break;
+			case "ECONOMY":
+				this.category = AdCategory.ECONOMY;
+				break;
+			case "LITERATURE":
+				this.category = AdCategory.LITERATURE;
+				break;
+			case "PHILOSOPHY":
+				this.category = AdCategory.PHILOSOPHY;
+				break;
+			case "PHYSICS":
+				this.category = AdCategory.PHYSICS;
+				break;
+			case "COMPUTER_SCIENCE":
+				this.category = AdCategory.COMPUTER_SCIENCE;
+				break;
+			case "CHEMISTRY":
+				this.category = AdCategory.CHEMISTRY;
+				break;
+			default:
+				this.category = AdCategory.UNKNOWN;
+		}
+	}
+
+	public void setStatus(int status) {
+		if(status == 0)
+			this.isSold = false;
+		else
+			this.isSold = true;
+	}
+	
+	public void setQuantity(int quantity){
+		this.quantity = quantity;
+	}
+	
+	public void setStartHighlight(String startDate) throws ParseException{
+		this.startDateHighlight = format.parse(startDate);
+	}
+	
+	public void setFinishHighlight(String finishDate) throws ParseException{	
+		this.finishDateHighlight = format.parse(finishDate);
+	}	
+	
+	public void setType(String type) {
+		if(type.contentEquals("SALE"))
+			this.type = AdType.SALE;
+		else
+			this.type = AdType.EXCHANGE;
+	}	
+	
+	//behavioural operations
 	public void markAsSold() {}
 	
 	public void addHighlight(Highlight hl) {
@@ -74,5 +190,6 @@ public final class Ad {
 		return this.isConvalidated;
 	}
 	
-	private void deleteMe() {}	
+	private void deleteMe() {}
+
 }

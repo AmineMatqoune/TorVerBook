@@ -18,4 +18,8 @@ public interface QueriesGenerator {
 		return "UPDATE User SET Username = '" + user.getUsername() + "', Name = '" + user.getName() + "', Surname = '" + user.getSurname() + "', Birthdate = '" + user.getBirthDateString() + "', "
 				+ "PhoneNumber = '" + user.getPhoneNumber() + "', Email = '" + user.getEmail() + "', Password = '" + user.getPassword() + "' WHERE Username = '" + actualUsername + "';";
 	}
+
+	public static String getMyAdsQuery(String username) {
+		return "SELECT * FROM Ad WHERE User = '" + username + "' ORDER BY Date DESC";
+	}
 }

@@ -1,8 +1,8 @@
 package logic.gui;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
+import java.io.FileNotFoundException;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import logic.gui.popup.ErrorPopup;
+
 
 public abstract class BaseScene {
 	
@@ -30,7 +32,7 @@ public abstract class BaseScene {
 	        imageView.setOpacity(0.05);
 	        pane.getChildren().add(imageView);
 		} catch (FileNotFoundException e) {
-			new MyPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
+			new ErrorPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 		}
 		
 		Label label1 = new Label("TorVerBook");

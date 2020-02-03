@@ -1,7 +1,8 @@
 package logic.highlight;
 
+import javafx.scene.paint.Color;
 import logic.ad.*;
-import java.awt.Color;
+
 
 public final class Highlight implements HighlightInterface{
 	
@@ -14,7 +15,8 @@ public final class Highlight implements HighlightInterface{
 	//highlight info for system
 	private int levelOfVisibility;
 	private Color textColor;
-	private Color bgColor;
+	private String rgbColor;
+	private String style;
 	
 	
 	public Highlight(HighlightType type) {
@@ -27,12 +29,13 @@ public final class Highlight implements HighlightInterface{
 	
 	private void initBaseHighlight() {
 		hlType = HighlightType.BASE;
-		thickness = 10;
+		thickness = 12;
 		pricePerDay = 0;
 		font = "Times New Roman";
 		textColor = Color.BLACK;
-		bgColor = Color.GREEN;
+		rgbColor = "#024a00";
 		levelOfVisibility = 0;
+		style = "Regular";
 	}
 	
 	private void initMediumHighlight() {
@@ -41,18 +44,20 @@ public final class Highlight implements HighlightInterface{
 		pricePerDay = 1;
 		font = "Arial";
 		textColor = Color.BLUE;
-		bgColor = Color.WHITE;	
+		rgbColor = "#ffffff";	
 		levelOfVisibility = 1;
+		style = "Regular";
 	}
 	
 	private void initSuperHighlight() {
 		hlType = HighlightType.SUPER;
-		thickness = 20;
+		thickness = 15;
 		pricePerDay = 2;
 		font = "Verdana";
 		textColor = Color.RED;
-		bgColor = Color.YELLOW;
+		rgbColor = " #ffd700";
 		levelOfVisibility = 2;
+		style = "Bold";
 	}
 
 	//getters()
@@ -68,10 +73,19 @@ public final class Highlight implements HighlightInterface{
 		return this.font;
 	}
 	
-	//behavioural methods inherited from interface
-	@Override
-	public void linkToAd(Ad ad) {} //è del controller quest'operazione?
+	public String getRGBColor() {
+		return rgbColor;
+	}
 	
+	public Color getTextColor() {
+		return textColor;
+	}
+	
+	public String getStyle() {
+		return style;
+	}
+	
+	//behavioural methods inherited from interface	
 	@Override
 	public boolean isExpired() {
 		return (Boolean)null;

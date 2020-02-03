@@ -2,6 +2,7 @@ package logic.gui;
 
 import javafx.application.*;
 import javafx.stage.Stage;
+import logic.controller.GUIController;
 
 
 public class MainGui extends Application{

@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.stage.Stage;
 import logic.account.User;
-import logic.gui.MyPopup;
 import logic.gui.SignUpScene;
+import logic.gui.popup.ErrorPopup;
 
 public class SignUpBean {
 	
@@ -38,7 +38,7 @@ public class SignUpBean {
 			dateFormat.setLenient(false);
 			date = dateFormat.parse(getYear() + "-" + getMonth() + "-" + getDay());
 		} catch (ParseException e) {
-			new MyPopup(e.getMessage(), (Stage)signUpScene.getScene().getWindow());
+			new ErrorPopup(e.getMessage(), (Stage)signUpScene.getScene().getWindow());
 			return expression;
 		}
 		

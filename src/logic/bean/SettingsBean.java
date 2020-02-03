@@ -1,6 +1,5 @@
 package logic.bean;
 
-import java.text.SimpleDateFormat;
 import logic.account.User;
 import logic.dao.UserDAO;
 import logic.gui.SettingScene;
@@ -10,41 +9,42 @@ public class SettingsBean {
 	private User user;
 	
 	private UserDAO userDAO = UserDAO.getInstance();
-	private SettingScene settingScene = SettingScene.getInstance();
+	private SettingScene settingScene;
 
+	public SettingsBean() {
+		user = userDAO.getUserObject();
+	}
+	
+	public void link() {
+		settingScene = SettingScene.getInstance();
+	}
+	
 	//METODI PER IMPOSTARE STRINGHE NELLE TEXTFIELD
 	public String getUserName() {
-		user = userDAO.getUserObject();
 		return user.getName();
 	}
 
 	public String getUserSurname() {
-		user = userDAO.getUserObject();
 		return user.getSurname();
 	}
 
 	public String getUserBirthdate() {
-		user = userDAO.getUserObject();
 		return user.getBirthDateString();
 	}
 
 	public String getUserPhoneNumber() {
-		user = userDAO.getUserObject();
 		return user.getPhoneNumber();
 	}
 	
 	public String getUserUsername() {
-		user = userDAO.getUserObject();
 		return user.getUsername();
 	}
 
 	public String getUserEmail() {
-		user = userDAO.getUserObject();
 		return user.getEmail();
 	}
 
 	public String getUserPassword() {
-		user = userDAO.getUserObject();
 		return user.getPassword();
 	}
 	
@@ -92,10 +92,6 @@ public class SettingsBean {
 			return expression;
 		if((user.getPassword().length() > 30) || user.getPassword().equals(""))
 			return expression;
-		
-		//user inputs are correct, check if birthDate is a valid date, if so, set user's birthdate			
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormat.setLenient(false);
 		
 		//no syntax errors found, return true
 		return !expression;

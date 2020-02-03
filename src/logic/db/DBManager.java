@@ -1,7 +1,6 @@
 package logic.db;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,36 +11,61 @@ import logic.account.User;
 public class DBManager {
 	
 	private static String driverClass = "com.mysql.jdbc.Driver";
-	private static String dbUrl = "jdbc:mysql://localhost:3306/torverbook";
-	private static String user = "root";
-	private static String pwd = "";
-	
-	private Connection conn;
-	private Statement stmt;
+	private static String dbUrl = "jdbc:mysql://torverbook.clnw3ivtnsjr.eu-west-2.rds.amazonaws.com:3306/torverbook";
+	private static String user = "admin";
+	private static String pwd = "QVIavmKCXTKFkSbRMX34";
 	
 	private static DBManager instance = null;
 	
-	private DBManager() throws SQLException, ClassNotFoundException{
+	Statement stmt = null;
+	Connection conn = null;
+	
+	public ResultSet logIn(String username, String password) throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+		
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(QueriesGenerator.getLogInQuery(username, password));
+		return rs;	
 	}
 	
-	public ResultSet logIn(String username, String password) throws SQLException {
-		return stmt.executeQuery(QueriesGenerator.getLogInQuery(username, password));
+	public boolean insertNewUser(User userObj) throws SQLException, ClassNotFoundException{
+		stmt = null;
+		conn = null;
+
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getSignUpCommand(userObj));
 	}
 	
-	public boolean insertNewUser(User user) throws SQLException{
-		return !stmt.execute(QueriesGenerator.getSignUpCommand(user));
+	public boolean updateUserInfo(User userObj, String actualUsername) throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getUpdateCommand(userObj, actualUsername));
 	}
 	
-	public boolean updateUserInfo(User user, String actualUsername) throws SQLException {
-		return !stmt.execute(QueriesGenerator.getUpdateCommand(user, actualUsername));
+	public ResultSet getMyAds(String username) throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return stmt.executeQuery(QueriesGenerator.getMyAdsQuery(username));
 	}
 	
 	public void close() throws SQLException {
-		stmt.close();
-		conn.close();
+		if (stmt != null)
+			stmt.close();
+		if (conn != null)
+			conn.close();
 	}
 	
 	public static DBManager getInstance() throws ClassNotFoundException, SQLException {

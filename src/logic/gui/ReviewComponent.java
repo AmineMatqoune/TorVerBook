@@ -7,7 +7,8 @@ import logic.stuff.Review;
 
 public class ReviewComponent {
 	
-	private Pane pane;
+	protected Pane pane;
+	protected Label backgroundPaneLabel;
 	
 	private static String TEXT_FONT = "Arial";
 	
@@ -17,7 +18,7 @@ public class ReviewComponent {
 		pane.setPrefWidth(550);
 		pane.setPrefHeight(150);
 		
-		Label backgroundPaneLabel = new Label();
+		backgroundPaneLabel = new Label();
 		backgroundPaneLabel.setPrefWidth(550);
 		backgroundPaneLabel.setPrefHeight(150);
 		backgroundPaneLabel.setStyle("-fx-background-color: #024a00");

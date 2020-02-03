@@ -52,6 +52,9 @@ public class LogInScene extends BaseScene{
         passwordField.setPrefHeight(25);
         passwordField.setPrefWidth(280);    
         passwordField.setPromptText("Password");
+        passwordField.setOnAction(event -> 
+    		attemptLogin()
+        );
         pane.getChildren().add(passwordField);
         
         Button logInButton = new Button("Log-in");

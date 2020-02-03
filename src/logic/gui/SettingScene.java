@@ -7,19 +7,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import logic.bean.SettingsBean;
 import logic.controller.SettingController;
+import logic.gui.popup.InfoPopup;
 
 //classe create per le impostazioni del profilo dell'utente
 public class SettingScene extends DashBoardScene{
 	
-	//SINGLETON come le altri classe per la gui
-	private static SettingScene instance = new SettingScene();
+	//SINGLETON come le altre classi per la gui
+	private static SettingScene instance = null;
 	
-	//oggetto per ottenere dati dal DB e per aggiornarli
-	private SettingsBean settingsBean = new SettingsBean();
-	private SettingController settingController = new SettingController();	
+	private SettingController settingController = new SettingController();
+	private SettingsBean settingsBean; ///////////////////////////
 	
 	private static final String TEXT_FONT = "Arial";
 	
@@ -190,16 +189,14 @@ public class SettingScene extends DashBoardScene{
 	
 	//metodo per salvare i cambiamenti fatti sulle info dello user
 	private void saveChanges() {
-		if(!settingController.applyChanges()) {
+		if(!settingController.applyChanges())
 			notifyInputError();
-		} else {
-			//metti tipo che ricarica la homepage o qualche messaggio di info
-			System.out.println("Salvataggio riuscito");
-		}
+		else 
+			new InfoPopup("Salvataggio riuscito!", (Stage) SettingScene.getInstance().getScene().getWindow());
 	}
 	
 	private void notifyInputError() {
-		new MyPopup("Errore nel salvatggio dei dati!", (Stage) SettingScene.getInstance().getScene().getWindow());
+		new InfoPopup("Errore nel salvataggio dei dati!", (Stage) SettingScene.getInstance().getScene().getWindow());
 	}
 
 	//metodi per passare le stringhe dalle textfield alla Bean
@@ -233,9 +230,8 @@ public class SettingScene extends DashBoardScene{
 	/////////////////////////////////////////////////
 	
 	public static SettingScene getInstance() {
-		/*if(instance == null) 
-			instance = new SettingScene();*/
-		//System.out.println("FLAG");
+		if(instance == null) 
+			instance = new SettingScene();
 		return instance;
 	}	
 

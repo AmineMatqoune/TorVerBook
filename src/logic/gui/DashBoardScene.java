@@ -7,8 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import logic.controller.HomepageController;
+import logic.controller.GUIController;
 
 public abstract class DashBoardScene extends BaseScene{
 
@@ -76,6 +75,9 @@ public abstract class DashBoardScene extends BaseScene{
 		addAdLabel.setFont(new Font(FONT, 36));
 		addAdLabel.setTextFill(Color.WHITE);
 		addAdLabel.setWrapText(true);
+		addAdLabel.setOnMouseClicked(event ->
+			guiController.setAddAdScene((Stage) pane.getScene().getWindow())
+		);
 		leftPane.getChildren().add(addAdLabel);
 		
 		myAdsLabel.setAlignment(Pos.CENTER);

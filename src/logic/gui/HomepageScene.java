@@ -1,9 +1,6 @@
 package logic.gui;
 
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import logic.controller.HomepageController;
 
 public class HomepageScene extends DashBoardScene{
 	
