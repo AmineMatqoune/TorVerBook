@@ -27,6 +27,7 @@ public final class Ad {
 	//Ad's info for system
 	private long id;
 	private User myUser;
+	private String myUserStr;
 	private boolean isConvalidated;
 	private Highlight myHighlight;
 	
@@ -34,9 +35,15 @@ public final class Ad {
 	
 	public Ad(User owner, long id) {
 		myUser = owner;
+		myUserStr = myUser.getUsername();
 		this.id = id;
 		format.setLenient(false);
 	}	
+	
+	public Ad(String username, long id) {
+		myUserStr = username;
+		this.id = id;
+	}
 	
 	//getters()
 	public Date getDate() {
@@ -71,15 +78,15 @@ public final class Ad {
 		return this.type;
 	}
 	
-	public User getOwner() {
-		return myUser;
+	public String getOwnerUsername() {
+		return myUserStr;
 	}
-	
-	public String getRGBColor() {
-		return myHighlight.getRGBColor();
-	}
-	
+		
 	//Highlight attribute
+	public Color getBackgroundColor() {
+		return myHighlight.getBackgroundColor();
+	}
+	
 	public String getFont() {
 		return myHighlight.getFont();
 	}
@@ -172,8 +179,12 @@ public final class Ad {
 		this.finishDateHighlight = format.parse(finishDate);
 	}	
 	
+	public void setHighlight(Highlight myHighlight) {
+		this.myHighlight = myHighlight;
+	}
+	
 	public void setType(String type) {
-		if(type.contentEquals("SALE"))
+		if(type.equals("SALE"))
 			this.type = AdType.SALE;
 		else
 			this.type = AdType.EXCHANGE;

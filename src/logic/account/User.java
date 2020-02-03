@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-
 import logic.ad.Ad;
 import logic.dao.AdDAO;
 import logic.stuff.Message;
@@ -25,9 +24,9 @@ public final class User extends Account{
 	private User[] relatedUser = null;
 	private Review[] ownReview = null;
 	
-	//L'utente dev'essere Singleton
-	public User(String name, String surname, String username, String email, String password) throws ClassNotFoundException, SQLException {
+	public User(String name, String surname, String username, String email, String password) throws ClassNotFoundException, SQLException, ParseException {
 		super(name, surname, username, email, password);
+		loadOwnAds();
 	}
 	
 	//methods for initialize User object
@@ -38,10 +37,16 @@ public final class User extends Account{
 	
 	public void loadOwnAds() throws ClassNotFoundException, SQLException, ParseException {
 		adDao = AdDAO.getInstance();
-		adDao.loadMyAds(this);
+		myAdList = adDao.loadMyAds(this);
 	}
 	
-	//methods for user's actions
+	public int getNumOfAds() {System.out.println("Lunghezza: " + myAdList.length);
+		return myAdList.length;
+	}
+	
+	public Ad[] getMyAds() {
+		return myAdList;
+	}
 	
 	public void writeReview(User dest, String mex, byte rank) {}
 	
@@ -74,10 +79,7 @@ public final class User extends Account{
 	public void sendMessage(Message mex) {
 	}
 	
-	public void sendEmail(){}
-	
-	public void setBirthDate(String date) {
-		//yyyy-mm-dd format
+	public void setBirthDate(String date) { //yyyy-mm-dd format
 		birthDateString = date;
 	}
 	

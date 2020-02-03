@@ -2,6 +2,8 @@ package logic.controller;
 
 
 import java.sql.SQLException;
+import java.text.ParseException;
+
 import javafx.stage.Stage;
 import logic.account.User;
 import logic.bean.SignUpBean;
@@ -41,7 +43,7 @@ public class SignUpController {
 			}
 			else //passwords don't match
 				return false;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			signUpScene = SignUpScene.getInstance();
 			new ErrorPopup(e.getMessage(), (Stage) signUpScene.getScene().getWindow());
 			return false;

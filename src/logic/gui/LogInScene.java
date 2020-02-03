@@ -38,6 +38,9 @@ public class LogInScene extends BaseScene{
         usernameField.setPrefHeight(25);
         usernameField.setPrefWidth(280);    
         usernameField.setPromptText("Username");
+        usernameField.setOnAction(event -> 
+			attemptLogin()
+        );
         pane.getChildren().add(usernameField);
         
         Label label2 = new Label("Password");
@@ -61,7 +64,7 @@ public class LogInScene extends BaseScene{
         logInButton.setFont(new Font(TEXT_FONT, 24));
         logInButton.setLayoutX(930);
         logInButton.setLayoutY(450);
-        logInButton.setOnMouseClicked(event -> 
+        logInButton.setOnAction(event -> 
         	attemptLogin()
         );
         pane.getChildren().add(logInButton);
@@ -76,7 +79,7 @@ public class LogInScene extends BaseScene{
         signUpButton.setFont(new Font(TEXT_FONT, 24));
         signUpButton.setLayoutX(922);
         signUpButton.setLayoutY(549);
-        signUpButton.setOnMouseClicked(event -> 
+        signUpButton.setOnAction(event -> 
         	loadSignUp()
         );
         pane.getChildren().add(signUpButton);

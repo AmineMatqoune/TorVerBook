@@ -7,19 +7,15 @@ import logic.gui.SettingScene;
 public class SettingsBean {
 
 	private User user;
-	
+
 	private UserDAO userDAO = UserDAO.getInstance();
-	private SettingScene settingScene;
 
 	public SettingsBean() {
 		user = userDAO.getUserObject();
 	}
-	
-	public void link() {
-		settingScene = SettingScene.getInstance();
-	}
-	
-	//METODI PER IMPOSTARE STRINGHE NELLE TEXTFIELD
+
+
+	// METODI PER IMPOSTARE STRINGHE NELLE TEXTFIELD
 	public String getUserName() {
 		return user.getName();
 	}
@@ -35,7 +31,7 @@ public class SettingsBean {
 	public String getUserPhoneNumber() {
 		return user.getPhoneNumber();
 	}
-	
+
 	public String getUserUsername() {
 		return user.getUsername();
 	}
@@ -47,53 +43,52 @@ public class SettingsBean {
 	public String getUserPassword() {
 		return user.getPassword();
 	}
-	
-	//METODI PER PRENDERE DA SETTINGSSCENE LE STRINGHE MODIFICATE
-	public String getNewName() {
-		return settingScene.getName();
+
+	public void setUserName(String name) {
+		user.setName(name);
 	}
 
-	public String getNewSurname() {
-		return settingScene.getSurname();
+	public void setUserSurname(String surname) {
+		user.setSurname(surname);
 	}
 
-	public String getNewBirthdate() {
-		return settingScene.getBirthdate();
+	public void setUserBirthdate(String date) {
+		user.setBirthDate(date);
 	}
 
-	public String getNewPhoneNumber() {
-		return settingScene.getPhoneNumber();
-	}
-	
-	public String getNewUsername() {
-		return settingScene.getUsername();
+	public void setUserPhoneNumber(String phoneNumber) {
+		user.setPhoneNumber(phoneNumber);
 	}
 
-	public String getNewEmail() {
-		return settingScene.getEmail();
+	public void setUserUsername(String username) {
+		user.setUsername(username);
 	}
 
-	public String getNewPassword() {
-		return settingScene.getPassword();
+	public void setUserEmail(String email) {
+		user.setEmail(email);
 	}
-	///////////////////////////////////////
-	
+
+	public void setUserPassword(String password) {
+		user.setPassword(password);
+	}
+
+
 	public boolean checkInfo(User user) {
-		
+
 		boolean expression = false;
-		
-		if((user.getName().length() > 15) || user.getName().equals(""))
+
+		if ((user.getName().length() > 15) || user.getName().equals(""))
 			return expression;
-		if((user.getSurname().length() > 15) || user.getSurname().equals(""))
+		if ((user.getSurname().length() > 15) || user.getSurname().equals(""))
 			return expression;
-		if((user.getUsername().length() > 20) || user.getUsername().equals(""))
+		if ((user.getUsername().length() > 20) || user.getUsername().equals(""))
 			return expression;
-		if((user.getEmail().length() > 30) || user.getEmail().equals(""))
+		if ((user.getEmail().length() > 30) || user.getEmail().equals(""))
 			return expression;
-		if((user.getPassword().length() > 30) || user.getPassword().equals(""))
+		if ((user.getPassword().length() > 30) || user.getPassword().equals(""))
 			return expression;
-		
-		//no syntax errors found, return true
+
+		// no syntax errors found, return true
 		return !expression;
 	}
 }

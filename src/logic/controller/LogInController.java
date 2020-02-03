@@ -13,14 +13,12 @@ public class LogInController {
 	
 	private GUIController guiController = GUIController.getInstance();
 	private UserDAO userDao = UserDAO.getInstance();
-	private User user;
 	
 	public boolean checkLogin(String username, String password) {
 		try {
 			//if log-in is successful, create user object and load homepage
 			if(userDao.logIn(username, password)) {
-				user = userDao.getUserObject();
-				user.loadOwnAds();
+				User user = userDao.getUserObject();
 				loadHomepage();
 				return true;
 			}

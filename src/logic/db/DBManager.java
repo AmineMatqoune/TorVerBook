@@ -51,6 +51,16 @@ public class DBManager {
 		return !stmt.execute(QueriesGenerator.getUpdateCommand(userObj, actualUsername));
 	}
 	
+	public ResultSet getHomepageAds() throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return stmt.executeQuery(QueriesGenerator.getHomepageAdsQuery());
+	}
+	
 	public ResultSet getMyAds(String username) throws SQLException, ClassNotFoundException {
 		stmt = null;
 		conn = null;

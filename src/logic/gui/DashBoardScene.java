@@ -1,47 +1,60 @@
 package logic.gui;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.controller.GUIController;
+import logic.gui.popup.ErrorPopup;
 
-public abstract class DashBoardScene extends BaseScene{
+public abstract class DashBoardScene extends BaseScene {
 
-	protected Pane centralPane;
-	
+	protected ScrollPane centralPaneContainer;
+	protected AnchorPane centralPane;
+
 	protected Label homepageLabel = new Label("Homepage");
 	protected Label settingsLabel = new Label("Settings");
 	protected Label addAdLabel = new Label("Add Ad");
 	protected Label myAdsLabel = new Label("My Ads");
 	protected Label favouriteListLabel = new Label("Favourite List");
 	protected Label myReviewLabel = new Label("My Review");
-	
 	protected Label usernameLabel1 = new Label("Username1");
 	protected Label usernameLabel2 = new Label("Username2");
 	protected Label usernameLabel3 = new Label("Username3");
 	protected Label messageLabel1 = new Label("Last message 1");
 	protected Label messageLabel2 = new Label("Last message 2");
-	protected Label messageLabel3 = new Label("Last message 3");	
-	
+	protected Label messageLabel3 = new Label("Last message 3");
 	protected GUIController guiController = GUIController.getInstance();
-	
+
 	protected final static String FONT = "Arial";
-	
+
 	public DashBoardScene() {
 		super();
 		Pane pane = (Pane) scene.getRoot();
-		
+
 		Pane leftPane = new Pane();
 		leftPane.setLayoutY(151);
 		leftPane.setPrefHeight(600);
 		leftPane.setPrefWidth(300);
 		leftPane.setStyle("-fx-background-color: #024a00");
 		pane.getChildren().add(leftPane);
-		
+
 		homepageLabel.setAlignment(Pos.CENTER);
 		homepageLabel.setContentDisplay(ContentDisplay.CENTER);
 		homepageLabel.setPrefHeight(100);
@@ -49,11 +62,9 @@ public abstract class DashBoardScene extends BaseScene{
 		homepageLabel.setFont(new Font(FONT, 36));
 		homepageLabel.setTextFill(Color.WHITE);
 		homepageLabel.setWrapText(true);
-		homepageLabel.setOnMouseClicked(event ->
-			guiController.setHomepageScene((Stage) pane.getScene().getWindow())
-		);
+		homepageLabel.setOnMouseClicked(event -> guiController.setHomepageScene((Stage) pane.getScene().getWindow()));
 		leftPane.getChildren().add(homepageLabel);
-		
+
 		settingsLabel.setAlignment(Pos.CENTER);
 		settingsLabel.setContentDisplay(ContentDisplay.CENTER);
 		settingsLabel.setLayoutY(100);
@@ -62,11 +73,9 @@ public abstract class DashBoardScene extends BaseScene{
 		settingsLabel.setFont(new Font(FONT, 36));
 		settingsLabel.setTextFill(Color.WHITE);
 		settingsLabel.setWrapText(true);
-		settingsLabel.setOnMouseClicked(event ->
-			guiController.setSettingsScene((Stage) pane.getScene().getWindow())
-		);
+		settingsLabel.setOnMouseClicked(event -> guiController.setSettingsScene((Stage) pane.getScene().getWindow()));
 		leftPane.getChildren().add(settingsLabel);
-		
+
 		addAdLabel.setAlignment(Pos.CENTER);
 		addAdLabel.setContentDisplay(ContentDisplay.CENTER);
 		addAdLabel.setLayoutY(200);
@@ -75,11 +84,9 @@ public abstract class DashBoardScene extends BaseScene{
 		addAdLabel.setFont(new Font(FONT, 36));
 		addAdLabel.setTextFill(Color.WHITE);
 		addAdLabel.setWrapText(true);
-		addAdLabel.setOnMouseClicked(event ->
-			guiController.setAddAdScene((Stage) pane.getScene().getWindow())
-		);
+		addAdLabel.setOnMouseClicked(event -> guiController.setAddAdScene((Stage) pane.getScene().getWindow()));
 		leftPane.getChildren().add(addAdLabel);
-		
+
 		myAdsLabel.setAlignment(Pos.CENTER);
 		myAdsLabel.setContentDisplay(ContentDisplay.CENTER);
 		myAdsLabel.setLayoutY(300);
@@ -88,8 +95,9 @@ public abstract class DashBoardScene extends BaseScene{
 		myAdsLabel.setFont(new Font(FONT, 36));
 		myAdsLabel.setTextFill(Color.WHITE);
 		myAdsLabel.setWrapText(true);
+		myAdsLabel.setOnMouseClicked(event -> guiController.setMyAdsScene((Stage) pane.getScene().getWindow()));
 		leftPane.getChildren().add(myAdsLabel);
-		
+
 		favouriteListLabel.setAlignment(Pos.CENTER);
 		favouriteListLabel.setContentDisplay(ContentDisplay.CENTER);
 		favouriteListLabel.setLayoutY(500);
@@ -98,8 +106,8 @@ public abstract class DashBoardScene extends BaseScene{
 		favouriteListLabel.setFont(new Font(FONT, 36));
 		favouriteListLabel.setTextFill(Color.WHITE);
 		favouriteListLabel.setWrapText(true);
-		leftPane.getChildren().add(favouriteListLabel);		
-		
+		leftPane.getChildren().add(favouriteListLabel);
+
 		myReviewLabel.setAlignment(Pos.CENTER);
 		myReviewLabel.setContentDisplay(ContentDisplay.CENTER);
 		myReviewLabel.setLayoutY(400);
@@ -108,18 +116,20 @@ public abstract class DashBoardScene extends BaseScene{
 		myReviewLabel.setFont(new Font(FONT, 36));
 		myReviewLabel.setTextFill(Color.WHITE);
 		myReviewLabel.setWrapText(true);
-		myReviewLabel.setOnMouseClicked(event ->
-			guiController.setMyReviewScene((Stage) pane.getScene().getWindow())
-		);
+		myReviewLabel.setOnMouseClicked(event -> guiController.setMyReviewScene((Stage) pane.getScene().getWindow()));
 		leftPane.getChildren().add(myReviewLabel);
-		
-		centralPane = new Pane();
-		centralPane.setLayoutY(150);
-		centralPane.setLayoutX(300);
-		centralPane.setPrefHeight(600);
-		centralPane.setPrefWidth(600);
-		pane.getChildren().add(centralPane);
-		
+
+		centralPaneContainer = new ScrollPane();
+		centralPaneContainer.setLayoutY(150);
+		centralPaneContainer.setLayoutX(300);
+		centralPaneContainer.setPrefHeight(600);
+		centralPaneContainer.setPrefWidth(600);
+		centralPaneContainer.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		centralPaneContainer.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		centralPane = new AnchorPane();
+		centralPaneContainer.setContent(centralPane);
+		pane.getChildren().add(centralPaneContainer);
+
 		Pane rightPane = new Pane();
 		rightPane.setLayoutY(168);
 		rightPane.setLayoutX(900);
@@ -127,7 +137,7 @@ public abstract class DashBoardScene extends BaseScene{
 		rightPane.setPrefWidth(300);
 		rightPane.setStyle("-fx-background-color: #024a00");
 		pane.getChildren().add(rightPane);
-		
+
 		usernameLabel1.setAlignment(Pos.TOP_LEFT);
 		usernameLabel1.setLayoutY(0);
 		usernameLabel1.setPrefHeight(60);
@@ -136,7 +146,7 @@ public abstract class DashBoardScene extends BaseScene{
 		usernameLabel1.setTextFill(Color.WHITE);
 		usernameLabel1.setWrapText(true);
 		rightPane.getChildren().add(usernameLabel1);
-		
+
 		messageLabel1.setAlignment(Pos.TOP_LEFT);
 		messageLabel1.setLayoutY(60);
 		messageLabel1.setPrefHeight(140);
@@ -145,14 +155,14 @@ public abstract class DashBoardScene extends BaseScene{
 		messageLabel1.setTextFill(Color.WHITE);
 		messageLabel1.setWrapText(true);
 		rightPane.getChildren().add(messageLabel1);
-		
+
 		Label label1 = new Label("");
 		label1.setStyle("-fx-background-color: #f7e178");
 		label1.setPrefHeight(10);
 		label1.setPrefWidth(300);
 		label1.setLayoutY(165);
 		rightPane.getChildren().add(label1);
-		
+
 		usernameLabel2.setAlignment(Pos.TOP_LEFT);
 		usernameLabel2.setLayoutY(200);
 		usernameLabel2.setPrefHeight(60);
@@ -161,7 +171,7 @@ public abstract class DashBoardScene extends BaseScene{
 		usernameLabel2.setTextFill(Color.WHITE);
 		usernameLabel2.setWrapText(true);
 		rightPane.getChildren().add(usernameLabel2);
-		
+
 		messageLabel2.setAlignment(Pos.TOP_LEFT);
 		messageLabel2.setLayoutY(260);
 		messageLabel2.setPrefHeight(140);
@@ -170,14 +180,14 @@ public abstract class DashBoardScene extends BaseScene{
 		messageLabel2.setTextFill(Color.WHITE);
 		messageLabel2.setWrapText(true);
 		rightPane.getChildren().add(messageLabel2);
-		
+
 		Label label2 = new Label("");
 		label2.setStyle("-fx-background-color: #f7e178");
 		label2.setPrefHeight(10);
 		label2.setPrefWidth(300);
 		label2.setLayoutY(365);
 		rightPane.getChildren().add(label2);
-		
+
 		usernameLabel3.setAlignment(Pos.TOP_LEFT);
 		usernameLabel3.setLayoutY(400);
 		usernameLabel3.setPrefHeight(60);
@@ -186,7 +196,7 @@ public abstract class DashBoardScene extends BaseScene{
 		usernameLabel3.setTextFill(Color.WHITE);
 		usernameLabel3.setWrapText(true);
 		rightPane.getChildren().add(usernameLabel3);
-		
+
 		messageLabel3.setAlignment(Pos.TOP_LEFT);
 		messageLabel3.setLayoutY(460);
 		messageLabel3.setPrefHeight(140);
@@ -195,5 +205,34 @@ public abstract class DashBoardScene extends BaseScene{
 		messageLabel3.setTextFill(Color.WHITE);
 		messageLabel3.setWrapText(true);
 		rightPane.getChildren().add(messageLabel3);
-	}	
+	}
+
+	public void setCentralPaneBackground(boolean backgroundOn) {
+		if (backgroundOn) {
+			try {
+				FileInputStream input = new FileInputStream("img/torvergata.PNG");
+				Image image = new Image(input);
+				BackgroundImage myBI = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+						BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+				centralPane.setBackground(new Background(myBI));
+				//centralPane.setOpacity(0.05);
+			} catch (FileNotFoundException e) {
+				new ErrorPopup(e.getMessage(), (Stage) centralPaneContainer.getScene().getWindow());
+			}
+		} else {
+			centralPane.setBackground(null);
+			centralPane.setOpacity(1);
+		}
+	}
+
+	public void setCentralPaneFullSize(boolean fullSizeMode) {
+		if (fullSizeMode) {
+			this.centralPane.setPrefHeight(590);
+			this.centralPane.setPrefWidth(585);
+		}else {
+			this.centralPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+			this.centralPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
+		}
+		
+	}
 }

@@ -41,8 +41,6 @@ public abstract class MyPopup {
 		pane.getChildren().add(label);
 
 		this.popup.getContent().add(pane);
-
-		if (!this.popup.isShowing())
-			this.popup.show(stage);
+		this.popup.show(stage);
 	}
 }

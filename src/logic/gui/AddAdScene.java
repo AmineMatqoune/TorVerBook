@@ -41,6 +41,8 @@ public class AddAdScene extends DashBoardScene{
 		super();
 		
 		addAdLabel.setTextFill(Color.YELLOW);
+		this.setCentralPaneBackground(true);
+		this.setCentralPaneFullSize(true);
 		
 		Label label1 = new Label("Ad Title");
 		label1.setLayoutX(30);
@@ -193,16 +195,15 @@ public class AddAdScene extends DashBoardScene{
 		addButton.setOnMouseClicked(event ->
 			addAd()
 	    );
-		centralPane.getChildren().add(addButton);
+		centralPane.getChildren().add(addButton);	
 	}
-	
+
 	private void addAd() {
 		if(addController.addAd()) {
 			
 		}
 	}
 	
-	//////////////////////
 	public String getTitle() {
 		return adTitleField.getText();
 	}
@@ -210,11 +211,6 @@ public class AddAdScene extends DashBoardScene{
 	public String getDescription() {
 		return adTitleField.getText();
 	}
-	
-	/*public void getAdType() {
-		radioGroup.is
-	}*/
-	///////////////////////
 
 	public static AddAdScene getInstance() {
 		if(AddAdScene.instance == null) {

@@ -19,6 +19,10 @@ public interface QueriesGenerator {
 				+ "PhoneNumber = '" + user.getPhoneNumber() + "', Email = '" + user.getEmail() + "', Password = '" + user.getPassword() + "' WHERE Username = '" + actualUsername + "';";
 	}
 
+	public static String getHomepageAdsQuery() {
+		return "SELECT * FROM Ad WHERE isConvalidated = TRUE ORDER BY Highlight DESC, Date DESC LIMIT 100";
+	}
+	
 	public static String getMyAdsQuery(String username) {
 		return "SELECT * FROM Ad WHERE User = '" + username + "' ORDER BY Date DESC";
 	}

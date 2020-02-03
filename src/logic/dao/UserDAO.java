@@ -2,6 +2,8 @@ package logic.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+
 import logic.account.User;
 import logic.db.DBManager;
 
@@ -17,7 +19,7 @@ public class UserDAO {
 	private UserDAO() {}
 	
 	//login case
-	public boolean logIn (String username, String password) throws SQLException, ClassNotFoundException {
+	public boolean logIn (String username, String password) throws SQLException, ClassNotFoundException, ParseException {
 		dbManager = DBManager.getInstance();
 		result = dbManager.logIn(username, password);
 
@@ -37,7 +39,7 @@ public class UserDAO {
 			newUser = user;
 	}
 	
-	private void createUserObject() throws SQLException, ClassNotFoundException {
+	private void createUserObject() throws SQLException, ClassNotFoundException, ParseException {
 		//creazione dell'effettivo oggetto User
 		newUser = new User(result.getString("Name"), result.getString("Surname"), result.getString("Username"), result.getString("Email"), result.getString("Password"));
 		newUser.setPhoneNumber(result.getString("PhoneNumber"));
@@ -63,7 +65,7 @@ public class UserDAO {
 	}
 	
 	public User getUserObject() {
-		return userTemp;
+		return newUser;
 	}
 	
 	public static UserDAO getInstance() {

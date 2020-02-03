@@ -2,20 +2,19 @@ package logic.account;
 
 import java.util.Date;
 
-
 public abstract class Account {
-	
-	//User's info
+
+	// User's account info
+	protected String username;
+	protected String email;
+	protected String password;
+
+	// User's info
 	protected String name;
 	protected String surname;
 	protected Date birthDate;
 	protected String phoneNumber;
-		
-	//User's account info
-	protected String username;
-	protected String email;
-	protected String password;
-	
+
 	public Account(String name, String surname, String username, String email, String password) {
 		this.name = name;
 		this.surname = surname;
@@ -23,8 +22,6 @@ public abstract class Account {
 		this.email = email;
 		this.password = password;
 	}
-	
-
 
 	public String getName() {
 		return this.name;
@@ -41,16 +38,45 @@ public abstract class Account {
 	public String getUsername() {
 		return this.username;
 	}
-	
-	public String getEmail() {		
+
+	public String getEmail() {
 		return this.email;
 	}
-	
-	public String getPhoneNumber(){
+
+	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
 
 	public String getPassword() {
 		return this.password;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

@@ -15,47 +15,47 @@ public final class Highlight implements HighlightInterface{
 	//highlight info for system
 	private int levelOfVisibility;
 	private Color textColor;
-	private String rgbColor;
+	private Color backgroundColor;
 	private String style;
 	
 	
 	public Highlight(HighlightType type) {
-		if (type == HighlightType.BASE)
-			initBaseHighlight();
+		if (type == HighlightType.SUPER)
+			initSuperHighlight();
 		else if (type == HighlightType.MEDIUM)
 			initMediumHighlight();
-		else initSuperHighlight();
+		else initBaseHighlight();
 	}
 	
 	private void initBaseHighlight() {
 		hlType = HighlightType.BASE;
-		thickness = 12;
+		thickness = 17;
 		pricePerDay = 0;
 		font = "Times New Roman";
 		textColor = Color.BLACK;
-		rgbColor = "#024a00";
+		backgroundColor = Color.FORESTGREEN;
 		levelOfVisibility = 0;
 		style = "Regular";
 	}
 	
 	private void initMediumHighlight() {
 		hlType = HighlightType.MEDIUM;
-		thickness = 15;
+		thickness = 20;
 		pricePerDay = 1;
 		font = "Arial";
 		textColor = Color.BLUE;
-		rgbColor = "#ffffff";	
+		backgroundColor = Color.WHITE;	
 		levelOfVisibility = 1;
 		style = "Regular";
 	}
 	
 	private void initSuperHighlight() {
 		hlType = HighlightType.SUPER;
-		thickness = 15;
+		thickness = 20;
 		pricePerDay = 2;
 		font = "Verdana";
 		textColor = Color.RED;
-		rgbColor = " #ffd700";
+		backgroundColor = Color.YELLOW;
 		levelOfVisibility = 2;
 		style = "Bold";
 	}
@@ -66,15 +66,15 @@ public final class Highlight implements HighlightInterface{
 	}
 	
 	public int getThickness() {
-		return this.getThickness();
+		return this.thickness;
 	}
 	
 	public String getFont() {
 		return this.font;
 	}
 	
-	public String getRGBColor() {
-		return rgbColor;
+	public Color getBackgroundColor() {
+		return backgroundColor;
 	}
 	
 	public Color getTextColor() {
