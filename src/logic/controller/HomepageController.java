@@ -25,7 +25,6 @@ public class HomepageController {
 			adDao = AdDAO.getInstance();
 			ads = adDao.getHomepageAdsList(); //initializing Ads that will be shown in Homepage
 		} catch (SQLException | ClassNotFoundException | ParseException e) {
-			System.out.println("hpPane non è inizializzato");
 			new ErrorPopup(e.getMessage(), (Stage) hpPane.getScene().getWindow());
 		}		
 	}

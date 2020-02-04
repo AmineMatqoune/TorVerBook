@@ -68,6 +68,7 @@ public abstract class BaseScene {
         	changeLanguage()
         );
         pane.getChildren().add(languageButton);
+        
     }
 	
 	public void changeLanguage() { //apply observer GoF

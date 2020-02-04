@@ -8,7 +8,6 @@ import logic.account.User;
 import logic.ad.Ad;
 import logic.db.DBManager;
 import logic.highlight.Highlight;
-import logic.highlight.HighlightType;
 
 public class AdDAO {
 

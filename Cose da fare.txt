@@ -1,3 +1,2 @@
 Finisci tutte le interfacce con Scene Builder
 Popola il db
-Highlight necessita del Dao

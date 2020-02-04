@@ -14,11 +14,10 @@ import logic.gui.popup.InfoPopup;
 //classe create per le impostazioni del profilo dell'utente
 public class SettingScene extends DashBoardScene {
 
-	// SINGLETON come le altre classi per la gui
 	private static SettingScene instance = null;
 
 	private SettingController settingController = new SettingController();
-	private SettingsBean settingsBean; ///////////////////////////
+	private SettingsBean settingsBean;
 
 	private static final String TEXT_FONT = "Arial";
 
@@ -261,7 +260,6 @@ public class SettingScene extends DashBoardScene {
 	public SettingsBean getSettingsBean() {
 		return this.settingsBean;
 	}
-	/////////////////////////////////////////////////
 
 	public static SettingScene getInstance() {
 		if (instance == null)
