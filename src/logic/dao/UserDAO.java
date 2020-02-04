@@ -26,7 +26,6 @@ public class UserDAO {
 			createUserObject();
 			return true;
 		}
-			
 		return false;
 	}
 	

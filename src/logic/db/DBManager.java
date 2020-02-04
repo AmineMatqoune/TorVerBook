@@ -12,9 +12,11 @@ import logic.account.User;
 public class DBManager {
 	
 	private static String driverClass = "com.mysql.jdbc.Driver";
-	private static String dbUrl = "jdbc:mysql://localhost:3306/torverbook";
-	private static String user = "root";
-	private static String pwd = "";
+	
+	private static String dbUrl = "jdbc:mysql://torverbook.clnw3ivtnsjr.eu-west-2.rds.amazonaws.com:3306/torverbook";
+	private static String user = "admin";
+	private static String pwd = "QVIavmKCXTKFkSbRMX34";
+
 	
 	private Connection conn;
 	private Statement stmt;
@@ -36,7 +38,7 @@ public class DBManager {
 	}
 	
 	public boolean updateUserInfo(User user, String actualUsername) throws SQLException {
-		return !stmt.execute(QueriesGenerator.getUpdateCommand(user, actualUsername));
+		return !stmt.execute(QueriesGenerator.getUpdateUserInfoCommand(user, actualUsername));
 	}
 	
 	public void close() throws SQLException {

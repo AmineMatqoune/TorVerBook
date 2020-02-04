@@ -1,6 +1,6 @@
 package logic.gui;
 
-import javafx.application.*;
+import javafx.application.Application;
 import javafx.stage.Stage;
 
 
@@ -14,8 +14,8 @@ public class MainGui extends Application{
 		stage = args;
 		stage.setTitle("TorVerBook");
 		stage.setResizable(false);
+		stage.setY(0);
 		stage.show();
-		
 		guiController.setLogInScene(stage);
 	}
 	
