@@ -2,15 +2,14 @@ package logic.controller;
 
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javafx.stage.Stage;
-
 import logic.account.User;
 import logic.bean.SignUpBean;
 import logic.dao.UserDAO;
-import logic.gui.GUIController;
-import logic.gui.MyPopup;
 import logic.gui.SignUpScene;
+import logic.gui.popup.ErrorPopup;
 
 public class SignUpController {
 	
@@ -44,9 +43,9 @@ public class SignUpController {
 			}
 			else //passwords don't match
 				return false;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			signUpScene = SignUpScene.getInstance();
-			new MyPopup(e.getMessage(), (Stage) signUpScene.getScene().getWindow());
+			new ErrorPopup(e.getMessage(), (Stage) signUpScene.getScene().getWindow());
 			return false;
 		} 
 		return true;

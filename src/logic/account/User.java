@@ -1,11 +1,11 @@
 package logic.account;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
 import logic.ad.Ad;
+import logic.dao.AdDAO;
 import logic.stuff.Message;
 import logic.stuff.Review;
 
@@ -14,22 +14,19 @@ public final class User extends Account{
 	//User's account info
 	private int rank;
 	private boolean isBanned;
-	private int numOfViolations;
+	private int numViolations;
 	private int money;
-	
 	private String birthDateString;
 	
-	private List<Ad> ownAd;
-	List<Message> listMessage = null;
-	List<User> relatedUser = null;
-	List<Review> ownReview = null;
+	private AdDAO adDao;	
+	private Ad[] myAdList;
+	private Message[] myMessageList = null;
+	private User[] relatedUser = null;
+	private Review[] ownReview = null;
 	
-	//L'utente dev'essere Singleton
-	public User(String name, String surname, String username, String email, String password) {
+	public User(String name, String surname, String username, String email, String password) throws ClassNotFoundException, SQLException, ParseException {
 		super(name, surname, username, email, password);
 		loadOwnAds();
-		loadOwnReviews();
-		loadRelatedUsers();
 	}
 	
 	//methods for initialize User object
@@ -38,9 +35,18 @@ public final class User extends Account{
 	
 	private void loadRelatedUsers() {}
 	
-	private void loadOwnAds() {}
+	public void loadOwnAds() throws ClassNotFoundException, SQLException, ParseException {
+		adDao = AdDAO.getInstance();
+		myAdList = adDao.loadMyAds(this);
+	}
 	
-	//methods for user's actions
+	public int getNumOfAds() {System.out.println("Lunghezza: " + myAdList.length);
+		return myAdList.length;
+	}
+	
+	public Ad[] getMyAds() {
+		return myAdList;
+	}
 	
 	public void writeReview(User dest, String mex, byte rank) {}
 	
@@ -52,10 +58,10 @@ public final class User extends Account{
 	
 	private void addRelatedUser(User u) {
 		if(relatedUser == null) {
-			relatedUser = new ArrayList<>();
+			//relatedUser = new ArrayList<>();
 		}
 		
-		relatedUser.add(u);
+		//relatedUser.add(u);
 	}
 	
 	public void changeProfileSettings(String name, String surname, String username, String email, String pwdHash){
@@ -73,17 +79,14 @@ public final class User extends Account{
 	public void sendMessage(Message mex) {
 	}
 	
-	public void sendEmail(){}
-	
-	public void setBirthDate(String date) {
-		//yyyy-mm-dd format
+	public void setBirthDate(String date) { //yyyy-mm-dd format
 		birthDateString = date;
 	}
 	
 	public void setBirthDate(Date date) {
 		birthDate = date;
 		
-		Calendar cal = Calendar.getInstance(); //Some Date's methods are deprecated, that's why we use Calendar type
+		Calendar cal = Calendar.getInstance(); //Some methods of the class Date are deprecated, that's why we use Calendar type
 		cal.setTime(date);
 		
 		birthDateString = ( String.valueOf(cal.get(Calendar.YEAR)) + "-" +  String.valueOf(1 + cal.get(Calendar.MONTH)) + "-" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
@@ -91,6 +94,14 @@ public final class User extends Account{
 	
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	
+	public void setNumViolations(int numViolations) {
+		this.numViolations = numViolations;
 	}
 	
 	public String getBirthDateString() {

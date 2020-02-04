@@ -1,6 +1,13 @@
-package logic.gui;
+package logic.controller;
 
 import javafx.stage.Stage;
+import logic.gui.AddAdScene;
+import logic.gui.HomepageScene;
+import logic.gui.LogInScene;
+import logic.gui.MyAdsScene;
+import logic.gui.MyReviewScene;
+import logic.gui.SettingScene;
+import logic.gui.SignUpScene;
 
 public class GUIController {
 	
@@ -9,7 +16,10 @@ public class GUIController {
 	private LogInScene login;
 	private SignUpScene signup;
 	private HomepageScene homepage;
+	private MyReviewScene myReview;
 	private SettingScene settings;
+	private AddAdScene addAd;
+	private MyAdsScene myAds;
 	
 	private GUIController() {}
 	
@@ -41,10 +51,24 @@ public class GUIController {
 		System.out.println("----COMPLETATO");
 	}
 	
+	public void setAddAdScene(Stage stage) {
+		System.out.println("GUIController: setAddAdScene()");
+		addAd = AddAdScene.getInstance();
+		stage.setScene(addAd.getScene());
+		System.out.println("----COMPLETATO");
+	}
+	
 	public void setMyReviewScene(Stage stage) {
 		System.out.println("GUIController: setMyReviewScene()");
-		MyReviewScene myReview = new MyReviewScene();
+		myReview = new MyReviewScene();
 		stage.setScene(myReview.getScene());
+		System.out.println("----COMPLETATO");
+	}
+	
+	public void setMyAdsScene(Stage stage) {
+		System.out.println("GUIController: setMyAdScene()");
+		myAds = MyAdsScene.getInstance();
+		stage.setScene(myAds.getScene());
 		System.out.println("----COMPLETATO");
 	}
 	

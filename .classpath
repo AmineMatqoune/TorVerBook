@@ -3,6 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+<<<<<<< HEAD
 	<classpathentry exported="true" kind="lib" path="C:/Users/CPTPackage/eclipse-workspace-desktop/TorVerBook/lib/mysql-connector-java-5.1.48.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/Amine/Desktop/TorVerBook.git/trunk/lib/mysql-connector-java-5.1.48.jar"/>
+>>>>>>> 9aef385e05b1f341e700c5448d9b978388155fbb
 	<classpathentry kind="output" path="bin"/>
 </classpath>

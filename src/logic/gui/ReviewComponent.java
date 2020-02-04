@@ -7,7 +7,8 @@ import logic.stuff.Review;
 
 public class ReviewComponent {
 	
-	private Pane pane;
+	protected Pane pane;
+	protected Label backgroundPaneLabel;
 	
 	private static String TEXT_FONT = "Arial";
 	
@@ -17,14 +18,14 @@ public class ReviewComponent {
 		pane.setPrefWidth(550);
 		pane.setPrefHeight(150);
 		
-		Label backgroundPaneLabel = new Label();
+		backgroundPaneLabel = new Label();
 		backgroundPaneLabel.setPrefWidth(550);
 		backgroundPaneLabel.setPrefHeight(150);
 		backgroundPaneLabel.setStyle("-fx-background-color: #024a00");
 		backgroundPaneLabel.setOpacity(0.25);
         pane.getChildren().add(backgroundPaneLabel);
         
-        Label label1 = new Label("Review by: " + review.getWriter().getUsername());
+        Label label1 = new Label("Review by: " + review.getWriter());
         label1.setFont(new Font(TEXT_FONT, 24));
         label1.setLayoutX(10);
         label1.setLayoutY(10);
