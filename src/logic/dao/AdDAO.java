@@ -15,11 +15,13 @@ public class AdDAO {
 	private static AdDAO instance = null;
 	private DBManager dbManager;
 	private ResultSet result;
+	private HighlightDAO highlightDao;
 	
 	private int count = 0;
 	
 	private AdDAO() throws ClassNotFoundException, SQLException {
 		dbManager = DBManager.getInstance();
+		highlightDao = new HighlightDAO();
 	}
 	
 	public Ad[] loadMyAds(User owner) throws SQLException, ClassNotFoundException, ParseException {
@@ -44,15 +46,19 @@ public class AdDAO {
 				myAds[i].setFinishHighlight(result.getString("FinishHighlight"));
 				
 				Highlight highlight = null;			
+				//for each Ad, we first create the relative Highlight entity object, and then we get() it
 				switch(result.getString("Highlight")) {
 				case "SUPER":
-					 highlight = new Highlight(HighlightType.SUPER);
+					highlightDao.createHighlightObject("SUPER");
+					highlight = highlightDao.getHighlightObject();
 					break;
 				case "MEDIUM":
-					highlight = new Highlight(HighlightType.MEDIUM);
+					highlightDao.createHighlightObject("MEDIUM");
+					highlight = highlightDao.getHighlightObject();
 					break;
 				default:
-					highlight = new Highlight(HighlightType.BASE);
+					highlightDao.createHighlightObject("BASE");
+					highlight = highlightDao.getHighlightObject();
 				}
 					
 				myAds[i].setHighlight(highlight);
@@ -83,16 +89,19 @@ public class AdDAO {
 				ads[i].setStartHighlight(result.getString("StartHighlight"));
 				ads[i].setFinishHighlight(result.getString("FinishHighlight"));
 				
-				Highlight highlight = null;			
+				Highlight highlight = null;	
 				switch(result.getString("Highlight")) {
 				case "SUPER":
-					 highlight = new Highlight(HighlightType.SUPER);
+					highlightDao.createHighlightObject("SUPER");
+					highlight = highlightDao.getHighlightObject();
 					break;
 				case "MEDIUM":
-					highlight = new Highlight(HighlightType.MEDIUM);
+					highlightDao.createHighlightObject("MEDIUM");
+					highlight = highlightDao.getHighlightObject();
 					break;
 				default:
-					highlight = new Highlight(HighlightType.BASE);
+					highlightDao.createHighlightObject("BASE");
+					highlight = highlightDao.getHighlightObject();
 				}
 					
 				ads[i].setHighlight(highlight);

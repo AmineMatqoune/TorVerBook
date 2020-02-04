@@ -71,6 +71,27 @@ public class DBManager {
 		return stmt.executeQuery(QueriesGenerator.getMyAdsQuery(username));
 	}
 	
+	public ResultSet getHighlight(String hlType) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return stmt.executeQuery(QueriesGenerator.getHighlightQuery(hlType));
+	}
+	
+	public ResultSet getRCReview() throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return stmt.executeQuery(QueriesGenerator.getRCReviewQuery());
+	}
+
+	
 	public void close() throws SQLException {
 		if (stmt != null)
 			stmt.close();

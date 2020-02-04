@@ -6,83 +6,106 @@ import logic.ad.*;
 
 public final class Highlight implements HighlightInterface{
 	
-	//highlight info for user
-	private HighlightType hlType;
+	//highlight info
 	private int thickness;
 	private int pricePerDay;
 	private String font;
-	
-	//highlight info for system
 	private int levelOfVisibility;
 	private Color textColor;
 	private Color backgroundColor;
 	private String style;
+	private HighlightType hlType;
 	
+	public Highlight() {}
 	
-	public Highlight(HighlightType type) {
-		if (type == HighlightType.SUPER)
-			initSuperHighlight();
-		else if (type == HighlightType.MEDIUM)
-			initMediumHighlight();
-		else initBaseHighlight();
-	}
-	
-	private void initBaseHighlight() {
-		hlType = HighlightType.BASE;
-		thickness = 17;
-		pricePerDay = 0;
-		font = "Times New Roman";
-		textColor = Color.BLACK;
-		backgroundColor = Color.FORESTGREEN;
-		levelOfVisibility = 0;
-		style = "Regular";
-	}
-	
-	private void initMediumHighlight() {
-		hlType = HighlightType.MEDIUM;
-		thickness = 20;
-		pricePerDay = 1;
-		font = "Arial";
-		textColor = Color.BLUE;
-		backgroundColor = Color.WHITE;	
-		levelOfVisibility = 1;
-		style = "Regular";
-	}
-	
-	private void initSuperHighlight() {
-		hlType = HighlightType.SUPER;
-		thickness = 20;
-		pricePerDay = 2;
-		font = "Verdana";
-		textColor = Color.RED;
-		backgroundColor = Color.YELLOW;
-		levelOfVisibility = 2;
-		style = "Bold";
+	//getters() and setters()
+	public HighlightType getHighlightType() {
+		return hlType;
 	}
 
-	//getters()
-	public HighlightType getType() {
-		return this.hlType;
+	public void setHighlightType(String hlType) {
+		if (hlType.equals("SUPER")) 
+			this.hlType = HighlightType.SUPER;
+		else if (hlType.equals("MEDIUM")) 
+			this.hlType = HighlightType.MEDIUM;
+		else if (hlType.equals("BASE")) 
+			this.hlType = HighlightType.BASE;	
 	}
-	
+
+	public int getPricePerDay() {
+		return pricePerDay;
+	}
+
+	public void setPricePerDay(int pricePerDay) {
+		this.pricePerDay = pricePerDay;
+	}
+
+	public int getLevelOfVisibility() {
+		return levelOfVisibility;
+	}
+
+	public void setLevelOfVisibility(int levelOfVisibility) {
+		this.levelOfVisibility = levelOfVisibility;
+	}
+
 	public int getThickness() {
 		return this.thickness;
 	}
 	
+	public void setThickness(int thickness) {
+		this.thickness = thickness;
+	}
+
 	public String getFont() {
 		return this.font;
+	}
+	
+	public void setFont(String font) {
+		this.font = font;
+	}
+
+	public Color getTextColor() {
+		return textColor;
+	}
+	
+	public void setTextColor(String textColor) {
+		switch (textColor) {
+		case "BLACK":
+			this.textColor = Color.BLACK;
+			break;
+		case "BLUE":
+			this.textColor = Color.BLUE;
+			break;
+		case "RED":
+			this.textColor = Color.RED;
+			break;
+		}
 	}
 	
 	public Color getBackgroundColor() {
 		return backgroundColor;
 	}
-	
-	public Color getTextColor() {
-		return textColor;
+
+	public void setBackgroundColor(String backgroundColor) {
+		switch (backgroundColor) {
+		case "GREEN":
+			this.backgroundColor = Color.GREEN;
+			break;
+		case "WHITE":
+			this.backgroundColor = Color.WHITE;
+			break;
+		case "YELLOW":
+			this.backgroundColor = Color.YELLOW;
+			break;
+		}
 	}
 	
 	public String getStyle() {
 		return style;
+	}
+	
+	public void setStyle(String style) {
+		this.style = style;
 	}
 	
 	//behavioural methods inherited from interface	

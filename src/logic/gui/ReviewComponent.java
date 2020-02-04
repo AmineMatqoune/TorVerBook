@@ -25,7 +25,7 @@ public class ReviewComponent {
 		backgroundPaneLabel.setOpacity(0.25);
         pane.getChildren().add(backgroundPaneLabel);
         
-        Label label1 = new Label("Review by: " + review.getWriter().getUsername());
+        Label label1 = new Label("Review by: " + review.getWriter());
         label1.setFont(new Font(TEXT_FONT, 24));
         label1.setLayoutX(10);
         label1.setLayoutY(10);

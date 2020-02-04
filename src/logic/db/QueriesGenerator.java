@@ -26,4 +26,12 @@ public interface QueriesGenerator {
 	public static String getMyAdsQuery(String username) {
 		return "SELECT * FROM Ad WHERE User = '" + username + "' ORDER BY Date DESC";
 	}
+	
+	public static String getRCReviewQuery() {
+		return "SELECT * FROM Review WHERE isConvalidated = FALSE ORDER BY Time ASC";
+	}
+	
+	public static String getHighlightQuery(String hlType) {
+		return "SELECT * FROM HighLight WHERE Type = '" + hlType + "'";
+	}
 }

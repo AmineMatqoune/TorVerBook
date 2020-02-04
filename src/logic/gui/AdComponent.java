@@ -27,7 +27,7 @@ public class AdComponent {
 		String rgbBackgroundColor;
 		String rgbDarkerBackgroundColor;
 		
-		if(bgColor == Color.FORESTGREEN) {
+		if(bgColor == Color.GREEN) {
 			rgbBackgroundColor = "-fx-background-color: #228B22";
 			rgbDarkerBackgroundColor = "-fx-background-color: #1F781F";
 		}	
