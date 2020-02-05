@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import logic.account.User;
+import logic.stuff.Review;
 
 public class DBManager {
 	
@@ -71,6 +72,16 @@ public class DBManager {
 		return stmt.executeQuery(QueriesGenerator.getMyAdsQuery(username));
 	}
 	
+	public ResultSet getFavouriteAds(String username) throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return stmt.executeQuery(QueriesGenerator.getFavouriteAdsQuery(username));
+}
+	
 	public ResultSet getHighlight(String hlType) throws ClassNotFoundException, SQLException {
 		stmt = null;
 		conn = null;
@@ -80,6 +91,38 @@ public class DBManager {
 		stmt = conn.createStatement();
 		return stmt.executeQuery(QueriesGenerator.getHighlightQuery(hlType));
 	}
+	
+	//metodo per convalidare l'annuncio
+	public boolean updateReviewState(Review review) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getUpdateReviewStateCommand(review));
+	}
+	
+	//metodo per rifiutare l'annuncio
+	public boolean deleteRCReview(Review review) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getDeleteReviewCommand(review));
+	}
+	
+	public ResultSet getMyReview(String username) throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return stmt.executeQuery(QueriesGenerator.getMyReviewQuery(username));
+}
 	
 	public ResultSet getRCReview() throws SQLException, ClassNotFoundException {
 		stmt = null;

@@ -109,6 +109,51 @@ public class AdDAO {
 		}
 		return ads;
 	}
+
+	public Ad[] loadFavouriteAds(User owner) throws SQLException, ClassNotFoundException, ParseException {
+			Ad[] myAds = null;
+			/*2. identico a loadMyAds però cambia solo il metodo utilizzato da dbManager*/
+			result = dbManager.getFavouriteAds(owner.getUsername());
+			
+			//creating list of Ads
+			if((count = getNumOfRows()) != 0) {
+				myAds = new Ad[count];
+				int i = 0;
+				while(result.next()) {
+					myAds[i] = new Ad(owner, result.getInt("ID"));
+					myAds[i].setDate(result.getString("Date"));
+					myAds[i].setDescription(result.getString("Description"));
+					myAds[i].setTitle(result.getString("Title"));
+					myAds[i].setPrice(result.getInt("Price"));
+					myAds[i].setCategory(result.getString("Course"));
+					myAds[i].setType(result.getString("Type"));
+					myAds[i].setStatus(result.getInt("isSold"));
+					myAds[i].setQuantity(result.getInt("Quantity"));
+					myAds[i].setStartHighlight(result.getString("StartHighlight"));
+					myAds[i].setFinishHighlight(result.getString("FinishHighlight"));
+					
+					Highlight highlight = null;			
+					//for each Ad, we first create the relative Highlight entity object, and then we get() it
+					switch(result.getString("Highlight")) {
+					case "SUPER":
+						highlightDao.createHighlightObject("SUPER");
+						highlight = highlightDao.getHighlightObject();
+						break;
+					case "MEDIUM":
+						highlightDao.createHighlightObject("MEDIUM");
+						highlight = highlightDao.getHighlightObject();
+						break;
+					default:
+						highlightDao.createHighlightObject("BASE");
+						highlight = highlightDao.getHighlightObject();
+					}
+						
+					myAds[i].setHighlight(highlight);
+					i++; 
+				}
+			}
+			return myAds;
+		}
 	
 	private int getNumOfRows() throws SQLException { //count how many rows do we have
 		count = 0;

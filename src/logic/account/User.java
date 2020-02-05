@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import logic.ad.Ad;
 import logic.dao.AdDAO;
+import logic.dao.ReviewDAO;
 import logic.stuff.Message;
 import logic.stuff.Review;
 
@@ -18,8 +19,11 @@ public final class User extends Account{
 	private int money;
 	private String birthDateString;
 	
+	private ReviewDAO reviewDao;
 	private AdDAO adDao;	
-	private Ad[] myAdList;
+	
+	private Ad[] myAdList = null;
+	private Ad[] favouriteAds = null;
 	private Message[] myMessageList = null;
 	private User[] relatedUser = null;
 	private Review[] ownReview = null;
@@ -27,6 +31,7 @@ public final class User extends Account{
 	public User(String name, String surname, String username, String email, String password) throws ClassNotFoundException, SQLException, ParseException {
 		super(name, surname, username, email, password);
 		loadOwnAds();
+		loadOwnReviews();
 	}
 	
 	//methods for initialize User object
@@ -35,9 +40,15 @@ public final class User extends Account{
 	
 	private void loadRelatedUsers() {}
 	
-	public void loadOwnAds() throws ClassNotFoundException, SQLException, ParseException {
+	private void loadOwnAds() throws ClassNotFoundException, SQLException, ParseException {
 		adDao = AdDAO.getInstance();
 		myAdList = adDao.loadMyAds(this);
+		favouriteAds =adDao.loadFavouriteAds(this);
+	}
+	
+	private void loadOwnReview() throws Exception  {
+		reviewDao = ReviewDAO.getInstance();
+		ownReview = reviewDao.loadMyReview(this);
 	}
 	
 	public int getNumOfAds() {System.out.println("Lunghezza: " + myAdList.length);
@@ -46,6 +57,14 @@ public final class User extends Account{
 	
 	public Ad[] getMyAds() {
 		return myAdList;
+	}
+	
+	public Ad[] getFavouriteList() {
+		return favouriteAds;
+	}
+	
+	public Review[] getMyReviews() {
+		return ownReview;
 	}
 	
 	public void writeReview(User dest, String mex, byte rank) {}

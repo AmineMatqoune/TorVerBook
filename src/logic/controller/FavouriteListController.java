@@ -1,43 +1,38 @@
+
 package logic.controller;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-
 import logic.account.User;
+import logic.ad.Ad;
 import logic.dao.UserDAO;
-import logic.gui.ReviewComponent;
-import logic.stuff.Review;
+import logic.gui.AdComponent;
 
-public class MyReviewController {
-	
-	private Review[] reviews;
+public class FavouriteListController {
+
+	private Ad[] favouriteAds;
 	private User currentUser;
 	
-	public MyReviewController() {
+	public FavouriteListController() {
 		UserDAO userDAO = UserDAO.getInstance();
 		currentUser = userDAO.getUserObject();
-		reviews = getReviews();
+		favouriteAds = getFavouriteAds();
 	}
 	
-	private Review[] getReviews() {
-		return currentUser.getMyReviews();
+	private Ad[] getFavouriteAds() {
+		return currentUser.getFavouriteList();
 	}
 	
 	public void attachAdsTo(Pane pane) {
-		if(reviews != null) {
-			float ypos = 25;
-			
-			for(int i = 0; i != reviews.length; i++) {
-				ReviewComponent temp = new ReviewComponent(reviews[i]);
-				temp.getReviewComponent().setLayoutX(25);
-				temp.getReviewComponent().setLayoutY(ypos);
-				pane.getChildren().add(temp.getReviewComponent());
-				
-				ypos = ypos + 200;
+		if(favouriteAds != null)
+			for(int i = 0; i < favouriteAds.length; i++){
+				AdComponent adComp = new AdComponent(favouriteAds[i]);
+				adComp.setY(AdComponent.height * i);
+				pane.getChildren().add(adComp.getAdPane());
+				//aggiungiamo il pane dell'ad allo scrollpane
 			}
-		}
 		else {
 			Label tmp = new Label("Empty List!");
 			tmp.setFont(new Font("Arial Bold", 50));

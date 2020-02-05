@@ -24,7 +24,7 @@ public abstract class BaseScene {
 	protected BaseScene() {
 		Pane pane = new Pane();
 		scene = new Scene(pane, 1200, 750);
-
+		
 		try {
 			FileInputStream input = new FileInputStream("img/torvergata.PNG");
 			Image image = new Image(input);

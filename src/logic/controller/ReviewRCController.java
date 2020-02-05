@@ -2,13 +2,40 @@ package logic.controller;
 
 import java.sql.SQLException;
 
+import javafx.scene.layout.Pane;
 import logic.dao.ReviewDAO;
+import logic.gui.ReviewRCComponent;
 import logic.stuff.Review;
 
 public class ReviewRCController {
 
-	public Review[] getReview() {
+	/*metodo che aggiunge al pane i reviewComponent*/
+	public void showRCReview(Pane pane) {
+		/*ricava le review che hanno fatto all'utente dal metodo privato getReview()*/
+		Review[] review = this.getReview();
+		
+		if(review != null) {
+			float xpos = 25;
+			float ypos = 25;
+			
+			for(int i = 0; i != review.length; i++) {
+				ReviewRCComponent temp = new ReviewRCComponent(review[i]);
+				temp.getReviewComponent().setLayoutX(xpos);
+				temp.getReviewComponent().setLayoutY(ypos);
+				pane.getChildren().add(temp.getReviewComponent());
+				
+				ypos = ypos + 200;
+			}
+		}
+		else {
+			System.out.println("Non ci sono review!");
+		}
+	}
+	
+	/*prende le review e le ritorna*/
+	private Review[] getReview() {
 		Review[] review = null;
+		
 		try {
 			ReviewDAO reviewDAO = ReviewDAO.getInstance();
 			review = reviewDAO.loadRCReview();
@@ -20,7 +47,45 @@ public class ReviewRCController {
 		} catch (Exception e) {
 			System.out.println("Errore 2 in getReview!");
 		}
-		System.out.println("FLAG.2");
 		return review;
 	}
+	
+	/*metodo attivato quando il RC preme su check.png*/
+	public void checkReview(Review review) {
+		try {
+			ReviewDAO reviewDAO = ReviewDAO.getInstance();
+			if(reviewDAO.setCheckReview(review)) {
+				//la review viene convalidata ma
+				//bisogna aggiornare la lista dei review
+				System.out.println("Operazione riuscita");
+			}
+			else {
+				//compare popup per errore
+				System.out.println("Operazione fallita");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*6. metodo attivato quando il RC preme su close.png 
+	 *  del reviewComponent: elimina la review dal database*/
+	/*7. bisognerà mettere far inviare l'email*/
+	public void deleteReview(Review review) {
+		try {
+			ReviewDAO reviewDAO = ReviewDAO.getInstance();
+			if(reviewDAO.setDeleteReview(review)) {
+				//la review viene convalidata ma
+				//bisogna aggiornare la lista dei review
+				System.out.println("Operazione riuscita");
+			}
+			else {
+				//compare popup per errore
+				System.out.println("Operazione fallita");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

@@ -2,6 +2,7 @@ package logic.controller;
 
 import javafx.stage.Stage;
 import logic.gui.AddAdScene;
+import logic.gui.FavouriteListScene;
 import logic.gui.HomepageScene;
 import logic.gui.LogInScene;
 import logic.gui.MyAdsScene;
@@ -55,6 +56,13 @@ public class GUIController {
 		System.out.println("GUIController: setAddAdScene()");
 		addAd = AddAdScene.getInstance();
 		stage.setScene(addAd.getScene());
+		System.out.println("----COMPLETATO");
+	}
+	
+	public void setFavouriteListScene(Stage stage) {
+		System.out.println("GUIController: setFavouriteListScene()");
+		FavouriteListScene favList = new FavouriteListScene();
+		stage.setScene(favList.getScene());
 		System.out.println("----COMPLETATO");
 	}
 	

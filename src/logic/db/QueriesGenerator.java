@@ -1,6 +1,7 @@
 package logic.db;
 
 import logic.account.User;
+import logic.stuff.Review;
 
 public interface QueriesGenerator {
 	
@@ -25,6 +26,23 @@ public interface QueriesGenerator {
 	
 	public static String getMyAdsQuery(String username) {
 		return "SELECT * FROM Ad WHERE User = '" + username + "' ORDER BY Date DESC";
+	}
+	
+	public static String getUpdateReviewStateCommand(Review review) {
+		return "UPDATE Review SET isConvalidated = TRUE WHERE WriterUser = '" + review.getWriter() + "' AND ReceiverUser = '" + review.getReceiver() + "';";
+	}
+		
+	public static String getDeleteReviewCommand(Review review) {
+		return "DELETE FROM Review WHERE WriterUser = '" + review.getWriter() + "' AND ReceiverUser = '" + review.getReceiver() + "';";
+	}
+		
+	public static String getMyReviewQuery(String username) {
+		return "SELECT * FROM Review WHERE isConvalidated = TRUE AND ReceiverUser = '" + username + "' ORDER BY Time ASC";
+	}
+		
+	public static String getFavouriteAdsQuery(String username) {
+		return "SELECT ID, Date, Description, Title, Price, Course, Type, isSold, Quantity, StartHighlight, FinishHighlight, "
+				+ "isConvalidated, Highlight, Ad.User, RuleChecker FROM Ad JOIN FavouriteList ON ID_Ad = ID WHERE FavouriteList.User = '" + username + "';";
 	}
 	
 	public static String getRCReviewQuery() {
