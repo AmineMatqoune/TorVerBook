@@ -2,7 +2,6 @@ package logic.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-
 import javafx.stage.Stage;
 import logic.account.User;
 import logic.dao.UserDAO;

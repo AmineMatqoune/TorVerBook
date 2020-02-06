@@ -1,4 +1,4 @@
-package logic.db;
+	package logic.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -93,25 +93,25 @@ public class DBManager {
 	}
 	
 	//metodo per convalidare l'annuncio
-	public boolean updateReviewState(Review review) throws ClassNotFoundException, SQLException {
+	public boolean updateReviewState(String writer, String receiver) throws ClassNotFoundException, SQLException {
 		stmt = null;
 		conn = null;
 		
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		return !stmt.execute(QueriesGenerator.getUpdateReviewStateCommand(review));
+		return !stmt.execute(QueriesGenerator.getUpdateReviewStateCommand(writer, receiver));
 	}
 	
 	//metodo per rifiutare l'annuncio
-	public boolean deleteRCReview(Review review) throws ClassNotFoundException, SQLException {
+	public boolean deleteRCReview(String writer, String receiver) throws ClassNotFoundException, SQLException {
 		stmt = null;
 		conn = null;
 		
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		return !stmt.execute(QueriesGenerator.getDeleteReviewCommand(review));
+		return !stmt.execute(QueriesGenerator.getDeleteReviewCommand(writer, receiver));
 	}
 	
 	public ResultSet getMyReview(String username) throws SQLException, ClassNotFoundException {

@@ -28,12 +28,12 @@ public interface QueriesGenerator {
 		return "SELECT * FROM Ad WHERE User = '" + username + "' ORDER BY Date DESC";
 	}
 	
-	public static String getUpdateReviewStateCommand(Review review) {
-		return "UPDATE Review SET isConvalidated = TRUE WHERE WriterUser = '" + review.getWriter() + "' AND ReceiverUser = '" + review.getReceiver() + "';";
+	public static String getUpdateReviewStateCommand(String writer, String receiver) {
+		return "UPDATE Review SET isConvalidated = TRUE WHERE WriterUser = '" + writer + "' AND ReceiverUser = '" + receiver + "';";
 	}
 		
-	public static String getDeleteReviewCommand(Review review) {
-		return "DELETE FROM Review WHERE WriterUser = '" + review.getWriter() + "' AND ReceiverUser = '" + review.getReceiver() + "';";
+	public static String getDeleteReviewCommand(String writer, String receiver) {
+		return "DELETE FROM Review WHERE WriterUser = '" + writer + "' AND ReceiverUser = '" + receiver + "';";
 	}
 		
 	public static String getMyReviewQuery(String username) {

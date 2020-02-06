@@ -31,12 +31,10 @@ public final class User extends Account{
 	public User(String name, String surname, String username, String email, String password) throws ClassNotFoundException, SQLException, ParseException {
 		super(name, surname, username, email, password);
 		loadOwnAds();
-		loadOwnReviews();
+		loadOwnReview();
 	}
 	
 	//methods for initialize User object
-	
-	private void loadOwnReviews() {}
 	
 	private void loadRelatedUsers() {}
 	
@@ -46,7 +44,7 @@ public final class User extends Account{
 		favouriteAds =adDao.loadFavouriteAds(this);
 	}
 	
-	private void loadOwnReview() throws Exception  {
+	private void loadOwnReview() throws ClassNotFoundException, SQLException, ParseException  {
 		reviewDao = ReviewDAO.getInstance();
 		ownReview = reviewDao.loadMyReview(this);
 	}

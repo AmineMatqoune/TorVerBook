@@ -29,6 +29,7 @@ public abstract class BaseScene {
 			FileInputStream input = new FileInputStream("img/torvergata.PNG");
 			Image image = new Image(input);
 	        ImageView imageView = new ImageView(image);
+	        imageView.setOpacity(0.25);
 	        pane.getChildren().add(imageView);
 		} catch (FileNotFoundException e) {
 			new ErrorPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
