@@ -3,9 +3,11 @@ package logic.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
 
 import logic.account.User;
 import logic.ad.Ad;
+import logic.bean.AddAdBean;
 import logic.db.DBManager;
 import logic.highlight.Highlight;
 
@@ -165,6 +167,25 @@ public class AdDAO {
 		//repositioning of the index at line 0 (before the first row)
 		result.beforeFirst();
 		return count;
+	}
+	
+	public boolean addNewAd() throws ClassNotFoundException, SQLException, NumberFormatException, NullPointerException {
+		AddAdBean adBean = new AddAdBean();
+		
+		String date = LocalDate.now().toString();
+		String description = adBean.getDescriprion();
+		String title = adBean.getTitle();
+		double price = adBean.getPrice();
+		String course = adBean.getCourse();
+		String type = adBean.getType();
+		int quantity = adBean.getQuantity();
+		String startHighlight = adBean.getStartHighlight();
+		String finishHighlight = adBean.getFinishHighlight();
+		String highlight = adBean.getHighlight();
+		String username = UserDAO.getInstance().getUserObject().getUsername();
+		
+		return dbManager.addAd(date, description, title, price, course, type, quantity, startHighlight, finishHighlight, highlight, username);
+		
 	}
 	
 	public static AdDAO getInstance() throws ClassNotFoundException, SQLException {

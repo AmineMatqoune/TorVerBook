@@ -59,7 +59,6 @@ public class ReviewDAO {
 	
 	/*metodo aggiunto: per oggetti ReviewRCComponent quando si preme su close.png*/
 	public boolean setDeleteReview(Review review) throws ClassNotFoundException, SQLException {
-		dbManager = DBManager.getInstance();
 		return dbManager.deleteRCReview(review.getWriter(), review.getReceiver());
 	}
 	

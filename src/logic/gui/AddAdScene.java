@@ -1,5 +1,6 @@
 package logic.gui;
 
+import java.time.LocalDate;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -11,6 +12,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.ad.AdCategory;
+import logic.ad.AdType;
 import logic.controller.AddAdController;
 import logic.highlight.HighlightType;
 
@@ -200,10 +202,14 @@ public class AddAdScene extends DashBoardScene{
 
 	private void addAd() {
 		if(addController.addAd()) {
-			
+			//me
+			System.out.println("Check positivo");
+		}
+		else {
+			System.out.println("Check negativo");
 		}
 	}
-	
+	///////////GET/////////////
 	public String getTitle() {
 		return adTitleField.getText();
 	}
@@ -211,7 +217,57 @@ public class AddAdScene extends DashBoardScene{
 	public String getDescription() {
 		return adTitleField.getText();
 	}
+	
+	public int getPrice() throws NumberFormatException, NullPointerException {
+		if(radioGroup.getSelectedToggle().equals(saleRadioButton)) {
+			//se saleRadioButton è premuto torna il prezzo
+			int intPrice = Integer.parseInt(price1Field.getText());
+			int decPrice = Integer.parseInt(price2Field.getText()) / 100;
+			return (intPrice+decPrice);
+		}
+		else if(radioGroup.getSelectedToggle().equals(exchangeRadioButton)){
+			//se exchangeRadioButton è premuto torna 0
+			return 0;
+		}
+		else {
+			//altrimenti se niente è premuto torna -1
+			return -1;
+		}			
+	}
+	
+	public AdType getType() throws NullPointerException {
+			if(radioGroup.getSelectedToggle().equals(exchangeRadioButton)) {
+				return AdType.SALE;
+			}
+			else if(radioGroup.getSelectedToggle().equals(saleRadioButton)){
+				return AdType.EXCHANGE;
+			}
+			else {
+				return null;
+			}
+	}
+	
+	public int getQuantity() throws NumberFormatException, NullPointerException {
+			return Integer.parseInt(quantityField.getText());
+	}
+	
+	public String selectedCollegeBox() throws NullPointerException {
+		return collegeBox.getValue().toString();
 
+	}
+	
+	public String selectedHighlightBox() throws NullPointerException {
+		return highlightBox.getValue().toString();
+	}
+	
+	public LocalDate getFromDate() throws NullPointerException {
+		return fromDate.getValue();
+	}
+	
+	public LocalDate getToDate() throws NullPointerException {
+		return toDate.getValue();
+	}
+	////////////////////////////
 	public static AddAdScene getInstance() {
 		if(AddAdScene.instance == null) {
 			AddAdScene.instance = new AddAdScene();

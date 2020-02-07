@@ -68,6 +68,21 @@ public class UserDAO {
 		return newUser;
 	}
 	
+	public int getNumViolation(String username) throws ClassNotFoundException, SQLException {
+		dbManager = DBManager.getInstance();
+		return  dbManager.getNumViolations(username).getInt("NumViolations");
+	}
+	
+	public void toBan(String username) throws ClassNotFoundException, SQLException {
+		dbManager = DBManager.getInstance();
+		dbManager.setBannedUser(username);
+	}
+	
+	public void incViolations(String username, int violations) throws ClassNotFoundException, SQLException {
+		dbManager = DBManager.getInstance();
+		dbManager.incNumViolations(username, violations);
+	}
+	
 	public static UserDAO getInstance() {
 		if(instance == null) 
 			instance = new UserDAO();

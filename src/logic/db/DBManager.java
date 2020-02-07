@@ -5,9 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import logic.account.User;
-import logic.stuff.Review;
 
 public class DBManager {
 	
@@ -133,7 +131,46 @@ public class DBManager {
 		stmt = conn.createStatement();
 		return stmt.executeQuery(QueriesGenerator.getRCReviewQuery());
 	}
+	
+	public ResultSet getNumViolations(String username) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return stmt.executeQuery(QueriesGenerator.getNumViolationsQuery(username));
+	}
 
+	public boolean setBannedUser(String username) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getBannedCommand(username));
+	}
+	
+	public boolean incNumViolations(String username, int violations) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getIncNumViolationsCommand(username, violations));
+	}
+	
+	public boolean addAd(String date, String description, String title, double price, String course, String type, int quantity, String startHighlight, String finishHighlight, String highlight, String username) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getAddAdCommand(date, description, title, price, course, type, quantity, startHighlight, finishHighlight, highlight, username));
+	}
 	
 	public void close() throws SQLException {
 		if (stmt != null)

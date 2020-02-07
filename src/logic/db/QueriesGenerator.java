@@ -1,7 +1,6 @@
 package logic.db;
 
 import logic.account.User;
-import logic.stuff.Review;
 
 public interface QueriesGenerator {
 	
@@ -51,5 +50,23 @@ public interface QueriesGenerator {
 	
 	public static String getHighlightQuery(String hlType) {
 		return "SELECT * FROM HighLight WHERE Type = '" + hlType + "'";
+	}
+	
+	public static String getNumViolationsQuery(String username) {
+		return "SELECT NumViolations FROM User WHERE Username = '" + username + "';";
+	}
+	
+	public static String getBannedCommand(String username) {
+		return "UPDATE User SET isBanned = TRUE WHERE Username = '" + username + "';";
+	}
+	
+	public static String getIncNumViolationsCommand(String username, int violations) {
+		return "UPDATE User SET NumViolations = " + violations + " WHERE Username = '" + username + "';";
+	}
+	
+	public static String getAddAdCommand(String date, String description, String title, double price, String course, String type, int quantity, String startHighlight, String finishHighlight, String highlight, String username) {
+		return "INSERT INTO Ad (Date, Description, Title, Price, Course, Type, Quantity, StartHighlight, FinishHighlight, Highlight, User, RuleChecker) "
+				+ "VALUES ('" + date + "', '" + description +"', '" + title + "', '" + price + "', '" + course + "', '" + type + "', '" + quantity + "', '" + startHighlight 
+				+ "', '" + finishHighlight + "', '" + highlight + "', '" + username + "', NULL);";
 	}
 }
