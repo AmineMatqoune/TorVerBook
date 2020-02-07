@@ -29,7 +29,7 @@ public class FavouriteListController {
 		if(favouriteAds != null)
 			for(int i = 0; i < favouriteAds.length; i++){
 				AdComponent adComp = new AdComponent(favouriteAds[i]);
-				adComp.setY(AdComponent.height * i);
+				adComp.setY(AdComponent.HEIGHT * i);
 				pane.getChildren().add(adComp.getAdPane());
 				//aggiungiamo il pane dell'ad allo scrollpane
 			}

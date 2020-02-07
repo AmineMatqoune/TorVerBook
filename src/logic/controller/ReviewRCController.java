@@ -33,7 +33,7 @@ public class ReviewRCController {
 		}
 	}
 	
-	/*prende le review e le ritorna*/
+	//prende le review e le ritorna
 	private Review[] getReview() {
 		Review[] review = null;
 		
@@ -51,11 +51,11 @@ public class ReviewRCController {
 		return review;
 	}
 	
-	/*metodo attivato quando il RC preme su check.png*/
-	public void checkReview(Review review) {
+	//metodo attivato quando il RC preme su check.png
+	public void acceptReview(Review review) {
 		try {
 			ReviewDAO reviewDAO = ReviewDAO.getInstance();
-			if(reviewDAO.setCheckReview(review)) {
+			if(reviewDAO.validateReview(review)) {
 				//la review viene convalidata ma
 				//bisogna aggiornare la lista dei review
 				System.out.println("Operazione riuscita");
@@ -69,9 +69,9 @@ public class ReviewRCController {
 		}
 	}
 	
-	/*6. metodo attivato quando il RC preme su close.png 
-	 *  del reviewComponent: elimina la review dal database*/
-	/*7. bisognerà mettere far inviare l'email*/
+	/* metodo attivato quando il RC preme su close.png 
+	 * del reviewComponent: elimina la review dal database
+	/* bisognerà mettere far inviare l'email*/
 	public void deleteReview(Review review) {
 		try {
 			ReviewDAO reviewDAO = ReviewDAO.getInstance();

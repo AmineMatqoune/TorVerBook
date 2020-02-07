@@ -40,8 +40,8 @@ public final class User extends Account{
 	
 	private void loadOwnAds() throws ClassNotFoundException, SQLException, ParseException {
 		adDao = AdDAO.getInstance();
-		myAdList = adDao.loadMyAds(this);
-		favouriteAds =adDao.loadFavouriteAds(this);
+		myAdList = adDao.loadMyAds(username);
+		favouriteAds =adDao.loadFavouriteAds(username);
 	}
 	
 	private void loadOwnReview() throws ClassNotFoundException, SQLException, ParseException  {
@@ -49,7 +49,7 @@ public final class User extends Account{
 		ownReview = reviewDao.loadMyReview(this);
 	}
 	
-	public int getNumOfAds() {System.out.println("Lunghezza: " + myAdList.length);
+	public int getNumOfAds() {
 		return myAdList.length;
 	}
 	

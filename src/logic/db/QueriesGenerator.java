@@ -1,6 +1,9 @@
 package logic.db;
 
+import java.time.LocalDate;
+
 import logic.account.User;
+import logic.ad.Ad;
 
 public interface QueriesGenerator {
 	
@@ -28,7 +31,7 @@ public interface QueriesGenerator {
 	}
 	
 	public static String getUpdateReviewStateCommand(String writer, String receiver) {
-		return "UPDATE Review SET isConvalidated = TRUE WHERE WriterUser = '" + writer + "' AND ReceiverUser = '" + receiver + "';";
+		return "UPDATE Review SET (isConvalidated, RuleChecker) = (TRUE, '@CarloRossi') WHERE WriterUser = '" + writer + "' AND ReceiverUser = '" + receiver + "';";
 	}
 		
 	public static String getDeleteReviewCommand(String writer, String receiver) {
@@ -42,6 +45,10 @@ public interface QueriesGenerator {
 	public static String getFavouriteAdsQuery(String username) {
 		return "SELECT ID, Date, Description, Title, Price, Course, Type, isSold, Quantity, StartHighlight, FinishHighlight, "
 				+ "isConvalidated, Highlight, Ad.User, RuleChecker FROM Ad JOIN FavouriteList ON ID_Ad = ID WHERE FavouriteList.User = '" + username + "';";
+	}
+	
+	public static String getAddAdToFavouriteListCommand(long id, String username) {
+		return "INSERT INTO FavouriteList VALUES ('" + id + "', '" + username + "');";
 	}
 	
 	public static String getRCReviewQuery() {
@@ -64,9 +71,9 @@ public interface QueriesGenerator {
 		return "UPDATE User SET NumViolations = " + violations + " WHERE Username = '" + username + "';";
 	}
 	
-	public static String getAddAdCommand(String date, String description, String title, double price, String course, String type, int quantity, String startHighlight, String finishHighlight, String highlight, String username) {
+	public static String getAddAdCommand(Ad ad) {
 		return "INSERT INTO Ad (Date, Description, Title, Price, Course, Type, Quantity, StartHighlight, FinishHighlight, Highlight, User, RuleChecker) "
-				+ "VALUES ('" + date + "', '" + description +"', '" + title + "', '" + price + "', '" + course + "', '" + type + "', '" + quantity + "', '" + startHighlight 
-				+ "', '" + finishHighlight + "', '" + highlight + "', '" + username + "', NULL);";
+				+ "VALUES ('" + LocalDate.now().toString() + "', '" + ad.getDescription() +"', '" + ad.getTitle() + "', '" + ad.getPrice() + "', '" + ad.getCategory().toString() + "', '" +
+				ad.getType().toString() + "', '" + ad.getQuantity() + "', '" + ad.getStartHighlightStr() + "', '" + ad.getFinishHighlightStr() + "', '" + ad.getHighlightTypeStr() + "', '" + ad.getMyUserStr() + "', NULL);";
 	}
 }

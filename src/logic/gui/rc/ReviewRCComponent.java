@@ -47,7 +47,7 @@ public class ReviewRCComponent extends ReviewComponent{
 	
 	private static void checkPress(Review review) {
 		con = new ReviewRCController();
-		con.checkReview(review);
+		con.acceptReview(review);
 	}
 	
 	private static void closePress(Review review) {

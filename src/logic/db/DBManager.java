@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import logic.account.User;
+import logic.ad.Ad;
 
 public class DBManager {
 	
@@ -26,8 +27,7 @@ public class DBManager {
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(QueriesGenerator.getLogInQuery(username, password));
-		return rs;	
+		return stmt.executeQuery(QueriesGenerator.getLogInQuery(username, password));
 	}
 	
 	public boolean insertNewUser(User userObj) throws SQLException, ClassNotFoundException{
@@ -78,7 +78,17 @@ public class DBManager {
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
 		return stmt.executeQuery(QueriesGenerator.getFavouriteAdsQuery(username));
-}
+	}
+	
+	public boolean addAdToFavouriteList(long id, String username) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getAddAdToFavouriteListCommand(id, username));
+	}
 	
 	public ResultSet getHighlight(String hlType) throws ClassNotFoundException, SQLException {
 		stmt = null;
@@ -162,14 +172,14 @@ public class DBManager {
 		return !stmt.execute(QueriesGenerator.getIncNumViolationsCommand(username, violations));
 	}
 	
-	public boolean addAd(String date, String description, String title, double price, String course, String type, int quantity, String startHighlight, String finishHighlight, String highlight, String username) throws ClassNotFoundException, SQLException {
+	public boolean addAd(Ad ad) throws ClassNotFoundException, SQLException {
 		stmt = null;
 		conn = null;
 		
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		return !stmt.execute(QueriesGenerator.getAddAdCommand(date, description, title, price, course, type, quantity, startHighlight, finishHighlight, highlight, username));
+		return !stmt.execute(QueriesGenerator.getAddAdCommand(ad));
 	}
 	
 	public void close() throws SQLException {
@@ -179,7 +189,7 @@ public class DBManager {
 			conn.close();
 	}
 	
-	public static DBManager getInstance() throws ClassNotFoundException, SQLException {
+	public static DBManager getInstance() {
 		if(instance == null) 
 			instance = new DBManager();
 		return instance;

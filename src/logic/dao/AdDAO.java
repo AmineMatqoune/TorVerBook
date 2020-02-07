@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 
-import logic.account.User;
 import logic.ad.Ad;
 import logic.bean.AddAdBean;
 import logic.db.DBManager;
@@ -25,16 +24,31 @@ public class AdDAO {
 		highlightDao = new HighlightDAO();
 	}
 	
-	public Ad[] loadMyAds(User owner) throws SQLException, ClassNotFoundException, ParseException {
+	public Ad[] loadMyAds(String ownerUsername) throws SQLException, ClassNotFoundException, ParseException {
+		result = dbManager.getMyAds(ownerUsername);
+		return fetchAdData(result);
+	}
+	
+	public Ad[] getHomepageAdsList() throws ClassNotFoundException, SQLException, ParseException {
+		result = dbManager.getHomepageAds();
+		return fetchAdData(result);
+	}
+
+	public Ad[] loadFavouriteAds(String ownerUsername) throws SQLException, ClassNotFoundException, ParseException {
+		result = dbManager.getFavouriteAds(ownerUsername);	
+		return fetchAdData(result);
+	}
+	
+	private Ad[] fetchAdData(ResultSet rs) throws ParseException, SQLException, ClassNotFoundException {
 		Ad[] myAds = null;
-		result = dbManager.getMyAds(owner.getUsername());
-		
 		//creating list of Ads
-		if((count = getNumOfRows()) != 0) {
+		if((count = getNumOfRows()) > 0) {
+			
 			myAds = new Ad[count];
 			int i = 0;
+			
 			while(result.next()) {
-				myAds[i] = new Ad(owner, result.getInt("ID"));
+				myAds[i] = new Ad(result.getString("User"), result.getInt("ID"));
 				myAds[i].setDate(result.getString("Date"));
 				myAds[i].setDescription(result.getString("Description"));
 				myAds[i].setTitle(result.getString("Title"));
@@ -69,94 +83,6 @@ public class AdDAO {
 		return myAds;
 	}
 	
-	public Ad[] getHomepageAdsList() throws ClassNotFoundException, SQLException, ParseException {
-		Ad[] ads = null;
-		result = dbManager.getHomepageAds();
-		count = getNumOfRows();
-		if(count > 0) {
-			ads = new Ad[count];
-			int i = 0;
-			
-			while(result.next()) {
-				ads[i] = new Ad(result.getString("User"), Integer.valueOf(result.getString("ID")));
-				ads[i].setDate(result.getString("Date"));
-				ads[i].setDescription(result.getString("Description"));
-				ads[i].setTitle(result.getString("Title"));
-				ads[i].setPrice(result.getInt("Price"));
-				ads[i].setCategory(result.getString("Course"));
-				ads[i].setType(result.getString("Type"));
-				ads[i].setStatus(result.getInt("isSold"));
-				ads[i].setQuantity(result.getInt("Quantity"));
-				ads[i].setStartHighlight(result.getString("StartHighlight"));
-				ads[i].setFinishHighlight(result.getString("FinishHighlight"));
-				
-				Highlight highlight = null;	
-				switch(result.getString("Highlight")) {
-				case "SUPER":
-					highlightDao.createHighlightObject("SUPER");
-					highlight = highlightDao.getHighlightObject();
-					break;
-				case "MEDIUM":
-					highlightDao.createHighlightObject("MEDIUM");
-					highlight = highlightDao.getHighlightObject();
-					break;
-				default:
-					highlightDao.createHighlightObject("BASE");
-					highlight = highlightDao.getHighlightObject();
-				}
-					
-				ads[i].setHighlight(highlight);
-				i++;
-			}
-		}
-		return ads;
-	}
-
-	public Ad[] loadFavouriteAds(User owner) throws SQLException, ClassNotFoundException, ParseException {
-			Ad[] myAds = null;
-			/*2. identico a loadMyAds però cambia solo il metodo utilizzato da dbManager*/
-			result = dbManager.getFavouriteAds(owner.getUsername());
-			
-			//creating list of Ads
-			if((count = getNumOfRows()) != 0) {
-				myAds = new Ad[count];
-				int i = 0;
-				while(result.next()) {
-					myAds[i] = new Ad(owner, result.getInt("ID"));
-					myAds[i].setDate(result.getString("Date"));
-					myAds[i].setDescription(result.getString("Description"));
-					myAds[i].setTitle(result.getString("Title"));
-					myAds[i].setPrice(result.getInt("Price"));
-					myAds[i].setCategory(result.getString("Course"));
-					myAds[i].setType(result.getString("Type"));
-					myAds[i].setStatus(result.getInt("isSold"));
-					myAds[i].setQuantity(result.getInt("Quantity"));
-					myAds[i].setStartHighlight(result.getString("StartHighlight"));
-					myAds[i].setFinishHighlight(result.getString("FinishHighlight"));
-					
-					Highlight highlight = null;			
-					//for each Ad, we first create the relative Highlight entity object, and then we get() it
-					switch(result.getString("Highlight")) {
-					case "SUPER":
-						highlightDao.createHighlightObject("SUPER");
-						highlight = highlightDao.getHighlightObject();
-						break;
-					case "MEDIUM":
-						highlightDao.createHighlightObject("MEDIUM");
-						highlight = highlightDao.getHighlightObject();
-						break;
-					default:
-						highlightDao.createHighlightObject("BASE");
-						highlight = highlightDao.getHighlightObject();
-					}
-						
-					myAds[i].setHighlight(highlight);
-					i++; 
-				}
-			}
-			return myAds;
-		}
-	
 	private int getNumOfRows() throws SQLException { //count how many rows do we have
 		count = 0;
 		result.beforeFirst();
@@ -169,23 +95,29 @@ public class AdDAO {
 		return count;
 	}
 	
-	public boolean addNewAd() throws ClassNotFoundException, SQLException, NumberFormatException, NullPointerException {
-		AddAdBean adBean = new AddAdBean();
+	public boolean createNewAd() throws ClassNotFoundException, SQLException, ParseException {
+		AddAdBean addAdBean = new AddAdBean();
 		
-		String date = LocalDate.now().toString();
-		String description = adBean.getDescriprion();
-		String title = adBean.getTitle();
-		double price = adBean.getPrice();
-		String course = adBean.getCourse();
-		String type = adBean.getType();
-		int quantity = adBean.getQuantity();
-		String startHighlight = adBean.getStartHighlight();
-		String finishHighlight = adBean.getFinishHighlight();
-		String highlight = adBean.getHighlight();
+		//we create a temporary Ad object (ID = 0), once we added it to bd, we can update his real ID
+		Ad ad = new Ad(UserDAO.getInstance().getUserObject().getUsername(), 0); 
+		ad.setDate(LocalDate.now().toString());
+		ad.setDescription(addAdBean.getDescription());
+		ad.setTitle(addAdBean.getTitle());
+		ad.setPrice(addAdBean.getPrice());
+		ad.setCategory(addAdBean.getCourse());
+		ad.setType(addAdBean.getType());
+		ad.setQuantity(addAdBean.getQuantity());
+		ad.setStartHighlight(addAdBean.getStartHighlight());
+		ad.setFinishHighlight(addAdBean.getFinishHighlight());
+		ad.setHighlight(addAdBean.getHighlight());
+		
+		return dbManager.addAd(ad);
+	}
+	
+	public boolean addAdToFavouriteList(Ad ad) throws ClassNotFoundException, SQLException {
 		String username = UserDAO.getInstance().getUserObject().getUsername();
-		
-		return dbManager.addAd(date, description, title, price, course, type, quantity, startHighlight, finishHighlight, highlight, username);
-		
+		long id = ad.getId();
+		return dbManager.addAdToFavouriteList(id, username);
 	}
 	
 	public static AdDAO getInstance() throws ClassNotFoundException, SQLException {

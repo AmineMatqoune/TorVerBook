@@ -53,7 +53,7 @@ public class ReviewDAO {
 	}
 	
 	/*metodo aggiunto: per oggetti ReviewRCComponent quando si preme su check.png*/
-	public boolean setCheckReview(Review review) throws ClassNotFoundException, SQLException {
+	public boolean validateReview(Review review) throws ClassNotFoundException, SQLException {
 		return dbManager.updateReviewState(review.getWriter(), review.getReceiver());
 	}
 	

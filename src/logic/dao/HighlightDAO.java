@@ -8,7 +8,6 @@ import logic.highlight.Highlight;
 public class HighlightDAO {
 	
 	private DBManager dbManager;
-	private ResultSet result;
 	private Highlight highlight;
 	
 	public HighlightDAO() throws ClassNotFoundException, SQLException {
@@ -16,6 +15,8 @@ public class HighlightDAO {
 	}
 	
 	public void createHighlightObject(String hlType) throws ClassNotFoundException, SQLException {
+		ResultSet result = null;
+		
 		if (hlType.equals("SUPER")) 
 			result = dbManager.getHighlight("SUPER");
 		else if (hlType.equals("MEDIUM"))
@@ -32,8 +33,9 @@ public class HighlightDAO {
 			highlight.setLevelOfVisibility(result.getInt("Visibility"));
 			highlight.setTextColor(result.getString("TextColor"));
 			highlight.setBackgroundColor(result.getString("BackgroundColor"));
-		} else 
+		} else {
 			throw new SQLException();
+		}	
 	}
 	
 	public Highlight getHighlightObject() {

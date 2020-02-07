@@ -1,7 +1,7 @@
 package logic.bean;
 
 import java.time.LocalDate;
-
+import javafx.scene.Scene;
 import logic.ad.AdType;
 import logic.gui.AddAdScene;
 
@@ -13,104 +13,37 @@ public class AddAdBean {
 		addAdScene = AddAdScene.getInstance();
 	}
 	
-	public boolean check() {
-		if(addAdScene.getTitle().length() > 100 || addAdScene.getTitle().equals("")) 
-			return false;
-		else if(addAdScene.getDescription().length() > 300 || addAdScene.getDescription().equals("")) 
-			return false;
-		else if(!checkType()) 
-			return false;
-		else if(!checkQuantity()) 
-			return false;
-		else if(!checkSelectedCourse())
-			return false;
-		else if(!checkHighlight())
-			return false;
-		else if(!checkFromDate())
-			return false;
-		else if(!checkToDate())
-			return false;
-		return true;
-	}
-	
-	private boolean checkPrice() {
-		try {
-			if(addAdScene.getPrice() > 255 || addAdScene.getPrice() == -1) {
-				return false;
-			}
-		} catch(NumberFormatException | NullPointerException e) {
-			return false;
-		}
-		return true;
+	public boolean check() { //1 tutto okay, 0 check fallito
+		return !(addAdScene.getTitle().length() > 100 || addAdScene.getTitle().equals("") ||
+				addAdScene.getDescription().length() > 300 || addAdScene.getDescription().equals("")
+				|| checkType() || checkQuantity() || checkFromDate() || checkToDate());
 	}
 	
 	private boolean checkType() {
-		try {
-			if(addAdScene.getType() == null) {
-				return false;
-			}
-			else if(AdType.SALE.equals(addAdScene.getType())) {
-				return checkPrice();
-			}
-		} catch(NullPointerException e) {
-			return false;
-		}
-		return true;
+		if(AdType.SALE.equals(addAdScene.getType()))
+			return checkPrice();
+		else
+			return true;
+	}
+	
+	private boolean checkPrice() {
+		return (addAdScene.getPrice() > 255 || addAdScene.getPrice() == -1);
 	}
 	
 	private boolean checkQuantity() {
-		try {
-			if(addAdScene.getQuantity() > 255 || addAdScene.getQuantity() <= 0) {
-				return false;
-			}
-		} catch(NumberFormatException | NullPointerException e) {
-			return false;
-		}
-		return true;
-	}
-	
-	private boolean checkSelectedCourse() {
-		try {
-			if(addAdScene.selectedCollegeBox() == null)
-				return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-		return true;
-	}
-	
-	private boolean checkHighlight() {
-		try {
-			if(addAdScene.selectedHighlightBox() == null)
-				return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-		return true;
+		return (addAdScene.getQuantity() > 255 || addAdScene.getQuantity() <= 0);
 	}
 	
 	private boolean checkFromDate() {
-		try {
-			if(addAdScene.getFromDate().compareTo(LocalDate.now()) < 0)
-				return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-		return true;
+		return addAdScene.getFromDate().compareTo(LocalDate.now()) < 0;
 	}
 	
 	private boolean checkToDate() {
-		try {
-			if(addAdScene.getToDate().compareTo(addAdScene.getFromDate()) <= 0)
-				return false;
-		} catch (NullPointerException e) {
-			return false;
-		}
-		return true;
+		return addAdScene.getToDate().compareTo(addAdScene.getFromDate()) < 0;
 	}
 	
-	////////////get da addAdScene
-	public String getDescriprion() {
+	//getter da addAdScene
+	public String getDescription() {
 		return addAdScene.getDescription();
 	}
 	
@@ -118,7 +51,7 @@ public class AddAdBean {
 		return addAdScene.getTitle();
 	}
 	
-	public double getPrice() throws NumberFormatException, NullPointerException {
+	public double getPrice() {
 		return addAdScene.getPrice();
 	}
 	
@@ -145,5 +78,8 @@ public class AddAdBean {
 	public String getHighlight() {
 		return addAdScene.selectedHighlightBox();
 	}
-	///////////////////////////////////////
+	
+	public Scene getScene() {
+		return addAdScene.getScene();
+	}
 }

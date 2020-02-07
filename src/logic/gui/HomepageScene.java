@@ -14,7 +14,6 @@ public class HomepageScene extends DashBoardScene{
 		homepageLabel.setTextFill(Color.YELLOW);
 		this.setCentralPaneFullSize(true);
 		this.setCentralPaneBackground(true);
-		
 		hpController.attachAdsTo(centralPane);
 	}
 	
