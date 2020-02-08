@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 public class Review {
 	
-	public String text;
+	private String text;
 	private Date time;
 	private float rank;
 	
