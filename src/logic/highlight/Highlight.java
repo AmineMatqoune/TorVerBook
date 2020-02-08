@@ -94,8 +94,8 @@ public final class Highlight implements HighlightInterface{
 		case "WHITE":
 			this.backgroundColor = Color.WHITE;
 			break;
-		case "YELLOW":
-			this.backgroundColor = Color.YELLOW;
+		case "CYAN":
+			this.backgroundColor = Color.CYAN;
 			break;
 		}
 	}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="750.0" maxWidth="1200.0" minHeight="750.0" minWidth="1200.0" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.controller.LogInController">
+   <children>
+      <ImageView fitHeight="585.0" fitWidth="1206.0" layoutX="-5.0" layoutY="166.0" opacity="0.045">
+         <image>
+            <Image url="@../../../img/logo.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutY="-5.0" prefHeight="150.0" prefWidth="1200.0" style="-fx-background-color: #024a00;" text="TorVerBook" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="70.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnLanguage" layoutX="1050.0" layoutY="50.0" mnemonicParsing="false" onAction="#changeLanguage" prefHeight="30.0" prefWidth="80.0" text="ENG">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Button>
+      <Pane layoutY="150.0" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #024a00 #024a00;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="300.0" text="Homepage" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="100.0" prefHeight="100.0" prefWidth="300.0" text="Settings" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="200.0" prefHeight="100.0" prefWidth="300.0" text="Add Ad" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="300.0" prefHeight="100.0" prefWidth="300.0" text="My Ads" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="400.0" prefHeight="100.0" prefWidth="300.0" text="Favorite List" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="500.0" prefHeight="100.0" prefWidth="300.0" text="My Review" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane layoutX="300.0" layoutY="150.0" prefHeight="600.0" prefWidth="600.0" />
+      <Pane layoutX="900.0" layoutY="150.0" prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: #024a00;">
+         <children>
+            <Label alignment="TOP_LEFT" layoutY="460.0" prefHeight="140.0" prefWidth="300.0" text="Last message 3" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label layoutY="400.0" prefHeight="60.0" prefWidth="300.0" text="Username 3" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutY="260.0" prefHeight="140.0" prefWidth="300.0" text="Last message 2" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label layoutY="200.0" prefHeight="60.0" prefWidth="300.0" text="Username2" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label prefHeight="60.0" prefWidth="300.0" text="Username1" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutY="60.0" prefHeight="140.0" prefWidth="300.0" text="Last message 1" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label layoutY="195.0" prefHeight="10.0" prefWidth="300.0" style="-fx-background-color: #f7e178;" />
+            <Label layoutY="395.0" prefHeight="10.0" prefWidth="300.0" style="-fx-background-color: #f7e178;" />
+         </children>
+      </Pane>
+      <Label layoutY="139.0" prefHeight="17.0" prefWidth="1200.0" style="-fx-background-color: #f7e178;" />
+   </children>
+</AnchorPane>

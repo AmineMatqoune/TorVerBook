@@ -1,11 +1,13 @@
 package logic.ad;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javafx.scene.paint.Color;
 import logic.account.*;
+import logic.dao.HighlightDAO;
 import logic.highlight.*;
 
 //Class for the entity Ad with getter, setter, init and behavioural operations
@@ -46,6 +48,14 @@ public final class Ad {
 	}
 	
 	//getters()
+	public String getMyUserStr() {
+		return myUserStr;
+	}
+	
+	public long getId() {
+		return this.id;
+	}
+	
 	public Date getDate() {
 		return this.date;
 	}
@@ -103,7 +113,25 @@ public final class Ad {
 		return myHighlight.getTextColor();
 	}
 	
+	public String getStartHighlightStr() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		return formatter.format(startDateHighlight);
+	}
+	
+	public String getFinishHighlightStr(){
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		return formatter.format(finishDateHighlight);
+	}
+	
+	public String getHighlightTypeStr() {
+		return myHighlight.getHighlightType().toString();
+	}
+	
 	//setters()
+	public void setMyUserString(String owner) {
+		this.myUserStr = owner;
+	}
+	
 	public void setDate(String date) throws ParseException {
 		this.date = format.parse(date);
 	}
@@ -116,7 +144,7 @@ public final class Ad {
 		this.title = title;
 	}
 		
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	
@@ -183,6 +211,17 @@ public final class Ad {
 		this.myHighlight = myHighlight;
 	}
 	
+	public void setHighlight(String myHighlight) throws ClassNotFoundException, SQLException {
+		HighlightDAO hlDao = new HighlightDAO();
+		
+		if (myHighlight.equals("SUPER"))
+			hlDao.createHighlightObject("SUPER");
+		else if (myHighlight.equals("MEDIUM"))
+			hlDao.createHighlightObject("MEDIUM");
+		else
+			hlDao.createHighlightObject("BASE");
+	}
+	
 	public void setType(String type) {
 		if(type.equals("SALE"))
 			this.type = AdType.SALE;
@@ -192,10 +231,6 @@ public final class Ad {
 	
 	//behavioural operations
 	public void markAsSold() {}
-	
-	public void addHighlight(Highlight hl) {
-		//personalize (call private method below)
-	}
 	
 	private boolean isConvalidated() {
 		return this.isConvalidated;

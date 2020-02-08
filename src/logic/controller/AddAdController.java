@@ -1,17 +1,33 @@
 package logic.controller;
 
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.LocalDate;
+import javafx.stage.Stage;
+
 import logic.bean.AddAdBean;
+import logic.dao.AdDAO;
+import logic.gui.AddAdScene;
+import logic.gui.popup.ErrorPopup;
 
 public class AddAdController {
-	
-	private AddAdBean adBean;
 
 	public boolean addAd() {
-		adBean = new AddAdBean();
-		// prima di aggiungere l'ad viene fatto un controllo 
-		// per vedere la correttezza nei campi
 		
+		AddAdBean adBean = new AddAdBean();
+		try {
+			if(!adBean.check())
+				return false;
 		
+			AdDAO adDAO = AdDAO.getInstance();
+			return adDAO.createNewAd();
+		} catch (ClassNotFoundException | SQLException | ParseException e) {
+			new ErrorPopup(e.getMessage(), (Stage) AddAdScene.getInstance().getScene().getWindow());
+		}
 		return true;
+	}
+	
+	public LocalDate getTodayDate() {
+		return LocalDate.now();
 	}
 }

@@ -13,7 +13,6 @@ public class UserDAO {
 	
 	private DBManager dbManager;	
 	private User newUser;
-	private User userTemp;	//user temporaneo per mantenere modifiche non salvate ancora
 	private ResultSet result;
 	
 	private UserDAO() {}
@@ -45,11 +44,6 @@ public class UserDAO {
 		newUser.setBirthDate(result.getString("Birthdate"));
 		newUser.setMoney(result.getInt("Money"));
 		newUser.setNumViolations(result.getInt("NumViolations"));
-		
-		//gli attributi di userTemp hanno lo stesso valore di quelli di newUser
-		userTemp = new User(result.getString("Name"), result.getString("Surname"), result.getString("Username"), result.getString("Email"), result.getString("Password"));
-		userTemp.setPhoneNumber(result.getString("PhoneNumber"));
-		userTemp.setBirthDate(result.getString("Birthdate"));
 	}
 	
 	public void updateUserInfoDAO(User user) throws ClassNotFoundException, SQLException {
@@ -65,6 +59,21 @@ public class UserDAO {
 	
 	public User getUserObject() {
 		return newUser;
+	}
+	
+	public int getNumViolation(String username) throws ClassNotFoundException, SQLException {
+		dbManager = DBManager.getInstance();
+		return  dbManager.getNumViolations(username).getInt("NumViolations");
+	}
+	
+	public void toBan(String username) throws ClassNotFoundException, SQLException {
+		dbManager = DBManager.getInstance();
+		dbManager.setBannedUser(username);
+	}
+	
+	public void incViolations(String username, int violations) throws ClassNotFoundException, SQLException {
+		dbManager = DBManager.getInstance();
+		dbManager.incNumViolations(username, violations);
 	}
 	
 	public static UserDAO getInstance() {

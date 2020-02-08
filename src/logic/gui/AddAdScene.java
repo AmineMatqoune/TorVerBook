@@ -1,5 +1,6 @@
 package logic.gui;
 
+import java.time.LocalDate;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -10,13 +11,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import logic.ad.AdCategory;
+import logic.ad.AdType;
 import logic.controller.AddAdController;
+import logic.gui.popup.ErrorPopup;
+import logic.gui.popup.InfoPopup;
 import logic.highlight.HighlightType;
 
 public class AddAdScene extends DashBoardScene{
 	
-	private AddAdController addController = new AddAdController();
+	private AddAdController addAdController = new AddAdController();
 	
 	private static AddAdScene instance = null;
 	
@@ -77,6 +82,7 @@ public class AddAdScene extends DashBoardScene{
 		saleRadioButton.setLayoutY(313);
 		saleRadioButton.setText("Single Price");
 		saleRadioButton.setFont(new Font(textFont, 24));
+		saleRadioButton.setSelected(true);
 		centralPane.getChildren().add(saleRadioButton);
 		
 		exchangeRadioButton = new RadioButton();
@@ -139,7 +145,8 @@ public class AddAdScene extends DashBoardScene{
 		label6.setFont(new Font(textFont, 24));
 		centralPane.getChildren().add(label6);
 		
-		collegeBox = new ChoiceBox <AdCategory> ();
+		collegeBox = new ChoiceBox <> ();
+		collegeBox.setValue(AdCategory.UNKNOWN);
 		collegeBox.setLayoutX(221);
 		collegeBox.setLayoutY(406);
 		collegeBox.setPrefHeight(25);
@@ -153,7 +160,8 @@ public class AddAdScene extends DashBoardScene{
 		label7.setFont(new Font(textFont, 24));
 		centralPane.getChildren().add(label7);
 		
-		highlightBox = new ChoiceBox <HighlightType> ();
+		highlightBox = new ChoiceBox <> ();
+		highlightBox.setValue(HighlightType.BASE);
 		highlightBox.setLayoutX(221);
 		highlightBox.setLayoutY(444);
 		highlightBox.setPrefHeight(25);
@@ -168,6 +176,7 @@ public class AddAdScene extends DashBoardScene{
 		centralPane.getChildren().add(label8);
 		
 		fromDate = new DatePicker();
+		fromDate.setValue(addAdController.getTodayDate());
 		fromDate.setLayoutX(104);
 		fromDate.setLayoutY(484);
 		fromDate.setPromptText("Today");
@@ -180,6 +189,7 @@ public class AddAdScene extends DashBoardScene{
 		centralPane.getChildren().add(label9);
 		
 		toDate = new DatePicker();
+		toDate.setValue(addAdController.getTodayDate());
 		toDate.setLayoutX(376);
 		toDate.setLayoutY(484);
 		toDate.setPromptText("Forever");
@@ -199,17 +209,60 @@ public class AddAdScene extends DashBoardScene{
 	}
 
 	private void addAd() {
-		if(addController.addAd()) {
-			
-		}
+		if(addAdController.addAd()) 
+			new InfoPopup("La tua richiesta di inserimento è stata inviata!\nAttendere la conferma dei nostri moderatori, dopodichè l'annuncio sarà visibile sulla bacheca" , (Stage)scene.getWindow());
+		else 
+			new ErrorPopup("Qualcosa è andato storto, verifica di aver inserito correttamente tutte le informazioni.", (Stage) scene.getWindow());
 	}
 	
+	//getter()
 	public String getTitle() {
 		return adTitleField.getText();
 	}
 	
 	public String getDescription() {
 		return adTitleField.getText();
+	}
+	
+	public int getPrice() {
+		if(radioGroup.getSelectedToggle().equals(saleRadioButton)) { 		//se saleRadioButton è premuto, ritorna il prezzo
+			int intPrice = Integer.parseInt(price1Field.getText());
+			int decPrice = Integer.parseInt(price2Field.getText()) / 100;
+			return (intPrice+decPrice);
+		}
+		else if(radioGroup.getSelectedToggle().equals(exchangeRadioButton)) //se exchangeRadioButton è premuto, ritorna 0
+			return 0;
+		else														 		//altrimenti se niente è premuto, ritorna -1
+			return -1;		
+	}
+	
+	public AdType getType()  {
+		if(radioGroup.getSelectedToggle().equals(exchangeRadioButton)) {
+			return AdType.SALE;
+		}
+		else
+			return AdType.EXCHANGE;
+	}
+	
+	public int getQuantity() {
+			return Integer.parseInt(quantityField.getText());
+	}
+	
+	public String selectedCollegeBox() {
+		return collegeBox.getValue().toString();
+
+	}
+	
+	public String selectedHighlightBox() {
+		return highlightBox.getValue().toString();
+	}
+	
+	public LocalDate getFromDate() {
+		return fromDate.getValue();
+	}
+	
+	public LocalDate getToDate() {
+		return toDate.getValue();
 	}
 
 	public static AddAdScene getInstance() {

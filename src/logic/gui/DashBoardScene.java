@@ -106,7 +106,9 @@ public abstract class DashBoardScene extends BaseScene {
 		favouriteListLabel.setFont(new Font(FONT, 36));
 		favouriteListLabel.setTextFill(Color.WHITE);
 		favouriteListLabel.setWrapText(true);
+		favouriteListLabel.setOnMouseClicked(event -> guiController.setFavouriteListScene((Stage) pane.getScene().getWindow()));
 		leftPane.getChildren().add(favouriteListLabel);
+		
 
 		myReviewLabel.setAlignment(Pos.CENTER);
 		myReviewLabel.setContentDisplay(ContentDisplay.CENTER);

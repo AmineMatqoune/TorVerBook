@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
 	<classpathentry kind="src" path=""/>
 	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.1.48.jar"/>
+=======
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.48.jar"/>
+>>>>>>> 3a1478938579a45865abae49a1d21a80aed9feeb
 	<classpathentry kind="output" path="bin"/>
 </classpath>

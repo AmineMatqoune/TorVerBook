@@ -1,8 +1,14 @@
 package logic.db;
 
+import java.time.LocalDate;
+
 import logic.account.User;
+<<<<<<< HEAD
 import logic.stuff.Message;
 import logic.utils.DateAndTimeUtils;
+=======
+import logic.ad.Ad;
+>>>>>>> 3a1478938579a45865abae49a1d21a80aed9feeb
 
 /* DOC. TIPS:: Fields Types Are (CONDITION:SELECT,INSERT,UPDATE,QUERY) */
 public interface QueriesGenerator {
@@ -56,11 +62,50 @@ public interface QueriesGenerator {
 		return "SELECT * FROM Ad WHERE User = '" + username + "' ORDER BY Date DESC";
 	}
 	
+	public static String getUpdateReviewStateCommand(String writer, String receiver) {
+		return "UPDATE Review SET (isConvalidated, RuleChecker) = (TRUE, '@CarloRossi') WHERE WriterUser = '" + writer + "' AND ReceiverUser = '" + receiver + "';";
+	}
+		
+	public static String getDeleteReviewCommand(String writer, String receiver) {
+		return "DELETE FROM Review WHERE WriterUser = '" + writer + "' AND ReceiverUser = '" + receiver + "';";
+	}
+		
+	public static String getMyReviewQuery(String username) {
+		return "SELECT * FROM Review WHERE isConvalidated = TRUE AND ReceiverUser = '" + username + "' ORDER BY Time ASC";
+	}
+		
+	public static String getFavouriteAdsQuery(String username) {
+		return "SELECT ID, Date, Description, Title, Price, Course, Type, isSold, Quantity, StartHighlight, FinishHighlight, "
+				+ "isConvalidated, Highlight, Ad.User, RuleChecker FROM Ad JOIN FavouriteList ON ID_Ad = ID WHERE FavouriteList.User = '" + username + "';";
+	}
+	
+	public static String getAddAdToFavouriteListCommand(long id, String username) {
+		return "INSERT INTO FavouriteList VALUES ('" + id + "', '" + username + "');";
+	}
+	
 	public static String getRCReviewQuery() {
 		return "SELECT * FROM Review WHERE isConvalidated = FALSE ORDER BY Time ASC";
 	}
 	
 	public static String getHighlightQuery(String hlType) {
 		return "SELECT * FROM HighLight WHERE Type = '" + hlType + "'";
+	}
+	
+	public static String getNumViolationsQuery(String username) {
+		return "SELECT NumViolations FROM User WHERE Username = '" + username + "';";
+	}
+	
+	public static String getBannedCommand(String username) {
+		return "UPDATE User SET isBanned = TRUE WHERE Username = '" + username + "';";
+	}
+	
+	public static String getIncNumViolationsCommand(String username, int violations) {
+		return "UPDATE User SET NumViolations = " + violations + " WHERE Username = '" + username + "';";
+	}
+	
+	public static String getAddAdCommand(Ad ad) {
+		return "INSERT INTO Ad (Date, Description, Title, Price, Course, Type, Quantity, StartHighlight, FinishHighlight, Highlight, User, RuleChecker) "
+				+ "VALUES ('" + LocalDate.now().toString() + "', '" + ad.getDescription() +"', '" + ad.getTitle() + "', '" + ad.getPrice() + "', '" + ad.getCategory().toString() + "', '" +
+				ad.getType().toString() + "', '" + ad.getQuantity() + "', '" + ad.getStartHighlightStr() + "', '" + ad.getFinishHighlightStr() + "', '" + ad.getHighlightTypeStr() + "', '" + ad.getMyUserStr() + "', NULL);";
 	}
 }

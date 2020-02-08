@@ -2,7 +2,6 @@ package logic.bean;
 
 import logic.account.User;
 import logic.dao.UserDAO;
-import logic.gui.SettingScene;
 
 public class SettingsBean {
 
