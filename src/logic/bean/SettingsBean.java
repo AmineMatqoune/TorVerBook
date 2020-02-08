@@ -1,90 +1,88 @@
 package logic.bean;
 
+import logic.account.Account;
 import logic.account.User;
-import logic.dao.UserDAO;
+import logic.dao.AccountDAO;
 
 public class SettingsBean {
 
-	private User user;
+	private Account account;
 
-	private UserDAO userDAO = UserDAO.getInstance();
+	private AccountDAO accountDAO = AccountDAO.getInstance();
 
 	public SettingsBean() {
-		user = (User) userDAO.getAccountObject();
+		account =  accountDAO.getAccountObject();
 	}
-
 
 	// METODI PER IMPOSTARE STRINGHE NELLE TEXTFIELD
-	public String getUserName() {
-		return user.getName();
+	public String getAccountName() {
+		return account.getName();
 	}
 
-	public String getUserSurname() {
-		return user.getSurname();
+	public String getAccountSurname() {
+		return account.getSurname();
 	}
 
-	public String getUserBirthdate() {
-		return user.getBirthDateString();
+	public String getAccountBirthdate() {
+		return account.getBirthDateString();
 	}
 
-	public String getUserPhoneNumber() {
-		return user.getPhoneNumber();
+	public String getAccountPhoneNumber() {
+		return account.getPhoneNumber();
 	}
 
-	public String getUserUsername() {
-		return user.getUsername();
+	public String getAccountUsername() {
+		return account.getUsername();
 	}
 
-	public String getUserEmail() {
-		return user.getEmail();
+	public String getAccountEmail() {
+		return account.getEmail();
 	}
 
-	public String getUserPassword() {
-		return user.getPassword();
+	public String getAccountPassword() {
+		return account.getPassword();
 	}
 
-	public void setUserName(String name) {
-		user.setName(name);
+	public void setAccountName(String name) {
+		account.setName(name);
 	}
 
-	public void setUserSurname(String surname) {
-		user.setSurname(surname);
+	public void setAccountSurname(String surname) {
+		account.setSurname(surname);
 	}
 
-	public void setUserBirthdate(String date) {
-		user.setBirthDate(date);
+	public void setAccountBirthdate(String date) {
+		account.setBirthDate(date);
 	}
 
-	public void setUserPhoneNumber(String phoneNumber) {
-		user.setPhoneNumber(phoneNumber);
+	public void setAccountPhoneNumber(String phoneNumber) {
+		account.setPhoneNumber(phoneNumber);
 	}
 
-	public void setUserUsername(String username) {
-		user.setUsername(username);
+	public void setAccountUsername(String username) {
+		account.setUsername(username);
 	}
 
-	public void setUserEmail(String email) {
-		user.setEmail(email);
+	public void setAccountEmail(String email) {
+		account.setEmail(email);
 	}
 
-	public void setUserPassword(String password) {
-		user.setPassword(password);
+	public void setAccountPassword(String password) {
+		account.setPassword(password);
 	}
 
-
-	public boolean checkInfo(User user) {
-
+	public boolean checkInfo(Account account) {
 		boolean expression = false;
 
-		if ((user.getName().length() > 15) || user.getName().equals(""))
+		if ((account.getName().length() > 15) || account.getName().equals(""))
 			return expression;
-		if ((user.getSurname().length() > 15) || user.getSurname().equals(""))
+		if ((account.getSurname().length() > 15) || account.getSurname().equals(""))
 			return expression;
-		if ((user.getUsername().length() > 20) || user.getUsername().equals(""))
+		if ((account.getUsername().length() > 20) || account.getUsername().equals(""))
 			return expression;
-		if ((user.getEmail().length() > 30) || user.getEmail().equals(""))
+		if ((account.getEmail().length() > 30) || account.getEmail().equals(""))
 			return expression;
-		if ((user.getPassword().length() > 30) || user.getPassword().equals(""))
+		if ((account.getPassword().length() > 30) || account.getPassword().equals(""))
 			return expression;
 
 		// no syntax errors found, return true

@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import logic.account.User;
 import logic.ad.Ad;
-import logic.dao.UserDAO;
+import logic.dao.AccountDAO;
 import logic.gui.AdComponent;
 
 public class MyAdsController {
@@ -15,7 +15,7 @@ public class MyAdsController {
 	private User currentUser;
 	
 	public MyAdsController() {
-		UserDAO userDAO = UserDAO.getInstance();
+		AccountDAO userDAO = AccountDAO.getInstance();
 		currentUser = (User) userDAO.getAccountObject();
 		ads = getAds();
 	}

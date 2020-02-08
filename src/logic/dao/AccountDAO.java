@@ -14,17 +14,16 @@ import logic.account.RuleChecker;
 import logic.account.User;
 import logic.db.DBManager;
 
-public class UserDAO {
+public class AccountDAO {
 
-	private static UserDAO instance = null;
+	private static AccountDAO instance = null;
 
 	private DBManager dbManager;
-	private User newUser;
 	private Account currentAccount;
 	private ResultSet result;
 	private AccountType accountType;
 
-	private UserDAO() {
+	private AccountDAO() {
 	}
 
 	// login case
@@ -48,8 +47,11 @@ public class UserDAO {
 	public void registerUser(User user) throws SQLException, ClassNotFoundException {
 		dbManager = DBManager.getInstance();
 
-		if (dbManager.insertNewUser(user))
-			newUser = user;
+		if (dbManager.insertNewUser(user)) {
+			currentAccount = (Account) user;
+			accountType = USER;
+		}
+
 	}
 
 	private void createAccountObject() throws SQLException, ClassNotFoundException, ParseException {
@@ -84,15 +86,18 @@ public class UserDAO {
 //		newUser.setNumViolations(result.getInt("NumViolations"));
 //	}
 
-	public void updateUserInfoDAO(User user) throws ClassNotFoundException, SQLException {
+	public void updateAccountInfo(Account modifiedAccount) throws ClassNotFoundException, SQLException {
 		// quando un utente aggiorna le proprie informazioni
 		dbManager = DBManager.getInstance();
-		if (dbManager.updateUserInfo(user, newUser.getUsername())) {
+		boolean operationSucceded = false;
+		operationSucceded = dbManager.updateAccountInfo(modifiedAccount, accountType, currentAccount.getUsername());
+
+		if (operationSucceded) {
 			// se l'update è andato a buon fine gli attributi di newUser vengono aggiornati
-			newUser.changeProfileSettings(user.getName(), user.getSurname(), user.getUsername(), user.getEmail(),
-					user.getPassword());
-			newUser.setBirthDate(user.getBirthDateString());
-			newUser.setPhoneNumber(user.getPhoneNumber());
+			currentAccount.changeProfileSettings(modifiedAccount.getName(), modifiedAccount.getSurname(),
+					modifiedAccount.getUsername(), modifiedAccount.getEmail(), modifiedAccount.getPassword());
+			currentAccount.setBirthDate(modifiedAccount.getBirthDateString());
+			currentAccount.setPhoneNumber(modifiedAccount.getPhoneNumber());
 		}
 	}
 
@@ -115,10 +120,14 @@ public class UserDAO {
 		dbManager.incNumViolations(username, violations);
 	}
 
-	public static UserDAO getInstance() {
+	public static AccountDAO getInstance() {
 		if (instance == null)
-			instance = new UserDAO();
+			instance = new AccountDAO();
 		return instance;
+	}
+
+	public AccountType getAccountType() {
+		return accountType;
 	}
 
 	private AccountType getAccountTypeByPrefix(String username) {

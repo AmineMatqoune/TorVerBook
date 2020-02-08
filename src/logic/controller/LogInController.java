@@ -4,19 +4,19 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import javafx.stage.Stage;
-import logic.dao.UserDAO;
+import logic.dao.AccountDAO;
 import logic.gui.LogInScene;
 import logic.gui.popup.ErrorPopup;
 
 public class LogInController {
 	
 	private GUIController guiController = GUIController.getInstance();
-	private UserDAO userDao = UserDAO.getInstance();
+	private AccountDAO accountDao = AccountDAO.getInstance();
 	
 	public boolean checkLogin(String username, String password) {
 		try {
 			//if log-in is successful, create user object and load homepage
-			if(userDao.logIn(username, password)) {
+			if(accountDao.logIn(username, password)) {
 //				User user = (User) userDao.getAccountObject();
 				System.out.println("Logged IN!");
 				loadHomepage();

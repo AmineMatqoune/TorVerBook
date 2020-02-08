@@ -7,7 +7,7 @@ import java.text.ParseException;
 import javafx.stage.Stage;
 import logic.account.User;
 import logic.bean.SignUpBean;
-import logic.dao.UserDAO;
+import logic.dao.AccountDAO;
 import logic.gui.SignUpScene;
 import logic.gui.popup.ErrorPopup;
 
@@ -17,7 +17,7 @@ public class SignUpController {
 	private SignUpScene signUpScene;
 	private GUIController gui;
 	private User user;
-	private UserDAO userDAO = UserDAO.getInstance();
+	private AccountDAO userDAO = AccountDAO.getInstance();
 	
 	public boolean signUp() {
 		signUpBean = new SignUpBean();

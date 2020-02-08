@@ -99,7 +99,7 @@ public class AdDAO {
 		AddAdBean addAdBean = new AddAdBean();
 		
 		//we create a temporary Ad object (ID = 0), once we added it to bd, we can update his real ID
-		Ad ad = new Ad(UserDAO.getInstance().getAccountObject().getUsername(), 0); 
+		Ad ad = new Ad(AccountDAO.getInstance().getAccountObject().getUsername(), 0); 
 		ad.setDate(LocalDate.now().toString());
 		ad.setDescription(addAdBean.getDescription());
 		ad.setTitle(addAdBean.getTitle());
@@ -115,7 +115,7 @@ public class AdDAO {
 	}
 	
 	public boolean addAdToFavouriteList(Ad ad) throws ClassNotFoundException, SQLException {
-		String username = UserDAO.getInstance().getAccountObject().getUsername();
+		String username = AccountDAO.getInstance().getAccountObject().getUsername();
 		long id = ad.getId();
 		return dbManager.addAdToFavouriteList(id, username);
 	}

@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import logic.account.Account;
+import logic.account.AccountType;
 import logic.account.User;
 import logic.ad.Ad;
 
@@ -19,7 +22,7 @@ public class DBManager {
 
 	Statement stmt = null;
 	Connection conn = null;
-	
+
 	public ResultSet ruleCheckerLogIn(String username, String password) throws SQLException, ClassNotFoundException {
 		stmt = null;
 		conn = null;
@@ -28,7 +31,7 @@ public class DBManager {
 		stmt = conn.createStatement();
 		return stmt.executeQuery(QueriesGenerator.getRuleCheckerLogInQuery(username, password));
 	}
-	
+
 	public ResultSet userLogIn(String username, String password) throws SQLException, ClassNotFoundException {
 		stmt = null;
 		conn = null;
@@ -48,14 +51,20 @@ public class DBManager {
 		return !stmt.execute(QueriesGenerator.getSignUpCommand(userObj));
 	}
 
-	public boolean updateUserInfo(User userObj, String actualUsername) throws SQLException, ClassNotFoundException {
+	public boolean updateAccountInfo(Account accountObj, AccountType accountType, String actualUsername)
+			throws SQLException, ClassNotFoundException {
 		stmt = null;
 		conn = null;
 
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		return !stmt.execute(QueriesGenerator.getUpdateUserInfoCommand(userObj, actualUsername));
+		if (accountType == AccountType.RULE_CHECKER) {
+			return !stmt.execute(QueriesGenerator.getUpdateRuleCheckerInfoCommand(accountObj, actualUsername));
+		} else {
+			return !stmt.execute(QueriesGenerator.getUpdateUserInfoCommand(accountObj, actualUsername));
+		}
+
 	}
 
 	public ResultSet getHomepageAds() throws SQLException, ClassNotFoundException {

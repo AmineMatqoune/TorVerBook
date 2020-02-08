@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+
 import logic.ad.Ad;
 import logic.dao.AdDAO;
 import logic.dao.ReviewDAO;
@@ -78,14 +79,6 @@ public final class User extends Account{
 		}
 		
 		//relatedUser.add(u);
-	}
-	
-	public void changeProfileSettings(String name, String surname, String username, String email, String pwdHash){
-		this.name = name;
-		this.surname = surname;
-		this.username = username;
-		this.email = email;
-		this.password = pwdHash;
 	}
 	
 	public void deleteAd(Ad ad) {}

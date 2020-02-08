@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 import logic.account.User;
-import logic.dao.UserDAO;
+import logic.dao.AccountDAO;
 import logic.gui.ReviewComponent;
 import logic.stuff.Review;
 
@@ -16,7 +16,7 @@ public class MyReviewController {
 	private User currentUser;
 	
 	public MyReviewController() {
-		UserDAO userDAO = UserDAO.getInstance();
+		AccountDAO userDAO = AccountDAO.getInstance();
 		currentUser = (User) userDAO.getAccountObject();
 		reviews = getReviews();
 	}

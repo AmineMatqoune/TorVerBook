@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import javafx.scene.layout.Pane;
 import logic.dao.ReviewDAO;
-import logic.dao.UserDAO;
+import logic.dao.AccountDAO;
 import logic.gui.rc.ReviewRCComponent;
 import logic.stuff.Review;
 
@@ -78,7 +78,7 @@ public class ReviewRCController {
 			if(reviewDAO.setDeleteReview(review)) {
 				//la review viene convalidata ma
 				//bisogna aggiornare la lista dei review
-				UserDAO userDAO = UserDAO.getInstance();
+				AccountDAO userDAO = AccountDAO.getInstance();
 				int violations = userDAO.getNumViolation(review.getWriter());
 				if(violations >= 4) {
 					//banniamo

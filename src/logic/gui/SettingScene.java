@@ -40,7 +40,7 @@ public class SettingScene extends DashBoardScene {
 		this.setCentralPaneFullSize(true);
 		this.setCentralPaneBackground(true);
 
-		Label usernameLabel = new Label("USERNAME: " + settingsBean.getUserUsername());
+		Label usernameLabel = new Label("USERNAME: " + settingsBean.getAccountUsername());
 		usernameLabel.setFont(new Font(TEXT_FONT, 33));
 		usernameLabel.setLayoutX(25);
 		usernameLabel.setLayoutY(17);
@@ -53,13 +53,13 @@ public class SettingScene extends DashBoardScene {
 		label1.setLayoutY(80);
 		centralPane.getChildren().add(label1);
 
-		nameField = new TextField(settingsBean.getUserName());
+		nameField = new TextField(settingsBean.getAccountName());
 		nameField.setPrefHeight(25);
 		nameField.setPrefWidth(300);
 		nameField.setLayoutX(250);
 		nameField.setLayoutY(80);
 		nameField.setOnKeyReleased(evt -> {
-			settingsBean.setUserName(getName());
+			settingsBean.setAccountName(getName());
 		});
 		centralPane.getChildren().add(nameField);
 
@@ -69,13 +69,13 @@ public class SettingScene extends DashBoardScene {
 		label2.setLayoutY(125);
 		centralPane.getChildren().add(label2);
 
-		surnameField = new TextField(settingsBean.getUserSurname());
+		surnameField = new TextField(settingsBean.getAccountSurname());
 		surnameField.setPrefHeight(25);
 		surnameField.setPrefWidth(300);
 		surnameField.setLayoutX(250);
 		surnameField.setLayoutY(125);
 		surnameField.setOnKeyReleased(evt -> {
-			settingsBean.setUserSurname(getSurname());
+			settingsBean.setAccountSurname(getSurname());
 		});
 		centralPane.getChildren().add(surnameField);
 
@@ -85,13 +85,13 @@ public class SettingScene extends DashBoardScene {
 		label3.setLayoutY(170);
 		centralPane.getChildren().add(label3);
 
-		dayField = new TextField(settingsBean.getUserBirthdate().substring(8, 10));
+		dayField = new TextField(settingsBean.getAccountBirthdate().substring(8, 10));
 		dayField.setPrefHeight(25);
 		dayField.setPrefWidth(75);
 		dayField.setLayoutX(250);
 		dayField.setLayoutY(170);
 		dayField.setOnKeyReleased(evt -> {
-			settingsBean.setUserBirthdate(getBirthdate());
+			settingsBean.setAccountBirthdate(getBirthdate());
 		});
 		centralPane.getChildren().add(dayField);
 
@@ -101,13 +101,13 @@ public class SettingScene extends DashBoardScene {
 		label9.setLayoutY(170);
 		centralPane.getChildren().add(label9);
 
-		monthField = new TextField(settingsBean.getUserBirthdate().substring(5, 7));
+		monthField = new TextField(settingsBean.getAccountBirthdate().substring(5, 7));
 		monthField.setPrefHeight(25);
 		monthField.setPrefWidth(75);
 		monthField.setLayoutX(350);
 		monthField.setLayoutY(170);
 		monthField.setOnKeyReleased(evt -> {
-			settingsBean.setUserBirthdate(getBirthdate());
+			settingsBean.setAccountBirthdate(getBirthdate());
 		});
 		centralPane.getChildren().add(monthField);
 
@@ -117,13 +117,13 @@ public class SettingScene extends DashBoardScene {
 		label10.setLayoutY(170);
 		centralPane.getChildren().add(label10);
 
-		yearField = new TextField(settingsBean.getUserBirthdate().substring(0, 4));
+		yearField = new TextField(settingsBean.getAccountBirthdate().substring(0, 4));
 		yearField.setPrefHeight(25);
 		yearField.setPrefWidth(100);
 		yearField.setLayoutX(450);
 		yearField.setLayoutY(170);
 		yearField.setOnKeyReleased(evt -> {
-			settingsBean.setUserBirthdate(getBirthdate());
+			settingsBean.setAccountBirthdate(getBirthdate());
 		});
 		centralPane.getChildren().add(yearField);
 
@@ -133,13 +133,13 @@ public class SettingScene extends DashBoardScene {
 		label4.setLayoutY(215);
 		centralPane.getChildren().add(label4);
 
-		phoneNumberField = new TextField(settingsBean.getUserPhoneNumber());
+		phoneNumberField = new TextField(settingsBean.getAccountPhoneNumber());
 		phoneNumberField.setPrefHeight(25);
 		phoneNumberField.setPrefWidth(300);
 		phoneNumberField.setLayoutX(250);
 		phoneNumberField.setLayoutY(215);
 		phoneNumberField.setOnKeyReleased(evt -> {
-			settingsBean.setUserPhoneNumber(getPhoneNumber());
+			settingsBean.setAccountPhoneNumber(getPhoneNumber());
 		});
 		centralPane.getChildren().add(phoneNumberField);
 
@@ -149,13 +149,13 @@ public class SettingScene extends DashBoardScene {
 		label5.setLayoutY(260);
 		centralPane.getChildren().add(label5);
 
-		usernameField = new TextField(settingsBean.getUserUsername());
+		usernameField = new TextField(settingsBean.getAccountUsername());
 		usernameField.setPrefHeight(25);
 		usernameField.setPrefWidth(300);
 		usernameField.setLayoutX(250);
 		usernameField.setLayoutY(260);
 		usernameField.setOnKeyReleased(evt -> {
-			settingsBean.setUserUsername(getUsername());
+			settingsBean.setAccountUsername(getUsername());
 		});
 		centralPane.getChildren().add(usernameField);
 
@@ -165,13 +165,13 @@ public class SettingScene extends DashBoardScene {
 		label6.setLayoutY(305);
 		centralPane.getChildren().add(label6);
 
-		emailField = new TextField(settingsBean.getUserEmail());
+		emailField = new TextField(settingsBean.getAccountEmail());
 		emailField.setPrefHeight(25);
 		emailField.setPrefWidth(300);
 		emailField.setLayoutX(250);
 		emailField.setLayoutY(305);
 		emailField.setOnKeyReleased(evt -> {
-			settingsBean.setUserEmail(getEmail());
+			settingsBean.setAccountEmail(getEmail());
 		});
 		centralPane.getChildren().add(emailField);
 
@@ -182,13 +182,13 @@ public class SettingScene extends DashBoardScene {
 		centralPane.getChildren().add(label7);
 
 		passwordField = new PasswordField();
-		passwordField.setText(settingsBean.getUserPassword());
+		passwordField.setText(settingsBean.getAccountPassword());
 		passwordField.setPrefHeight(25);
 		passwordField.setPrefWidth(300);
 		passwordField.setLayoutX(250);
 		passwordField.setLayoutY(350);
 		passwordField.setOnKeyReleased(evt -> {
-			settingsBean.setUserPassword(getPassword());
+			settingsBean.setAccountPassword(getPassword());
 		});
 		centralPane.getChildren().add(passwordField);
 
@@ -199,7 +199,7 @@ public class SettingScene extends DashBoardScene {
 		centralPane.getChildren().add(label8);
 
 		confirmPasswordField = new PasswordField();
-		confirmPasswordField.setText(settingsBean.getUserPassword());
+		confirmPasswordField.setText(settingsBean.getAccountPassword());
 		confirmPasswordField.setPrefHeight(25);
 		confirmPasswordField.setPrefWidth(300);
 		confirmPasswordField.setLayoutX(250);

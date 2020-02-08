@@ -88,4 +88,12 @@ public abstract class Account {
 		this.password = password;
 	}
 
+	public void changeProfileSettings(String name, String surname, String username, String email, String pwdHash){
+		this.name = name;
+		this.surname = surname;
+		this.username = username;
+		this.email = email;
+		this.password = pwdHash;
+	}
+	
 }
