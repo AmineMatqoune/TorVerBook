@@ -20,18 +20,18 @@ public class AddAdBean {
 	}
 	
 	private boolean checkType() {
-		if(AdType.SALE.equals(addAdScene.getType()))
-			return checkPrice();
+		if(AdType.SALE.equals(addAdScene.getType())) {
+			return checkPrice();}
 		else
 			return true;
 	}
 	
 	private boolean checkPrice() {
-		return (addAdScene.getPrice() > 255 || addAdScene.getPrice() == -1);
+		return addAdScene.getPrice() > 255 || addAdScene.getPrice() == -1;
 	}
 	
 	private boolean checkQuantity() {
-		return (addAdScene.getQuantity() > 255 || addAdScene.getQuantity() <= 0);
+		return addAdScene.getQuantity() > 255 || addAdScene.getQuantity() <= 0;
 	}
 	
 	private boolean checkFromDate() {

@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import logic.ad.Ad;
+import logic.dao.AccountDAO;
 import logic.dao.AdDAO;
 import logic.gui.AdUComponent;
 import logic.gui.popup.ErrorPopup;
@@ -35,19 +36,26 @@ public class HomepageController {
 	}
 
 	public void attachAdsTo(Pane pane) {
-		if (ads != null)
-			for (int i = 0; i < ads.length; i++) {
-				AdUComponent adComp = new AdUComponent(ads[i]);
-				adComp.setY(AdUComponent.HEIGHT * i);
-				pane.getChildren().add(adComp.getAdPane()); // aggiungiamo l'adComponent allo scrollpane
+		try {
+			if (ads != null)
+				for (int i = 0; i < ads.length; i++) {	
+					boolean isFavourite = adDao.checkIsFavouriteAd(ads[i].getId(), AccountDAO.getInstance().getAccountObject().getUsername());
+					AdUComponent adComp = new AdUComponent(ads[i], isFavourite);
+					adComp.setY(AdUComponent.HEIGHT * i);
+					pane.getChildren().add(adComp.getAdPane()); // aggiungiamo l'adComponent allo scrollpane
+				}
+			else {
+				Label tmp = new Label("Empty List!");
+				tmp.setFont(new Font("Arial Bold", 50));
+				tmp.setAlignment(Pos.CENTER);
+				tmp.setPrefHeight(230);
+				tmp.setPrefWidth(585);
+				pane.getChildren().add(tmp);
 			}
-		else {
-			Label tmp = new Label("Empty List!");
-			tmp.setFont(new Font("Arial Bold", 50));
-			tmp.setAlignment(Pos.CENTER);
-			tmp.setPrefHeight(230);
-			tmp.setPrefWidth(585);
-			pane.getChildren().add(tmp);
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+			Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
+			new ErrorPopup(e.getMessage(), (Stage) hpPane.getScene().getWindow());
 		}
 	}
 

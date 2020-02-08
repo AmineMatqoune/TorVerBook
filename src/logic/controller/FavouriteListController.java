@@ -30,8 +30,7 @@ public class FavouriteListController {
 			for(int i = 0; i < favouriteAds.length; i++){
 				AdComponent adComp = new AdComponent(favouriteAds[i]);
 				adComp.setY(AdComponent.HEIGHT * i);
-				pane.getChildren().add(adComp.getAdPane());
-				//aggiungiamo il pane dell'ad allo scrollpane
+				pane.getChildren().add(adComp.getAdPane());                   //aggiungiamo il pane dell'ad allo scrollpane
 			}
 		else {
 			Label tmp = new Label("Empty List!");

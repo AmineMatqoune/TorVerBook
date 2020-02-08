@@ -212,7 +212,7 @@ public class AddAdScene extends DashBoardScene{
 		if(addAdController.addAd()) 
 			new InfoPopup("La tua richiesta di inserimento è stata inviata!\nAttendere la conferma dei nostri moderatori, dopodichè l'annuncio sarà visibile sulla bacheca" , (Stage)scene.getWindow());
 		else 
-			new ErrorPopup("Qualcosa è andato storto, verifica di aver inserito correttamente tutte le informazioni.", (Stage) scene.getWindow());
+			new InfoPopup("Qualcosa è andato storto, verifica di aver inserito correttamente tutte le informazioni.", (Stage) scene.getWindow());
 	}
 	
 	//getter()
@@ -221,13 +221,23 @@ public class AddAdScene extends DashBoardScene{
 	}
 	
 	public String getDescription() {
-		return adTitleField.getText();
+		return adTextArea.getText();
 	}
 	
 	public int getPrice() {
+		int intPrice = 10, decPrice = 0;
+		
 		if(radioGroup.getSelectedToggle().equals(saleRadioButton)) { 		//se saleRadioButton è premuto, ritorna il prezzo
-			int intPrice = Integer.parseInt(price1Field.getText());
-			int decPrice = Integer.parseInt(price2Field.getText()) / 100;
+			if(price1Field.getText().equals(""))
+				intPrice = Integer.parseInt(price1Field.getPromptText());
+			else
+				intPrice = Integer.parseInt(price1Field.getText());
+			
+			if(price2Field.getText().equals(""))
+				decPrice = Integer.parseInt(price2Field.getPromptText()) / 100;
+			else
+				decPrice = Integer.parseInt(price2Field.getText()) / 100;
+			
 			return (intPrice+decPrice);
 		}
 		else if(radioGroup.getSelectedToggle().equals(exchangeRadioButton)) //se exchangeRadioButton è premuto, ritorna 0
@@ -237,7 +247,7 @@ public class AddAdScene extends DashBoardScene{
 	}
 	
 	public AdType getType()  {
-		if(radioGroup.getSelectedToggle().equals(exchangeRadioButton)) {
+		if(radioGroup.getSelectedToggle().equals(saleRadioButton)) {
 			return AdType.SALE;
 		}
 		else
@@ -245,7 +255,9 @@ public class AddAdScene extends DashBoardScene{
 	}
 	
 	public int getQuantity() {
-			return Integer.parseInt(quantityField.getText());
+		if(quantityField.getText().equals(""))
+			return Integer.parseInt(quantityField.getPromptText());
+		return Integer.parseInt(quantityField.getText());
 	}
 	
 	public String selectedCollegeBox() {

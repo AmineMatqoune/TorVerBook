@@ -16,14 +16,8 @@ public class HighlightDAO {
 	
 	public void createHighlightObject(String hlType) throws ClassNotFoundException, SQLException {
 		ResultSet result = null;
-		
-		if (hlType.equals("SUPER")) 
-			result = dbManager.getHighlight("SUPER");
-		else if (hlType.equals("MEDIUM"))
-			result = dbManager.getHighlight("MEDIUM");
-		else
-			result = dbManager.getHighlight("BASE");	
-		
+		result = dbManager.getHighlight(hlType);
+	
 		if(result.first()) {
 			highlight = new Highlight();
 			highlight.setHighlightType(result.getString("Type"));

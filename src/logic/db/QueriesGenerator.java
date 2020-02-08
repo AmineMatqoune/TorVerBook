@@ -68,9 +68,9 @@ public interface QueriesGenerator {
 				+ dstUser.getUsername() + "'," + message.getText() + "'," + DateAndTimeUtils.getTimeString() + ",'"
 				+ DateAndTimeUtils.getDateString() + "')";
 	}
-
-	public static String getHomepageAdsQuery() {
-		return "SELECT * FROM Ad WHERE isConvalidated = TRUE ORDER BY Highlight DESC, Date DESC LIMIT 100";
+	
+	public static String checkIsFavourite(long adId, String username) {
+		return "SELECT * FROM FavouriteList where ID_Ad = " + adId + " AND User = '" + username +"';" ;
 	}
 
 	public static String getMyAdsQuery(String username) {
@@ -100,6 +100,10 @@ public interface QueriesGenerator {
 	public static String getAddAdToFavouriteListCommand(long id, String username) {
 		return "INSERT INTO FavouriteList VALUES ('" + id + "', '" + username + "');";
 	}
+	
+	public static String getRemoveAdFromFavouriteListCommand(long id, String currentUser) {
+		return "DELETE FROM FavouriteList WHERE ID_Ad = " + id + " AND User = '" + currentUser + "';";
+	}
 
 	public static String getRCReviewQuery() {
 		return "SELECT * FROM Review WHERE isConvalidated = FALSE ORDER BY Time ASC";
@@ -127,5 +131,5 @@ public interface QueriesGenerator {
 				+ "', '" + ad.getPrice() + "', '" + ad.getCategory().toString() + "', '" + ad.getType().toString()
 				+ "', '" + ad.getQuantity() + "', '" + ad.getStartHighlightStr() + "', '" + ad.getFinishHighlightStr()
 				+ "', '" + ad.getHighlightTypeStr() + "', '" + ad.getMyUserStr() + "', NULL);";
-	}
+	}	
 }

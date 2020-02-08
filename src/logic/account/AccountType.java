@@ -1,6 +1,5 @@
 package logic.account;
 
 public enum AccountType {
-	USER,
-	RULE_CHECKER
+	USER, RULE_CHECKER
 }

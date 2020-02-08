@@ -24,6 +24,7 @@ public final class Highlight implements HighlightInterface{
 	}
 
 	public void setHighlightType(String hlType) {
+		System.out.println(hlType + " ricevuto in input");
 		if (hlType.equals("SUPER")) 
 			this.hlType = HighlightType.SUPER;
 		else if (hlType.equals("MEDIUM")) 
