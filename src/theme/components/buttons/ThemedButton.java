@@ -12,7 +12,6 @@ public abstract class ThemedButton extends Button {
 	
 	
 	protected ThemedButton() {
-		this.setFont();
 	}
 	
 }

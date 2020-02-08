@@ -47,13 +47,9 @@ public class DBManager {
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		return !stmt.execute(QueriesGenerator.getUpdateCommand(userObj, actualUsername));
+		return !stmt.execute(QueriesGenerator.getUpdateUserInfoCommand(userObj, actualUsername));
 	}
-	
-	public boolean updateUserInfo(User user, String actualUsername) throws SQLException {
-		return !stmt.execute(QueriesGenerator.getUpdateUserInfoCommand(user, actualUsername));
-	}
-	
+		
 	public ResultSet getHomepageAds() throws SQLException, ClassNotFoundException {
 		stmt = null;
 		conn = null;

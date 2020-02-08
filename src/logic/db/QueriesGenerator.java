@@ -3,12 +3,9 @@ package logic.db;
 import java.time.LocalDate;
 
 import logic.account.User;
-<<<<<<< HEAD
+import logic.ad.Ad;
 import logic.stuff.Message;
 import logic.utils.DateAndTimeUtils;
-=======
-import logic.ad.Ad;
->>>>>>> 3a1478938579a45865abae49a1d21a80aed9feeb
 
 /* DOC. TIPS:: Fields Types Are (CONDITION:SELECT,INSERT,UPDATE,QUERY) */
 public interface QueriesGenerator {
