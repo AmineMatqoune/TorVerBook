@@ -17,7 +17,7 @@ public class FavouriteListController {
 	
 	public FavouriteListController() {
 		UserDAO userDAO = UserDAO.getInstance();
-		currentUser = userDAO.getUserObject();
+		currentUser = (User) userDAO.getAccountObject();
 		favouriteAds = getFavouriteAds();
 	}
 	

@@ -13,6 +13,7 @@ public abstract class Account {
 	protected String name;
 	protected String surname;
 	protected Date birthDate;
+	protected String birthDateString;
 	protected String phoneNumber;
 
 	public Account(String name, String surname, String username, String email, String password) {
@@ -33,6 +34,10 @@ public abstract class Account {
 
 	public Date getBirthDate() {
 		return this.birthDate;
+	}
+	
+	public String getBirthDateString() {
+		return this.birthDateString;
 	}
 
 	public String getUsername() {
@@ -61,6 +66,10 @@ public abstract class Account {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+	
+	public void setBirthDate(String birthDate) {
+		this.birthDateString = birthDate;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {

@@ -10,7 +10,7 @@ public class SettingsBean {
 	private UserDAO userDAO = UserDAO.getInstance();
 
 	public SettingsBean() {
-		user = userDAO.getUserObject();
+		user = (User) userDAO.getAccountObject();
 	}
 
 
