@@ -1,6 +1,8 @@
 package logic.controller;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.scene.layout.Pane;
 import logic.dao.ReviewDAO;
@@ -44,7 +46,7 @@ public class ReviewRCController {
 			return review;
 		} catch (ClassNotFoundException | SQLException e) {
 			System.out.println("Errore 1 in getReview!");
-			e.printStackTrace();
+			  Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
 		} catch (Exception e) {
 			System.out.println("Errore 2 in getReview!");
 		}
@@ -65,7 +67,7 @@ public class ReviewRCController {
 				System.out.println("Operazione fallita");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			  Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
 		}
 	}
 	
@@ -95,7 +97,7 @@ public class ReviewRCController {
 				System.out.println("Operazione fallita");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			  Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
 		}
 	}
 }

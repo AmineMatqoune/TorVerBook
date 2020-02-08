@@ -46,24 +46,25 @@ public class Review {
 	public void setDate(String date) throws ParseException {
 		this.time = format.parse(date);
 	}
-	
-	/*public void setText(String text) {
+
+	public void setText(String text) {
 		this.text = text;
 	}
-	
-	public void setTime(String time) {
-		return time;
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	public void setRank(float rank) {
+		this.rank = rank;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
 	
-	public void setRank() {
-		return String.valueOf(rank);
-	}	
-	
-	public void setWriter() {
-		return writer;
-	}
-	
-	public void setReceiver() {
-		return receiver;
-	}*/
 }
