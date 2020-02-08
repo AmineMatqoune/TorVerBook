@@ -24,13 +24,13 @@ public class SettingController {
 
 		try {
 			// controllo dei dati
-			Account tempAccount = null;
-			if (accountDao.getAccountType() == AccountType.USER) {
-				tempAccount = new User(settingsBean.getAccountName(), settingsBean.getAccountSurname(),
+			Account tempAccount;
+			if (accountDao.getAccountType() == AccountType.RULE_CHECKER) {
+				tempAccount = new RuleChecker(settingsBean.getAccountName(), settingsBean.getAccountSurname(),
 						settingsBean.getAccountUsername(), settingsBean.getAccountEmail(),
 						settingsBean.getAccountPassword());
-			}else if(accountDao.getAccountType() == AccountType.RULE_CHECKER) {
-				tempAccount = new RuleChecker(settingsBean.getAccountName(), settingsBean.getAccountSurname(),
+			} else {
+				tempAccount = new User(settingsBean.getAccountName(), settingsBean.getAccountSurname(),
 						settingsBean.getAccountUsername(), settingsBean.getAccountEmail(),
 						settingsBean.getAccountPassword());
 			}
