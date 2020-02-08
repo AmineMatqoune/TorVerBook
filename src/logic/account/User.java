@@ -17,7 +17,6 @@ public final class User extends Account{
 	private boolean isBanned;
 	private int numViolations;
 	private int money;
-	private String birthDateString;
 	
 	private ReviewDAO reviewDao;
 	private AdDAO adDao;	

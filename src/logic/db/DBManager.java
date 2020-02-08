@@ -19,15 +19,23 @@ public class DBManager {
 
 	Statement stmt = null;
 	Connection conn = null;
-
-	public ResultSet logIn(String username, String password) throws SQLException, ClassNotFoundException {
+	
+	public ResultSet ruleCheckerLogIn(String username, String password) throws SQLException, ClassNotFoundException {
 		stmt = null;
 		conn = null;
-
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		return stmt.executeQuery(QueriesGenerator.getLogInQuery(username, password));
+		return stmt.executeQuery(QueriesGenerator.getRuleCheckerLogInQuery(username, password));
+	}
+	
+	public ResultSet userLogIn(String username, String password) throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return stmt.executeQuery(QueriesGenerator.getUserLogInQuery(username, password));
 	}
 
 	public boolean insertNewUser(User userObj) throws SQLException, ClassNotFoundException {

@@ -17,7 +17,7 @@ public class MyReviewController {
 	
 	public MyReviewController() {
 		UserDAO userDAO = UserDAO.getInstance();
-		currentUser = userDAO.getUserObject();
+		currentUser = (User) userDAO.getAccountObject();
 		reviews = getReviews();
 	}
 	

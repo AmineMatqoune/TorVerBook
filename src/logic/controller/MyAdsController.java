@@ -16,7 +16,7 @@ public class MyAdsController {
 	
 	public MyAdsController() {
 		UserDAO userDAO = UserDAO.getInstance();
-		currentUser = userDAO.getUserObject();
+		currentUser = (User) userDAO.getAccountObject();
 		ads = getAds();
 	}
 	

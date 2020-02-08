@@ -10,9 +10,14 @@ import logic.utils.DateAndTimeUtils;
 /* DOC. TIPS:: Fields Types Are (CONDITION:SELECT,INSERT,UPDATE,QUERY) */
 public interface QueriesGenerator {
 
-	public static String getLogInQuery(String username, String password) {
+	public static String getUserLogInQuery(String username, String password) {
 		/* CONDITION FIELDS: [USERNAME] [PASSWORD] */
 		return "SELECT * FROM User WHERE Username = '" + username + "'" + " AND Password = '" + password + "';";
+	}
+	
+	public static String getRuleCheckerLogInQuery(String username, String password) {
+		/* CONDITION FIELDS: [USERNAME] [PASSWORD] */
+		return "SELECT * FROM RuleChecker WHERE Username = '" + username + "'" + " AND Password = '" + password + "';";
 	}
 
 	public static String getSignUpCommand(User user) {

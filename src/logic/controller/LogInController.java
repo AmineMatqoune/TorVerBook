@@ -2,8 +2,8 @@ package logic.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+
 import javafx.stage.Stage;
-import logic.account.User;
 import logic.dao.UserDAO;
 import logic.gui.LogInScene;
 import logic.gui.popup.ErrorPopup;
@@ -17,7 +17,7 @@ public class LogInController {
 		try {
 			//if log-in is successful, create user object and load homepage
 			if(userDao.logIn(username, password)) {
-				User user = userDao.getUserObject();
+//				User user = (User) userDao.getAccountObject();
 				System.out.println("Logged IN!");
 				loadHomepage();
 				return true;
