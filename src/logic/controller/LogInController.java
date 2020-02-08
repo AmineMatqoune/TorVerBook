@@ -18,6 +18,7 @@ public class LogInController {
 			//if log-in is successful, create user object and load homepage
 			if(userDao.logIn(username, password)) {
 				User user = userDao.getUserObject();
+				System.out.println("Logged IN!");
 				loadHomepage();
 				return true;
 			}
