@@ -3,7 +3,9 @@ package logic.gui;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -43,7 +45,10 @@ public abstract class DashBoardScene extends BaseScene {
 	protected Label messageLabel2 = new Label("Last message 2");
 	protected Label messageLabel3 = new Label("Last message 3");
 	protected GUIController guiController = GUIController.getInstance();
-
+	
+	protected static final String BG_COLOR_SIDE_BUTTON_NORMAL = "#024a00";
+	protected static final String BG_COLOR_SIDE_BUTTON_HOVERED = "#feca57";
+	
 	protected final static String FONT = "Arial";
 
 	public DashBoardScene() {
@@ -64,7 +69,10 @@ public abstract class DashBoardScene extends BaseScene {
 		homepageLabel.setFont(new Font(FONT, 36));
 		homepageLabel.setTextFill(Color.WHITE);
 		homepageLabel.setWrapText(true);
-		homepageLabel.setOnMouseClicked(event -> guiController.setHomepageScene((Stage) pane.getScene().getWindow()));
+		homepageLabel.setOnMouseReleased(event -> guiController.setHomepageScene((Stage) pane.getScene().getWindow()));
+		homepageLabel.setOnMouseEntered(event -> homepageLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+		homepageLabel.setOnMouseExited(event -> homepageLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+		homepageLabel.setCursor(Cursor.HAND);
 		leftPane.getChildren().add(homepageLabel);
 
 		settingsLabel.setAlignment(Pos.CENTER);
@@ -75,7 +83,10 @@ public abstract class DashBoardScene extends BaseScene {
 		settingsLabel.setFont(new Font(FONT, 36));
 		settingsLabel.setTextFill(Color.WHITE);
 		settingsLabel.setWrapText(true);
-		settingsLabel.setOnMouseClicked(event -> guiController.setSettingsScene((Stage) pane.getScene().getWindow()));
+		settingsLabel.setOnMouseReleased(event -> guiController.setSettingsScene((Stage) pane.getScene().getWindow()));
+		settingsLabel.setOnMouseEntered(event -> settingsLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+		settingsLabel.setOnMouseExited(event -> settingsLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+		settingsLabel.setCursor(Cursor.HAND);
 		leftPane.getChildren().add(settingsLabel);
 
 		if (AccountDAO.getInstance().getAccountType() == AccountType.USER) {
@@ -87,7 +98,10 @@ public abstract class DashBoardScene extends BaseScene {
 			addAdLabel.setFont(new Font(FONT, 36));
 			addAdLabel.setTextFill(Color.WHITE);
 			addAdLabel.setWrapText(true);
-			addAdLabel.setOnMouseClicked(event -> guiController.setAddAdScene((Stage) pane.getScene().getWindow()));
+			addAdLabel.setOnMouseReleased(event -> guiController.setAddAdScene((Stage) pane.getScene().getWindow()));
+			addAdLabel.setOnMouseEntered(event -> addAdLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+			addAdLabel.setOnMouseExited(event -> addAdLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+			addAdLabel.setCursor(Cursor.HAND);
 			leftPane.getChildren().add(addAdLabel);
 
 			myAdsLabel.setAlignment(Pos.CENTER);
@@ -98,7 +112,10 @@ public abstract class DashBoardScene extends BaseScene {
 			myAdsLabel.setFont(new Font(FONT, 36));
 			myAdsLabel.setTextFill(Color.WHITE);
 			myAdsLabel.setWrapText(true);
-			myAdsLabel.setOnMouseClicked(event -> guiController.setMyAdsScene((Stage) pane.getScene().getWindow()));
+			myAdsLabel.setOnMouseReleased(event -> guiController.setMyAdsScene((Stage) pane.getScene().getWindow()));
+			myAdsLabel.setOnMouseEntered(event -> myAdsLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+			myAdsLabel.setOnMouseExited(event -> myAdsLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+			myAdsLabel.setCursor(Cursor.HAND);
 			leftPane.getChildren().add(myAdsLabel);
 
 			favouriteListLabel.setAlignment(Pos.CENTER);
@@ -109,8 +126,11 @@ public abstract class DashBoardScene extends BaseScene {
 			favouriteListLabel.setFont(new Font(FONT, 36));
 			favouriteListLabel.setTextFill(Color.WHITE);
 			favouriteListLabel.setWrapText(true);
-			favouriteListLabel.setOnMouseClicked(
+			favouriteListLabel.setOnMouseReleased(
 					event -> guiController.setFavouriteListScene((Stage) pane.getScene().getWindow()));
+			favouriteListLabel.setOnMouseEntered(event -> favouriteListLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+			favouriteListLabel.setOnMouseExited(event -> favouriteListLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+			favouriteListLabel.setCursor(Cursor.HAND);
 			leftPane.getChildren().add(favouriteListLabel);
 
 			myReviewLabel.setAlignment(Pos.CENTER);
@@ -122,7 +142,10 @@ public abstract class DashBoardScene extends BaseScene {
 			myReviewLabel.setTextFill(Color.WHITE);
 			myReviewLabel.setWrapText(true);
 			myReviewLabel
-					.setOnMouseClicked(event -> guiController.setMyReviewScene((Stage) pane.getScene().getWindow()));
+					.setOnMouseReleased(event -> guiController.setMyReviewScene((Stage) pane.getScene().getWindow()));
+			myReviewLabel.setOnMouseEntered(event -> myReviewLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+			myReviewLabel.setOnMouseExited(event -> myReviewLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+			myReviewLabel.setCursor(Cursor.HAND);
 			leftPane.getChildren().add(myReviewLabel);
 		}
 		centralPaneContainer = new ScrollPane();
@@ -151,6 +174,7 @@ public abstract class DashBoardScene extends BaseScene {
 		usernameLabel1.setFont(new Font(FONT, 30));
 		usernameLabel1.setTextFill(Color.WHITE);
 		usernameLabel1.setWrapText(true);
+		usernameLabel1.setPadding(new Insets(0,0,0,10));
 		rightPane.getChildren().add(usernameLabel1);
 
 		messageLabel1.setAlignment(Pos.TOP_LEFT);
@@ -160,6 +184,7 @@ public abstract class DashBoardScene extends BaseScene {
 		messageLabel1.setFont(new Font(FONT, 22));
 		messageLabel1.setTextFill(Color.WHITE);
 		messageLabel1.setWrapText(true);
+		messageLabel1.setPadding(new Insets(0,0,0,10));
 		rightPane.getChildren().add(messageLabel1);
 
 		Label label1 = new Label("");
@@ -176,6 +201,7 @@ public abstract class DashBoardScene extends BaseScene {
 		usernameLabel2.setFont(new Font(FONT, 30));
 		usernameLabel2.setTextFill(Color.WHITE);
 		usernameLabel2.setWrapText(true);
+		usernameLabel2.setPadding(new Insets(0,0,0,10));
 		rightPane.getChildren().add(usernameLabel2);
 
 		messageLabel2.setAlignment(Pos.TOP_LEFT);
@@ -185,6 +211,7 @@ public abstract class DashBoardScene extends BaseScene {
 		messageLabel2.setFont(new Font(FONT, 22));
 		messageLabel2.setTextFill(Color.WHITE);
 		messageLabel2.setWrapText(true);
+		messageLabel2.setPadding(new Insets(0,0,0,10));
 		rightPane.getChildren().add(messageLabel2);
 
 		Label label2 = new Label("");
@@ -201,6 +228,7 @@ public abstract class DashBoardScene extends BaseScene {
 		usernameLabel3.setFont(new Font(FONT, 30));
 		usernameLabel3.setTextFill(Color.WHITE);
 		usernameLabel3.setWrapText(true);
+		usernameLabel3.setPadding(new Insets(0,0,0,10));
 		rightPane.getChildren().add(usernameLabel3);
 
 		messageLabel3.setAlignment(Pos.TOP_LEFT);
@@ -210,6 +238,7 @@ public abstract class DashBoardScene extends BaseScene {
 		messageLabel3.setFont(new Font(FONT, 22));
 		messageLabel3.setTextFill(Color.WHITE);
 		messageLabel3.setWrapText(true);
+		messageLabel3.setPadding(new Insets(0,0,0,10));
 		rightPane.getChildren().add(messageLabel3);
 	}
 
