@@ -1,3 +1,4 @@
+/.classpath
 /.project
 /.settings/
 /.travis.yml
@@ -8,12 +9,5 @@
 /Logica da sviluppare.txt
 /Matqoune-FR.txt
 /Matqoune-US.txt
-/README.md
-/SQL DDL Cmd.txt
-/UCDiagram.drawio
-/build.xml
-/img/
-/lib/
-/sonar-project.properties
 /src/
 /theme/
