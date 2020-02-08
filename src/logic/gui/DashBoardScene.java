@@ -44,7 +44,7 @@ public abstract class DashBoardScene extends BaseScene {
 	protected Label messageLabel3 = new Label("Last message 3");
 	protected GUIController guiController = GUIController.getInstance();
 
-	protected final static String FONT = "Arial";
+	protected static final String FONT = "Arial";
 
 	public DashBoardScene() {
 		super();
@@ -221,7 +221,6 @@ public abstract class DashBoardScene extends BaseScene {
 				BackgroundImage myBI = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
 						BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 				centralPane.setBackground(new Background(myBI));
-				// centralPane.setOpacity(0.05);
 			} catch (FileNotFoundException e) {
 				new ErrorPopup(e.getMessage(), (Stage) centralPaneContainer.getScene().getWindow());
 			}

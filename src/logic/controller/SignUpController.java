@@ -12,22 +12,19 @@ import logic.gui.SignUpScene;
 import logic.gui.popup.ErrorPopup;
 
 public class SignUpController {
-	
-	private SignUpBean signUpBean;
+
 	private SignUpScene signUpScene;
-	private GUIController gui;
-	private User user;
 	private AccountDAO userDAO = AccountDAO.getInstance();
 	
 	public boolean signUp() {
-		signUpBean = new SignUpBean();
+		SignUpBean signUpBean = new SignUpBean();
 		
 		//check if user's inputs are correct, if so, proceed with the sign-up
 		try {
 			if(signUpBean.getPassword().equals(signUpBean.getConfirmPassword())) {
 				
 				//if password fields are same, proceed creating a temporary user object and check information consistency
-				user = new User(signUpBean.getName(), signUpBean.getSurname(), signUpBean.getUsername(), signUpBean.getEmail(), signUpBean.getPassword());
+				User user = new User(signUpBean.getName(), signUpBean.getSurname(), signUpBean.getUsername(), signUpBean.getEmail(), signUpBean.getPassword());
 				user.setPhoneNumber(signUpBean.getPhoneNumber());
 
 				if(signUpBean.checkInfo(user)) {
@@ -53,7 +50,7 @@ public class SignUpController {
 
 	private void loadLogIn() {
 		signUpScene = SignUpScene.getInstance();
-		gui = GUIController.getInstance();
+		GUIController gui = GUIController.getInstance();
 		
 		gui.setLogInScene((Stage) signUpScene.getScene().getWindow());
 	}

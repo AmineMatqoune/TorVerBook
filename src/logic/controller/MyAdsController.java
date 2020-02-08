@@ -29,7 +29,7 @@ public class MyAdsController {
 			for(int i = 0; i < ads.length; i++){
 				AdComponent adComp = new AdComponent(ads[i]);
 				adComp.setY(AdComponent.HEIGHT * i);
-				pane.getChildren().add(adComp.getAdPane());      //aggiungiamo il pane dell'ad allo scrollpane;*/
+				pane.getChildren().add(adComp.getAdPane());      //aggiungiamo il pane dell'ad allo scrollpane
 			}
 		else {
 			Label tmp = new Label("Empty List!");

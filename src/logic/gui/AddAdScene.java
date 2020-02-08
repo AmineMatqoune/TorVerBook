@@ -1,6 +1,8 @@
 package logic.gui;
 
 import java.time.LocalDate;
+
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -12,10 +14,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 import logic.ad.AdCategory;
 import logic.ad.AdType;
 import logic.controller.AddAdController;
-import logic.gui.popup.ErrorPopup;
 import logic.gui.popup.InfoPopup;
 import logic.highlight.HighlightType;
 
@@ -30,7 +32,6 @@ public class AddAdScene extends DashBoardScene{
 	private RadioButton saleRadioButton;
 	private RadioButton exchangeRadioButton;
 	private TextField price1Field;
-	private TextField price2Field;
 	private TextField quantityField;
 	private ChoiceBox <AdCategory> collegeBox;
 	private ChoiceBox <HighlightType> highlightBox;
@@ -98,29 +99,16 @@ public class AddAdScene extends DashBoardScene{
 		exchangeRadioButton.setToggleGroup(radioGroup);
 		
 		price1Field = new TextField();
+		price1Field.setAlignment(Pos.CENTER_RIGHT);
 		price1Field.setPromptText("10");
 		price1Field.setLayoutX(208);
 		price1Field.setLayoutY(316);
 		price1Field.setPrefHeight(25);
-		price1Field.setPrefWidth(37);
+		price1Field.setPrefWidth(80);
 		centralPane.getChildren().add(price1Field);
 		
-		Label label3 = new Label(",");
-		label3.setLayoutX(247);
-		label3.setLayoutY(314);
-		label3.setFont(new Font(textFont, 24));
-		centralPane.getChildren().add(label3);
-		
-		price2Field = new TextField();
-		price2Field.setPromptText("00");
-		price2Field.setLayoutX(258);
-		price2Field.setLayoutY(316);
-		price2Field.setPrefHeight(25);
-		price2Field.setPrefWidth(37);
-		centralPane.getChildren().add(price2Field);
-		
 		Label label4 = new Label("€");
-		label4.setLayoutX(303);
+		label4.setLayoutX(290);
 		label4.setLayoutY(314);
 		label4.setFont(new Font(textFont, 24));
 		centralPane.getChildren().add(label4);
@@ -132,7 +120,7 @@ public class AddAdScene extends DashBoardScene{
 		centralPane.getChildren().add(label5);
 		
 		quantityField = new TextField();
-		quantityField.setPromptText("00");
+		quantityField.setPromptText("1");
 		quantityField.setLayoutX(464);
 		quantityField.setLayoutY(313);
 		quantityField.setPrefHeight(25);
@@ -179,7 +167,6 @@ public class AddAdScene extends DashBoardScene{
 		fromDate.setValue(addAdController.getTodayDate());
 		fromDate.setLayoutX(104);
 		fromDate.setLayoutY(484);
-		fromDate.setPromptText("Today");
 		centralPane.getChildren().add(fromDate);
 		
 		Label label9 = new Label("To");
@@ -192,7 +179,6 @@ public class AddAdScene extends DashBoardScene{
 		toDate.setValue(addAdController.getTodayDate());
 		toDate.setLayoutX(376);
 		toDate.setLayoutY(484);
-		toDate.setPromptText("Forever");
 		centralPane.getChildren().add(toDate);
 		
 		addButton = new Button();
@@ -225,25 +211,16 @@ public class AddAdScene extends DashBoardScene{
 	}
 	
 	public int getPrice() {
-		int intPrice = 10, decPrice = 0;
+		int intPrice;
 		
 		if(radioGroup.getSelectedToggle().equals(saleRadioButton)) { 		//se saleRadioButton è premuto, ritorna il prezzo
 			if(price1Field.getText().equals(""))
 				intPrice = Integer.parseInt(price1Field.getPromptText());
 			else
-				intPrice = Integer.parseInt(price1Field.getText());
-			
-			if(price2Field.getText().equals(""))
-				decPrice = Integer.parseInt(price2Field.getPromptText()) / 100;
-			else
-				decPrice = Integer.parseInt(price2Field.getText()) / 100;
-			
-			return (intPrice+decPrice);
-		}
-		else if(radioGroup.getSelectedToggle().equals(exchangeRadioButton)) //se exchangeRadioButton è premuto, ritorna 0
-			return 0;
-		else														 		//altrimenti se niente è premuto, ritorna -1
-			return -1;		
+				intPrice =Integer.parseInt(price1Field.getText());
+			return intPrice;
+		}		
+		else return 0; //se exchangeRadioButton è premuto, ritorna 0
 	}
 	
 	public AdType getType()  {
@@ -267,6 +244,10 @@ public class AddAdScene extends DashBoardScene{
 	
 	public String selectedHighlightBox() {
 		return highlightBox.getValue().toString();
+	}
+	
+	public DatePicker getFromDateObj() {
+		return fromDate;
 	}
 	
 	public LocalDate getFromDate() {

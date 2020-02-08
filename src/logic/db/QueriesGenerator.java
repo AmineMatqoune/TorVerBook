@@ -105,10 +105,6 @@ public interface QueriesGenerator {
 		return "DELETE FROM FavouriteList WHERE ID_Ad = " + id + " AND User = '" + currentUser + "';";
 	}
 
-	public static String getRCReviewQuery() {
-		return "SELECT * FROM Review WHERE isConvalidated = FALSE ORDER BY Time ASC";
-	}
-
 	public static String getHighlightQuery(String hlType) {
 		return "SELECT * FROM HighLight WHERE Type = '" + hlType + "'";
 	}

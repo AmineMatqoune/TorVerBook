@@ -4,19 +4,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class DateAndTimeUtils {
-
+	
+	private DateAndTimeUtils() {}
+	
 	public static String getDateString() {
 		LocalDate date = getCurrentDate();
 		/* The parsed date format is "YYYY-MM-DD" */
-		String parsedDate = date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth();
-		return parsedDate;
+		return date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth();
 	}
 
 	public static String getTimeString() {
 		LocalTime time = getCurrentTime();
 		/* The parsed time format is "HH:MM:SS" */
-		String parsedTime = time.getHour() + ":" + time.getMinute() + ":" + time.getSecond();
-		return parsedTime;
+		return time.getHour() + ":" + time.getMinute() + ":" + time.getSecond();
 	}
 
 	private static LocalDate getCurrentDate() {

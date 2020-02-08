@@ -24,7 +24,6 @@ public final class Highlight implements HighlightInterface{
 	}
 
 	public void setHighlightType(String hlType) {
-		System.out.println(hlType + " ricevuto in input");
 		if (hlType.equals("SUPER")) 
 			this.hlType = HighlightType.SUPER;
 		else if (hlType.equals("MEDIUM")) 
@@ -80,6 +79,7 @@ public final class Highlight implements HighlightInterface{
 		case "RED":
 			this.textColor = Color.RED;
 			break;
+		default:
 		}
 	}
 	
@@ -98,6 +98,7 @@ public final class Highlight implements HighlightInterface{
 		case "CYAN":
 			this.backgroundColor = Color.CYAN;
 			break;
+		default:
 		}
 	}
 	

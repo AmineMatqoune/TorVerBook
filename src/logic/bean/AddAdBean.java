@@ -13,21 +13,21 @@ public class AddAdBean {
 		addAdScene = AddAdScene.getInstance();
 	}
 	
-	public boolean check() { //1 tutto okay, 0 check fallito
+	public boolean check() { //1 tutto okay, 0 check fallito  
 		return !(addAdScene.getTitle().length() > 100 || addAdScene.getTitle().equals("") ||
 				addAdScene.getDescription().length() > 300 || addAdScene.getDescription().equals("")
 				|| checkType() || checkQuantity() || checkFromDate() || checkToDate());
 	}
 	
 	private boolean checkType() {
-		if(AdType.SALE.equals(addAdScene.getType())) {
-			return checkPrice();}
+		if(AdType.SALE.equals(addAdScene.getType())) 
+			return checkPrice();
 		else
 			return true;
 	}
 	
 	private boolean checkPrice() {
-		return addAdScene.getPrice() > 255 || addAdScene.getPrice() == -1;
+		return addAdScene.getPrice() > 255;
 	}
 	
 	private boolean checkQuantity() {
@@ -51,7 +51,7 @@ public class AddAdBean {
 		return addAdScene.getTitle();
 	}
 	
-	public double getPrice() {
+	public int getPrice() {
 		return addAdScene.getPrice();
 	}
 	

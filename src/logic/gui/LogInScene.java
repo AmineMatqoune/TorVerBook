@@ -104,9 +104,7 @@ public class LogInScene extends BaseScene{
     }
 	
 	private void attemptLogin() {
-		if(usernameField.getText().equals("") || passwordField.getText().equals(""))
-			notifyInputError();
-		else if(!loginController.checkLogin(usernameField.getText(), passwordField.getText()))
+		if(usernameField.getText().equals("") || passwordField.getText().equals("") || !loginController.checkLogin(usernameField.getText(), passwordField.getText()))
 			notifyInputError();
 	}
 	

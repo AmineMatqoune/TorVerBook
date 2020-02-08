@@ -180,7 +180,7 @@ public class DBManager {
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		return stmt.executeQuery(QueriesGenerator.getRCReviewQuery());
+		return stmt.executeQuery("SELECT * FROM Review WHERE isConvalidated = FALSE ORDER BY Time ASC");
 	}
 
 	public ResultSet getNumViolations(String username) throws ClassNotFoundException, SQLException {

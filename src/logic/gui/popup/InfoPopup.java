@@ -16,8 +16,8 @@ public class InfoPopup extends MyPopup {
 		button.setLayoutX(108);
 		button.setLayoutY(100);
 		pane.getChildren().add(button);
-		button.setOnMouseClicked(event->{
-			popup.hide();
-		});
+		button.setOnMouseClicked(event ->
+			popup.hide()
+		);
 	}
 }
