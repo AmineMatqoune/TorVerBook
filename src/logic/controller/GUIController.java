@@ -9,6 +9,9 @@ import logic.gui.MyAdsScene;
 import logic.gui.MyReviewScene;
 import logic.gui.SettingScene;
 import logic.gui.SignUpScene;
+import logic.gui.rc.AdRCScene;
+import logic.gui.rc.ReviewRCScene;
+import logic.gui.rc.SettingsRCScene;
 
 public class GUIController {
 	
@@ -21,6 +24,8 @@ public class GUIController {
 	private SettingScene settings;
 	private AddAdScene addAd;
 	private MyAdsScene myAds;
+	private SettingsRCScene rcSettings;
+	
 	
 	private GUIController() {}
 	
@@ -62,6 +67,21 @@ public class GUIController {
 	public void setMyAdsScene(Stage stage) {
 		myAds = MyAdsScene.getInstance();
 		stage.setScene(myAds.getScene());
+	}
+	
+	public void setRCSettingsScene(Stage stage) {
+		rcSettings = SettingsRCScene.getInstance();
+		stage.setScene(rcSettings.getScene());
+	}
+	
+	public void setRCReviewScene(Stage stage) {
+		ReviewRCScene review = new ReviewRCScene();
+		stage.setScene(review.getScene());
+	}
+	
+	public void setRCAdScene(Stage stage) {
+		AdRCScene ad = new AdRCScene();
+		stage.setScene(ad.getScene());
 	}
 	
 	public static GUIController getInstance() {

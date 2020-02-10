@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import javafx.stage.Stage;
+import logic.account.AccountType;
 import logic.dao.AccountDAO;
 import logic.gui.LogInScene;
 import logic.gui.popup.ErrorPopup;
@@ -17,8 +18,14 @@ public class LogInController {
 		try {
 			//if log-in is successful, create user object and load homepage
 			if(accountDao.logIn(username, password)) {
-				loadHomepage();
-				return true;
+				if(accountDao.getAccountType() == AccountType.USER) {
+					loadUserHomepage();
+					return true;
+				}
+				else if(accountDao.getAccountType() == AccountType.RULE_CHECKER) {
+					loadRCHomepage();
+					return true;
+				}				
 			}
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());
@@ -31,8 +38,13 @@ public class LogInController {
 		guiController.setSignUpScene((Stage) LogInScene.getInstance().getScene().getWindow());
 	}
 	
-	//metodo per caricare l'homepage
-	public void loadHomepage() {
+	//metodo per caricare l'homepage per l'user
+	public void loadUserHomepage() {
 		guiController.setHomepageScene((Stage) LogInScene.getInstance().getScene().getWindow());
+	}
+	
+	//metodo per caricare l'homepage per il rulechecker
+	public void loadRCHomepage() {
+		guiController.setRCSettingsScene((Stage) LogInScene.getInstance().getScene().getWindow());
 	}
 }

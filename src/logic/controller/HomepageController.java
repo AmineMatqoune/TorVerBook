@@ -28,8 +28,6 @@ public class HomepageController {
 			adDao = AdDAO.getInstance();
 			ads = adDao.getHomepageAdsList(); // initializing Ads that will be shown in Homepage
 		} catch (SQLException | ClassNotFoundException | ParseException e) {
-			System.out.println("hpPane è ancora da fa NON ELIMINARE");
-			System.out.println(e.getMessage());
 			Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
 			new ErrorPopup(e.getMessage(), (Stage) hpPane.getScene().getWindow());
 		}
@@ -42,7 +40,7 @@ public class HomepageController {
 					boolean isFavourite = adDao.checkIsFavouriteAd(ads[i].getId(), AccountDAO.getInstance().getAccountObject().getUsername());
 					AdUComponent adComp = new AdUComponent(ads[i], isFavourite);
 					adComp.setY(AdUComponent.HEIGHT * i);
-					pane.getChildren().add(adComp.getAdPane()); // aggiungiamo l'adComponent allo scrollpane
+					pane.getChildren().add(adComp.getAdComponent()); // aggiungiamo l'adComponent allo scrollpane
 				}
 			else {
 				Label tmp = new Label("Empty List!");
@@ -53,7 +51,6 @@ public class HomepageController {
 				pane.getChildren().add(tmp);
 			}
 		} catch (SQLException | ClassNotFoundException e) {
-			System.out.println(e.getMessage());
 			Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
 			new ErrorPopup(e.getMessage(), (Stage) hpPane.getScene().getWindow());
 		}

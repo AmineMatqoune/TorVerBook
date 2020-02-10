@@ -16,10 +16,10 @@ public class ReviewRCComponent extends ReviewComponent{
 	
 	public ReviewRCComponent(Review review) {
 		super(review);
+		width = 625;
+		pane.setPrefWidth(width);
 		
-		pane.setPrefWidth(625);
-		
-		backgroundPaneLabel.setPrefWidth(625);
+		backgroundPaneLabel.setPrefWidth(width);
 		
 		try {
 			FileInputStream input = new FileInputStream("img/check.png");

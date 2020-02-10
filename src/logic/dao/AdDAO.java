@@ -25,12 +25,17 @@ public class AdDAO {
 	
 	public Ad[] loadMyAds(String ownerUsername) throws SQLException, ClassNotFoundException, ParseException {
 		ResultSet result = dbManager.getMyAds(ownerUsername);
-		return fetchAdData(result);
+		return fetchAd(result);
+	}
+	
+	public Ad[] loadRCAd() throws ClassNotFoundException, SQLException, ParseException {
+		ResultSet result = dbManager.getRCAd();
+		return fetchAd(result);
 	}
 	
 	public Ad[] getHomepageAdsList() throws ClassNotFoundException, SQLException, ParseException {
 		ResultSet result = dbManager.getHomepageAds();
-		return fetchAdData(result);		
+		return fetchAd(result);		
 	}
 
 	public boolean checkIsFavouriteAd(long adId, String currentUsername) throws ClassNotFoundException, SQLException {
@@ -39,10 +44,10 @@ public class AdDAO {
 	
 	public Ad[] loadFavouriteAds(String ownerUsername) throws SQLException, ClassNotFoundException, ParseException {
 		ResultSet result = dbManager.getFavouriteAds(ownerUsername);	
-		return fetchAdData(result);
+		return fetchAd(result);
 	}
 	
-	private Ad[] fetchAdData(ResultSet result) throws ParseException, SQLException, ClassNotFoundException {
+	private Ad[] fetchAd(ResultSet result) throws ParseException, SQLException, ClassNotFoundException {
 		Ad[] myAds = null;
 		//creating list of Ads
 		if((count = getNumOfRows(result)) > 0) {
@@ -122,6 +127,14 @@ public class AdDAO {
 	
 	public boolean removeAdFromFavouriteList(Ad ad) throws ClassNotFoundException, SQLException {
 		return dbManager.removeAdFromFavouriteList(ad.getId(), AccountDAO.getInstance().getAccountObject().getUsername());
+	}
+	
+	public boolean validateAd(long id) throws ClassNotFoundException, SQLException {
+		return dbManager.updateAdState(id);
+	}
+	
+	public boolean setDeleteAd(long id) throws ClassNotFoundException, SQLException {
+		return dbManager.deleteRCAd(id);
 	}
 	
 	public static AdDAO getInstance() throws ClassNotFoundException, SQLException {

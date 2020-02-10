@@ -182,6 +182,16 @@ public class DBManager {
 		stmt = conn.createStatement();
 		return stmt.executeQuery("SELECT * FROM Review WHERE isConvalidated = FALSE ORDER BY Time ASC");
 	}
+	
+	public ResultSet getRCAd() throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return stmt.executeQuery("SELECT * FROM Ad WHERE isConvalidated = FALSE ORDER BY Date ASC");
+	}
 
 	public ResultSet getNumViolations(String username) throws ClassNotFoundException, SQLException {
 		stmt = null;
@@ -223,13 +233,33 @@ public class DBManager {
 		return !stmt.execute(QueriesGenerator.getAddAdCommand(ad));
 	}
 
+	public boolean updateAdState(long id) throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getUpdateAdStateCommand(id));
+	}
+
+	public boolean deleteRCAd(long id) throws SQLException, ClassNotFoundException {
+		stmt = null;
+		conn = null;
+
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getDeleteAdCommand(id));
+	}
+	
 	public void close() throws SQLException {
 		if (stmt != null)
 			stmt.close();
 		if (conn != null)
 			conn.close();
 	}
-
+	
 	public static DBManager getInstance() {
 		if (instance == null)
 			instance = new DBManager();

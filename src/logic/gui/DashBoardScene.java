@@ -22,9 +22,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import logic.account.AccountType;
 import logic.controller.GUIController;
-import logic.dao.AccountDAO;
 import logic.gui.popup.ErrorPopup;
 
 public abstract class DashBoardScene extends BaseScene {
@@ -89,65 +87,62 @@ public abstract class DashBoardScene extends BaseScene {
 		settingsLabel.setCursor(Cursor.HAND);
 		leftPane.getChildren().add(settingsLabel);
 
-		if (AccountDAO.getInstance().getAccountType() == AccountType.USER) {
-			addAdLabel.setAlignment(Pos.CENTER);
-			addAdLabel.setContentDisplay(ContentDisplay.CENTER);
-			addAdLabel.setLayoutY(200);
-			addAdLabel.setPrefHeight(100);
-			addAdLabel.setPrefWidth(300);
-			addAdLabel.setFont(new Font(FONT, 36));
-			addAdLabel.setTextFill(Color.WHITE);
-			addAdLabel.setWrapText(true);
-			addAdLabel.setOnMouseReleased(event -> guiController.setAddAdScene((Stage) pane.getScene().getWindow()));
-			addAdLabel.setOnMouseEntered(event -> addAdLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
-			addAdLabel.setOnMouseExited(event -> addAdLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
-			addAdLabel.setCursor(Cursor.HAND);
-			leftPane.getChildren().add(addAdLabel);
-
-			myAdsLabel.setAlignment(Pos.CENTER);
-			myAdsLabel.setContentDisplay(ContentDisplay.CENTER);
-			myAdsLabel.setLayoutY(300);
-			myAdsLabel.setPrefHeight(100);
-			myAdsLabel.setPrefWidth(300);
-			myAdsLabel.setFont(new Font(FONT, 36));
-			myAdsLabel.setTextFill(Color.WHITE);
-			myAdsLabel.setWrapText(true);
-			myAdsLabel.setOnMouseReleased(event -> guiController.setMyAdsScene((Stage) pane.getScene().getWindow()));
-			myAdsLabel.setOnMouseEntered(event -> myAdsLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
-			myAdsLabel.setOnMouseExited(event -> myAdsLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
-			myAdsLabel.setCursor(Cursor.HAND);
-			leftPane.getChildren().add(myAdsLabel);
-
-			favouriteListLabel.setAlignment(Pos.CENTER);
-			favouriteListLabel.setContentDisplay(ContentDisplay.CENTER);
-			favouriteListLabel.setLayoutY(500);
-			favouriteListLabel.setPrefHeight(100);
-			favouriteListLabel.setPrefWidth(300);
-			favouriteListLabel.setFont(new Font(FONT, 36));
-			favouriteListLabel.setTextFill(Color.WHITE);
-			favouriteListLabel.setWrapText(true);
-			favouriteListLabel.setOnMouseReleased(
-					event -> guiController.setFavouriteListScene((Stage) pane.getScene().getWindow()));
-			favouriteListLabel.setOnMouseEntered(event -> favouriteListLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
-			favouriteListLabel.setOnMouseExited(event -> favouriteListLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
-			favouriteListLabel.setCursor(Cursor.HAND);
-			leftPane.getChildren().add(favouriteListLabel);
-
-			myReviewLabel.setAlignment(Pos.CENTER);
-			myReviewLabel.setContentDisplay(ContentDisplay.CENTER);
-			myReviewLabel.setLayoutY(400);
-			myReviewLabel.setPrefHeight(100);
-			myReviewLabel.setPrefWidth(300);
-			myReviewLabel.setFont(new Font(FONT, 36));
-			myReviewLabel.setTextFill(Color.WHITE);
-			myReviewLabel.setWrapText(true);
-			myReviewLabel
-					.setOnMouseReleased(event -> guiController.setMyReviewScene((Stage) pane.getScene().getWindow()));
-			myReviewLabel.setOnMouseEntered(event -> myReviewLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
-			myReviewLabel.setOnMouseExited(event -> myReviewLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
-			myReviewLabel.setCursor(Cursor.HAND);
-			leftPane.getChildren().add(myReviewLabel);
-		}
+		addAdLabel.setAlignment(Pos.CENTER);
+		addAdLabel.setContentDisplay(ContentDisplay.CENTER);
+		addAdLabel.setLayoutY(200);
+		addAdLabel.setPrefHeight(100);
+		addAdLabel.setPrefWidth(300);
+		addAdLabel.setFont(new Font(FONT, 36));
+		addAdLabel.setTextFill(Color.WHITE);
+		addAdLabel.setWrapText(true);
+		addAdLabel.setOnMouseReleased(event -> guiController.setAddAdScene((Stage) pane.getScene().getWindow()));
+		addAdLabel.setOnMouseEntered(event -> addAdLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+		addAdLabel.setOnMouseExited(event -> addAdLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+		addAdLabel.setCursor(Cursor.HAND);
+		leftPane.getChildren().add(addAdLabel);
+		
+		myAdsLabel.setAlignment(Pos.CENTER);
+		myAdsLabel.setContentDisplay(ContentDisplay.CENTER);
+		myAdsLabel.setLayoutY(300);
+		myAdsLabel.setPrefHeight(100);
+		myAdsLabel.setPrefWidth(300);
+		myAdsLabel.setFont(new Font(FONT, 36));
+		myAdsLabel.setTextFill(Color.WHITE);
+		myAdsLabel.setWrapText(true);
+		myAdsLabel.setOnMouseReleased(event -> guiController.setMyAdsScene((Stage) pane.getScene().getWindow()));
+		myAdsLabel.setOnMouseEntered(event -> myAdsLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+		myAdsLabel.setOnMouseExited(event -> myAdsLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+		myAdsLabel.setCursor(Cursor.HAND);
+		leftPane.getChildren().add(myAdsLabel);
+		
+		favouriteListLabel.setAlignment(Pos.CENTER);
+		favouriteListLabel.setContentDisplay(ContentDisplay.CENTER);
+		favouriteListLabel.setLayoutY(500);
+		favouriteListLabel.setPrefHeight(100);
+		favouriteListLabel.setPrefWidth(300);
+		favouriteListLabel.setFont(new Font(FONT, 36));
+		favouriteListLabel.setTextFill(Color.WHITE);
+		favouriteListLabel.setWrapText(true);
+		favouriteListLabel.setOnMouseReleased(event -> guiController.setFavouriteListScene((Stage) pane.getScene().getWindow()));
+		favouriteListLabel.setOnMouseEntered(event -> favouriteListLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+		favouriteListLabel.setOnMouseExited(event -> favouriteListLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+		favouriteListLabel.setCursor(Cursor.HAND);
+		leftPane.getChildren().add(favouriteListLabel);
+		
+		myReviewLabel.setAlignment(Pos.CENTER);
+		myReviewLabel.setContentDisplay(ContentDisplay.CENTER);
+		myReviewLabel.setLayoutY(400);
+		myReviewLabel.setPrefHeight(100);
+		myReviewLabel.setPrefWidth(300);
+		myReviewLabel.setFont(new Font(FONT, 36));
+		myReviewLabel.setTextFill(Color.WHITE);
+		myReviewLabel.setWrapText(true);
+		myReviewLabel.setOnMouseReleased(event -> guiController.setMyReviewScene((Stage) pane.getScene().getWindow()));
+		myReviewLabel.setOnMouseEntered(event -> myReviewLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_HOVERED ));
+		myReviewLabel.setOnMouseExited(event -> myReviewLabel.setStyle("-fx-background-color: " + BG_COLOR_SIDE_BUTTON_NORMAL));
+		myReviewLabel.setCursor(Cursor.HAND);
+		leftPane.getChildren().add(myReviewLabel);
+		
 		centralPaneContainer = new ScrollPane();
 		centralPaneContainer.setLayoutY(150);
 		centralPaneContainer.setLayoutX(300);

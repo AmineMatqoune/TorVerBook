@@ -1,6 +1,7 @@
 package logic.controller;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +28,7 @@ public class ReviewRCController {
 				temp.getReviewComponent().setLayoutY(ypos);
 				pane.getChildren().add(temp.getReviewComponent());
 				
-				ypos = ypos + 200;
+				ypos = (temp.getHeight() + 50);
 			}
 		}
 		else {
@@ -42,13 +43,9 @@ public class ReviewRCController {
 		try {
 			ReviewDAO reviewDAO = ReviewDAO.getInstance();
 			review = reviewDAO.loadRCReview();
-			System.out.println(review);
 			return review;
-		} catch (ClassNotFoundException | SQLException e) {
-			System.out.println("Errore 1 in getReview!");
-			  Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
-		} catch (Exception e) {
-			System.out.println("Errore 2 in getReview!");
+		} catch (ClassNotFoundException | SQLException | ParseException e) {
+			Logger.getLogger("Problemi con getReview").log(Level.SEVERE, e.getMessage());
 		}
 		return review;
 	}
@@ -60,11 +57,6 @@ public class ReviewRCController {
 			if(reviewDAO.validateReview(review)) {
 				//la review viene convalidata ma
 				//bisogna aggiornare la lista dei review
-				System.out.println("Operazione riuscita");
-			}
-			else {
-				//compare popup per errore
-				System.out.println("Operazione fallita");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			  Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
@@ -90,11 +82,7 @@ public class ReviewRCController {
 					//incrementiamo
 					userDAO.incViolations(review.getWriter(), violations);
 				}				
-				System.out.println("Operazione riuscita");
-			}
-			else {
-				//compare popup per errore
-				System.out.println("Operazione fallita");
+				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			  Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());

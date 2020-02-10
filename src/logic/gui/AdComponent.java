@@ -126,8 +126,12 @@ public class AdComponent {
 	public void setY(int y) {
 		pane.setLayoutY(y);
 	}
+	
+	public int getHeight() {
+		return HEIGHT;
+	}
 
-	public Pane getAdPane() {
+	public Pane getAdComponent() {
 		return pane;
 	}
 }
