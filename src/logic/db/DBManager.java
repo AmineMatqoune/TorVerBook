@@ -74,7 +74,20 @@ public class DBManager {
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		return stmt.executeQuery(QueriesGenerator.getHomepageAdsQuery());
+		
+		//we don't have any parameter to pass to QueriesGenerator, that's why we wrote the query here
+		return stmt.executeQuery("SELECT * FROM Ad WHERE isConvalidated = TRUE ORDER BY Highlight DESC, Date DESC LIMIT 100");
+	}
+	
+	public boolean checkIsFavouriteAd(long adId, String username) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+		
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		
+		return stmt.executeQuery(QueriesGenerator.checkIsFavourite(adId, username)).first();
 	}
 
 	public ResultSet getMyAds(String username) throws SQLException, ClassNotFoundException {
@@ -105,6 +118,17 @@ public class DBManager {
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
 		return !stmt.execute(QueriesGenerator.getAddAdToFavouriteListCommand(id, username));
+	}
+	
+	public boolean removeAdFromFavouriteList(long id, String currentUser) throws ClassNotFoundException, SQLException {
+		stmt = null;
+		conn = null;
+
+		Class.forName(driverClass);
+		conn = DriverManager.getConnection(dbUrl, user, pwd);
+		stmt = conn.createStatement();
+		return !stmt.execute(QueriesGenerator.getRemoveAdFromFavouriteListCommand(id, currentUser));
+		
 	}
 
 	public ResultSet getHighlight(String hlType) throws ClassNotFoundException, SQLException {
@@ -156,7 +180,7 @@ public class DBManager {
 		Class.forName(driverClass);
 		conn = DriverManager.getConnection(dbUrl, user, pwd);
 		stmt = conn.createStatement();
-		return stmt.executeQuery(QueriesGenerator.getRCReviewQuery());
+		return stmt.executeQuery("SELECT * FROM Review WHERE isConvalidated = FALSE ORDER BY Time ASC");
 	}
 
 	public ResultSet getNumViolations(String username) throws ClassNotFoundException, SQLException {

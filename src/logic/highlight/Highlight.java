@@ -79,6 +79,7 @@ public final class Highlight implements HighlightInterface{
 		case "RED":
 			this.textColor = Color.RED;
 			break;
+		default:
 		}
 	}
 	
@@ -97,6 +98,7 @@ public final class Highlight implements HighlightInterface{
 		case "CYAN":
 			this.backgroundColor = Color.CYAN;
 			break;
+		default:
 		}
 	}
 	

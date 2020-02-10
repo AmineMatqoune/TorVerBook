@@ -49,7 +49,7 @@ public abstract class DashBoardScene extends BaseScene {
 	protected static final String BG_COLOR_SIDE_BUTTON_NORMAL = "#024a00";
 	protected static final String BG_COLOR_SIDE_BUTTON_HOVERED = "#feca57";
 	
-	protected final static String FONT = "Arial";
+	protected static final String FONT = "Arial";
 
 	public DashBoardScene() {
 		super();
@@ -250,7 +250,6 @@ public abstract class DashBoardScene extends BaseScene {
 				BackgroundImage myBI = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
 						BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 				centralPane.setBackground(new Background(myBI));
-				// centralPane.setOpacity(0.05);
 			} catch (FileNotFoundException e) {
 				new ErrorPopup(e.getMessage(), (Stage) centralPaneContainer.getScene().getWindow());
 			}

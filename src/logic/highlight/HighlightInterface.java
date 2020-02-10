@@ -1,7 +1,5 @@
 package logic.highlight;
 
-import logic.ad.Ad;
-
 public interface HighlightInterface {
 		public boolean isExpired();
 		

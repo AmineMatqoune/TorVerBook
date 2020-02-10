@@ -18,7 +18,7 @@ public class AddAdController {
 		try {
 			if(!adBean.check())
 				return false;
-		
+			
 			AdDAO adDAO = AdDAO.getInstance();
 			return adDAO.createNewAd();
 		} catch (ClassNotFoundException | SQLException | ParseException e) {

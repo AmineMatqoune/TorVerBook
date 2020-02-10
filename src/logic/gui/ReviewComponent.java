@@ -10,7 +10,8 @@ public class ReviewComponent {
 	protected Pane pane;
 	protected Label backgroundPaneLabel;
 	
-	private static String TEXT_FONT = "Arial";
+	private static String textFont = "Arial";
+	private static String bgColor = "-fx-background-color: #024a00";
 	
 	public ReviewComponent(Review review) {
 		pane = new Pane();
@@ -21,12 +22,12 @@ public class ReviewComponent {
 		backgroundPaneLabel = new Label();
 		backgroundPaneLabel.setPrefWidth(550);
 		backgroundPaneLabel.setPrefHeight(150);
-		backgroundPaneLabel.setStyle("-fx-background-color: #024a00");
+		backgroundPaneLabel.setStyle(bgColor);
 		backgroundPaneLabel.setOpacity(0.25);
         pane.getChildren().add(backgroundPaneLabel);
         
         Label label1 = new Label("Review by: " + review.getWriter());
-        label1.setFont(new Font(TEXT_FONT, 24));
+        label1.setFont(new Font(textFont, 24));
         label1.setLayoutX(10);
         label1.setLayoutY(10);
         pane.getChildren().add(label1);
@@ -36,7 +37,7 @@ public class ReviewComponent {
         label2.setPrefHeight(100);
         label2.setLayoutX(10);
         label2.setLayoutY(38);
-        label2.setStyle("-fx-background-color: #024a00");
+        label2.setStyle(bgColor);
         label2.setOpacity(0.5);
         pane.getChildren().add(label2);
         
@@ -53,7 +54,7 @@ public class ReviewComponent {
         label3.setPrefHeight(100);
         label3.setLayoutX(440);
         label3.setLayoutY(38);
-        label3.setStyle("-fx-background-color: #024a00");
+        label3.setStyle(bgColor);
         label3.setOpacity(0.5);
         pane.getChildren().add(label3);
         

@@ -93,7 +93,7 @@ public class AccountDAO {
 		operationSucceded = dbManager.updateAccountInfo(modifiedAccount, accountType, currentAccount.getUsername());
 
 		if (operationSucceded) {
-			// se l'update è andato a buon fine gli attributi di newUser vengono aggiornati
+			// se l'update va a buon fine gli attributi di newUser vengono aggiornati
 			currentAccount.changeProfileSettings(modifiedAccount.getName(), modifiedAccount.getSurname(),
 					modifiedAccount.getUsername(), modifiedAccount.getEmail(), modifiedAccount.getPassword());
 			currentAccount.setBirthDate(modifiedAccount.getBirthDateString());

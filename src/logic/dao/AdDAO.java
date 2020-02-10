@@ -14,7 +14,6 @@ public class AdDAO {
 
 	private static AdDAO instance = null;
 	private DBManager dbManager;
-	private ResultSet result;
 	private HighlightDAO highlightDao;
 	
 	private int count = 0;
@@ -25,25 +24,28 @@ public class AdDAO {
 	}
 	
 	public Ad[] loadMyAds(String ownerUsername) throws SQLException, ClassNotFoundException, ParseException {
-		result = dbManager.getMyAds(ownerUsername);
+		ResultSet result = dbManager.getMyAds(ownerUsername);
 		return fetchAdData(result);
 	}
 	
 	public Ad[] getHomepageAdsList() throws ClassNotFoundException, SQLException, ParseException {
-		result = dbManager.getHomepageAds();
-		return fetchAdData(result);
+		ResultSet result = dbManager.getHomepageAds();
+		return fetchAdData(result);		
 	}
 
+	public boolean checkIsFavouriteAd(long adId, String currentUsername) throws ClassNotFoundException, SQLException {
+		return dbManager.checkIsFavouriteAd(adId, currentUsername);
+	}
+	
 	public Ad[] loadFavouriteAds(String ownerUsername) throws SQLException, ClassNotFoundException, ParseException {
-		result = dbManager.getFavouriteAds(ownerUsername);	
+		ResultSet result = dbManager.getFavouriteAds(ownerUsername);	
 		return fetchAdData(result);
 	}
 	
-	private Ad[] fetchAdData(ResultSet rs) throws ParseException, SQLException, ClassNotFoundException {
+	private Ad[] fetchAdData(ResultSet result) throws ParseException, SQLException, ClassNotFoundException {
 		Ad[] myAds = null;
 		//creating list of Ads
-		if((count = getNumOfRows()) > 0) {
-			
+		if((count = getNumOfRows(result)) > 0) {
 			myAds = new Ad[count];
 			int i = 0;
 			
@@ -83,7 +85,7 @@ public class AdDAO {
 		return myAds;
 	}
 	
-	private int getNumOfRows() throws SQLException { //count how many rows do we have
+	private int getNumOfRows(ResultSet result) throws SQLException { //count how many rows do we have
 		count = 0;
 		result.beforeFirst();
 		
@@ -115,9 +117,11 @@ public class AdDAO {
 	}
 	
 	public boolean addAdToFavouriteList(Ad ad) throws ClassNotFoundException, SQLException {
-		String username = AccountDAO.getInstance().getAccountObject().getUsername();
-		long id = ad.getId();
-		return dbManager.addAdToFavouriteList(id, username);
+		return dbManager.addAdToFavouriteList(ad.getId(), AccountDAO.getInstance().getAccountObject().getUsername());
+	}
+	
+	public boolean removeAdFromFavouriteList(Ad ad) throws ClassNotFoundException, SQLException {
+		return dbManager.removeAdFromFavouriteList(ad.getId(), AccountDAO.getInstance().getAccountObject().getUsername());
 	}
 	
 	public static AdDAO getInstance() throws ClassNotFoundException, SQLException {
@@ -125,5 +129,4 @@ public class AdDAO {
 			instance = new AdDAO();
 		return instance;
 	}
-
 }

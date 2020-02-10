@@ -1,7 +1,6 @@
 package logic.bean;
 
 import logic.account.Account;
-import logic.account.User;
 import logic.dao.AccountDAO;
 
 public class SettingsBean {

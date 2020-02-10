@@ -17,10 +17,8 @@ public class SettingController {
 
 	private AccountDAO accountDao = AccountDAO.getInstance();
 
-	private SettingsBean settingsBean;
-
 	public boolean applyChanges() {
-		settingsBean = SettingScene.getInstance().getSettingsBean();
+		SettingsBean settingsBean = SettingScene.getInstance().getSettingsBean();
 
 		try {
 			// controllo dei dati
@@ -47,10 +45,4 @@ public class SettingController {
 		}
 		return true;
 	}
-
-//	private void updateUserDAO(User user) {
-//		user.changeProfileSettings(settingsBean.getAccountName(), settingsBean.getAccountSurname(), settingsBean.getAccountUsername(), settingsBean.getAccountEmail(), settingsBean.getAccountPassword());
-//		user.setBirthDate(settingsBean.getAccountBirthdate());
-//		user.setPhoneNumber(settingsBean.getAccountPhoneNumber());
-//	}
 }
