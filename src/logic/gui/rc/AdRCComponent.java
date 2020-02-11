@@ -6,19 +6,19 @@ import java.io.FileNotFoundException;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import logic.ad.Ad;
+
 import logic.controller.AdRCController;
-import logic.controller.ReviewRCController;
 import logic.gui.AdComponent;
 import logic.gui.popup.ErrorPopup;
-import logic.stuff.Review;
+
 
 public class AdRCComponent extends AdComponent{
 
 	private static AdRCController con;
+	private long id;
 	
-	public AdRCComponent(Ad ad) {
-		super(ad);
+	public AdRCComponent(String title, String description, String username, String type, int price, String category) {
+		super(title, description, username, type, price, category);
 		pane.setPrefWidth(675);
 		
 		try {
@@ -28,7 +28,7 @@ public class AdRCComponent extends AdComponent{
 	        checkImage.setLayoutX(550);
 	        checkImage.setLayoutY(50);
 	        checkImage.setOnMouseClicked(event -> 
-        		checkPress(ad)
+        		checkPress()
 	        );
 	        pane.getChildren().add(checkImage);
 	        
@@ -38,7 +38,7 @@ public class AdRCComponent extends AdComponent{
 	        closeImage.setLayoutX(550);
 	        closeImage.setLayoutY(225);
 	        closeImage.setOnMouseClicked(event -> 
-        		closePress(ad)
+        		closePress()
 	        );
 	        pane.getChildren().add(closeImage);
 		} catch (FileNotFoundException e) {
@@ -46,13 +46,17 @@ public class AdRCComponent extends AdComponent{
 		}
 	}
 	
-	private static void checkPress(Ad ad) {
-		con = new AdRCController();
-		con.acceptAd(ad);
+	public void setAdId (long id) {
+		this.id = id;
 	}
 	
-	private static void closePress(Ad ad) {
+	private void checkPress() {
 		con = new AdRCController();
-		con.deleteAd(ad);
+		con.acceptAd(id);
+	}
+	
+	private void closePress() {
+		con = new AdRCController();
+		con.deleteAd(id);
 	}
 }

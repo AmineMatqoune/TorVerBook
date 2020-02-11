@@ -6,27 +6,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import logic.ad.Ad;
 import logic.dao.AccountDAO;
 import logic.dao.AdDAO;
+import logic.gui.popup.ErrorPopup;
+import logic.gui.popup.InfoPopup;
 import logic.gui.rc.AdRCComponent;
 
 
 public class AdRCController {
 
+	private Pane scenePane;
+	private Ad[] ads;
+	
 	public void showRCAd(Pane pane) {
-		/*ricava le review che hanno fatto all'utente dal metodo privato getReview()*/
-		Ad[] ad = this.getAd();
+		scenePane = pane;
+		//ricava gli ad che hanno fatto all'utente dal metodo privato getAd()
+		ads = this.getAd();
 		
-		if(ad != null) {
-			float xpos = 25;
-			float ypos = 25;
+		if(ads != null) {
+			int xpos = 25;
+			int ypos = 25;
 			
-			for(int i = 0; i != ad.length; i++) {
-				AdRCComponent temp = new AdRCComponent(ad[i]);
+			for(int i = 0; i != ads.length; i++) {
+				AdRCComponent temp = new AdRCComponent(ads[i].getTitle(), ads[i].getDescription(), ads[i].getMyUserStr(), ads[i].getType().toString(), ads[i].getPrice(), ads[i].getCategory().toString());
+				temp.setAdId(ads[i].getId());
 				temp.getAdComponent().setLayoutX(xpos);
 				temp.getAdComponent().setLayoutY(ypos);
-				pane.getChildren().add(temp.getAdComponent());
+				scenePane.getChildren().add(temp.getAdComponent());
 				
 				ypos = temp.getHeight() + 50;
 			}
@@ -41,41 +49,53 @@ public class AdRCController {
 			ad = adDao.loadRCAd();
 			return ad;
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
-			Logger.getLogger("Problemi in getAd").log(Level.SEVERE, e.getMessage());
+			new ErrorPopup(e.getMessage(), (Stage)scenePane.getScene().getWindow());
 		}
 		return ad;
 	}
 	
-	public void acceptAd(Ad ad) {
+	public void acceptAd(long id) {
 		try {
 			AdDAO adDAO = AdDAO.getInstance();
-			if(adDAO.validateAd(ad.getId())) {
+			if(adDAO.validateAd(id)) {
 				//la review viene convalidata ma
 				//bisogna aggiornare la lista dei review
+				new InfoPopup("Annuncio Convalidato!", (Stage)scenePane.getScene().getWindow());
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			Logger.getLogger("Problemi con acceptAd").log(Level.SEVERE, e.getMessage());
+			new ErrorPopup(e.getMessage(), (Stage)scenePane.getScene().getWindow());
 		}
 	}
 	
-	public void deleteAd(Ad ad) {
+	public void deleteAd(long id) {
 		try {
 			AdDAO adDAO = AdDAO.getInstance();
-			if(adDAO.setDeleteAd(ad.getId())) {
+			if(adDAO.deleteAd(id)) {
 				AccountDAO userDAO = AccountDAO.getInstance();
-				int violations = userDAO.getNumViolation(ad.getOwnerUsername());
-				if(violations >= 4) {
+				String username = retrieveUsernameById(id);
+				int violations = userDAO.getNumViolation(username);
+				if(violations > 4) {
 					//banniamo
-					userDAO.toBan(ad.getOwnerUsername());
+					userDAO.toBan(username);
 				}
 				else {
 					//incrementiamo
-					userDAO.incViolations(ad.getOwnerUsername(), violations);
+					userDAO.incViolations(username, violations);
 				}				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			  Logger.getLogger("Problemi con deleteAd").log(Level.SEVERE, e.getMessage());
 		}
+	}
+	
+	private String retrieveUsernameById(long id) {
+		int i = 0;
+		while(i < ads.length) {
+			if (ads[i].getId() == id)
+				break;
+			i++;
+		}
+		return ads[i].getMyUserStr();
 	}
 }
 

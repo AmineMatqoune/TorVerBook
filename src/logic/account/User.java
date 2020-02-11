@@ -14,7 +14,6 @@ import logic.stuff.Review;
 public final class User extends Account{
 	
 	//User's account info
-	private int rank;
 	private boolean isBanned;
 	private int numViolations;
 	private int money;
@@ -40,7 +39,7 @@ public final class User extends Account{
 	
 	private void loadOwnAds() throws ClassNotFoundException, SQLException, ParseException {
 		adDao = AdDAO.getInstance();
-		myAdList = adDao.loadMyAds(username);
+		myAdList = adDao.loadMyAds(this);
 		favouriteAds =adDao.loadFavouriteAds(username);
 	}
 	
@@ -81,17 +80,47 @@ public final class User extends Account{
 		//relatedUser.add(u);
 	}
 	
-	public void deleteAd(Ad ad) {}
+	public void deleteAd(long id) {
+		for (int i = 0; i < myAdList.length; i++) {
+			if(myAdList[i].getId() == id)
+				myAdList[i] = null;
+		}
+		
+		redefineAdList(myAdList.length - 1);
+	}
 	
-	public void markAsSold(Ad ad) {}
+	//quando facciamo modifiche su un Ad, dobbiamo aggiornare i relativi oggetti
+	private void redefineAdList(int length) {
+		Ad[] newAdList = new Ad[length];
+		for(int i = 0; i < length; i++)
+			if(myAdList[i] != null) 
+				newAdList[i] = myAdList[i];
+		
+		myAdList = newAdList;
+	}
+	
+	public void markAsSold(long id) {
+		//se la qunatità disponibile equivale a 1, elimina, altrimenti decrementa di 1 la quantità
+		for(int i = 0; i < myAdList.length; i++)
+			if(myAdList[i].getId() == id) {
+				if(myAdList[i].getQuantity() == 1) { 
+					deleteAd(id);
+				}
+				else {
+					myAdList[i].setQuantity(myAdList[i].getQuantity() - 1);
+				}
+			}
+	}
 	
 	public void sendMessage(Message mex) {
 	}
 	
+	@Override
 	public void setBirthDate(String date) { //yyyy-mm-dd format
 		birthDateString = date;
 	}
 	
+	@Override
 	public void setBirthDate(Date date) {
 		birthDate = date;
 		
@@ -101,6 +130,7 @@ public final class User extends Account{
 		birthDateString = ( String.valueOf(cal.get(Calendar.YEAR)) + "-" +  String.valueOf(1 + cal.get(Calendar.MONTH)) + "-" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
 	}
 	
+	@Override
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
@@ -113,6 +143,7 @@ public final class User extends Account{
 		this.numViolations = numViolations;
 	}
 	
+	@Override
 	public String getBirthDateString() {
 		return birthDateString;
 	}

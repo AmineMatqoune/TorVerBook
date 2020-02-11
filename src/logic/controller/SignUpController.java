@@ -1,6 +1,5 @@
 package logic.controller;
 
-
 import java.sql.SQLException;
 import java.text.ParseException;
 

@@ -19,7 +19,7 @@ public final class Ad {
 	private String description;
 	private String title;
 	private AdCategory category;
-	private double price;
+	private int price;
 	private int quantity;
 	private AdType type;
 	private boolean isSold;
@@ -68,7 +68,7 @@ public final class Ad {
 		return this.title;
 	}
 	
-	public double getPrice() {
+	public int getPrice() {
 		return this.price;
 	}
 	
@@ -80,7 +80,7 @@ public final class Ad {
 		return this.isSold;
 	}
 	
-	public double getQuantity(){
+	public int getQuantity(){
 		return this.quantity;
 	}
 	
@@ -132,6 +132,10 @@ public final class Ad {
 		this.myUserStr = owner;
 	}
 	
+	public void setMyUserObj(User owner) {
+		myUser = owner;
+	}
+	
 	public void setDate(String date) throws ParseException {
 		this.date = format.parse(date);
 	}
@@ -144,7 +148,7 @@ public final class Ad {
 		this.title = title;
 	}
 		
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	
@@ -225,12 +229,14 @@ public final class Ad {
 	}	
 	
 	//behavioural operations
-	public void markAsSold() {}
-	
-	private boolean isConvalidated() {
-		return this.isConvalidated;
+	public void markAsSold() {
+		if (getQuantity() == 1)
+			myUser.deleteAd(id);
+		else
+			setQuantity(getQuantity() - 1);
 	}
 	
-	private void deleteMe() {}
-
+	public void setConvalidated(boolean isConvalidated) {
+		this.isConvalidated = isConvalidated;
+	}
 }

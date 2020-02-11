@@ -1,7 +1,6 @@
 package logic.highlight;
 
 import javafx.scene.paint.Color;
-import logic.ad.*;
 
 
 public final class Highlight implements HighlightInterface{
@@ -30,10 +29,6 @@ public final class Highlight implements HighlightInterface{
 			this.hlType = HighlightType.MEDIUM;
 		else if (hlType.equals("BASE")) 
 			this.hlType = HighlightType.BASE;	
-	}
-
-	public int getPricePerDay() {
-		return pricePerDay;
 	}
 
 	public void setPricePerDay(int pricePerDay) {
@@ -110,20 +105,20 @@ public final class Highlight implements HighlightInterface{
 		this.style = style;
 	}
 	
-	//behavioural methods inherited from interface	
-	@Override
-	public boolean isExpired() {
-		return (Boolean)null;
+	//behavioural methods inherited from interface			
+	@Override	
+	public int getPricePerDay() {
+		return pricePerDay;
 	}
-	
-	@Override
-	public void remove() {}
-	
-	@Override
-	public int getPrice(int days) {return 0;}
 	
 	@Override
 	public void getPeriod() {
 		//return finishDate-startDate?
+	}
+
+	@Override
+	public boolean isExpired() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

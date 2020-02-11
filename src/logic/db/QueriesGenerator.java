@@ -102,7 +102,7 @@ public interface QueriesGenerator {
 	}
 	
 	public static String getRemoveAdFromFavouriteListCommand(long id, String currentUser) {
-		return "DELETE FROM FavouriteList WHERE ID = " + id + " AND User = '" + currentUser + "';";
+		return "DELETE FROM FavouriteList WHERE ID_Ad = " + id + " AND User = '" + currentUser + "';";
 	}
 
 	public static String getHighlightQuery(String hlType) {
@@ -130,10 +130,14 @@ public interface QueriesGenerator {
 	}	
 	
 	public static String getUpdateAdStateCommand(long id) {
-		return "UPDATE Ad SET isConvalidated = TRUE WHERE ID = " + id + ";";
+		return "UPDATE Ad SET isConvalidated = TRUE WHERE ID = " + id;
 	}
 	
 	public static String getDeleteAdCommand(long id) {
-		return "DELETE FROM Ad WHERE ID = " + id + ";";
+		return "DELETE FROM Ad WHERE ID = " + id;
+	}
+	
+	public static String getMarkAsSoldCommand(long id) {
+		return "UPDATE Ad SET Quantity = Quantity - 1 WHERE ID = " + id;
 	}
 }

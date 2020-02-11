@@ -5,29 +5,26 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import logic.ad.Ad;
 
-//questi AdComponent sono per MyAdsScene
+//questi AdComponent sono per FavouriteListScene
 public class AdComponent {
 
 	protected Pane pane;
 
 	private String textfont;
 	private Color bgColor;
-	private Color textcolor;
+	private Color textColor;
 	private int thickness;
+	private String adStyle;
 
 	public static final int WIDTH = 585;
 	public static final int HEIGHT = 350;
 	public static final String HEADER = " Bold";
-
-	public AdComponent(Ad ad) {
-		textfont = ad.getFont();
-		thickness = ad.getThickness();
-		textcolor = ad.getTextColor();
-		bgColor = ad.getBackgroundColor();
+	
+	public AdComponent(String title, String description, String username, String type, int price, String category) {
 		String rgbBackgroundColor;
 		String rgbDarkerBackgroundColor;
+		System.out.println("Ho ricevuto: " + title + "\n" + description + "\n\n\n\n");
 
 		if (bgColor == Color.GREEN) {
 			rgbBackgroundColor = "-fx-background-color: #228B22";
@@ -45,8 +42,8 @@ public class AdComponent {
 		pane.setPrefWidth(WIDTH);
 		pane.setPrefHeight(HEIGHT);
 
-		Label titleLabel = new Label(ad.getTitle());
-		titleLabel.setTextFill(textcolor);
+		Label titleLabel = new Label(title);
+		titleLabel.setTextFill(textColor);
 		titleLabel.setAlignment(Pos.CENTER);
 		titleLabel.setFont(new Font(textfont + HEADER, (thickness + 10)));
 		titleLabel.setPrefWidth(WIDTH);
@@ -54,7 +51,7 @@ public class AdComponent {
 		pane.getChildren().add(titleLabel);
 
 		Label descriptionHeader = new Label("Description");
-		descriptionHeader.setTextFill(textcolor);
+		descriptionHeader.setTextFill(textColor);
 		descriptionHeader.setFont(new Font(textfont + HEADER, (thickness + 5)));
 		descriptionHeader.setLayoutX(10);
 		descriptionHeader.setLayoutY(50);
@@ -68,20 +65,20 @@ public class AdComponent {
 		descPane.setLayoutY(82);
 		pane.getChildren().add(descPane);
 
-		Label descriptionLabel = new Label(ad.getDescription());
-		descriptionLabel.setTextFill(textcolor);
+		Label descriptionLabel = new Label(description);
+		descriptionLabel.setTextFill(textColor);
 		descriptionLabel.setFont(new Font(textfont, thickness));
-		descriptionLabel.setStyle(ad.getStyle());
+		descriptionLabel.setStyle(adStyle);
 		descriptionLabel.setPrefWidth(316);
 		descriptionLabel.setPrefHeight(256);
 		descriptionLabel.setAlignment(Pos.TOP_CENTER);
 		descriptionLabel.setWrapText(true);
 		descPane.getChildren().add(descriptionLabel);
 
-		Label ownerUsernameLabel = new Label("By " + ad.getOwnerUsername());
-		ownerUsernameLabel.setTextFill(textcolor);
+		Label ownerUsernameLabel = new Label("By " + username);
+		ownerUsernameLabel.setTextFill(textColor);
 		ownerUsernameLabel.setFont(new Font(textfont + HEADER, thickness));
-		ownerUsernameLabel.setStyle(ad.getStyle());
+		ownerUsernameLabel.setStyle(adStyle);
 		ownerUsernameLabel.setLayoutX(348);
 		ownerUsernameLabel.setLayoutY(53);
 		pane.getChildren().add(ownerUsernameLabel);
@@ -94,35 +91,55 @@ public class AdComponent {
 		infoAdPane.setLayoutY(82);
 		pane.getChildren().add(infoAdPane);
 
-		Label adTypeLabel = new Label("Ad type: " + ad.getType());
-		adTypeLabel.setTextFill(textcolor);
+		Label adTypeLabel = new Label("Ad type: " + type);
+		adTypeLabel.setTextFill(textColor);
 		adTypeLabel.setFont(new Font(textfont, 15));
 		adTypeLabel.setLayoutX(20);
 		adTypeLabel.setLayoutY(48);
 		infoAdPane.getChildren().add(adTypeLabel);
 
-		Label priceLabel = new Label("Price: " + ad.getPrice() + " €");
-		priceLabel.setTextFill(textcolor);
+		Label priceLabel = new Label("Price: " + price + " €");
+		priceLabel.setTextFill(textColor);
 		priceLabel.setFont(new Font(textfont, 15));
 		priceLabel.setLayoutX(20);
 		priceLabel.setLayoutY(93);
 		infoAdPane.getChildren().add(priceLabel);
 
-		Label quantityLabel = new Label("Quantity:  " + ad.getQuantity());
-		quantityLabel.setTextFill(textcolor);
-		quantityLabel.setFont(new Font(textfont, 15));
-		quantityLabel.setLayoutX(20);
-		quantityLabel.setLayoutY(143);
-		infoAdPane.getChildren().add(quantityLabel);
+		Label categorylabel = new Label("Course:  " + category);
+		categorylabel.setTextFill(textColor);
+		categorylabel.setFont(new Font(textfont, 15));
+		categorylabel.setLayoutX(20);
+		categorylabel.setLayoutY(143);
+		infoAdPane.getChildren().add(categorylabel);
 
 		Label label10 = new Label("Send Message");
-		label10.setTextFill(textcolor);
+		label10.setTextFill(textColor);
 		label10.setFont(new Font(textfont, thickness));
 		label10.setLayoutX(35);
 		label10.setLayoutY(200);
 		infoAdPane.getChildren().add(label10);
 	}
-
+	
+	public void setFont(String font) {
+		textfont = font;
+	}
+	
+	public void setStyle(String style){
+		adStyle = style;
+	}
+	
+	public void setThickness(int thickness) {
+		this.thickness = thickness;
+	}
+	
+	public void setTextColor(Color color) {
+		textColor = color;
+	}
+	
+	public void setBackgroundColor(Color color) {
+		bgColor = color;
+	}
+	
 	public void setY(int y) {
 		pane.setLayoutY(y);
 	}

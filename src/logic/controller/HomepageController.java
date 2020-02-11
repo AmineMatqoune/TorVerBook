@@ -10,10 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+import logic.account.User;
 import logic.ad.Ad;
 import logic.dao.AccountDAO;
 import logic.dao.AdDAO;
+import logic.gui.AdComponent;
 import logic.gui.AdUComponent;
 import logic.gui.popup.ErrorPopup;
 
@@ -34,12 +35,14 @@ public class HomepageController {
 	}
 
 	public void attachAdsTo(Pane pane) {
+		User user = (User) AccountDAO.getInstance().getAccountObject();
 		try {
 			if (ads != null)
 				for (int i = 0; i < ads.length; i++) {	
-					boolean isFavourite = adDao.checkIsFavouriteAd(ads[i].getId(), AccountDAO.getInstance().getAccountObject().getUsername());
-					AdUComponent adComp = new AdUComponent(ads[i], isFavourite);
-					adComp.setY(AdUComponent.HEIGHT * i);
+					boolean isFavourite = adDao.checkIsFavouriteAd(ads[i].getId(),user.getUsername());
+					AdUComponent adComp = new AdUComponent(ads[i].getTitle(), ads[i].getDescription(), user.getUsername(), ads[i].getType().toString(), ads[i].getPrice(), ads[i].getCategory().toString(), isFavourite);
+					adComp.setId(ads[i].getId());
+					adComp.setY(AdComponent.HEIGHT * i);
 					pane.getChildren().add(adComp.getAdComponent()); // aggiungiamo l'adComponent allo scrollpane
 				}
 			else {

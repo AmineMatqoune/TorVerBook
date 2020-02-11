@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 import logic.account.User;
 import logic.ad.Ad;
 import logic.dao.AccountDAO;
-import logic.gui.AdComponent;
+import logic.gui.AdMyAdsComponent;
 
 public class MyAdsController {
 	
@@ -27,7 +27,8 @@ public class MyAdsController {
 	public void attachAdsTo(Pane pane) {
 		if(ads != null)
 			for(int i = 0; i < ads.length; i++){
-				AdComponent adComp = new AdComponent(ads[i]);
+				AdMyAdsComponent adComp = new AdMyAdsComponent(ads[i].getTitle(), ads[i].getDescription(), ads[i].getMyUserStr(), ads[i].getType().toString(), ads[i].getPrice(), ads[i].getCategory().toString());
+				adComp.setId(ads[i].getId());
 				adComp.setY(adComp.getHeight() * i);
 				pane.getChildren().add(adComp.getAdComponent());      //aggiungiamo il pane dell'ad allo scrollpane
 			}
@@ -40,5 +41,4 @@ public class MyAdsController {
 			pane.getChildren().add(tmp);
 		}
 	}
-	
 }

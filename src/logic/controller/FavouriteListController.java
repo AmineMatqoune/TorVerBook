@@ -28,7 +28,12 @@ public class FavouriteListController {
 	public void attachAdsTo(Pane pane) {
 		if(favouriteAds != null)
 			for(int i = 0; i < favouriteAds.length; i++){
-				AdComponent adComp = new AdComponent(favouriteAds[i]);
+				AdComponent adComp = new AdComponent(favouriteAds[i].getTitle(), favouriteAds[i].getDescription(), currentUser.getUsername(), favouriteAds[i].getType().toString(), favouriteAds[i].getPrice(), favouriteAds[i].getCategory().toString());
+				adComp.setFont(favouriteAds[i].getFont());
+				adComp.setThickness(favouriteAds[i].getThickness());
+				adComp.setTextColor(favouriteAds[i].getTextColor());
+				adComp.setBackgroundColor(favouriteAds[i].getBackgroundColor());
+				adComp.setStyle(favouriteAds[i].getStyle());
 				adComp.setY(AdComponent.HEIGHT * i);
 				pane.getChildren().add(adComp.getAdComponent());                   //aggiungiamo il pane dell'ad allo scrollpane
 			}

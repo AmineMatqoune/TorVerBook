@@ -1,6 +1,6 @@
 User Stories:
 
-1-As a user, I want to save favorite ads, so that I don't have to search them again.
+1-As a user, I want to save favourite ads, so that I don't have to search them again.
 
 2-As a user, I want to filter the list of books specifying 3 parameters*, so that I can see a list of books i'm interested in.
 	parameters: title, price, college course.

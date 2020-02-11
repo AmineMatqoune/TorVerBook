@@ -11,6 +11,8 @@ public class HomepageScene extends DashBoardScene{
 	private HomepageScene() {
 		super();
 		
+		
+		
 		homepageLabel.setTextFill(Color.YELLOW);
 		this.setCentralPaneFullSize(true);
 		this.setCentralPaneBackground(true);

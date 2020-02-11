@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 
+import logic.account.User;
 import logic.ad.Ad;
 import logic.bean.AddAdBean;
 import logic.db.DBManager;
@@ -23,9 +24,15 @@ public class AdDAO {
 		highlightDao = new HighlightDAO();
 	}
 	
-	public Ad[] loadMyAds(String ownerUsername) throws SQLException, ClassNotFoundException, ParseException {
-		ResultSet result = dbManager.getMyAds(ownerUsername);
-		return fetchAd(result);
+	public Ad[] loadMyAds(User user) throws SQLException, ClassNotFoundException, ParseException {
+		ResultSet result = dbManager.getMyAds(user.getUsername());
+		Ad[] tmp = fetchAd(result);
+		
+		//bind tra Ad e User
+		if(tmp != null)
+			for(int i = 0; i < tmp.length; i++)
+				tmp[i].setMyUserObj(user);
+		return tmp;
 	}
 	
 	public Ad[] loadRCAd() throws ClassNotFoundException, SQLException, ParseException {
@@ -39,7 +46,7 @@ public class AdDAO {
 	}
 
 	public boolean checkIsFavouriteAd(long adId, String currentUsername) throws ClassNotFoundException, SQLException {
-		return dbManager.checkIsFavouriteAd(adId, currentUsername);
+		return dbManager.checkIsFavouriteAd(adId, currentUsername).first();
 	}
 	
 	public Ad[] loadFavouriteAds(String ownerUsername) throws SQLException, ClassNotFoundException, ParseException {
@@ -121,20 +128,28 @@ public class AdDAO {
 		return dbManager.addAd(ad);
 	}
 	
-	public boolean addAdToFavouriteList(Ad ad) throws ClassNotFoundException, SQLException {
-		return dbManager.addAdToFavouriteList(ad.getId(), AccountDAO.getInstance().getAccountObject().getUsername());
+	public boolean addAdToFavouriteList(long id) throws ClassNotFoundException, SQLException {
+		return dbManager.addAdToFavouriteList(id, AccountDAO.getInstance().getAccountObject().getUsername());
 	}
 	
-	public boolean removeAdFromFavouriteList(Ad ad) throws ClassNotFoundException, SQLException {
-		return dbManager.removeAdFromFavouriteList(ad.getId(), AccountDAO.getInstance().getAccountObject().getUsername());
+	public boolean removeAdFromFavouriteList(long id) throws ClassNotFoundException, SQLException {
+		return dbManager.removeAdFromFavouriteList(id, AccountDAO.getInstance().getAccountObject().getUsername());
 	}
 	
 	public boolean validateAd(long id) throws ClassNotFoundException, SQLException {
 		return dbManager.updateAdState(id);
 	}
 	
-	public boolean setDeleteAd(long id) throws ClassNotFoundException, SQLException {
-		return dbManager.deleteRCAd(id);
+	public boolean deleteAd(long id) throws ClassNotFoundException, SQLException {
+		User user = (User) AccountDAO.getInstance().getAccountObject();
+		user.deleteAd(id);
+		return dbManager.deleteAd(id);
+	}
+	
+	public boolean markAsSold(long id) throws ClassNotFoundException, SQLException {
+		User user = (User) AccountDAO.getInstance().getAccountObject();
+		user.markAsSold(id);
+		return dbManager.markAsSold(id);
 	}
 	
 	public static AdDAO getInstance() throws ClassNotFoundException, SQLException {
