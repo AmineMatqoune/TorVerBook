@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+import logic.bean.AdBean;
 import logic.dao.AdDAO;
 import logic.gui.popup.ErrorPopup;
 import logic.gui.popup.InfoPopup;
@@ -16,10 +16,8 @@ import logic.gui.popup.InfoPopup;
 
 public class AdMyAdsComponent extends AdComponent{
 	
-	private long id;
-	
-	public AdMyAdsComponent(String title, String description, String username, String type, int price, String category) {
-		super(title, description, username, type, price, category);
+	public AdMyAdsComponent(AdBean adBean) {
+		super(adBean);
 		
 		Pane deletePane = new Pane();
 		deletePane.setPrefSize(60, 60);
@@ -56,10 +54,6 @@ public class AdMyAdsComponent extends AdComponent{
 		
 	}
 	
-	public void setId(long id) {
-		this.id = id;
-	}
-	
 	private void deleteAd() {
 		try {
 			if(AdDAO.getInstance().deleteAd(id)) {
@@ -69,7 +63,7 @@ public class AdMyAdsComponent extends AdComponent{
 			} else {
 				new InfoPopup("Ops! Qualcosa è andato storto!", (Stage)pane.getScene().getWindow());
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			new ErrorPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 		}
 	}
@@ -77,7 +71,7 @@ public class AdMyAdsComponent extends AdComponent{
 	private void markAsSold() {
 		try {
 			AdDAO.getInstance().markAsSold(id);
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			new ErrorPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 		} 
 	}

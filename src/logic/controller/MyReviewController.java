@@ -4,8 +4,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-
 import logic.account.User;
+import logic.bean.ReviewBean;
 import logic.dao.AccountDAO;
 import logic.gui.ReviewComponent;
 import logic.stuff.Review;
@@ -30,7 +30,8 @@ public class MyReviewController {
 			float ypos = 25;
 			
 			for(int i = 0; i != reviews.length; i++) {
-				ReviewComponent temp = new ReviewComponent(reviews[i]);
+				ReviewBean bean = new ReviewBean(reviews[i]);
+				ReviewComponent temp = new ReviewComponent(bean);
 				temp.getReviewComponent().setLayoutX(25);
 				temp.getReviewComponent().setLayoutY(ypos);
 				pane.getChildren().add(temp.getReviewComponent());

@@ -27,7 +27,7 @@ public class LogInController {
 					return true;
 				}				
 			}
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());
 		}
 		//Notify log-in error

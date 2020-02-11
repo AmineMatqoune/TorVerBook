@@ -5,8 +5,9 @@ import java.io.FileNotFoundException;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+import logic.bean.AdBean;
 import logic.controller.AdRCController;
 import logic.gui.AdComponent;
 import logic.gui.popup.ErrorPopup;
@@ -15,10 +16,9 @@ import logic.gui.popup.ErrorPopup;
 public class AdRCComponent extends AdComponent{
 
 	private static AdRCController con;
-	private long id;
 	
-	public AdRCComponent(String title, String description, String username, String type, int price, String category) {
-		super(title, description, username, type, price, category);
+	public AdRCComponent(AdBean adBean) {
+		super(adBean);
 		pane.setPrefWidth(675);
 		
 		try {
@@ -44,10 +44,6 @@ public class AdRCComponent extends AdComponent{
 		} catch (FileNotFoundException e) {
 			new ErrorPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 		}
-	}
-	
-	public void setAdId (long id) {
-		this.id = id;
 	}
 	
 	private void checkPress() {

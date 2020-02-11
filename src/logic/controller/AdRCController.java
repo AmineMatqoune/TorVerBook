@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.ad.Ad;
+import logic.bean.AdBean;
 import logic.dao.AccountDAO;
 import logic.dao.AdDAO;
 import logic.gui.popup.ErrorPopup;
@@ -30,8 +31,8 @@ public class AdRCController {
 			int ypos = 25;
 			
 			for(int i = 0; i != ads.length; i++) {
-				AdRCComponent temp = new AdRCComponent(ads[i].getTitle(), ads[i].getDescription(), ads[i].getMyUserStr(), ads[i].getType().toString(), ads[i].getPrice(), ads[i].getCategory().toString());
-				temp.setAdId(ads[i].getId());
+				AdBean adBean = new AdBean(ads[i]);
+				AdRCComponent temp = new AdRCComponent(adBean);
 				temp.getAdComponent().setLayoutX(xpos);
 				temp.getAdComponent().setLayoutY(ypos);
 				scenePane.getChildren().add(temp.getAdComponent());
@@ -48,7 +49,7 @@ public class AdRCController {
 			AdDAO adDao = AdDAO.getInstance();
 			ad = adDao.loadRCAd();
 			return ad;
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage)scenePane.getScene().getWindow());
 		}
 		return ad;
@@ -62,7 +63,7 @@ public class AdRCController {
 				//bisogna aggiornare la lista dei review
 				new InfoPopup("Annuncio Convalidato!", (Stage)scenePane.getScene().getWindow());
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			new ErrorPopup(e.getMessage(), (Stage)scenePane.getScene().getWindow());
 		}
 	}
@@ -83,7 +84,7 @@ public class AdRCController {
 					userDAO.incViolations(username, violations);
 				}				
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			  Logger.getLogger("Problemi con deleteAd").log(Level.SEVERE, e.getMessage());
 		}
 	}

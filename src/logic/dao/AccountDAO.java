@@ -27,7 +27,7 @@ public class AccountDAO {
 	}
 
 	// login case
-	public boolean logIn(String username, String password) throws SQLException, ClassNotFoundException, ParseException {
+	public boolean logIn(String username, String password) throws SQLException, ParseException {
 		dbManager = DBManager.getInstance();
 		accountType = getAccountTypeByPrefix(username);
 		if (accountType == USER) {
@@ -37,24 +37,21 @@ public class AccountDAO {
 		}
 		// if exists 1 row in result, then we succesfully logged in
 		if (result.first()) {
-//			createUserObject();
 			createAccountObject();
 			return true;
 		}
 		return false;
 	}
 
-	public void registerUser(User user) throws SQLException, ClassNotFoundException {
+	public void registerUser(User user) throws SQLException {
 		dbManager = DBManager.getInstance();
-
 		if (dbManager.insertNewUser(user)) {
-			currentAccount = (Account) user;
+			currentAccount = user;
 			accountType = USER;
 		}
-
 	}
 
-	private void createAccountObject() throws SQLException, ClassNotFoundException, ParseException {
+	private void createAccountObject() throws SQLException, ParseException {
 		// creazione dell'effettivo oggetto User/Rule Checker
 		if (accountType == USER) {
 			User user = new User(result.getString("Name"), result.getString("Surname"), result.getString("Username"),
@@ -76,17 +73,7 @@ public class AccountDAO {
 		}
 	}
 
-//	private void createUserObject() throws SQLException, ClassNotFoundException, ParseException {
-//		// creazione dell'effettivo oggetto User
-//		newUser = new User(result.getString("Name"), result.getString("Surname"), result.getString("Username"),
-//				result.getString("Email"), result.getString("Password"));
-//		newUser.setPhoneNumber(result.getString("PhoneNumber"));
-//		newUser.setBirthDate(result.getString("Birthdate"));
-//		newUser.setMoney(result.getInt("Money"));
-//		newUser.setNumViolations(result.getInt("NumViolations"));
-//	}
-
-	public void updateAccountInfo(Account modifiedAccount) throws ClassNotFoundException, SQLException {
+	public void updateAccountInfo(Account modifiedAccount) throws SQLException {
 		// quando un utente aggiorna le proprie informazioni
 		dbManager = DBManager.getInstance();
 		boolean operationSucceded = false;
@@ -105,17 +92,17 @@ public class AccountDAO {
 		return currentAccount;
 	}
 
-	public int getNumViolation(String username) throws ClassNotFoundException, SQLException {
+	public int getNumViolation(String username) throws SQLException {
 		dbManager = DBManager.getInstance();
 		return dbManager.getNumViolations(username).getInt("NumViolations");
 	}
 
-	public void toBan(String username) throws ClassNotFoundException, SQLException {
+	public void toBan(String username) throws SQLException {
 		dbManager = DBManager.getInstance();
 		dbManager.setBannedUser(username);
 	}
 
-	public void incViolations(String username, int violations) throws ClassNotFoundException, SQLException {
+	public void incViolations(String username, int violations) throws SQLException {
 		dbManager = DBManager.getInstance();
 		dbManager.incNumViolations(username, violations);
 	}

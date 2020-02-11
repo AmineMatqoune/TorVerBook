@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import logic.gui.popup.ErrorPopup;
-import logic.stuff.Review;
+import logic.bean.ReviewBean;
 import logic.controller.ReviewRCController;
 import logic.gui.ReviewComponent;
 
@@ -14,8 +14,8 @@ public class ReviewRCComponent extends ReviewComponent{
 
 	private static ReviewRCController con;
 	
-	public ReviewRCComponent(Review review) {
-		super(review);
+	public ReviewRCComponent(ReviewBean reviewBean) {
+		super(reviewBean);
 		width = 625;
 		pane.setPrefWidth(width);
 		
@@ -27,7 +27,7 @@ public class ReviewRCComponent extends ReviewComponent{
 	        ImageView checkImage = new ImageView(image);
 	        checkImage.setLayoutX(550);
 	        checkImage.setOnMouseClicked(event -> 
-        	checkPress(review)
+        	checkPress(reviewBean)
 	        );
 	        pane.getChildren().add(checkImage);
 	        
@@ -37,7 +37,7 @@ public class ReviewRCComponent extends ReviewComponent{
 	        closeImage.setLayoutX(550);
 	        closeImage.setLayoutY(75);
 	        closeImage.setOnMouseClicked(event -> 
-        	closePress(review)
+        	closePress(reviewBean)
 	        );
 	        pane.getChildren().add(closeImage);
 		} catch (FileNotFoundException e) {
@@ -45,14 +45,14 @@ public class ReviewRCComponent extends ReviewComponent{
 		}
 	}
 	
-	private static void checkPress(Review review) {
+	private static void checkPress(ReviewBean review) {
 		con = new ReviewRCController();
-		con.acceptReview(review);
+		con.acceptReview(review.getWriter(), review.getReceiver());
 	}
 	
-	private static void closePress(Review review) {
+	private static void closePress(ReviewBean review) {
 		con = new ReviewRCController();
-		con.deleteReview(review);
+		con.deleteReview(review.getWriter(), review.getReceiver());
 	}
 
 }

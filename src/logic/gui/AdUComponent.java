@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+import logic.bean.AdBean;
 import logic.dao.AdDAO;
 import logic.gui.popup.InfoPopup;
 
@@ -16,23 +16,21 @@ import logic.gui.popup.InfoPopup;
 public class AdUComponent extends AdComponent{
 	
 	private ImageView star = null;
-	private Pane starPane;
 	private FileInputStream input = null;
-    private boolean isFavourite = false;
-    private long id;
+    private boolean isFavourite;
     
-	public AdUComponent(String title, String description, String username, String type, int price, String category, boolean isFavourite) {
-		super(title, description, username, type, price, category);
-		this.isFavourite = isFavourite;
-		
+	public AdUComponent(AdBean adBean) {
+		super(adBean);
+
 		try {
-			starPane = new Pane();
+			Pane starPane = new Pane();
 			starPane.setPrefSize(40, 40);
 			starPane.setLayoutX(520);
 			starPane.setLayoutY(10);
 			pane.getChildren().add(starPane);
+			isFavourite = adBean.getFavourite();
 			
-			if(this.isFavourite)
+			if(isFavourite)
 				input = new FileInputStream("img/star5.PNG");
 			else
 				input = new FileInputStream("img/star0.PNG");
@@ -48,19 +46,15 @@ public class AdUComponent extends AdComponent{
 		}
 	}
 	
-	private boolean addToFavouriteList() throws ClassNotFoundException, SQLException {
+	private boolean addToFavouriteList() throws SQLException {
 		AdDAO dao = AdDAO.getInstance();
 		return dao.addAdToFavouriteList(id);
 	}
 	
-	private boolean removeFromFavouriteList() throws ClassNotFoundException, SQLException {
+	private boolean removeFromFavouriteList() throws SQLException {
 		AdDAO dao = AdDAO.getInstance();
 		return dao.removeAdFromFavouriteList(id);
 	}
-	
-	public void setId(long id) {
-    	this.id = id;
-    }
 	
 	private void clickStar() {
 		try {
@@ -73,7 +67,7 @@ public class AdUComponent extends AdComponent{
 			Image image2 = new Image(input2);
 			star.setImage(image2);
 			this.isFavourite = !this.isFavourite;
-		} catch (ClassNotFoundException | SQLException | FileNotFoundException e) {
+		} catch (SQLException | FileNotFoundException e) {
 			new InfoPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 		}
 	}

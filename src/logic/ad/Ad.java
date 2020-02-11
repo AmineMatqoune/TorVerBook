@@ -215,7 +215,7 @@ public final class Ad {
 		this.myHighlight = myHighlight;
 	}
 	
-	public void setHighlight(String myHighlightType) throws ClassNotFoundException, SQLException {
+	public void setHighlight(String myHighlightType) throws SQLException {
 		HighlightDAO hlDao = new HighlightDAO();
 		hlDao.createHighlightObject(myHighlightType);
 		this.myHighlight = hlDao.getHighlightObject(); //bind ad-highlight

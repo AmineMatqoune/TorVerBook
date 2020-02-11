@@ -27,7 +27,7 @@ public final class User extends Account{
 	private User[] relatedUser = null;
 	private Review[] ownReview = null;
 	
-	public User(String name, String surname, String username, String email, String password) throws ClassNotFoundException, SQLException, ParseException {
+	public User(String name, String surname, String username, String email, String password) throws SQLException, ParseException {
 		super(name, surname, username, email, password);
 		loadOwnAds();
 		loadOwnReview();
@@ -37,13 +37,13 @@ public final class User extends Account{
 	
 	private void loadRelatedUsers() {}
 	
-	private void loadOwnAds() throws ClassNotFoundException, SQLException, ParseException {
+	private void loadOwnAds() throws SQLException, ParseException {
 		adDao = AdDAO.getInstance();
 		myAdList = adDao.loadMyAds(this);
 		favouriteAds =adDao.loadFavouriteAds(username);
 	}
 	
-	private void loadOwnReview() throws ClassNotFoundException, SQLException, ParseException  {
+	private void loadOwnReview() throws  SQLException, ParseException  {
 		reviewDao = ReviewDAO.getInstance();
 		ownReview = reviewDao.loadMyReview(this);
 	}
@@ -85,7 +85,6 @@ public final class User extends Account{
 			if(myAdList[i].getId() == id)
 				myAdList[i] = null;
 		}
-		
 		redefineAdList(myAdList.length - 1);
 	}
 	
@@ -126,7 +125,6 @@ public final class User extends Account{
 		
 		Calendar cal = Calendar.getInstance(); //Some methods of the class Date are deprecated, that's why we use Calendar type
 		cal.setTime(date);
-		
 		birthDateString = ( String.valueOf(cal.get(Calendar.YEAR)) + "-" +  String.valueOf(1 + cal.get(Calendar.MONTH)) + "-" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
 	}
 	

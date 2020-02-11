@@ -10,11 +10,11 @@ public class HighlightDAO {
 	private DBManager dbManager;
 	private Highlight highlight;
 	
-	public HighlightDAO() throws ClassNotFoundException, SQLException {
+	public HighlightDAO() throws SQLException {
 		dbManager = DBManager.getInstance();
 	}
 	
-	public void createHighlightObject(String hlType) throws ClassNotFoundException, SQLException {
+	public void createHighlightObject(String hlType) throws SQLException {
 		ResultSet result = null;
 		result = dbManager.getHighlight(hlType);
 	

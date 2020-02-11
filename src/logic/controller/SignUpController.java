@@ -39,7 +39,7 @@ public class SignUpController {
 			}
 			else //passwords don't match
 				return false;
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+		} catch (SQLException | ParseException e) {
 			signUpScene = SignUpScene.getInstance();
 			new ErrorPopup(e.getMessage(), (Stage) signUpScene.getScene().getWindow());
 			return false;

@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.account.User;
 import logic.ad.Ad;
+import logic.bean.AdBean;
 import logic.dao.AccountDAO;
 import logic.dao.AdDAO;
 import logic.gui.AdComponent;
@@ -28,8 +29,7 @@ public class HomepageController {
 		try {
 			adDao = AdDAO.getInstance();
 			ads = adDao.getHomepageAdsList(); // initializing Ads that will be shown in Homepage
-		} catch (SQLException | ClassNotFoundException | ParseException e) {
-			Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
+		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) hpPane.getScene().getWindow());
 		}
 	}
@@ -38,10 +38,11 @@ public class HomepageController {
 		User user = (User) AccountDAO.getInstance().getAccountObject();
 		try {
 			if (ads != null)
-				for (int i = 0; i < ads.length; i++) {	
-					boolean isFavourite = adDao.checkIsFavouriteAd(ads[i].getId(),user.getUsername());
-					AdUComponent adComp = new AdUComponent(ads[i].getTitle(), ads[i].getDescription(), user.getUsername(), ads[i].getType().toString(), ads[i].getPrice(), ads[i].getCategory().toString(), isFavourite);
-					adComp.setId(ads[i].getId());
+				for (int i = 0; i < ads.length; i++) {
+					boolean isFavourite = adDao.checkIsFavouriteAd(ads[i].getId(), user.getUsername());
+					AdBean adBean = new AdBean(ads[i]);
+					adBean.setFavourite(isFavourite);
+					AdUComponent adComp = new AdUComponent(adBean);
 					adComp.setY(AdComponent.HEIGHT * i);
 					pane.getChildren().add(adComp.getAdComponent()); // aggiungiamo l'adComponent allo scrollpane
 				}
@@ -53,8 +54,7 @@ public class HomepageController {
 				tmp.setPrefWidth(585);
 				pane.getChildren().add(tmp);
 			}
-		} catch (SQLException | ClassNotFoundException e) {
-			Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
+		} catch (SQLException e) {
 			new ErrorPopup(e.getMessage(), (Stage) hpPane.getScene().getWindow());
 		}
 	}

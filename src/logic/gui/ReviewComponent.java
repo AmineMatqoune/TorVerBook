@@ -3,7 +3,7 @@ package logic.gui;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-import logic.stuff.Review;
+import logic.bean.ReviewBean;
 
 public class ReviewComponent {
 	
@@ -15,7 +15,7 @@ public class ReviewComponent {
 	private static String textFont = "Arial";
 	private static String bgColor = "-fx-background-color: #024a00";
 	
-	public ReviewComponent(Review review) {
+	public ReviewComponent(ReviewBean bean) {
 		pane = new Pane();
 		
 		pane.setPrefWidth(550);
@@ -28,7 +28,7 @@ public class ReviewComponent {
 		backgroundPaneLabel.setOpacity(0.25);
         pane.getChildren().add(backgroundPaneLabel);
         
-        Label label1 = new Label("Review by: " + review.getWriter());
+        Label label1 = new Label("Review by: " + bean.getWriter());
         label1.setFont(new Font(textFont, 24));
         label1.setLayoutX(10);
         label1.setLayoutY(10);
@@ -43,7 +43,7 @@ public class ReviewComponent {
         label2.setOpacity(0.5);
         pane.getChildren().add(label2);
         
-        Label textLabel = new Label(review.getText());
+        Label textLabel = new Label(bean.getText());
         textLabel.setWrapText(true);
         textLabel.setPrefWidth(420);
         textLabel.setPrefHeight(100);
@@ -65,7 +65,7 @@ public class ReviewComponent {
         label4.setLayoutY(45);
         pane.getChildren().add(label4);
         
-        Label label5 = new Label(review.getRank());
+        Label label5 = new Label(bean.getRank());
         label5.setLayoutX(474);
         label5.setLayoutY(69);
         pane.getChildren().add(label5);

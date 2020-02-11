@@ -77,8 +77,8 @@ public interface QueriesGenerator {
 		return "SELECT * FROM Ad WHERE User = '" + username + "' ORDER BY Date DESC";
 	}
 
-	public static String getUpdateReviewStateCommand(String writer, String receiver) {
-		return "UPDATE Review SET (isConvalidated, RuleChecker) = (TRUE, '@CarloRossi') WHERE WriterUser = '" + writer
+	public static String getUpdateReviewStateCommand(String writer, String receiver, String rulechecker) {
+		return "UPDATE Review SET isConvalidated = TRUE, RuleChecker = '" + rulechecker + "' WHERE WriterUser = '" + writer
 				+ "' AND ReceiverUser = '" + receiver + "';";
 	}
 

@@ -13,17 +13,17 @@ public class ReviewDAO {
 	private static ReviewDAO instance = null;
 	private DBManager dbManager;
 	
-	private ReviewDAO() throws ClassNotFoundException, SQLException {
+	private ReviewDAO() {
 		dbManager = DBManager.getInstance();
 	}
 	
 	/*metodo aggiunto per prendere le review dell'utente*/
-	public Review[] loadMyReview(User user) throws SQLException, ClassNotFoundException, ParseException {
+	public Review[] loadMyReview(User user) throws SQLException, ParseException {
 		ResultSet result = dbManager.getMyReview(user.getUsername());
 		return fetchReview(result);
 	}
 	
-	public Review[] loadRCReview() throws SQLException, ClassNotFoundException, ParseException {
+	public Review[] loadRCReview() throws SQLException, ParseException {
 		ResultSet result = dbManager.getRCReview();
 		return fetchReview(result);
 	}
@@ -53,16 +53,16 @@ public class ReviewDAO {
 	}
 	
 	/*metodo aggiunto: per oggetti ReviewRCComponent quando si preme su check.png*/
-	public boolean validateReview(Review review) throws ClassNotFoundException, SQLException {
-		return dbManager.updateReviewState(review.getWriter(), review.getReceiver());
+	public boolean validateReview(String writer, String receiver, String rulechecker) throws SQLException {
+		return dbManager.updateReviewState(writer, receiver, rulechecker);
 	}
 	
 	/*metodo aggiunto: per oggetti ReviewRCComponent quando si preme su close.png*/
-	public boolean setDeleteReview(Review review) throws ClassNotFoundException, SQLException {
-		return dbManager.deleteRCReview(review.getWriter(), review.getReceiver());
+	public boolean setDeleteReview(String writer, String receiver) throws SQLException {
+		return dbManager.deleteRCReview(writer, receiver);
 	}
 	
-	public static ReviewDAO getInstance() throws ClassNotFoundException, SQLException {
+	public static ReviewDAO getInstance() {
 		if (instance == null)
 			instance = new ReviewDAO();
 		return instance;

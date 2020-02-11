@@ -21,7 +21,7 @@ public class AddAdController {
 			
 			AdDAO adDAO = AdDAO.getInstance();
 			return adDAO.createNewAd();
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) AddAdScene.getInstance().getScene().getWindow());
 		}
 		return true;

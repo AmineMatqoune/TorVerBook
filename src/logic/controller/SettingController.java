@@ -40,7 +40,7 @@ public class SettingController {
 
 			// aggiorno database
 			accountDao.updateAccountInfo(tempAccount);
-		} catch (ClassNotFoundException | SQLException | ParseException e) {
+		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) SettingScene.getInstance().getScene().getWindow());
 		}
 		return true;
