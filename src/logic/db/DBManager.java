@@ -37,6 +37,11 @@ public class DBManager {
 		return !stmt.execute(QueriesGenerator.getSignUpCommand(userObj));
 	}
 
+	public ResultSet getSearchAds(String category, String type, double price) throws SQLException {
+		init();
+		return stmt.executeQuery(QueriesGenerator.getSearchListAds(category, type, price));
+	}
+	
 	public boolean updateAccountInfo(Account accountObj, AccountType accountType, String actualUsername) throws SQLException {
 		init();
 		if (accountType == AccountType.RULE_CHECKER) {
@@ -44,7 +49,6 @@ public class DBManager {
 		} else {
 			return !stmt.execute(QueriesGenerator.getUpdateUserInfoCommand(accountObj, actualUsername));
 		}
-
 	}
 
 	public ResultSet getHomepageAds() throws SQLException {

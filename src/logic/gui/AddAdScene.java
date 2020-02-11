@@ -1,5 +1,7 @@
 package logic.gui;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 import javafx.geometry.Pos;
@@ -11,6 +13,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -18,13 +22,13 @@ import javafx.stage.Stage;
 import logic.ad.AdCategory;
 import logic.ad.AdType;
 import logic.controller.AddAdController;
+import logic.gui.popup.ErrorPopup;
 import logic.gui.popup.InfoPopup;
 import logic.highlight.HighlightType;
 
 public class AddAdScene extends DashBoardScene{
 	
 	private AddAdController addAdController = new AddAdController();
-	
 	private static AddAdScene instance = null;
 	
 	private TextField adTitleField;
@@ -157,6 +161,18 @@ public class AddAdScene extends DashBoardScene{
 		highlightBox.getItems().setAll(HighlightType.values());
 		centralPane.getChildren().add(highlightBox);
 		
+		try {
+			FileInputStream input = new FileInputStream("img/information.png");
+			Image image = new Image(input);
+	        ImageView imageView = new ImageView(image);
+	        imageView.setLayoutX(394);
+	        imageView.setLayoutY(442);
+	        imageView.setOnMouseClicked(event -> new InfoPopup("Highlight Price Per Day:\n1) BASE - 0\n2) MEDIUM - 1\n3) SUPER - 2", (Stage) centralPane.getScene().getWindow()));
+	        centralPane.getChildren().add(imageView);
+		} catch (FileNotFoundException e) {
+			new ErrorPopup(e.getMessage(), (Stage)centralPane.getScene().getWindow());
+		}
+		
 		Label label8 = new Label("From");
 		label8.setLayoutX(30);
 		label8.setLayoutY(479);
@@ -195,8 +211,9 @@ public class AddAdScene extends DashBoardScene{
 	}
 
 	private void addAd() {
-		if(addAdController.addAd()) 
+		if(addAdController.addAd()) {
 			new InfoPopup("La tua richiesta di inserimento è stata inviata!\nAttendere la conferma dei nostri moderatori, dopodichè l'annuncio sarà visibile sulla bacheca" , (Stage)scene.getWindow());
+		}
 		else 
 			new InfoPopup("Qualcosa è andato storto, verifica di aver inserito correttamente tutte le informazioni.", (Stage) scene.getWindow());
 	}

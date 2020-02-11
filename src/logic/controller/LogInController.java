@@ -8,6 +8,7 @@ import logic.account.AccountType;
 import logic.dao.AccountDAO;
 import logic.gui.LogInScene;
 import logic.gui.popup.ErrorPopup;
+import logic.gui.popup.InfoPopup;
 
 public class LogInController {
 	
@@ -26,6 +27,8 @@ public class LogInController {
 					loadRCHomepage();
 					return true;
 				}				
+			} else {
+				new InfoPopup("Account bannato!",  (Stage) LogInScene.getInstance().getScene().getWindow());
 			}
 		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());

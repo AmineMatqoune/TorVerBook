@@ -23,9 +23,6 @@ public class AccountDAO {
 	private ResultSet result;
 	private AccountType accountType;
 
-	private AccountDAO() {
-	}
-
 	// login case
 	public boolean logIn(String username, String password) throws SQLException, ParseException {
 		dbManager = DBManager.getInstance();
@@ -37,8 +34,7 @@ public class AccountDAO {
 		}
 		// if exists 1 row in result, then we succesfully logged in
 		if (result.first()) {
-			createAccountObject();
-			return true;
+			return createAccountObject();
 		}
 		return false;
 	}
@@ -51,7 +47,7 @@ public class AccountDAO {
 		}
 	}
 
-	private void createAccountObject() throws SQLException, ParseException {
+	private boolean createAccountObject() throws SQLException, ParseException {
 		// creazione dell'effettivo oggetto User/Rule Checker
 		if (accountType == USER) {
 			User user = new User(result.getString("Name"), result.getString("Surname"), result.getString("Username"),
@@ -60,7 +56,10 @@ public class AccountDAO {
 			user.setBirthDate(result.getString("Birthdate"));
 			user.setMoney(result.getInt("Money"));
 			user.setNumViolations(result.getInt("NumViolations"));
+			user.setStatus(result.getInt("isBanned"));
 			currentAccount = user;
+			if(user.isBanned())
+				return false;
 		} else if (accountType == RULE_CHECKER) {
 			RuleChecker ruleChecker = new RuleChecker(result.getString("Name"), result.getString("Surname"),
 					result.getString("Username"), result.getString("Email"), result.getString("Password"));
@@ -71,6 +70,7 @@ public class AccountDAO {
 			ruleChecker.setworkFinishTime(LocalDate.parse(result.getString("WorkFinishTime")));
 			currentAccount = ruleChecker;
 		}
+		return true;
 	}
 
 	public void updateAccountInfo(Account modifiedAccount) throws SQLException {

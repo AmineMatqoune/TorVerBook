@@ -54,7 +54,12 @@ public interface QueriesGenerator {
 				+ "PhoneNumber = '" + account.getPhoneNumber() + "', Email = '" + account.getEmail() + "', Password = '"
 				+ account.getPassword() + "' WHERE Username = '" + actualUsername + "';";
 	}
-	
+
+	public static String getSearchListAds(String category, String type, double price) {
+		return "SELECT * FROM Ad WHERE Course = '" + category + "' AND Type = '" + type + "' AND Price < " + price
+				+ ";";
+	}
+
 	public static String getLatestMessagesQuery(User srcUser, User dstUser, int maxNumberOfMessages) {
 		/* CONDITION FIELDS: [WRITERUSER] [RECEIVERUSER] */
 		/* QUERY FIELDS: [QUERY_LIMIT] */
@@ -68,9 +73,9 @@ public interface QueriesGenerator {
 				+ dstUser.getUsername() + "'," + message.getText() + "'," + DateAndTimeUtils.getTimeString() + ",'"
 				+ DateAndTimeUtils.getDateString() + "')";
 	}
-	
+
 	public static String checkIsFavourite(long adId, String username) {
-		return "SELECT * FROM FavouriteList where ID_Ad = " + adId + " AND User = '" + username +"';" ;
+		return "SELECT * FROM FavouriteList where ID_Ad = " + adId + " AND User = '" + username + "';";
 	}
 
 	public static String getMyAdsQuery(String username) {
@@ -78,8 +83,8 @@ public interface QueriesGenerator {
 	}
 
 	public static String getUpdateReviewStateCommand(String writer, String receiver, String rulechecker) {
-		return "UPDATE Review SET isConvalidated = TRUE, RuleChecker = '" + rulechecker + "' WHERE WriterUser = '" + writer
-				+ "' AND ReceiverUser = '" + receiver + "';";
+		return "UPDATE Review SET isConvalidated = TRUE, RuleChecker = '" + rulechecker + "' WHERE WriterUser = '"
+				+ writer + "' AND ReceiverUser = '" + receiver + "';";
 	}
 
 	public static String getDeleteReviewCommand(String writer, String receiver) {
@@ -100,7 +105,7 @@ public interface QueriesGenerator {
 	public static String getAddAdToFavouriteListCommand(long id, String username) {
 		return "INSERT INTO FavouriteList VALUES ('" + id + "', '" + username + "');";
 	}
-	
+
 	public static String getRemoveAdFromFavouriteListCommand(long id, String currentUser) {
 		return "DELETE FROM FavouriteList WHERE ID_Ad = " + id + " AND User = '" + currentUser + "';";
 	}
@@ -114,7 +119,8 @@ public interface QueriesGenerator {
 	}
 
 	public static String getBannedCommand(String username) {
-		return "UPDATE User SET isBanned = TRUE WHERE Username = '" + username + "';";
+		return "UPDATE User SET isBanned = TRUE AND NumViolations = NumViolations + 1 WHERE Username = '" + username
+				+ "';";
 	}
 
 	public static String getIncNumViolationsCommand(String username, int violations) {
@@ -127,16 +133,16 @@ public interface QueriesGenerator {
 				+ "', '" + ad.getPrice() + "', '" + ad.getCategory().toString() + "', '" + ad.getType().toString()
 				+ "', '" + ad.getQuantity() + "', '" + ad.getStartHighlightStr() + "', '" + ad.getFinishHighlightStr()
 				+ "', '" + ad.getHighlightTypeStr() + "', '" + ad.getMyUserStr() + "', NULL);";
-	}	
-	
+	}
+
 	public static String getUpdateAdStateCommand(long id) {
 		return "UPDATE Ad SET isConvalidated = TRUE WHERE ID = " + id;
 	}
-	
+
 	public static String getDeleteAdCommand(long id) {
 		return "DELETE FROM Ad WHERE ID = " + id;
 	}
-	
+
 	public static String getMarkAsSoldCommand(long id) {
 		return "UPDATE Ad SET Quantity = Quantity - 1 WHERE ID = " + id;
 	}

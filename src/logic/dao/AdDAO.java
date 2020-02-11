@@ -35,6 +35,12 @@ public class AdDAO {
 		return tmp;
 	}
 	
+	public Ad[] loadSearchAd(String category, String type, double price) throws ParseException, SQLException {
+		ResultSet result = dbManager.getSearchAds(category, type, price);
+		return fetchAd(result);
+	}
+	
+	
 	public Ad[] loadRCAd() throws SQLException, ParseException {
 		ResultSet result = dbManager.getRCAd();
 		return fetchAd(result);
@@ -111,9 +117,10 @@ public class AdDAO {
 	
 	public boolean createNewAd() throws SQLException, ParseException {
 		AddAdBean addAdBean = new AddAdBean();
+		User user = (User) AccountDAO.getInstance().getAccountObject();
 		
 		//we create a temporary Ad object (ID = 0), once we added it to bd, we can update his real ID
-		Ad ad = new Ad(AccountDAO.getInstance().getAccountObject().getUsername(), 0); 
+		Ad ad = new Ad(user.getUsername(), 0); 
 		ad.setDate(LocalDate.now().toString());
 		ad.setDescription(addAdBean.getDescription());
 		ad.setTitle(addAdBean.getTitle());
@@ -124,7 +131,11 @@ public class AdDAO {
 		ad.setStartHighlight(addAdBean.getStartHighlight());
 		ad.setFinishHighlight(addAdBean.getFinishHighlight());
 		ad.setHighlight(addAdBean.getHighlight());
-		return dbManager.addAd(ad);
+		if(dbManager.addAd(ad)) {                                   //se l'inserimento nel db va a buon fine, aggiungi l'ad all'oggetto user
+			user.addAd(ad);
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean addAdToFavouriteList(long id) throws SQLException {
@@ -147,8 +158,10 @@ public class AdDAO {
 	
 	public boolean markAsSold(long id) throws SQLException {
 		User user = (User) AccountDAO.getInstance().getAccountObject();
-		user.markAsSold(id);
-		return dbManager.markAsSold(id);
+		if(user.markAsSold(id))
+			return dbManager.markAsSold(id);
+		else
+			return dbManager.deleteAd(id);
 	}
 	
 	public static AdDAO getInstance() throws SQLException {

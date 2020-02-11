@@ -19,7 +19,7 @@ public class SettingScene extends DashBoardScene {
 	private SettingController settingController = new SettingController();
 	private SettingsBean settingsBean;
 
-	private static final String TEXT_FONT = "Arial";
+	private static final String TEXT_FONT = "Arial Bold";
 
 	private TextField nameField;
 	private TextField surnameField;

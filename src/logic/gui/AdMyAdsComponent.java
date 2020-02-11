@@ -23,14 +23,14 @@ public class AdMyAdsComponent extends AdComponent{
 		deletePane.setPrefSize(60, 60);
 		deletePane.setLayoutX(540);
 		deletePane.setLayoutY(0);
-		deletePane.setStyle("-fx-background-color: #f44336");
+		deletePane.setStyle("-fx-background-color: #F44336");
 		pane.getChildren().add(deletePane);
 		
 		Pane markAsSold = new Pane();
 		markAsSold.setPrefSize(60, 60);
 		markAsSold.setLayoutX(540);
 		markAsSold.setLayoutY(60);
-		markAsSold.setStyle("-fx-background-color: #f44336");
+		markAsSold.setStyle("-fx-background-color: #32CD32");
 		pane.getChildren().add(markAsSold);
 		
 		try {
@@ -58,8 +58,8 @@ public class AdMyAdsComponent extends AdComponent{
 		try {
 			if(AdDAO.getInstance().deleteAd(id)) {
 				new InfoPopup("Annuncio cancellato correttamente!", (Stage)pane.getScene().getWindow());
-				MyAdsScene adScene = MyAdsScene.getInstance();
-				adScene.refresh();
+				/*MyAdsScene adScene = MyAdsScene.getInstance();
+				adScene.refresh();*/
 			} else {
 				new InfoPopup("Ops! Qualcosa è andato storto!", (Stage)pane.getScene().getWindow());
 			}
@@ -71,6 +71,7 @@ public class AdMyAdsComponent extends AdComponent{
 	private void markAsSold() {
 		try {
 			AdDAO.getInstance().markAsSold(id);
+			new InfoPopup("Ottimo! Hai venduto 1 annuncio, continua così!", (Stage)pane.getScene().getWindow());
 		} catch (SQLException e) {
 			new ErrorPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 		} 

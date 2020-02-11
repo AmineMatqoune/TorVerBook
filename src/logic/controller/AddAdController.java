@@ -24,7 +24,7 @@ public class AddAdController {
 		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) AddAdScene.getInstance().getScene().getWindow());
 		}
-		return true;
+		return false;
 	}
 	
 	public LocalDate getTodayDate() {

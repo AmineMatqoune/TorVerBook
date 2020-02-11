@@ -35,6 +35,7 @@ public class HomepageController {
 	}
 
 	public void attachAdsTo(Pane pane) {
+		hpPane = pane;
 		User user = (User) AccountDAO.getInstance().getAccountObject();
 		try {
 			if (ads != null)
@@ -55,6 +56,31 @@ public class HomepageController {
 				pane.getChildren().add(tmp);
 			}
 		} catch (SQLException e) {
+			new ErrorPopup(e.getMessage(), (Stage) hpPane.getScene().getWindow());
+		}
+	}
+	
+	public void searchList(String category, String type, double price) {
+		try {
+			Ad[] searchAds = adDao.loadSearchAd(category, type, price);
+			hpPane.getChildren().clear();
+			if (searchAds != null)
+				for (int i = 0; i < searchAds.length; i++) {
+					boolean isFavourite = adDao.checkIsFavouriteAd(searchAds[i].getId(), searchAds[i].getMyUserStr());
+					AdBean adBean = new AdBean(searchAds[i]);
+					AdUComponent adComp = new AdUComponent(adBean);
+					adComp.setY(AdComponent.HEIGHT * i);
+					hpPane.getChildren().add(adComp.getAdComponent()); // aggiungiamo l'adComponent allo scrollpane
+			}
+			else {
+				Label tmp = new Label("Empty List!");
+				tmp.setFont(new Font("Arial Bold", 50));
+				tmp.setAlignment(Pos.CENTER);
+				tmp.setPrefHeight(230);
+				tmp.setPrefWidth(585);
+				hpPane.getChildren().add(tmp);
+			}
+		} catch (ParseException | SQLException e) {
 			new ErrorPopup(e.getMessage(), (Stage) hpPane.getScene().getWindow());
 		}
 	}
