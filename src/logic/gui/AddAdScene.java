@@ -138,7 +138,7 @@ public class AddAdScene extends DashBoardScene{
 		centralPane.getChildren().add(label6);
 		
 		collegeBox = new ChoiceBox <> ();
-		collegeBox.setValue(AdCategory.UNKNOWN);
+		collegeBox.setValue(AdCategory.ANY);
 		collegeBox.setLayoutX(221);
 		collegeBox.setLayoutY(406);
 		collegeBox.setPrefHeight(25);
