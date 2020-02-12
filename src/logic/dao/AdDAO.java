@@ -28,7 +28,7 @@ public class AdDAO {
 		ResultSet result = dbManager.getMyAds(user.getUsername());
 		Ad[] tmp = fetchAd(result);
 		
-		//bind tra Ad e User
+		//bind tra Ad e User 
 		if(tmp != null)
 			for(int i = 0; i < tmp.length; i++)
 				tmp[i].setMyUserObj(user);

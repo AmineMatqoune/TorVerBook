@@ -40,7 +40,7 @@ public class GUIController {
 	}
 	
 	public void setHomepageScene(Stage stage) {
-		homepage = HomepageScene.getInstance();
+		homepage = HomepageScene.getInstance(); 
 		stage.setScene(homepage.getScene());
 	}
 	

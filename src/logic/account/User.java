@@ -9,13 +9,13 @@ import java.util.Date;
 import logic.ad.Ad;
 import logic.dao.AdDAO;
 import logic.dao.ReviewDAO;
-import logic.stuff.Message;
-import logic.stuff.Review;
+import logic.message.Message;
+import logic.review.Review;
 
 public final class User extends Account {
 
 	// User's account info
-	private boolean isBanned = false;
+	private boolean isBanned = false; 
 	private int numViolations;
 	private int money;
 
@@ -73,14 +73,6 @@ public final class User extends Account {
 		Ad[] newFavouriteList = Arrays.copyOf(favouriteAds, favouriteAds.length + 1);
 		newFavouriteList[favouriteAds.length] = ad;
 		favouriteAds = newFavouriteList;
-	}
-
-	private void addRelatedUser(User u) {
-		if (relatedUser == null) {
-			// relatedUser = new ArrayList<>();
-		}
-
-		// relatedUser.add(u);
 	}
 
 	public void deleteAd(long id) {

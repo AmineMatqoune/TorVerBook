@@ -1,12 +1,10 @@
 package logic.account;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import logic.ad.Ad;
-import logic.stuff.Review;
+import logic.review.Review;
 
 public final class RuleChecker extends Account {
 
@@ -24,19 +22,6 @@ public final class RuleChecker extends Account {
 	public RuleChecker(String name, String surname, String username, String email, String pwdHash) {
 		super(name, surname, username, email, pwdHash);
 		loadOwnInfo();
-		loadAds();
-		loadReviews();
-	}
-
-	public void loadAds() {
-		if (listAd == null)
-			listAd = new ArrayList<>();
-		// ...
-	}
-
-	public void loadReviews() {
-		if (listReview == null)
-			listReview = new ArrayList<>();
 	}
 
 	public void loadOwnInfo() {
@@ -52,7 +37,7 @@ public final class RuleChecker extends Account {
 	}
 
 	public void banUser(User u) {
-
+		
 	}
 
 	public List<Ad> getListAd() {

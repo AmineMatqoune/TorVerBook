@@ -73,6 +73,7 @@ public abstract class BaseScene {
     }
 	
 	public void changeLanguage() { //apply observer GoF
+		System.out.println();
 		if(languageButton.getText().equals("ITA"))
 			languageButton.setText("ENG");
 		else

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import logic.account.Account;
 import logic.account.User;
 import logic.ad.Ad;
-import logic.stuff.Message;
+import logic.message.Message;
 import logic.utils.DateAndTimeUtils;
 
 /* DOC. TIPS:: Fields Types Are (CONDITION:SELECT,INSERT,UPDATE,QUERY) */

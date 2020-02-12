@@ -1,4 +1,4 @@
-package logic.stuff;
+package logic.message;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

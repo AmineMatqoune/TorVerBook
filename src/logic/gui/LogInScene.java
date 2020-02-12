@@ -82,7 +82,7 @@ public class LogInScene extends BaseScene{
         signUpButton.setOnAction(event -> 
         	loadSignUp()
         );
-        pane.getChildren().add(signUpButton);
+        pane.getChildren().add(signUpButton); 
         
         errorUsername = new Label();
         errorUsername.setFont(new Font(TEXT_FONT, 15));
@@ -106,6 +106,8 @@ public class LogInScene extends BaseScene{
 	private void attemptLogin() {
 		if(usernameField.getText().equals("") || passwordField.getText().equals("") || !loginController.checkLogin(usernameField.getText(), passwordField.getText()))
 			notifyInputError();
+		else
+			loginController.loadHomepage();
 	}
 	
 	private void loadSignUp() {

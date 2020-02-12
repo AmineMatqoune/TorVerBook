@@ -1,10 +1,9 @@
 package logic.dao;
 
 import java.sql.ResultSet;
-
 import logic.account.User;
 import logic.db.DBManager;
-import logic.stuff.Message;
+import logic.message.Message;
 
 public class MessagesDAO {
 

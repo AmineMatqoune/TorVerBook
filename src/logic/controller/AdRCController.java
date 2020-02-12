@@ -1,9 +1,8 @@
 package logic.controller;
 
 import java.sql.SQLException;
+
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -83,7 +82,7 @@ public class AdRCController {
 				}
 			}
 		} catch (SQLException e) {
-			Logger.getLogger("Problemi con deleteAd").log(Level.SEVERE, e.getMessage());
+			new ErrorPopup(e.getMessage(), (Stage) scenePane.getScene().getWindow());
 		}
 	}
 

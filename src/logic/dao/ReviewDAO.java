@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import logic.db.DBManager;
-import logic.stuff.Review;
+import logic.review.Review;
 
 public class ReviewDAO {
 	

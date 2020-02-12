@@ -9,7 +9,7 @@ import logic.dao.ReviewDAO;
 import logic.bean.ReviewBean;
 import logic.dao.AccountDAO;
 import logic.gui.rc.ReviewRCComponent;
-import logic.stuff.Review;
+import logic.review.Review;
 
 public class ReviewRCController {
 	

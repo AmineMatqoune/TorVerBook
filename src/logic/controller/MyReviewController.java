@@ -8,7 +8,7 @@ import logic.account.User;
 import logic.bean.ReviewBean;
 import logic.dao.AccountDAO;
 import logic.gui.ReviewComponent;
-import logic.stuff.Review;
+import logic.review.Review;
 
 public class MyReviewController {
 	

@@ -22,10 +22,12 @@ public class AccountDAO {
 	private Account currentAccount;
 	private ResultSet result;
 	private AccountType accountType;
+	private String errorMessage = "";
 
 	// login case
 	public boolean logIn(String username, String password) throws SQLException, ParseException {
 		dbManager = DBManager.getInstance();
+		errorMessage = "";
 		accountType = getAccountTypeByPrefix(username);
 		if (accountType == USER) {
 			result = dbManager.userLogIn(username, password);
@@ -34,7 +36,7 @@ public class AccountDAO {
 		}
 		// if exists 1 row in result, then we succesfully logged in
 		if (result.first()) {
-			return createAccountObject();
+			return createAccountObject(); 
 		}
 		return false;
 	}
@@ -58,8 +60,10 @@ public class AccountDAO {
 			user.setNumViolations(result.getInt("NumViolations"));
 			user.setStatus(result.getInt("isBanned"));
 			currentAccount = user;
-			if(user.isBanned())
+			if(user.isBanned()) {
+				errorMessage = "USER_BANNED";System.out.println("errorMessage = " + errorMessage);
 				return false;
+			}
 		} else if (accountType == RULE_CHECKER) {
 			RuleChecker ruleChecker = new RuleChecker(result.getString("Name"), result.getString("Surname"),
 					result.getString("Username"), result.getString("Email"), result.getString("Password"));
@@ -113,11 +117,15 @@ public class AccountDAO {
 		return instance;
 	}
 
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+	
 	public AccountType getAccountType() {
 		return accountType;
 	}
 
-	private AccountType getAccountTypeByPrefix(String username) {
+	public AccountType getAccountTypeByPrefix(String username) {
 		final String prefixFlag = "@";
 		return username.startsWith(prefixFlag) ? RULE_CHECKER : USER;
 	}
