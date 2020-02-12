@@ -134,7 +134,6 @@ public class HomepageScene extends DashBoardScene {
 		}
 
 		Pane componentPane = new Pane();
-		componentPane.setPrefSize(600, 500);
 		componentPane.setLayoutY(100);
 		centralPane.getChildren().add(componentPane);
 
