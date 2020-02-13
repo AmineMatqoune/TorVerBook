@@ -93,6 +93,6 @@ public class AdRCController {
 				break;
 			i++;
 		}
-		return ads[i].getMyUserStr();
+		return ads[i].getOwnerUsername();
 	}
 }

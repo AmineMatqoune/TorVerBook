@@ -10,7 +10,7 @@ public class ReviewComponent {
 	protected Pane pane;
 	protected Label backgroundPaneLabel;
 	protected int height = 150;
-	protected int width = 550;
+	protected int width = 600;
 	
 	private static String textFont = "Arial";
 	private static String bgColor = "-fx-background-color: #024a00";

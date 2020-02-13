@@ -1,6 +1,8 @@
 package logic.gui;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,8 +18,8 @@ public class AdComponent {
 	private int thickness;
 	private String adStyle;
 
-	public static final int WIDTH = 585;
-	public static final int HEIGHT = 350;
+	public static final int WIDTH = 600;
+	public static final int HEIGHT = 380;
 	public static final String HEADER = " Bold";
 
 	public AdComponent(AdBean adBean) {
@@ -41,14 +43,15 @@ public class AdComponent {
 		pane = new Pane();
 		pane.setStyle(rgbBackgroundColor);
 		pane.setPrefWidth(WIDTH);
-		pane.setPrefHeight(HEIGHT);
-
+		pane.setPadding(new Insets(0,0,50,0));
+		
 		Label titleLabel = new Label(adBean.getTitle());
 		titleLabel.setTextFill(adBean.getTextColor());
 		titleLabel.setAlignment(Pos.CENTER);
 		titleLabel.setFont(new Font(textfont + HEADER, (thickness + 10)));
 		titleLabel.setPrefWidth(WIDTH);
 		titleLabel.setPrefHeight(40);
+		titleLabel.setPadding(new Insets(20,0,0,0));
 		pane.getChildren().add(titleLabel);
 
 		Label descriptionHeader = new Label("Description");
@@ -74,6 +77,7 @@ public class AdComponent {
 		descriptionLabel.setPrefHeight(256);
 		descriptionLabel.setAlignment(Pos.TOP_CENTER);
 		descriptionLabel.setWrapText(true);
+		descriptionLabel.setPadding(new Insets(20));
 		descPane.getChildren().add(descriptionLabel);
 
 		Label ownerUsernameLabel = new Label("By " + adBean.getUsername());
@@ -118,6 +122,9 @@ public class AdComponent {
 		label10.setFont(new Font(textfont, thickness));
 		label10.setLayoutX(35);
 		label10.setLayoutY(200);
+		label10.setCursor(Cursor.HAND);
+		label10.setPadding(new Insets(5));
+		
 		infoAdPane.getChildren().add(label10);
 	}
 
@@ -126,7 +133,7 @@ public class AdComponent {
 	}
 
 	public int getHeight() {
-		return HEIGHT;
+		return (int) pane.getHeight();
 	}
 
 	public Pane getAdComponent() {

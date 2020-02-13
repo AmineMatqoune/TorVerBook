@@ -132,7 +132,7 @@ public interface QueriesGenerator {
 				+ "VALUES ('" + LocalDate.now().toString() + "', '" + ad.getDescription() + "', '" + ad.getTitle()
 				+ "', '" + ad.getPrice() + "', '" + ad.getCategory().toString() + "', '" + ad.getType().toString()
 				+ "', '" + ad.getQuantity() + "', '" + ad.getStartHighlightStr() + "', '" + ad.getFinishHighlightStr()
-				+ "', '" + ad.getHighlightTypeStr() + "', '" + ad.getMyUserStr() + "', NULL);";
+				+ "', '" + ad.getHighlightTypeStr() + "', '" + ad.getOwnerUsername() + "', NULL);";
 	}
 
 	public static String getUpdateAdStateCommand(long id) {

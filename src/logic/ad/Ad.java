@@ -33,7 +33,8 @@ public final class Ad {
 	private boolean isConvalidated;
 	private Highlight myHighlight;
 
-	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	private static final String DATE_STRING_FORMAT = "yyyy-MM-dd";
+	private final SimpleDateFormat format = new SimpleDateFormat(DATE_STRING_FORMAT);
 
 	public Ad(User owner, long id) {
 		myUser = owner;
@@ -48,7 +49,7 @@ public final class Ad {
 	}
 
 	// getters()
-	public String getMyUserStr() {
+	public String getOwnerUsername() {
 		return myUserStr;
 	}
 
@@ -88,9 +89,6 @@ public final class Ad {
 		return this.type;
 	}
 
-	public String getOwnerUsername() {
-		return myUserStr;
-	}
 
 	// Highlight attribute
 	public Color getBackgroundColor() {
@@ -114,12 +112,12 @@ public final class Ad {
 	}
 
 	public String getStartHighlightStr() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat(DATE_STRING_FORMAT);
 		return formatter.format(startDateHighlight);
 	}
 
 	public String getFinishHighlightStr() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat(DATE_STRING_FORMAT);
 		return formatter.format(finishDateHighlight);
 	}
 

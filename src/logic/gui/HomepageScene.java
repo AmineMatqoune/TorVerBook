@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -86,32 +87,32 @@ public class HomepageScene extends DashBoardScene {
 		currentMaxPrice.setTextFill(Color.WHITE);
 		currentMaxPrice.setFont(new Font(FONT, 15));
 		priceFilterContainer.getChildren().add(currentMaxPrice);
-//		priceLabel.setLayoutX(375);
-//		priceLabel.setLayoutY(25);
 		searchPane.getChildren().add(priceFilterContainer);
 
+		
+		final int SLIDER_MIN = 1;
+		final int SLIDER_MAX = 100;
+		final int SLIDER_INIT = 50;
+		
 		slider = new Slider();
 		slider.setLayoutX(375);
 		slider.setLayoutY(50);
-		slider.setMax(100);
-		slider.setMin(1);
-		EventHandler<Event> currentPriceUpdateEvent = new EventHandler<Event>() {
-			@Override
-			public void handle(Event event) {
-				currentMaxPrice.setText(Integer.toString((int) slider.getValue()));
-			}
-		};
+		slider.setMin(SLIDER_MIN);
+		slider.setMax(SLIDER_MAX);
+		slider.setValue(SLIDER_INIT);
+		EventHandler<Event> currentPriceUpdateEvent = event -> currentMaxPrice
+				.setText(Integer.toString((int) slider.getValue()));
 		slider.setOnMouseDragged(currentPriceUpdateEvent);
 		slider.setOnMouseReleased(currentPriceUpdateEvent);
 		searchPane.getChildren().add(slider);
 
-		Label label1 = new Label("1");
+		Label label1 = new Label(Integer.toString(SLIDER_MIN));
 		label1.setTextFill(Color.WHITE);
 		label1.setLayoutX(372);
 		label1.setLayoutY(65);
 		searchPane.getChildren().add(label1);
 
-		Label label100 = new Label("100");
+		Label label100 = new Label(Integer.toString(SLIDER_MAX));
 		label100.setTextFill(Color.WHITE);
 		label100.setLayoutX(505);
 		label100.setLayoutY(65);
@@ -121,6 +122,7 @@ public class HomepageScene extends DashBoardScene {
 		imagePane.setPrefSize(50, 50);
 		imagePane.setLayoutX(530);
 		imagePane.setLayoutY(25);
+		imagePane.setCursor(Cursor.HAND);
 		imagePane.setOnMouseReleased(event -> search());
 		searchPane.getChildren().add(imagePane);
 
@@ -133,11 +135,11 @@ public class HomepageScene extends DashBoardScene {
 			new ErrorPopup(e.getMessage(), (Stage) centralPane.getScene().getWindow());
 		}
 
-		Pane componentPane = new Pane();
-		componentPane.setLayoutY(100);
-		centralPane.getChildren().add(componentPane);
+		Pane adComponentsPane = new Pane();
+		adComponentsPane.setLayoutY(100);
+		centralPane.getChildren().add(adComponentsPane);
 
-		hpController.attachAdsTo(componentPane);
+		hpController.attachAdsTo(adComponentsPane);
 	}
 
 	private void search() {

@@ -78,7 +78,7 @@ public class HomepageController {
 			hpPane.getChildren().clear();
 			if (searchAds != null)
 				for (int i = 0; i < searchAds.length; i++) {
-					boolean isFavourite = adDao.checkIsFavouriteAd(searchAds[i].getId(), searchAds[i].getMyUserStr());
+					boolean isFavourite = adDao.checkIsFavouriteAd(searchAds[i].getId(), searchAds[i].getOwnerUsername());
 					AdBean adBean = new AdBean(searchAds[i]);
 					adBean.setFavourite(isFavourite);
 					AdUComponent adComp = new AdUComponent(adBean);
