@@ -62,6 +62,12 @@ public class ReviewDAO {
 		return dbManager.deleteRCReview(writer, receiver);
 	}
 	
+	public Float getAverage(String username) throws SQLException {
+		ResultSet result = dbManager.getAverageRank(username);
+		result.next();
+		return result.getFloat("Media");
+	}
+	
 	public static ReviewDAO getInstance() {
 		if (instance == null)
 			instance = new ReviewDAO();

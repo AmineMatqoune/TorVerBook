@@ -17,40 +17,30 @@ public class GUIController {
 	
 	private static GUIController instance = null;
 	
-	private LogInScene login;
-	private SignUpScene signup;
-	private HomepageScene homepage;
-	private MyReviewScene myReview;
-	private SettingScene settings;
-	private AddAdScene addAd;
-	private MyAdsScene myAds;
-	private SettingsRCScene rcSettings;
-	
-	
 	private GUIController() {}
 	
 	public void setLogInScene(Stage stage) {
-		login = LogInScene.getInstance();
+		LogInScene login = LogInScene.getInstance();
 		stage.setScene(login.getScene());
 	}
 	
 	public void setSignUpScene(Stage stage) {
-		signup = SignUpScene.getInstance();
+		SignUpScene signup = SignUpScene.getInstance();
 		stage.setScene(signup.getScene());
 	}
 	
 	public void setHomepageScene(Stage stage) {
-		homepage = HomepageScene.getInstance(); 
+		HomepageScene homepage = HomepageScene.getInstance(); 
 		stage.setScene(homepage.getScene());
 	}
 	
 	public void setSettingsScene(Stage stage) {
-		settings = SettingScene.getInstance();
+		SettingScene settings = SettingScene.getInstance();
 		stage.setScene(settings.getScene());
 	}
 	
 	public void setAddAdScene(Stage stage) {
-		addAd = AddAdScene.getInstance();
+		AddAdScene addAd = AddAdScene.getInstance();
 		stage.setScene(addAd.getScene());
 	}
 	
@@ -60,17 +50,17 @@ public class GUIController {
 	}
 	
 	public void setMyReviewScene(Stage stage) {
-		myReview = new MyReviewScene();
+		MyReviewScene myReview = new MyReviewScene();
 		stage.setScene(myReview.getScene());
 	}
 	
 	public void setMyAdsScene(Stage stage) {
-		myAds = MyAdsScene.getInstance();
+		MyAdsScene myAds = MyAdsScene.getInstance();
 		stage.setScene(myAds.getScene());
 	}
 	
 	public void setRCSettingsScene(Stage stage) {
-		rcSettings = SettingsRCScene.getInstance();
+		SettingsRCScene rcSettings = SettingsRCScene.getInstance();
 		stage.setScene(rcSettings.getScene());
 	}
 	

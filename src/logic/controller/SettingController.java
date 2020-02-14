@@ -19,7 +19,7 @@ public class SettingController {
 
 	public boolean applyChanges() {
 		SettingsBean settingsBean = SettingScene.getInstance().getSettingsBean();
-
+		
 		try {
 			// controllo dei dati
 			Account tempAccount;
@@ -27,14 +27,15 @@ public class SettingController {
 				tempAccount = new RuleChecker(settingsBean.getAccountName(), settingsBean.getAccountSurname(),
 						settingsBean.getAccountUsername(), settingsBean.getAccountEmail(),
 						settingsBean.getAccountPassword());
-			} else {
+			} 
+			else {
 				tempAccount = new User(settingsBean.getAccountName(), settingsBean.getAccountSurname(),
 						settingsBean.getAccountUsername(), settingsBean.getAccountEmail(),
 						settingsBean.getAccountPassword());
 			}
 			tempAccount.setBirthDate(settingsBean.getAccountBirthdate());
 			tempAccount.setPhoneNumber(settingsBean.getAccountPhoneNumber());
-
+			
 			if (!settingsBean.checkInfo(tempAccount))
 				return false;
 

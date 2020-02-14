@@ -150,6 +150,11 @@ public class DBManager {
 		return !stmt.execute(QueriesGenerator.getMarkAsSoldCommand(id));
 	}
 	
+	public ResultSet getAverageRank(String username) throws SQLException {
+		init();
+		return stmt.executeQuery(QueriesGenerator.getRankAverageQuery(username));
+	}
+	
 	private void init() throws SQLException {
 		stmt = null;
 		conn = null;

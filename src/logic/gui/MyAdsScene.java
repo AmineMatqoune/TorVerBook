@@ -15,12 +15,11 @@ public class MyAdsScene extends DashBoardScene{
 		
 		setCentralPaneBackground(true);
 		setCentralPaneFullSize(true);
-	
+		
 		myAdsController.attachAdsTo(centralPane);
 	}
 	
 	public void refresh() {
-		myAdsController = new MyAdsController();
 		myAdsController.attachAdsTo(centralPane);
 	}
 	

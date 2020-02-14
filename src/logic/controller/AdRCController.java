@@ -1,10 +1,11 @@
 package logic.controller;
 
 import java.sql.SQLException;
-
 import java.text.ParseException;
-
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.ad.Ad;
 import logic.bean.AdBean;
@@ -23,20 +24,21 @@ public class AdRCController {
 		scenePane = pane;
 		// ricava gli ad che hanno fatto all'utente dal metodo privato getAd()
 		ads = this.getAd();
-
 		if (ads != null) {
-			int xpos = 25;
-			int ypos = 25;
-
 			for (int i = 0; i != ads.length; i++) {
-				AdBean adBean = new AdBean(ads[i]);
-				AdRCComponent temp = new AdRCComponent(adBean);
-				temp.getAdComponent().setLayoutX(xpos);
-				temp.getAdComponent().setLayoutY(ypos);
-				scenePane.getChildren().add(temp.getAdComponent());
-
-				ypos = temp.getHeight() + 50;
+				AdBean bean = new AdBean(ads[i]);
+				AdRCComponent ad = new AdRCComponent(bean);
+				ad.getAdComponent().setLayoutY(AdRCComponent.HEIGHT*i);
+				scenePane.getChildren().add(ad.getAdComponent());
 			}
+		}
+		else {
+			Label tmp = new Label("Empty List!");
+			tmp.setFont(new Font("Arial Bold", 50));
+			tmp.setAlignment(Pos.CENTER);
+			tmp.setPrefHeight(230);
+			tmp.setPrefWidth(585);
+			scenePane.getChildren().add(tmp);
 		}
 	}
 

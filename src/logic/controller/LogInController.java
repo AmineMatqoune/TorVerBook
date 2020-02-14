@@ -22,7 +22,7 @@ public class LogInController {
 				return true;
 			} else {
 				if(accountDao.getErrorMessage().equals("USER_BANNED"))
-					//new InfoPopup("Account bannato!", (Stage) LogInScene.getInstance().getScene().getWindow());
+					new InfoPopup("Account bannato!", (Stage) LogInScene.getInstance().getScene().getWindow());
 				// Notify log-in error
 				return false;
 			}

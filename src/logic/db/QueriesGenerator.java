@@ -146,4 +146,8 @@ public interface QueriesGenerator {
 	public static String getMarkAsSoldCommand(long id) {
 		return "UPDATE Ad SET Quantity = Quantity - 1 WHERE ID = " + id;
 	}
+
+	public static String getRankAverageQuery(String username) {
+		return "SELECT avg(Rank) as Media FROM Review WHERE ReceiverUser = '" + username + "'";
+	}
 }

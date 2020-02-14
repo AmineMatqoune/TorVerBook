@@ -1,19 +1,25 @@
 package logic.controller;
 
+import java.sql.SQLException;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import logic.account.User;
 import logic.bean.ReviewBean;
 import logic.dao.AccountDAO;
+import logic.dao.ReviewDAO;
 import logic.gui.ReviewComponent;
+import logic.gui.popup.InfoPopup;
 import logic.review.Review;
 
 public class MyReviewController {
 	
 	private Review[] reviews;
 	private User currentUser;
+	
+	private Pane thePane;
 	
 	public MyReviewController() {
 		AccountDAO userDAO = AccountDAO.getInstance();
@@ -26,6 +32,7 @@ public class MyReviewController {
 	}
 	
 	public void attachAdsTo(Pane pane) {
+		thePane = pane;
 		if(reviews != null) {
 			float ypos = 25;
 			
@@ -46,6 +53,16 @@ public class MyReviewController {
 			tmp.setPrefHeight(230);
 			tmp.setPrefWidth(585);
 			pane.getChildren().add(tmp);
+		}
+	}
+
+	public String getAverage() {
+		ReviewDAO reviewDao = ReviewDAO.getInstance();
+		try {
+			return reviewDao.getAverage(currentUser.getUsername()).toString();
+		} catch (SQLException  e) {
+			new InfoPopup("Media non calcolabile!", (Stage) thePane.getScene().getWindow());
+			return "0";
 		}
 	}
 }

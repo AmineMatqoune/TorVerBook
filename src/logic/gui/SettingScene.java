@@ -58,9 +58,9 @@ public class SettingScene extends DashBoardScene {
 		nameField.setPrefWidth(300);
 		nameField.setLayoutX(250);
 		nameField.setLayoutY(80);
-		nameField.setOnKeyReleased(evt -> {
-			settingsBean.setAccountName(getName());
-		});
+		nameField.setOnKeyReleased(evt -> 
+			settingsBean.setAccountName(getName())
+		);
 		centralPane.getChildren().add(nameField);
 
 		Label label2 = new Label("Surname");
@@ -74,9 +74,9 @@ public class SettingScene extends DashBoardScene {
 		surnameField.setPrefWidth(300);
 		surnameField.setLayoutX(250);
 		surnameField.setLayoutY(125);
-		surnameField.setOnKeyReleased(evt -> {
-			settingsBean.setAccountSurname(getSurname());
-		});
+		surnameField.setOnKeyReleased(evt -> 
+			settingsBean.setAccountSurname(getSurname())
+		);
 		centralPane.getChildren().add(surnameField);
 
 		Label label3 = new Label("Birthdate");
@@ -90,9 +90,9 @@ public class SettingScene extends DashBoardScene {
 		dayField.setPrefWidth(75);
 		dayField.setLayoutX(250);
 		dayField.setLayoutY(170);
-		dayField.setOnKeyReleased(evt -> {
-			settingsBean.setAccountBirthdate(getBirthdate());
-		});
+		dayField.setOnKeyReleased(evt -> 
+			settingsBean.setAccountBirthdate(getBirthdate())
+		);
 		centralPane.getChildren().add(dayField);
 
 		Label label9 = new Label("/");
@@ -106,9 +106,9 @@ public class SettingScene extends DashBoardScene {
 		monthField.setPrefWidth(75);
 		monthField.setLayoutX(350);
 		monthField.setLayoutY(170);
-		monthField.setOnKeyReleased(evt -> {
-			settingsBean.setAccountBirthdate(getBirthdate());
-		});
+		monthField.setOnKeyReleased(evt -> 
+			settingsBean.setAccountBirthdate(getBirthdate())
+		);
 		centralPane.getChildren().add(monthField);
 
 		Label label10 = new Label("/");
@@ -122,9 +122,9 @@ public class SettingScene extends DashBoardScene {
 		yearField.setPrefWidth(100);
 		yearField.setLayoutX(450);
 		yearField.setLayoutY(170);
-		yearField.setOnKeyReleased(evt -> {
-			settingsBean.setAccountBirthdate(getBirthdate());
-		});
+		yearField.setOnKeyReleased(evt -> 
+			settingsBean.setAccountBirthdate(getBirthdate())
+		);
 		centralPane.getChildren().add(yearField);
 
 		Label label4 = new Label("Phone number");
@@ -138,9 +138,9 @@ public class SettingScene extends DashBoardScene {
 		phoneNumberField.setPrefWidth(300);
 		phoneNumberField.setLayoutX(250);
 		phoneNumberField.setLayoutY(215);
-		phoneNumberField.setOnKeyReleased(evt -> {
-			settingsBean.setAccountPhoneNumber(getPhoneNumber());
-		});
+		phoneNumberField.setOnKeyReleased(evt -> 
+			settingsBean.setAccountPhoneNumber(getPhoneNumber())
+		);
 		centralPane.getChildren().add(phoneNumberField);
 
 		Label label5 = new Label("Username");
@@ -154,9 +154,9 @@ public class SettingScene extends DashBoardScene {
 		usernameField.setPrefWidth(300);
 		usernameField.setLayoutX(250);
 		usernameField.setLayoutY(260);
-		usernameField.setOnKeyReleased(evt -> {
-			settingsBean.setAccountUsername(getUsername());
-		});
+		usernameField.setOnKeyReleased(evt -> 
+			settingsBean.setAccountUsername(getUsername())
+		);
 		centralPane.getChildren().add(usernameField);
 
 		Label label6 = new Label("E-mail");
@@ -170,9 +170,9 @@ public class SettingScene extends DashBoardScene {
 		emailField.setPrefWidth(300);
 		emailField.setLayoutX(250);
 		emailField.setLayoutY(305);
-		emailField.setOnKeyReleased(evt -> {
-			settingsBean.setAccountEmail(getEmail());
-		});
+		emailField.setOnKeyReleased(evt -> 
+			settingsBean.setAccountEmail(getEmail())
+		);
 		centralPane.getChildren().add(emailField);
 
 		Label label7 = new Label("Password");
@@ -187,9 +187,9 @@ public class SettingScene extends DashBoardScene {
 		passwordField.setPrefWidth(300);
 		passwordField.setLayoutX(250);
 		passwordField.setLayoutY(350);
-		passwordField.setOnKeyReleased(evt -> {
-			settingsBean.setAccountPassword(getPassword());
-		});
+		passwordField.setOnKeyReleased(evt -> 
+			settingsBean.setAccountPassword(getPassword())
+		);
 		centralPane.getChildren().add(passwordField);
 
 		Label label8 = new Label("Confirm password");
@@ -216,11 +216,11 @@ public class SettingScene extends DashBoardScene {
 
 	// metodo per salvare i cambiamenti fatti sulle info dello user
 	private void saveChanges() {
-		if (!settingController.applyChanges()) {
-			notifyInputError();
-		} else {
+		if (settingController.applyChanges()) {
 			new InfoPopup("Salvataggio riuscito!", (Stage) this.getScene().getWindow());
 			guiController.setHomepageScene((Stage) this.getScene().getWindow());
+		} else {
+			notifyInputError();
 		}
 	}
 

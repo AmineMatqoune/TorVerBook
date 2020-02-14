@@ -2,7 +2,6 @@ package logic.gui;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -82,6 +81,7 @@ public class HomepageScene extends DashBoardScene {
 		maxPriceLabel.setTextFill(Color.WHITE);
 		maxPriceLabel.setFont(new Font(FONT, 16));
 		maxPriceLabel.setPadding(new Insets(0, 5, 0, 0));
+
 		priceFilterContainer.getChildren().add(maxPriceLabel);
 		Label currentMaxPrice = new Label("");
 		currentMaxPrice.setTextFill(Color.WHITE);

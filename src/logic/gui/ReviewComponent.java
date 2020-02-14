@@ -9,8 +9,9 @@ public class ReviewComponent {
 	
 	protected Pane pane;
 	protected Label backgroundPaneLabel;
-	protected int height = 150;
-	protected int width = 600;
+	
+	public static final int HEIGHT = 150;
+	public static final int WIDTH = 600;
 	
 	private static String textFont = "Arial";
 	private static String bgColor = "-fx-background-color: #024a00";
@@ -71,8 +72,8 @@ public class ReviewComponent {
         pane.getChildren().add(label5);
 	}
 	
-	public int getHeight() {
-		return height;
+	public void setY(int y) {
+		pane.setLayoutY(y);
 	}
 	
 	public Pane getReviewComponent() {

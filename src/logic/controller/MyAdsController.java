@@ -8,17 +8,16 @@ import logic.account.User;
 import logic.ad.Ad;
 import logic.bean.AdBean;
 import logic.dao.AccountDAO;
+import logic.gui.AdComponent;
 import logic.gui.AdMyAdsComponent;
 
 public class MyAdsController {
 	
-	private Ad[] ads;
 	private User currentUser;
 	
 	public MyAdsController() {
 		AccountDAO userDAO = AccountDAO.getInstance();
 		currentUser = (User) userDAO.getAccountObject();
-		ads = getAds();
 	}
 	
 	private Ad[] getAds() {
@@ -26,13 +25,16 @@ public class MyAdsController {
 	}
 	
 	public void attachAdsTo(Pane pane) {
-		if(ads != null)
+		pane.getChildren().clear();
+		Ad[] ads = getAds();
+		if(ads != null) {
 			for(int i = 0; i < ads.length; i++){
 				AdBean adBean = new AdBean(ads[i]);
 				AdMyAdsComponent adComp = new AdMyAdsComponent(adBean);
-				adComp.setY(adComp.getHeight() * i);
+				adComp.setY(AdComponent.HEIGHT * i);
 				pane.getChildren().add(adComp.getAdComponent());      //aggiungiamo il pane dell'ad allo scrollpane
 			}
+		}
 		else {
 			Label tmp = new Label("Empty List!");
 			tmp.setFont(new Font("Arial Bold", 50));

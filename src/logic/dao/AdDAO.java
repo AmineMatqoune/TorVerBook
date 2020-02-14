@@ -4,9 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
-
 import logic.account.User;
 import logic.ad.Ad;
+import logic.bean.AdBean;
 import logic.bean.AddAdBean;
 import logic.db.DBManager;
 import logic.highlight.Highlight;
@@ -115,12 +115,12 @@ public class AdDAO {
 		return count;
 	}
 	
+	
 	public boolean createNewAd() throws SQLException, ParseException {
 		AddAdBean addAdBean = new AddAdBean();
 		User user = (User) AccountDAO.getInstance().getAccountObject();
-		
 		//we create a temporary Ad object (ID = 0), once we added it to bd, we can update his real ID
-		Ad ad = new Ad(user.getUsername(), 0); 
+		Ad ad = new Ad(user.getUsername(), 0);
 		ad.setDate(LocalDate.now().toString());
 		ad.setDescription(addAdBean.getDescription());
 		ad.setTitle(addAdBean.getTitle());
@@ -138,12 +138,37 @@ public class AdDAO {
 		return false;
 	}
 	
-	public boolean addAdToFavouriteList(long id) throws SQLException {
-		return dbManager.addAdToFavouriteList(id, AccountDAO.getInstance().getAccountObject().getUsername());
+	public boolean addAdToFavouriteList(AdBean bean) throws SQLException, ParseException {
+		if(dbManager.addAdToFavouriteList(bean.getId(), AccountDAO.getInstance().getAccountObject().getUsername())) {
+			User user = (User) AccountDAO.getInstance().getAccountObject();
+			user.saveInFavoriteList(createAd(bean));
+			return true;
+		}
+		return false;
 	}
 	
-	public boolean removeAdFromFavouriteList(long id) throws  SQLException {
-		return dbManager.removeAdFromFavouriteList(id, AccountDAO.getInstance().getAccountObject().getUsername());
+	private Ad createAd(AdBean bean) throws ParseException {
+		Ad ad = new Ad(bean.getUsername(), bean.getId());
+		ad.setDate(bean.getDate());
+		ad.setDescription(bean.getDescription());
+		ad.setTitle(bean.getTitle());
+		ad.setPrice(bean.getPrice());
+		ad.setCategory(bean.getCategory());
+		ad.setType(bean.getAdType());
+		ad.setQuantity(bean.getQuantity());
+		ad.setStartHighlight(bean.getStartHighDate());
+		ad.setFinishHighlight(bean.getFinishHighDate());
+		ad.setHighlight(bean.getHighlight());
+		return ad;
+	}
+	
+	public boolean removeAdFromFavouriteList(AdBean bean) throws  SQLException, ParseException {
+		if(dbManager.removeAdFromFavouriteList(bean.getId(), AccountDAO.getInstance().getAccountObject().getUsername())) {
+			User user = (User) AccountDAO.getInstance().getAccountObject();
+			user.removeFromFavoriteList(createAd(bean));
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean validateAd(long id) throws SQLException {
@@ -152,7 +177,7 @@ public class AdDAO {
 	
 	public boolean deleteAd(long id) throws SQLException {
 		User user = (User) AccountDAO.getInstance().getAccountObject();
-		user.deleteAd(id);
+		user.removeAd(id);
 		return dbManager.deleteAd(id);
 	}
 	

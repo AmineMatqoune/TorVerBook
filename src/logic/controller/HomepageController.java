@@ -3,7 +3,6 @@ package logic.controller;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -97,5 +96,4 @@ public class HomepageController {
 			new ErrorPopup(e.getMessage(), (Stage) hpPane.getScene().getWindow());
 		}
 	}
-
 }

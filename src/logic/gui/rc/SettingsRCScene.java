@@ -11,6 +11,8 @@ public class SettingsRCScene extends RCHomepage{
 
 	private static SettingsRCScene instance = null;
 	
+	private static final String WORK_IN_PROGRESS = "WORK IN PROGRESS";
+	
 	private TextField usernameField;
 	private TextField nameField;
 	private TextField surnameField;
@@ -39,7 +41,7 @@ public class SettingsRCScene extends RCHomepage{
 		label1.setLayoutY(190);
 		pane.getChildren().add(label1);
 		
-		usernameField = new TextField();
+		usernameField = new TextField(WORK_IN_PROGRESS);
 		usernameField.setPrefSize(450, 25);
 		usernameField.setLayoutX(540);
 		usernameField.setLayoutY(190);
@@ -51,7 +53,7 @@ public class SettingsRCScene extends RCHomepage{
 		label2.setLayoutY(250);
 		pane.getChildren().add(label2);
 		
-		nameField = new TextField();
+		nameField = new TextField(WORK_IN_PROGRESS);
 		nameField.setPrefSize(450, 25);
 		nameField.setLayoutX(540);
 		nameField.setLayoutY(250);
@@ -63,7 +65,7 @@ public class SettingsRCScene extends RCHomepage{
 		label3.setLayoutY(310);
 		pane.getChildren().add(label3);
 		
-		surnameField = new TextField();
+		surnameField = new TextField(WORK_IN_PROGRESS);
 		surnameField.setPrefSize(450, 25);
 		surnameField.setLayoutX(540);
 		surnameField.setLayoutY(310);
@@ -111,7 +113,7 @@ public class SettingsRCScene extends RCHomepage{
 		label5.setLayoutY(430);
 		pane.getChildren().add(label5);
 		
-		phoneNumberField = new TextField();
+		phoneNumberField = new TextField(WORK_IN_PROGRESS);
 		phoneNumberField.setPrefSize(450, 25);
 		phoneNumberField.setLayoutX(540);
 		phoneNumberField.setLayoutY(430);
@@ -147,7 +149,7 @@ public class SettingsRCScene extends RCHomepage{
 		label8.setLayoutY(610);
 		pane.getChildren().add(label8);
 		
-		salaryField = new TextField();
+		salaryField = new TextField(WORK_IN_PROGRESS);
 		salaryField.setPrefSize(450, 25);
 		salaryField.setLayoutX(540);
 		salaryField.setLayoutY(610);

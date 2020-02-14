@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-
 import logic.ad.Ad;
 import logic.dao.AdDAO;
 import logic.dao.ReviewDAO;
@@ -64,33 +63,76 @@ public final class User extends Account {
 	}
 
 	public void addAd(Ad ad) {
-		Ad[] newMyAdList = Arrays.copyOf(myAdList, myAdList.length + 1);
-		newMyAdList[myAdList.length] = ad;
-		myAdList = newMyAdList;
+		try{
+			Ad[] newMyAdList = Arrays.copyOf(myAdList, myAdList.length + 1);
+			newMyAdList[myAdList.length] = ad;
+			myAdList = newMyAdList;
+		} catch(NullPointerException e) {
+			myAdList = new Ad[1];
+			myAdList[0] = ad;
+		}
 	}
 
 	public void saveInFavoriteList(Ad ad) {
-		Ad[] newFavouriteList = Arrays.copyOf(favouriteAds, favouriteAds.length + 1);
-		newFavouriteList[favouriteAds.length] = ad;
-		favouriteAds = newFavouriteList;
+		if(favouriteAds != null) {
+			Ad[] newFavouriteList = Arrays.copyOf(favouriteAds, favouriteAds.length + 1);
+			newFavouriteList[favouriteAds.length] = ad;
+			favouriteAds = newFavouriteList;
+		}
+		else {
+			favouriteAds = new Ad[1];
+			favouriteAds[0] = ad;
+			
+		}
+	}
+	
+	public void removeFromFavoriteList(Ad ad) {
+		favouriteAds = removeAd(favouriteAds, ad);
+	}
+	
+	private Ad[] removeAd(Ad[] favouriteList, Ad ad) {
+		Ad[] newList = null;
+		try {
+			if(favouriteList.length != 1) {
+				int i;
+				int j = 0;
+				newList = new Ad[favouriteList.length-1];
+				for(i = 0; i != favouriteList.length-1; i++) {
+					if(!favouriteList[i].equals(ad)) {
+						newList[j] = favouriteList[i];
+						j++;
+					}
+				}
+			}
+		}catch(NullPointerException ne) {
+			return newList;
+		}
+		return newList;
 	}
 
-	public void deleteAd(long id) {
-		for (int i = 0; i < myAdList.length; i++) {
-			if (myAdList[i].getId() == id)
-				myAdList[i] = null;
-		}
-		redefineAdList(myAdList.length - 1);
+	public void removeAd(long id) {
+		myAdList = redefineAdList(myAdList, id);
 	}
 
 	// quando facciamo modifiche su un Ad, dobbiamo aggiornare i relativi oggetti
-	private void redefineAdList(int length) {
-		Ad[] newAdList = new Ad[length];
-		for (int i = 0; i < length; i++)
-			if (myAdList[i] != null)
-				newAdList[i] = myAdList[i];
-
-		myAdList = newAdList;
+	private Ad[] redefineAdList(Ad[] adList, long id) {
+		Ad[] newList = null;
+		try {
+			if(adList.length != 1) {
+				int i;
+				int j = 0;
+				newList = new Ad[adList.length-1];
+				for(i = 0; i != adList.length; i++) {
+					if(adList[i].getId() != id) {
+						newList[j] = adList[i];
+						j++;
+					}
+				}
+			}
+		}catch(NullPointerException ne) {
+			return newList;
+		}
+		return newList;
 	}
 
 	public boolean markAsSold(long id) {
@@ -99,7 +141,7 @@ public final class User extends Account {
 		for (int i = 0; i < myAdList.length; i++)
 			if (myAdList[i].getId() == id) {
 				if (myAdList[i].getQuantity() == 1) {
-					deleteAd(id);
+					removeAd(id);
 					return false;
 				} else {
 					myAdList[i].setQuantity(myAdList[i].getQuantity() - 1);

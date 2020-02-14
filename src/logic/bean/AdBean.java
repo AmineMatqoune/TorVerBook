@@ -2,34 +2,45 @@ package logic.bean;
 
 import javafx.scene.paint.Color;
 import logic.ad.Ad;
+import logic.highlight.Highlight;
 
 public class AdBean {
-
+	
 	private final long id;
 	private final String title;
 	private final String description;
 	private final String username;
 	private final String adType;
 	private final int price;
+	private final int quantity;
 	private final String category;
+	private final Highlight highlight;
 	private final Color textColor;
 	private final Color bgColor;
 	private final int thickness;
 	private final String textFont;
 	private boolean isFavourite = false;
+	private final String startHighDate;
+	private final String finishHighDate;
+	private final String date;
 
 	public AdBean(Ad ad) {
-		this.id = ad.getId();
+		id = ad.getId();
 		title = ad.getTitle();
 		description = ad.getDescription();
 		username = ad.getOwnerUsername();
 		adType = ad.getType().toString();
 		price = ad.getPrice();
 		category = ad.getCategory().toString();
+		highlight = ad.getHighlight();
 		textColor = ad.getTextColor();
 		bgColor = ad.getBackgroundColor();
 		thickness = ad.getThickness();
 		textFont = ad.getFont();
+		quantity = ad.getQuantity();
+		startHighDate = ad.getStartHighlightStr();
+		finishHighDate = ad.getFinishHighlightStr();
+		date = ad.getDate();
 	}
 	
 	public long getId() {
@@ -84,4 +95,23 @@ public class AdBean {
 		this.isFavourite = isFavourite;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public String getStartHighDate() {
+		return startHighDate;
+	}
+
+	public String getFinishHighDate() {
+		return finishHighDate;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public Highlight getHighlight() {
+		return highlight;
+	}
 }

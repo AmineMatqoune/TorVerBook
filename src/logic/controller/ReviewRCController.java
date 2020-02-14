@@ -2,12 +2,15 @@ package logic.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import logic.dao.ReviewDAO;
 import logic.bean.ReviewBean;
 import logic.dao.AccountDAO;
+import logic.gui.popup.InfoPopup;
 import logic.gui.rc.ReviewRCComponent;
 import logic.review.Review;
 
@@ -15,31 +18,33 @@ public class ReviewRCController {
 	
 	private AccountDAO userDAO = null;
 	
+	private Pane scenePane;
+	
 	public ReviewRCController() {
 		userDAO = AccountDAO.getInstance();
 	}
 
 	/*metodo che aggiunge al pane i reviewComponent*/
 	public void showRCReview(Pane pane) {
+		scenePane = pane;
 		/*ricava le review che hanno fatto all'utente dal metodo privato getReview()*/
 		Review[] review = this.getReview();
 		
 		if(review != null) {
-			float xpos = 25;
-			float ypos = 25;
-			
 			for(int i = 0; i != review.length; i++) {
 				ReviewBean bean = new ReviewBean(review[i]);
-				ReviewRCComponent temp = new ReviewRCComponent(bean);
-				temp.getReviewComponent().setLayoutX(xpos);
-				temp.getReviewComponent().setLayoutY(ypos);
-				pane.getChildren().add(temp.getReviewComponent());
-				
-				ypos = (temp.getHeight() + 50);
+				ReviewRCComponent rev = new ReviewRCComponent(bean);
+				rev.setY(ReviewRCComponent.HEIGHT * i);
+				pane.getChildren().add(rev.getReviewComponent());
 			}
 		}
 		else {
-			Logger.getLogger("ReviewLogger").log(Level.SEVERE, "Non ci sono review");
+			Label tmp = new Label("Empty List!");
+			tmp.setFont(new Font("Arial Bold", 50));
+			tmp.setAlignment(Pos.CENTER);
+			tmp.setPrefHeight(230);
+			tmp.setPrefWidth(585);
+			scenePane.getChildren().add(tmp);
 		}
 	}
 	
@@ -52,7 +57,7 @@ public class ReviewRCController {
 			review = reviewDAO.loadRCReview();
 			return review;
 		} catch (SQLException | ParseException e) {
-			Logger.getLogger("Problemi con getReview").log(Level.SEVERE, e.getMessage());
+			new InfoPopup("Problemi nel caricamento delle review", (Stage) scenePane.getScene().getWindow());
 		}
 		return review;
 	}
@@ -66,7 +71,7 @@ public class ReviewRCController {
 				//bisogna aggiornare la lista dei review
 			}
 		} catch (SQLException e) {
-			  Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
+			new InfoPopup("Problemi nell'approvazione del review", (Stage) scenePane.getScene().getWindow());
 		}
 	}
 	
@@ -91,7 +96,7 @@ public class ReviewRCController {
 				
 			}
 		} catch (SQLException e) {
-			  Logger.getLogger("ReviewRCController").log(Level.SEVERE, e.getMessage());
+			new InfoPopup("Problemi nella censura del review", (Stage) scenePane.getScene().getWindow());
 		}
 	}
 }

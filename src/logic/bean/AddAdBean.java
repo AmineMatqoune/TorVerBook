@@ -20,10 +20,12 @@ public class AddAdBean {
 	}
 	
 	private boolean checkType() {
-		if(AdType.SALE.equals(addAdScene.getType())) 
-			return checkPrice();
-		else
+		if(addAdScene.getType().equals(AdType.EXCHANGE)){
 			return true;
+		}
+		else {
+			return checkPrice();
+		}
 	}
 	
 	private boolean checkPrice() {

@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
+import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -24,6 +25,7 @@ public class AdMyAdsComponent extends AdComponent{
 		deletePane.setLayoutX(540);
 		deletePane.setLayoutY(0);
 		deletePane.setStyle("-fx-background-color: #F44336");
+		deletePane.setCursor(Cursor.HAND);
 		pane.getChildren().add(deletePane);
 		
 		Pane markAsSold = new Pane();
@@ -31,6 +33,7 @@ public class AdMyAdsComponent extends AdComponent{
 		markAsSold.setLayoutX(540);
 		markAsSold.setLayoutY(60);
 		markAsSold.setStyle("-fx-background-color: #32CD32");
+		markAsSold.setCursor(Cursor.HAND);
 		pane.getChildren().add(markAsSold);
 		
 		try {
@@ -58,8 +61,8 @@ public class AdMyAdsComponent extends AdComponent{
 		try {
 			if(AdDAO.getInstance().deleteAd(id)) {
 				new InfoPopup("Annuncio cancellato correttamente!", (Stage)pane.getScene().getWindow());
-				/*MyAdsScene adScene = MyAdsScene.getInstance();
-				adScene.refresh();*/
+				MyAdsScene adScene = MyAdsScene.getInstance();
+				adScene.refresh();
 			} else {
 				new InfoPopup("Ops! Qualcosa è andato storto!", (Stage)pane.getScene().getWindow());
 			}

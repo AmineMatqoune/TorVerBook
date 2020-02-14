@@ -57,8 +57,9 @@ public final class Ad {
 		return this.id;
 	}
 
-	public Date getDate() {
-		return this.date;
+	public String getDate() {
+		SimpleDateFormat formatter = new SimpleDateFormat(DATE_STRING_FORMAT);
+		return formatter.format(date);
 	}
 
 	public String getDescription() {
@@ -91,6 +92,9 @@ public final class Ad {
 
 
 	// Highlight attribute
+	public Highlight getHighlight() {
+		return myHighlight;		
+	}
 	public Color getBackgroundColor() {
 		return myHighlight.getBackgroundColor();
 	}
@@ -229,7 +233,7 @@ public final class Ad {
 	// behavioural operations
 	public void markAsSold() {
 		if (getQuantity() == 1)
-			myUser.deleteAd(id);
+			myUser.removeAd(id);
 		else
 			setQuantity(getQuantity() - 1);
 	}
