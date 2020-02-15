@@ -10,7 +10,6 @@ import java.util.Date;
 import logic.ad.Ad;
 import logic.dao.AdDAO;
 import logic.dao.ReviewDAO;
-import logic.message.Message;
 import logic.review.Review;
 
 public final class User extends Account {
@@ -22,8 +21,6 @@ public final class User extends Account {
 
 	private Ad[] myAdList = null;
 	private Ad[] favouriteAds = null;
-	//private Message[] myMessageList = null;
-	//private User[] relatedUser = null;
 	private Review[] ownReview = null;
 
 	public User(String name, String surname, String username, String email, String password)
@@ -61,9 +58,6 @@ public final class User extends Account {
 		return ownReview;
 	}
 
-	public void writeReview(User dest, String mex, byte rank) {
-	}
-
 	public boolean addAd(Ad ad) {
 		if(pay(ad)) {
 			if(myAdList != null) {	
@@ -76,7 +70,6 @@ public final class User extends Account {
 			}
 			return true;
 		}
-		System.out.println("Soldi insufficienti!");
 		return false;
 	}
 	
@@ -167,9 +160,6 @@ public final class User extends Account {
 				}
 			}
 		return true;
-	}
-
-	public void sendMessage(Message mex) {
 	}
 
 	@Override

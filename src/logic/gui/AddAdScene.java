@@ -222,7 +222,7 @@ public class AddAdScene extends DashBoardScene{
 			guiController.setHomepageScene((Stage) scene.getWindow());
 		}
 		else 
-			new InfoPopup("Qualcosa è andato storto, verifica di aver inserito correttamente tutte le informazioni.", (Stage) scene.getWindow());
+			new InfoPopup("Qualcosa è andato storto, verifica di aver inserito correttamente tutte le informazioni e di avere credito a sufficienza", (Stage) scene.getWindow());
 	}
 	
 	//getter()
