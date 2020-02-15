@@ -130,9 +130,10 @@ public class DBManager {
 		return !stmt.execute(QueriesGenerator.getIncNumViolationsCommand(username, violations));
 	}
 
-	public boolean addAd(Ad ad) throws SQLException {
+	public boolean addAd(Ad ad, int newMoney) throws SQLException {
 		init();
-		return !stmt.execute(QueriesGenerator.getAddAdCommand(ad));
+		return (!stmt.execute(QueriesGenerator.getAddAdCommand(ad)) && !stmt.execute(QueriesGenerator.getPaymentCommand(ad.getOwnerUsername(), newMoney)));
+		
 	}
 
 	public boolean updateAdState(long id) throws SQLException {

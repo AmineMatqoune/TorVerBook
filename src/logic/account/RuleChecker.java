@@ -21,10 +21,10 @@ public final class RuleChecker extends Account {
 
 	public RuleChecker(String name, String surname, String username, String email, String pwdHash) {
 		super(name, surname, username, email, pwdHash);
-		loadOwnInfo();
+		//loadOwnInfo();
 	}
 
-	public void loadOwnInfo() {
+	/*public void loadOwnInfo() {
 
 	}
 
@@ -38,7 +38,7 @@ public final class RuleChecker extends Account {
 
 	public void banUser(User u) {
 		
-	}
+	}*/
 
 	public List<Ad> getListAd() {
 		return listAd;

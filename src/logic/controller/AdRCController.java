@@ -11,15 +11,19 @@ import logic.ad.Ad;
 import logic.bean.AdBean;
 import logic.dao.AccountDAO;
 import logic.dao.AdDAO;
+import logic.gui.AdComponent;
 import logic.gui.popup.ErrorPopup;
-import logic.gui.popup.InfoPopup;
 import logic.gui.rc.AdRCComponent;
 
 public class AdRCController {
 
+	private static AdRCController instance = null;
+	
 	private Pane scenePane;
 	private Ad[] ads;
-
+	
+	private AdRCController() {}
+	
 	public void showRCAd(Pane pane) {
 		scenePane = pane;
 		// ricava gli ad che hanno fatto all'utente dal metodo privato getAd()
@@ -28,7 +32,7 @@ public class AdRCController {
 			for (int i = 0; i != ads.length; i++) {
 				AdBean bean = new AdBean(ads[i]);
 				AdRCComponent ad = new AdRCComponent(bean);
-				ad.getAdComponent().setLayoutY(AdRCComponent.HEIGHT*i);
+				ad.getAdComponent().setLayoutY(AdComponent.HEIGHT * (double) i);
 				scenePane.getChildren().add(ad.getAdComponent());
 			}
 		}
@@ -55,46 +59,54 @@ public class AdRCController {
 		return ad;
 	}
 
-	public void acceptAd(long id) {
+	public boolean acceptAd(long id) {
 		try {
 			AdDAO adDAO = AdDAO.getInstance();
-			if (adDAO.validateAd(id)) {
+			if (adDAO.validateAdRC(id)) 
 				// la review viene convalidata ma
 				// bisogna aggiornare la lista dei review
-				new InfoPopup("Annuncio Convalidato!", (Stage) scenePane.getScene().getWindow());
-			}
+				return true;
 		} catch (SQLException e) {
 			new ErrorPopup(e.getMessage(), (Stage) scenePane.getScene().getWindow());
 		}
+		return false;
 	}
 
-	public void deleteAd(long id) {
+	public boolean deleteAd(long id) {
 		try {
 			AdDAO adDAO = AdDAO.getInstance();
-			if (adDAO.deleteAd(id)) {
+			if (adDAO.deleteAdRC(id)) {
 				AccountDAO userDAO = AccountDAO.getInstance();
 				String username = retrieveUsernameById(id);
 				int violations = userDAO.getNumViolation(username);
-				if (violations >= 4) {
-					// banniamo
+				if (violations >= 4) 
 					userDAO.toBan(username);
-				} else {
-					// incrementiamo
-					userDAO.incViolations(username, violations);
-				}
+				userDAO.incViolations(username, violations);
+				return true;
 			}
 		} catch (SQLException e) {
 			new ErrorPopup(e.getMessage(), (Stage) scenePane.getScene().getWindow());
 		}
+		return false;
 	}
 
 	private String retrieveUsernameById(long id) {
 		int i = 0;
-		while (i < ads.length) {
-			if (ads[i].getId() == id)
-				break;
-			i++;
+		if(ads != null) {
+			while (i < ads.length) {
+				if (ads[i].getId() == id)
+					break;
+				i++;
+			}
 		}
 		return ads[i].getOwnerUsername();
 	}
+	
+	public static AdRCController getInstance() {
+		if(AdRCController.instance == null)
+			AdRCController.instance = new AdRCController();
+		return AdRCController.instance;
+	}
+	
+	
 }

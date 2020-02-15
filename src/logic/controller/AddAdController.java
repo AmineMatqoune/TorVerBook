@@ -16,7 +16,7 @@ public class AddAdController {
 		
 		AddAdBean adBean = new AddAdBean();
 		try {
-			if(!adBean.check())
+			if(!adBean.check()) 
 				return false;
 			
 			AdDAO adDAO = AdDAO.getInstance();

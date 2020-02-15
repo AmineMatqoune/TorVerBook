@@ -3,7 +3,7 @@ package logic.highlight;
 import javafx.scene.paint.Color;
 
 
-public final class Highlight implements HighlightInterface{
+public final class Highlight{
 	
 	//highlight info
 	private int thickness;
@@ -14,8 +14,6 @@ public final class Highlight implements HighlightInterface{
 	private Color backgroundColor;
 	private String style;
 	private HighlightType hlType;
-	
-	public Highlight() {}
 	
 	//getters() and setters()
 	public HighlightType getHighlightType() {
@@ -104,21 +102,8 @@ public final class Highlight implements HighlightInterface{
 	public void setStyle(String style) {
 		this.style = style;
 	}
-	
-	//behavioural methods inherited from interface			
-	@Override	
-	public int getPricePerDay() {
-		return pricePerDay;
-	}
-	
-	@Override
-	public void getPeriod() {
-		//return finishDate-startDate?
-	}
 
-	@Override
-	public boolean isExpired() {
-		// TODO Auto-generated method stub
-		return false;
+	public int getPricePerDay() {
+		return this.pricePerDay;
 	}
 }

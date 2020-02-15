@@ -11,6 +11,7 @@ import logic.bean.AdBean;
 import logic.controller.AdRCController;
 import logic.gui.AdComponent;
 import logic.gui.popup.ErrorPopup;
+import logic.gui.popup.InfoPopup;
 
 public class AdRCComponent extends AdComponent {
 
@@ -42,12 +43,14 @@ public class AdRCComponent extends AdComponent {
 	}
 
 	private void checkPress() {
-		con = new AdRCController();
-		con.acceptAd(id);
+		con = AdRCController.getInstance();
+		if(con.acceptAd(id))
+			new InfoPopup("Annuncio Convalidato!", (Stage) pane.getScene().getWindow());
 	}
 
 	private void closePress() {
-		con = new AdRCController();
-		con.deleteAd(id);
+		con = AdRCController.getInstance();
+		if(con.deleteAd(id))
+			new InfoPopup("Annuncio Eliminato!", (Stage) pane.getScene().getWindow());
 	}
 }

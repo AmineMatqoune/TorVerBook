@@ -26,7 +26,7 @@ public class TestLogInController {
 	@Test
 	public void testCheckLoginWrongUsername() {
 		LogInController login = new LogInController();
-		assertEquals(false, login.checkLogin("Ludo98", "amine.pwd"));
+		assertEquals(false, login.checkLogin("Ludo98", "A3bdalla"));
 	}
 	
 	@Test
@@ -38,7 +38,7 @@ public class TestLogInController {
 	@Test
 	public void testCheckLoginWrongPasswordUpperCase() { 
 		LogInController login = new LogInController();
-		assertEquals(false, login.checkLogin("Amine139", "amine.PWD"));
+		assertEquals(false, login.checkLogin("Ludo98", "ludo.PWD"));
 	}
 	
 	@Test

@@ -14,7 +14,7 @@ public class AdRCScene extends RCHomepage{
 		
 		adLabel.setTextFill(Color.YELLOW);
 		
-		controller = new AdRCController();
+		controller = AdRCController.getInstance();
 		
 		componentPane = new Pane();
 		componentPane.setLayoutX(25);

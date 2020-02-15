@@ -2,6 +2,8 @@ package logic.account;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,8 +22,8 @@ public final class User extends Account {
 
 	private Ad[] myAdList = null;
 	private Ad[] favouriteAds = null;
-	private Message[] myMessageList = null;
-	private User[] relatedUser = null;
+	//private Message[] myMessageList = null;
+	//private User[] relatedUser = null;
 	private Review[] ownReview = null;
 
 	public User(String name, String surname, String username, String email, String password)
@@ -62,15 +64,38 @@ public final class User extends Account {
 	public void writeReview(User dest, String mex, byte rank) {
 	}
 
-	public void addAd(Ad ad) {
-		try{
-			Ad[] newMyAdList = Arrays.copyOf(myAdList, myAdList.length + 1);
-			newMyAdList[myAdList.length] = ad;
-			myAdList = newMyAdList;
-		} catch(NullPointerException e) {
-			myAdList = new Ad[1];
-			myAdList[0] = ad;
+	public boolean addAd(Ad ad) {
+		if(pay(ad)) {
+			if(myAdList != null) {	
+				Ad[] newMyAdList = Arrays.copyOf(myAdList, myAdList.length + 1);
+				newMyAdList[myAdList.length] = ad;
+				myAdList = newMyAdList;
+			} else {
+				myAdList = new Ad[1];
+				myAdList[0] = ad;
+			}
+			return true;
 		}
+		System.out.println("Soldi insufficienti!");
+		return false;
+	}
+	
+	//returns true if the user has enough money
+	private boolean pay(Ad ad) { 
+		LocalDate finish = LocalDate.parse(ad.getFinishHighlightStr(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		LocalDate start = LocalDate.parse(ad.getStartHighlightStr(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+		//Ci siamo calcolati il costo finale dell'ad
+		int price = ad.getHighlight().getPricePerDay() * finish.compareTo(start);     
+		if(price <= money) {
+			setMoney(getMoney() - price);
+			return true;
+		}
+		return false;
+	}
+
+	public int getMoney() {
+		return this.money;
 	}
 
 	public void saveInFavoriteList(Ad ad) {
@@ -81,8 +106,7 @@ public final class User extends Account {
 		}
 		else {
 			favouriteAds = new Ad[1];
-			favouriteAds[0] = ad;
-			
+			favouriteAds[0] = ad;			
 		}
 	}
 	
@@ -92,20 +116,17 @@ public final class User extends Account {
 	
 	private Ad[] removeAd(Ad[] favouriteList, Ad ad) {
 		Ad[] newList = null;
-		try {
-			if(favouriteList.length != 1) {
-				int i;
-				int j = 0;
-				newList = new Ad[favouriteList.length-1];
-				for(i = 0; i != favouriteList.length-1; i++) {
-					if(!favouriteList[i].equals(ad)) {
-						newList[j] = favouriteList[i];
-						j++;
-					}
+		
+		if(favouriteList.length != 1) {
+			int i;
+			int j = 0;
+			newList = new Ad[favouriteList.length-1];
+			
+			for(i = 0; i != favouriteList.length-1; i++) 
+				if(!favouriteList[i].equals(ad)) {
+					newList[j] = favouriteList[i];
+					j++;
 				}
-			}
-		}catch(NullPointerException ne) {
-			return newList;
 		}
 		return newList;
 	}
@@ -117,20 +138,17 @@ public final class User extends Account {
 	// quando facciamo modifiche su un Ad, dobbiamo aggiornare i relativi oggetti
 	private Ad[] redefineAdList(Ad[] adList, long id) {
 		Ad[] newList = null;
-		try {
-			if(adList.length != 1) {
-				int i;
-				int j = 0;
-				newList = new Ad[adList.length-1];
-				for(i = 0; i != adList.length; i++) {
-					if(adList[i].getId() != id) {
-						newList[j] = adList[i];
-						j++;
-					}
+
+		if(adList.length != 1) {
+			int i;
+			int j = 0;
+			newList = new Ad[adList.length-1];
+			for(i = 0; i != adList.length; i++) {
+				if(adList[i].getId() != id) {
+					newList[j] = adList[i];
+					j++;
 				}
 			}
-		}catch(NullPointerException ne) {
-			return newList;
 		}
 		return newList;
 	}

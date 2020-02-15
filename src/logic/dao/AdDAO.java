@@ -131,8 +131,9 @@ public class AdDAO {
 		ad.setStartHighlight(addAdBean.getStartHighlight());
 		ad.setFinishHighlight(addAdBean.getFinishHighlight());
 		ad.setHighlight(addAdBean.getHighlight());
-		if(dbManager.addAd(ad)) {                                   //se l'inserimento nel db va a buon fine, aggiungi l'ad all'oggetto user
-			user.addAd(ad);
+		
+		if(user.addAd(ad)) {                                   //se l'inserimento nell'oggetto user va a buon fine, ultimiamo aggiungendolo al bd
+			dbManager.addAd(ad, user.getMoney());
 			return true;
 		}
 		return false;
@@ -171,8 +172,12 @@ public class AdDAO {
 		return false;
 	}
 	
-	public boolean validateAd(long id) throws SQLException {
+	public boolean validateAdRC(long id) throws SQLException {
 		return dbManager.updateAdState(id);
+	}
+	
+	public boolean deleteAdRC(long id) throws SQLException {
+		return dbManager.deleteAd(id);
 	}
 	
 	public boolean deleteAd(long id) throws SQLException {

@@ -61,7 +61,7 @@ public class AccountDAO {
 			user.setStatus(result.getInt("isBanned"));
 			currentAccount = user;
 			if(user.isBanned()) {
-				errorMessage = "USER_BANNED";System.out.println("errorMessage = " + errorMessage);
+				errorMessage = "USER_BANNED";
 				return false;
 			}
 		} else if (accountType == RULE_CHECKER) {
@@ -98,7 +98,9 @@ public class AccountDAO {
 
 	public int getNumViolation(String username) throws SQLException {
 		dbManager = DBManager.getInstance();
-		return dbManager.getNumViolations(username).getInt("NumViolations");
+		result = dbManager.getNumViolations(username);
+		result.first();
+		return result.getInt("NumViolations");
 	}
 
 	public void toBan(String username) throws SQLException {

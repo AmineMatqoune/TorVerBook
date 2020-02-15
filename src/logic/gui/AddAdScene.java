@@ -219,6 +219,7 @@ public class AddAdScene extends DashBoardScene{
 	private void addAd() {
 		if(addAdController.addAd()) {
 			new InfoPopup("La tua richiesta di inserimento è stata inviata!\nAttendere la conferma dei nostri moderatori, dopodichè l'annuncio sarà visibile sulla bacheca" , (Stage)scene.getWindow());
+			guiController.setHomepageScene((Stage) scene.getWindow());
 		}
 		else 
 			new InfoPopup("Qualcosa è andato storto, verifica di aver inserito correttamente tutte le informazioni.", (Stage) scene.getWindow());
@@ -247,9 +248,8 @@ public class AddAdScene extends DashBoardScene{
 	}
 	
 	public AdType getType()  {
-		if(radioGroup.getSelectedToggle().equals(saleRadioButton)) {
+		if(radioGroup.getSelectedToggle().equals(saleRadioButton)) 
 			return AdType.SALE;
-		}
 		else
 			return AdType.EXCHANGE;
 	}
@@ -282,9 +282,8 @@ public class AddAdScene extends DashBoardScene{
 	}
 
 	public static AddAdScene getInstance() {
-		if(AddAdScene.instance == null) {
+		if(AddAdScene.instance == null) 
 			AddAdScene.instance = new AddAdScene();
-		}
 		return instance;
 	}
 }

@@ -119,12 +119,11 @@ public interface QueriesGenerator {
 	}
 
 	public static String getBannedCommand(String username) {
-		return "UPDATE User SET isBanned = TRUE AND NumViolations = NumViolations + 1 WHERE Username = '" + username
-				+ "';";
+		return "UPDATE User SET isBanned = TRUE WHERE Username = '" + username + "';";
 	}
 
 	public static String getIncNumViolationsCommand(String username, int violations) {
-		return "UPDATE User SET NumViolations = " + violations + " WHERE Username = '" + username + "';";
+		return "UPDATE User SET NumViolations = " + (violations + 1) + " WHERE Username = '" + username + "';";
 	}
 
 	public static String getAddAdCommand(Ad ad) {
@@ -149,5 +148,9 @@ public interface QueriesGenerator {
 
 	public static String getRankAverageQuery(String username) {
 		return "SELECT avg(Rank) as Media FROM Review WHERE ReceiverUser = '" + username + "'";
+	}
+
+	public static String getPaymentCommand(String owner, int newMoney) {
+		return "UPDATE User SET Money = " + newMoney + " where Username = '" + owner + "';";
 	}
 }
