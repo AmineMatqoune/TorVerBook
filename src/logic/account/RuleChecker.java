@@ -24,22 +24,6 @@ public final class RuleChecker extends Account {
 		//loadOwnInfo();
 	}
 
-	/*public void loadOwnInfo() {
-
-	}
-
-	public void convalidateAd(Ad ad) {
-
-	}
-
-	public void banAd(Ad ad) {
-
-	}
-
-	public void banUser(User u) {
-		
-	}*/
-
 	public List<Ad> getListAd() {
 		return listAd;
 	}
