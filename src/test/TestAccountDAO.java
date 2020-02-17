@@ -11,7 +11,7 @@ import logic.account.AccountType;
 import logic.dao.AccountDAO;
 
 public class TestAccountDAO {
-
+	
 	@Test
 	public void testLogInCorrect() throws SQLException, ParseException {
 		AccountDAO account = new AccountDAO();

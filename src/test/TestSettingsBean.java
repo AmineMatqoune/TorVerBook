@@ -13,6 +13,7 @@ import logic.bean.SettingsBean;
 
 public class TestSettingsBean {
 
+	//TEST CASE SVILUPPATO DA: Ludovico Di Iorio 0254277
 	@Test
 	public void testCheckInfoCorrect() throws SQLException, ParseException {
 		SettingsBean sBean = new SettingsBean();
@@ -57,6 +58,7 @@ public class TestSettingsBean {
 
 	//Ora iniziano i test sulle informazioni che eccedono la lunghezza massima
 	
+	//TEST CASE SVILUPPATO DA: Abdelrahman 0253048
 	@Test
 	public void testCheckInfoWrongName2() throws SQLException, ParseException {
 		SettingsBean sBean = new SettingsBean();
