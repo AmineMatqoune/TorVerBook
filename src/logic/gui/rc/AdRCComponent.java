@@ -46,11 +46,13 @@ public class AdRCComponent extends AdComponent {
 		con = AdRCController.getInstance();
 		if(con.acceptAd(id))
 			new InfoPopup("Annuncio Convalidato!", (Stage) pane.getScene().getWindow());
+		con.showRCAd(con.getPane());
 	}
 
 	private void closePress() {
 		con = AdRCController.getInstance();
 		if(con.deleteAd(id))
 			new InfoPopup("Annuncio Eliminato!", (Stage) pane.getScene().getWindow());
+		con.showRCAd(con.getPane());
 	}
 }

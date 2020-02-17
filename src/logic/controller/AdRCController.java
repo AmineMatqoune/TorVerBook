@@ -25,6 +25,7 @@ public class AdRCController {
 	private AdRCController() {}
 	
 	public void showRCAd(Pane pane) {
+		pane.getChildren().clear();
 		scenePane = pane;
 		// ricava gli ad che hanno fatto all'utente dal metodo privato getAd()
 		ads = this.getAd();
@@ -100,6 +101,10 @@ public class AdRCController {
 			}
 		}
 		return ads[i].getOwnerUsername();
+	}
+	
+	public Pane getPane() {
+		return scenePane;
 	}
 	
 	public static AdRCController getInstance() {

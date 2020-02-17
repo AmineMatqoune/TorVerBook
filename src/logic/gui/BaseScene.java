@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 
 import java.io.FileNotFoundException;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import logic.gui.popup.ErrorPopup;
 
@@ -27,7 +25,6 @@ public abstract class BaseScene {
 	
 	protected BaseScene() {
 		Pane pane = new Pane();
-		calculateStageDimensions();
 		scene = new Scene(pane, sceneWidth, sceneHeight);
 
 		try {
@@ -80,11 +77,6 @@ public abstract class BaseScene {
 			languageButton.setText("ENG");
 		else
 			languageButton.setText("ITA");
-	}
-
-	private void calculateStageDimensions() {
-		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-		sceneHeight = (int) screenBounds.getHeight() - 28;
 	}
 
 	public Scene getScene() {

@@ -54,6 +54,7 @@ public class AdUComponent extends AdComponent{
 		try {
 			return dao.addAdToFavouriteList(adBean);
 		} catch (ParseException e) {
+			new InfoPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 			return false;
 		}
 	}
@@ -63,7 +64,7 @@ public class AdUComponent extends AdComponent{
 		try {
 			return dao.removeAdFromFavouriteList(adBean);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			new InfoPopup(e.getMessage(), (Stage)pane.getScene().getWindow());
 			return false;
 		}
 	}
