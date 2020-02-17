@@ -1,8 +1,0 @@
-Functional Requirements:
-
-1-The system shall save user's favorite ads when the user clicks on the ad's star.
-
-2-The system shall allow user to filter* the search of books.
-	*filter is based on "Title", "College Course", "Price".
-
-3-The system shall decrease by 1 the quantity of books when the ad (relative to the book) is marked as sold by the seller.

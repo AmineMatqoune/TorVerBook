@@ -1,2 +1,0 @@
--Quando convalidi un Ad o Review, sul db ci deve stare scritto quale rulechecker l'ha convalidato, vedi il metodo getUpdateReviewStateCommand in QueriesGenerator
--Popola il db

@@ -1,5 +1,0 @@
--Il sistema ogni volta che si avvia, fa lo scan di tutti gli ad e modifica la visibilità di ciascuno di essi nel momento in cui
-scadono, si accorge di quegli ad che nonostante abbiano la visibilità massima, hanno raggiunto la scadenza
-
-
--Il sistema visualizza gli ad secondo una logica basata sul livello di visibilità e tempo. 

@@ -1,7 +1,0 @@
-Functional Requirements:
-
-1-The system shall provide the possibility to user to contact other users via chat and show phone number and email.
-
-2-The system shall place highlighted ads on the top of the search list.
-
-3-The system shall provide the possibility to rank the seller of a book with a rating between 1 and 5 stars.
