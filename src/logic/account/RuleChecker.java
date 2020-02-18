@@ -15,7 +15,7 @@ public final class RuleChecker extends Account {
 	private int salary;
 	private LocalDate workStartTime;
 	private LocalDate workFinishTime;
-	private int numConvalidatedAds;
+	private int numConvalidatedAds = 0;
 
 	// methods for RuleChecker's actions
 
@@ -63,11 +63,7 @@ public final class RuleChecker extends Account {
 		this.workFinishTime = workFinishTime;
 	}
 
-	public int getNumConvalidatedAds() {
-		return numConvalidatedAds;
-	}
-
-	public void setNumConvalidatedAds(int numConvalidatedAds) {
-		this.numConvalidatedAds = numConvalidatedAds;
+	public void incNumConvalidatedAds(){
+		this.numConvalidatedAds = this.numConvalidatedAds + 1;
 	}
 }

@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
+
+import logic.account.RuleChecker;
 import logic.account.User;
 import logic.ad.Ad;
 import logic.bean.AdBean;
@@ -173,10 +175,14 @@ public class AdDAO {
 	}
 	
 	public boolean validateAdRC(long id) throws SQLException {
+		RuleChecker rc = (RuleChecker) AccountDAO.getInstance().getAccountObject();
+		rc.incNumConvalidatedAds();
 		return dbManager.updateAdState(id);
 	}
 	
 	public boolean deleteAdRC(long id) throws SQLException {
+		RuleChecker rc = (RuleChecker) AccountDAO.getInstance().getAccountObject();
+		rc.incNumConvalidatedAds();
 		return dbManager.deleteAd(id);
 	}
 	
