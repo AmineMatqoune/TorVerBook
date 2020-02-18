@@ -155,6 +155,11 @@ public class DBManager {
 		init();
 		return stmt.executeQuery(QueriesGenerator.getRankAverageQuery(username));
 	}
+
+	public ResultSet getEmail(String username) throws SQLException {
+		init();
+		return stmt.executeQuery("SELECT Email as email FROM User WHERE Email = '" + username + "';");
+	}
 	
 	private void init() throws SQLException {
 		stmt = null;

@@ -102,6 +102,13 @@ public class AccountDAO {
 		result.first();
 		return result.getInt("NumViolations");
 	}
+	
+	public String getEmail(String username) throws SQLException {
+		dbManager = DBManager.getInstance();
+		result = dbManager.getEmail(username);
+		result.first();
+		return result.getString("email");
+	}
 
 	public void toBan(String username) throws SQLException {
 		dbManager = DBManager.getInstance();

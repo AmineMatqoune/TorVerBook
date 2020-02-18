@@ -2,6 +2,9 @@ package logic.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+
+import javax.mail.internet.AddressException;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -14,6 +17,7 @@ import logic.dao.AdDAO;
 import logic.gui.AdComponent;
 import logic.gui.popup.ErrorPopup;
 import logic.gui.rc.AdRCComponent;
+import logic.utils.SendMail;
 
 public class AdRCController {
 
@@ -80,12 +84,18 @@ public class AdRCController {
 				AccountDAO userDAO = AccountDAO.getInstance();
 				String username = retrieveUsernameById(id);
 				int violations = userDAO.getNumViolation(username);
-				if (violations >= 4) 
+				SendMail send = new SendMail(userDAO.getEmail(username), scenePane);
+				if (violations >= 4) {
 					userDAO.toBan(username);
+					send.sendReportingEmail("A causa del superamente del numero limite di violazioni, sei sstato bannato.");
+				}
+				else {
+					send.sendReportingEmail("Il tuo annuncio è stato rifiutato, e fino ad ora hai compiuto " + (violations+1) + ". Alla quinta violazione verrai bannato.\nCordiali saluti da TorVerBook");
+				}
 				userDAO.incViolations(username, violations);
 				return true;
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AddressException e) {
 			new ErrorPopup(e.getMessage(), (Stage) scenePane.getScene().getWindow());
 		}
 		return false;
@@ -112,6 +122,4 @@ public class AdRCController {
 			AdRCController.instance = new AdRCController();
 		return AdRCController.instance;
 	}
-	
-	
 }

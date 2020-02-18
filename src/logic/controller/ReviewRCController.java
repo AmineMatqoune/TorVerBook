@@ -2,6 +2,9 @@ package logic.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+
+import javax.mail.internet.AddressException;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -13,6 +16,7 @@ import logic.dao.AccountDAO;
 import logic.gui.popup.InfoPopup;
 import logic.gui.rc.ReviewRCComponent;
 import logic.review.Review;
+import logic.utils.SendMail;
 
 public class ReviewRCController {
 	
@@ -85,17 +89,18 @@ public class ReviewRCController {
 				//la review viene convalidata ma
 				//bisogna aggiornare la lista dei review
 				int violations = userDAO.getNumViolation(writer);
+				SendMail send = new SendMail(userDAO.getEmail(writer), scenePane);
 				if(violations >= 4) {
 					//banniamo
 					userDAO.toBan(writer);
+					send.sendReportingEmail("A causa del superamente del numero limite di violazioni, sei sstato bannato.");
 				}
 				else {
-					//incrementiamo
-					userDAO.incViolations(writer, violations);
-				}				
-				
+					send.sendReportingEmail("La tua recensione è stato rifiutata, e fino ad ora hai compiuto " + (violations+1) + ". Alla quinta violazione verrai bannato.\nCordiali saluti da TorVerBook");
+				}
+				userDAO.incViolations(writer, violations);
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AddressException e) {
 			new InfoPopup("Problemi nella censura del review", (Stage) scenePane.getScene().getWindow());
 		}
 	}

@@ -48,5 +48,4 @@ public class TestLogInController {
 		LogInController login = new LogInController();
 		assertEquals(false, login.checkLogin("amine139", "wrongPWD"));
 	}
-
 }
