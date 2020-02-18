@@ -83,7 +83,7 @@ public class TestSettingsBean {
 	@Test
 	public void testCheckInfoWrongUsername2() throws SQLException, ParseException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Abdel", "Abdel", " ", "abdelrhmanabdalla15@gmail.com", "A3bdalla");
+		Account account = new User("Abdel", "Abdel", "fsg", "abdelrhmanabdalla15@gmail.com", "A3bdalla");
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 

@@ -216,7 +216,7 @@ public class SettingScene extends DashBoardScene {
 
 	// metodo per salvare i cambiamenti fatti sulle info dello user
 	private void saveChanges() {
-		if (settingController.applyChanges()) {
+		if (settingController.applyChanges(settingsBean)) {
 			new InfoPopup("Salvataggio riuscito!", (Stage) this.getScene().getWindow());
 			guiController.setHomepageScene((Stage) this.getScene().getWindow());
 		} else {
@@ -255,10 +255,6 @@ public class SettingScene extends DashBoardScene {
 
 	public String getPassword() {
 		return passwordField.getText();
-	}
-
-	public SettingsBean getSettingsBean() {
-		return this.settingsBean;
 	}
 
 	public static SettingScene getInstance() {

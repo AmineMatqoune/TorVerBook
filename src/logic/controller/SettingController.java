@@ -2,7 +2,6 @@ package logic.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-
 import javafx.stage.Stage;
 import logic.account.Account;
 import logic.account.AccountType;
@@ -17,9 +16,7 @@ public class SettingController {
 
 	private AccountDAO accountDao = AccountDAO.getInstance();
 
-	public boolean applyChanges() {
-		SettingsBean settingsBean = SettingScene.getInstance().getSettingsBean();
-		
+	public boolean applyChanges(SettingsBean settingsBean) {
 		try {
 			// controllo dei dati
 			Account tempAccount;
@@ -38,7 +35,6 @@ public class SettingController {
 			
 			if (!settingsBean.checkInfo(tempAccount))
 				return false;
-
 			// aggiorno database
 			accountDao.updateAccountInfo(tempAccount);
 		} catch (SQLException | ParseException e) {
