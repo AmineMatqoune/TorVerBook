@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="lib/tomcat-embed-logging-juli.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-embed-logging-log4j.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat7-embed-websocket.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Amine/Desktop/TorVerBook.git/trunk/lib/servlet-api-3.0-7.0.0pre2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
