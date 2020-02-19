@@ -6,11 +6,42 @@
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="TorVerBook">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../eclipse/java-2019-09/eclipse/"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
+    <path id="JUnit 5.libraryclasspath">
+        <pathelement location="../../../.p2/pool/plugins/org.junit.jupiter.api_5.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit.jupiter.engine_5.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit.jupiter.migrationsupport_5.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit.jupiter.params_5.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit.platform.commons_1.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit.platform.engine_1.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit.platform.launcher_1.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit.platform.runner_1.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit.platform.suite.api_1.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit.vintage.engine_5.5.1.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.opentest4j_1.2.0.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.apiguardian_1.1.0.v20190826-0900.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+    </path>
     <path id="TorVerBook.classpath">
         <pathelement location="bin"/>
+        <pathelement location="lib/mysql-connector-java-5.1.48.jar"/>
+        <path refid="JUnit 5.libraryclasspath"/>
+        <pathelement location="lib/junit-4.13.jar"/>
+        <pathelement location="lib/mail.jar"/>
+        <pathelement location="lib/annotations-api.jar"/>
+        <pathelement location="lib/ecj-4.4.2.jar"/>
+        <pathelement location="lib/tomcat-dbcp.jar"/>
+        <pathelement location="lib/tomcat-embed-core.jar"/>
+        <pathelement location="lib/tomcat-embed-el.jar"/>
+        <pathelement location="lib/tomcat-embed-jasper.jar"/>
+        <pathelement location="lib/tomcat-embed-logging-juli.jar"/>
+        <pathelement location="lib/tomcat-embed-logging-log4j.jar"/>
+        <pathelement location="lib/tomcat7-embed-websocket.jar"/>
+        <pathelement location="lib/servlet-api-3.0-7.0.0pre2.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -48,5 +79,118 @@
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
+    </target>
+    <target name="BaseGUI">
+        <java classname="logic.GUI.BaseGUI" failonerror="true" fork="yes">
+            <classpath refid="TorVerBook.classpath"/>
+        </java>
+    </target>
+    <target name="Init">
+        <java classname="logic.Init" failonerror="true" fork="yes">
+            <classpath refid="TorVerBook.classpath"/>
+        </java>
+    </target>
+    <target name="LoginGUI">
+        <java classname="logic.GUI.LoginGUI" failonerror="true" fork="yes">
+            <classpath refid="TorVerBook.classpath"/>
+        </java>
+    </target>
+    <target name="LoginPage">
+        <java classname="logic.GUI.LoginPage" failonerror="true" fork="yes">
+            <classpath refid="TorVerBook.classpath"/>
+        </java>
+    </target>
+    <target name="main server">
+        <java classname="logic.Main" failonerror="true" fork="yes">
+            <arg line="--server-mode"/>
+            <classpath refid="TorVerBook.classpath"/>
+        </java>
+    </target>
+    <target name="MainGUI (1)">
+        <java classname="logic.GUI.MainGUI" failonerror="true" fork="yes">
+            <classpath refid="TorVerBook.classpath"/>
+        </java>
+    </target>
+    <target name="MainGUI">
+        <java classname="logic.GUI.MainGui" failonerror="true" fork="yes">
+            <classpath refid="TorVerBook.classpath"/>
+        </java>
+    </target>
+    <target name="test">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestAccountDAO" todir="${junit.output.dir}"/>
+            <test name="test.TestAdDAO" todir="${junit.output.dir}"/>
+            <test name="test.TestLogInController" todir="${junit.output.dir}"/>
+            <test name="test.TestSettingsBean" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="TorVerBook.classpath"/>
+        </junit>
+    </target>
+    <target name="TestAccountDAO">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestAccountDAO" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="TorVerBook.classpath"/>
+        </junit>
+    </target>
+    <target name="TestAdDAO">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestAdDAO" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="TorVerBook.classpath"/>
+        </junit>
+    </target>
+    <target name="TestAdDAO.testCheckIsFavouriteAdCorrect3">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestAdDAO" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="TorVerBook.classpath"/>
+        </junit>
+    </target>
+    <target name="TestLogInController">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestLogInController" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="TorVerBook.classpath"/>
+        </junit>
+    </target>
+    <target name="TestSettingsBean">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestSettingsBean" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="TorVerBook.classpath"/>
+        </junit>
+    </target>
+    <target name="TorVerBook">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestAccountDAO" todir="${junit.output.dir}"/>
+            <test name="test.TestAdDAO" todir="${junit.output.dir}"/>
+            <test name="test.TestLogInController" todir="${junit.output.dir}"/>
+            <test name="test.TestSettingsBean" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="TorVerBook.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
 </project>
