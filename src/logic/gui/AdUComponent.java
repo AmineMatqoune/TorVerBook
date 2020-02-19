@@ -23,7 +23,10 @@ public class AdUComponent extends AdComponent{
     
 	public AdUComponent(AdBean adBean) {
 		super(adBean);
-
+		
+		ownerUsernameLabel.setUnderline(true);
+		sendMex.setUnderline(true);
+		
 		try {
 			Pane starPane = new Pane();
 			starPane.setPrefSize(40, 40);

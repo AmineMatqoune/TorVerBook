@@ -17,7 +17,9 @@ public class AdComponent {
 	private String textfont;
 	private int thickness;
 	private String adStyle;
-
+	protected Label ownerUsernameLabel;
+	protected Label sendMex;
+	
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 380;
 	public static final String HEADER = " Bold";
@@ -80,12 +82,13 @@ public class AdComponent {
 		descriptionLabel.setPadding(new Insets(20));
 		descPane.getChildren().add(descriptionLabel);
 
-		Label ownerUsernameLabel = new Label("By " + adBean.getUsername());
+		ownerUsernameLabel = new Label("By " + adBean.getUsername());
 		ownerUsernameLabel.setTextFill(adBean.getTextColor());
 		ownerUsernameLabel.setFont(new Font(textfont + HEADER, thickness));
 		ownerUsernameLabel.setStyle(adStyle);
 		ownerUsernameLabel.setLayoutX(348);
 		ownerUsernameLabel.setLayoutY(53);
+		ownerUsernameLabel.setCursor(Cursor.HAND);
 		pane.getChildren().add(ownerUsernameLabel);
 
 		Pane infoAdPane = new Pane();
@@ -117,15 +120,15 @@ public class AdComponent {
 		categorylabel.setLayoutY(143);
 		infoAdPane.getChildren().add(categorylabel);
 
-		Label label10 = new Label("Send Message");
-		label10.setTextFill(adBean.getTextColor());
-		label10.setFont(new Font(textfont, thickness));
-		label10.setLayoutX(35);
-		label10.setLayoutY(200);
-		label10.setCursor(Cursor.HAND);
-		label10.setPadding(new Insets(5));
+		sendMex = new Label("Send Message");
+		sendMex.setTextFill(adBean.getTextColor());
+		sendMex.setFont(new Font(textfont + HEADER, thickness));
+		sendMex.setLayoutX(35);
+		sendMex.setLayoutY(200);
+		sendMex.setCursor(Cursor.HAND);
+		sendMex.setPadding(new Insets(5));
 		
-		infoAdPane.getChildren().add(label10);
+		infoAdPane.getChildren().add(sendMex);
 	}
 
 	public void setY(int y) {
