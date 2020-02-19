@@ -37,7 +37,7 @@ public class SendMail {
 	 
 	    Session session = Session.getInstance(props, null);
 	    session.setDebug(true);
-	 
+	    
 	    // Creazione delle BodyParts del messaggio
 	    MimeBodyPart messageBodyPart1 = new MimeBodyPart();
 	 
@@ -50,11 +50,11 @@ public class SendMail {
 	      msg.setSubject("TorVerBook - InfoMail");
 	      msg.setSentDate(new Date());
 	      msg.setFrom(new InternetAddress(mittente));
-	 
+
 	      // destinatario
 	      msg.addRecipient(Message.RecipientType.TO,
 	      new InternetAddress(recipient));
-	 
+	      
 	      // corpo del messaggio
 	      messageBodyPart1.setText(text);
 	      multipart.addBodyPart(messageBodyPart1);

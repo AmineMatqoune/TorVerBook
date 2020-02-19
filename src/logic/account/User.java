@@ -2,6 +2,7 @@ package logic.account;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -59,7 +60,7 @@ public final class User extends Account {
 	}
 
 	public boolean addAd(Ad ad) {
-		if(pay(ad)) {
+		if(pay(ad)) {               //se il pagamento va a buon fine, aggiungiamo l'ad alla lista
 			if(myAdList != null) {	
 				Ad[] newMyAdList = Arrays.copyOf(myAdList, myAdList.length + 1);
 				newMyAdList[myAdList.length] = ad;
@@ -77,9 +78,9 @@ public final class User extends Account {
 	private boolean pay(Ad ad) { 
 		LocalDate finish = LocalDate.parse(ad.getFinishHighlightStr(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalDate start = LocalDate.parse(ad.getStartHighlightStr(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
+		int days = (int) Duration.between(start.atStartOfDay(), finish.atStartOfDay()).toDays();
 		//Ci siamo calcolati il costo finale dell'ad
-		int price = ad.getHighlight().getPricePerDay() * finish.compareTo(start);     
+		int price = ad.getHighlight().getPricePerDay() * days;     
 		if(price <= money) {
 			setMoney(getMoney() - price);
 			return true;

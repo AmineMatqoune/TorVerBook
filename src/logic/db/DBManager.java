@@ -158,7 +158,7 @@ public class DBManager {
 
 	public ResultSet getEmail(String username) throws SQLException {
 		init();
-		return stmt.executeQuery("SELECT Email as email FROM User WHERE Email = '" + username + "';");
+		return stmt.executeQuery("SELECT Email FROM User WHERE Username = '" + username + "';");
 	}
 	
 	private void init() throws SQLException {
