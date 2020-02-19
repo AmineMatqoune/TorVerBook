@@ -20,7 +20,7 @@ public class LogInController {
 			if (accountDao.logIn(username, password)) {
 				return true;
 			} else {
-				if(accountDao.getErrorMessage().equals("USER_BANNED"))
+				if (accountDao.getErrorMessage().equals("USER_BANNED"))
 					new InfoPopup("Account bannato!", (Stage) LogInScene.getInstance().getScene().getWindow());
 				// Notify log-in error
 				return false;
@@ -35,14 +35,16 @@ public class LogInController {
 		guiController.setSignUpScene((Stage) LogInScene.getInstance().getScene().getWindow());
 	}
 
-	/* metodo per caricare l'homepage per lo user/ruleChecker
-	*  applicazione del GoF Factory Method, più precisamente:
-	*  il vero oggetto homepage da instanziare si sa solo a runtime, 
-	*  in base al risultato si sa se si è loggato un utente o un rulechecker;
-	*  in entrambi i casi, è necessario presentare un messaggio di benvenuto.
-	*/
+	/*
+	 * metodo per caricare l'homepage per lo user/ruleChecker applicazione del GoF
+	 * Factory Method, più precisamente: il vero oggetto homepage da instanziare si
+	 * sa solo a runtime, in base al risultato si sa se si è loggato un utente o un
+	 * rulechecker; in entrambi i casi, è necessario presentare un messaggio di
+	 * benvenuto.
+	 */
 	public void loadHomepage() {
-		Homepage home = guiController.loadNextHomepage(accountDao.getAccountType(), (Stage) LogInScene.getInstance().getScene().getWindow());
+		Homepage home = guiController.loadNextHomepage(accountDao.getAccountType(),
+				(Stage) LogInScene.getInstance().getScene().getWindow());
 		home.salut();
 	}
 }

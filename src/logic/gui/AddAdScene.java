@@ -219,11 +219,14 @@ public class AddAdScene extends DashBoardScene {
 	private void addAd() {
 		int result = addAdController.addAd();
 		if(result == 0) 
-			new InfoPopup("Qualcosa è andato storto, verifica di aver inserito correttamente tutte le informazioni e di avere credito a sufficienza", (Stage) scene.getWindow());
+			new InfoPopup("Qualcosa è andato storto, verifica di aver inserito correttamente tutte le informazioni e di"
+					+ " avere credito a sufficienza", (Stage) scene.getWindow());
 		else if (result == 1)
-			new InfoPopup("Non hai abbastanza credito per poter usufruire dell'highlight fino al " + getToDate() + ". Prova a cambiare le date o abbassare il livello di highlight!", (Stage) scene.getWindow());
+			new InfoPopup("Non hai abbastanza credito per poter usufruire dell'highlight fino al " + getToDate() + ". "
+					+ "Prova a cambiare le date o abbassare il livello di highlight!", (Stage) scene.getWindow());
 		else if (result == 2) {
-			new InfoPopup("La tua richiesta di inserimento è stata inviata!\nAttendere la conferma dei nostri moderatori, dopodichè l'annuncio sarà visibile sulla bacheca" , (Stage)scene.getWindow());
+			new InfoPopup("La tua richiesta di inserimento è stata inviata!\nAttendere la conferma dei nostri moderatori, "
+					+ "dopodichè l'annuncio sarà visibile sulla bacheca" , (Stage)scene.getWindow());
 			guiController.setHomepageScene((Stage) scene.getWindow());
 		}			
 	}
@@ -246,8 +249,9 @@ public class AddAdScene extends DashBoardScene {
 			else
 				intPrice = Integer.parseInt(price1Field.getText());
 			return intPrice;
-		} else
+		} else {
 			return 0; // se exchangeRadioButton è premuto, ritorna 0
+		}
 	}
 
 	public AdType getType() {
