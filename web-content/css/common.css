@@ -1,0 +1,274 @@
+html,
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+:root {
+  --primary-color: #2ecc71;
+  --secondary-color: #32a288;
+  --primary-font: "Montserrat", sans-serif;
+  --secondary-font: "Comfortaa", cursive;
+  --header-height: 120px;
+  --bg-img: url("../resources/torvergata.PNG");
+}
+
+header {
+  background-color: var(--primary-color);
+  width: 100%;
+  height: var(--header-height);
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 5px solid white;
+  padding-top: 10px;
+}
+
+header:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-bottom: 5px solid var(--primary-color);
+  width: 100%;
+  bottom: -10px;
+}
+
+header #header-title {
+  width: 100%;
+  text-align: center;
+  font-size: 45px;
+  font-family: var(--primary-font);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+}
+
+#content-container {
+  width: 100%;
+  height: calc(100% - var(--header-height));
+  background: var(--bg-img) repeat;
+}
+
+#content-container .user-auth-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background: #00000080;
+  /* background: #2d3436b0; */
+}
+
+#content-container .user-auth-container label {
+  font-size: 20px;
+  font-family: var(--secondary-font);
+  color: White;
+  font-weight: 600;
+}
+
+#content-container .user-auth-container input {
+  width: 100%;
+}
+
+#content-container .user-auth-container button {
+  width: 100%;
+  text-transform: uppercase;
+  font-family: var(--primary-font);
+  font-weight: 600;
+  font-size: 22px;
+}
+
+#content-container .user-auth-container hr {
+  height: 1px;
+  background: #ffffff60;
+  width: 90%;
+}
+
+#content-container .user-auth-container button.sign-up-btn {
+  color: #17a2b8;
+}
+
+.main-panels-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 5px;
+  margin-left: 0% !important;
+  background: #00000080;
+}
+
+.main-panels-container panel {
+  height: 100%;
+  padding: 0px;
+  overflow: auto;
+}
+
+.main-panels-container panel.left-panel button {
+  width: 100%;
+  height: calc(100% / 7);
+  background: var(--primary-color);
+  border-style: none;
+  font-family: var(--primary-font);
+  font-size: 30px;
+  font-weight: 500;
+  color: white;
+  text-align: left;
+}
+
+.main-panels-container panel.left-panel button em {
+  float: left;
+  margin: 6px 20px 0px 10px;
+}
+
+.main-panels-container panel.left-panel button:hover {
+  background: var(--secondary-color);
+}
+
+.main-panels-container panel.left-panel button.active {
+  background: var(--secondary-color);
+}
+
+.main-panels-container panel.right-panel{
+	  background-color: #44d380;
+}
+
+.main-panels-container panel.right-panel .no-messages-container{
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 flex-direction: column;
+	 height: 100%;
+	 color: #ecf0f1;
+}
+
+.main-panels-container panel.right-panel .no-messages-container h1{
+	font-family: var(--primary-font);
+	font-weight: 600;
+	font-size: 30px;
+}
+
+.main-panels-container panel.right-panel .chat-container {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.main-panels-container panel.right-panel .chat-container .chat-message-input {
+  width: 100%;
+  height: 38px;
+  background: white;
+  border-radius: 0px;
+  border: none;
+}
+
+.main-panels-container
+  panel.right-panel
+  .chat-container
+  .chat-messages-container {
+  width: 100%;
+  background: white;
+  margin: 0px;
+  padding: 10px;
+  height: 25vh;
+  overflow-y: auto;
+}
+
+.main-panels-container
+  panel.right-panel
+  .chat-container
+  .chat-messages-container
+  .chat-message {
+  width: 100%;
+}
+
+.main-panels-container panel.central-panel {
+  background-color: #44d380;
+  border: 1px solid #3e3d4b50;
+  position: relative;
+}
+
+.central-panel .ads-container {
+  height: calc(100%-100px);
+  overflow-y: auto;
+}
+
+.central-panel .ads-container ad {
+  background: #00a8ff;
+  display: flex;
+  padding: 20px 20px;
+  flex-direction: column;
+  border: 1px solid #0097e6;
+}
+
+.central-panel .ads-container .title {
+  font-family: var(--primary-font);
+  align-self: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.central-panel .ads-container .description {
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  color: #f5f6fa;
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.central-panel .ads-container .info-container {
+  align-self: center;
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  width: 100%;
+  color: #fad390;
+}
+
+.central-panel .ads-container .info-container .price {
+  font-family: var(--primary-font);
+  align-self: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-right: 15px;
+}
+
+.central-panel .ads-container .info-container .price-icon {
+  align-self: center;
+  font-size: 18px !important;
+}
+
+.central-panel .ads-container .info-container .quantity {
+  font-family: var(--secondary-font);
+  align-self: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.central-panel .ads-container .send-message {
+  font-family: var(--primary-font);
+  align-self: center;
+  font-size: 25px;
+}
+
+.central-panel .ads-container h6 {
+  font-family: var(--secondary-font);
+  color: #f7f1e3;
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+  #content-container {
+    height: auto !important;
+  }
+
+  #content-container .user-auth-container {
+    height: auto !important;
+  }
+  #content-container .user-auth-container form {
+    width: 100% !important;
+  }
+}

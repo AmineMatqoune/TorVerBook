@@ -6,5 +6,14 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="lib/junit-4.13.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="lib/ecj-4.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-core.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-el.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-jasper.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-logging-juli.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat-embed-logging-log4j.jar"/>
+	<classpathentry kind="lib" path="lib/tomcat7-embed-websocket.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

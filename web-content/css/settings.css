@@ -1,0 +1,7 @@
+.central-panel form {
+  padding: 15px;
+}
+
+.central-panel form label{
+	font-family: var(--primary-font);
+}

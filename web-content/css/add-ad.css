@@ -1,0 +1,16 @@
+.central-panel form {
+  padding: 15px;
+}
+
+.central-panel form label{
+	font-family: var(--primary-font);
+}
+
+
+.central-panel form button {
+  width: 25%;
+  float: right;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-family: var(--primary-font);
+}

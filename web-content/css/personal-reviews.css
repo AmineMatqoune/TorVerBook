@@ -1,0 +1,49 @@
+.central-panel .reviews-container {
+  background: #00a8ff;
+  display: flex;
+  padding: 20px 20px;
+  flex-direction: column;
+  border: 1px solid #0097e6;
+}
+
+.central-panel .reviews-container .book-info {
+  border-bottom: 1px solid #3e3d4b50;
+  margin-bottom: 15px;
+}
+
+.central-panel .reviews-container .book-info .book-title {
+  font-family: var(--primary-font);
+  align-self: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.central-panel .reviews-container .book-info .book-description {
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  color: #f5f6fa;
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.central-panel .reviews-container .book-info .book-rating {
+  color: #f5f6fa;
+  margin-bottom: 10px;
+}
+
+.central-panel .reviews-container .personal-opinion {
+  font-family: var(--primary-font);
+  font-size: 18px;
+  color: #f5f6fa;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.central-panel .reviews-container h6 {
+  font-family: var(--secondary-font);
+  color: #f7f1e3;
+  font-size: 15px;
+}
