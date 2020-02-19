@@ -2,7 +2,7 @@ package torverbook.web.server;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.util.logging.Logger;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.Globals;
@@ -26,11 +26,11 @@ public class WebServer {
 			return new File(".").getCanonicalPath() + "/";
 	}
 	
-	public static boolean directoryExists() throws URISyntaxException, IOException {
+	public static boolean directoryExists() throws IOException {
 		return new File(getRootPath() + "web-content").exists();
 	}
 
-	public void createServerEmbeddedWithCustomPath(String path) throws IOException, LifecycleException {
+	public void createServerEmbeddedWithCustomPath(String path) throws LifecycleException {
 		Tomcat tomcat = new Tomcat();
 		tomcat.setBaseDir(TMP_DIR);
 		tomcat.setPort(this.port);
@@ -43,7 +43,7 @@ public class WebServer {
 		tomcat.getServer().await();
 	}
 
-	public void createServerEmbedded() throws IOException, LifecycleException, URISyntaxException {
+	public void createServerEmbedded() throws IOException, LifecycleException {
 		Tomcat tomcat = new Tomcat();
 		tomcat.setBaseDir(TMP_DIR);
 		tomcat.setPort(this.port);
@@ -64,18 +64,22 @@ public class WebServer {
 
 	}
 
-	public void createServerEmbeddedWithXML() throws IOException, LifecycleException, URISyntaxException {
-		Tomcat tomcat = new Tomcat();
-		tomcat.setBaseDir(TMP_DIR);
-		tomcat.setPort(this.port);
-		
-		String rootWebAppDirectoryPath = getRootPath();
-		Context ctx = tomcat.addWebapp(tomcat.getHost(), "", rootWebAppDirectoryPath + WEB_CONTENT_DIR);
-		ctx.getServletContext().setAttribute(Globals.ALT_DD_ATTR, rootWebAppDirectoryPath + WEB_CONFIG_XML);
-		((StandardJarScanner) ctx.getJarScanner()).setScanAllDirectories(true);
+	public void createServerEmbeddedWithXML() throws IOException, LifecycleException {
+		try {
+			Tomcat tomcat = new Tomcat();
+			tomcat.setBaseDir(TMP_DIR);
+			tomcat.setPort(this.port);
+			
+			String rootWebAppDirectoryPath = getRootPath();
+			Context ctx = tomcat.addWebapp(tomcat.getHost(), "", rootWebAppDirectoryPath + WEB_CONTENT_DIR);
+			ctx.getServletContext().setAttribute(Globals.ALT_DD_ATTR, rootWebAppDirectoryPath + WEB_CONFIG_XML);
+			((StandardJarScanner) ctx.getJarScanner()).setScanAllDirectories(true);
 
-		tomcat.start();
-		tomcat.getServer().await();
+			tomcat.start();
+			tomcat.getServer().await();
+		} catch (IOException | LifecycleException e){
+			Logger.getLogger(e.getMessage());
+		}
 	}
 
 }
