@@ -19,7 +19,7 @@ public class FavouriteListController extends AuthenticatedController {
 	private static final long serialVersionUID = -4203738735443040247L;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			super.doGet(req, resp);
 			if (authenticatedUser) {

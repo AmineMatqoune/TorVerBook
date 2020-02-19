@@ -12,7 +12,7 @@ public class PersonalReviewsController extends AuthenticatedController {
 	private static final long serialVersionUID = 565120048959767406L;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			super.doGet(req, resp);
 			if (authenticatedUser) {

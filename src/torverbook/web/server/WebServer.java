@@ -22,49 +22,62 @@ public class WebServer {
 		this.port = port;
 	}
 	
-	private static String getRootPath() throws IOException {
+	private static String getRootPath() {
+		try {
 			return new File(".").getCanonicalPath() + "/";
+		} catch (IOException e){
+			Logger.getLogger(e.getMessage());
+		}
+		//da Amine
+		return null;		
 	}
 	
-	public static boolean directoryExists() throws IOException {
-		return new File(getRootPath() + "web-content").exists();
+	public static boolean directoryExists() {
+		return new File(getRootPath() + "web-content").exists();	
 	}
 
-	public void createServerEmbeddedWithCustomPath(String path) throws LifecycleException {
-		Tomcat tomcat = new Tomcat();
-		tomcat.setBaseDir(TMP_DIR);
-		tomcat.setPort(this.port);
-		Context ctx = tomcat.addWebapp(tomcat.getHost(), "", path);
-		((StandardJarScanner) ctx.getJarScanner()).setScanAllDirectories(true);
-		Tomcat.addServlet(ctx, "loginController", new LoginController());
-		ctx.addServletMapping("/login", "loginController");
-		ctx.addWelcomeFile("index.jsp");
-		tomcat.start();
-		tomcat.getServer().await();
+	public void createServerEmbeddedWithCustomPath(String path) {
+		try {
+			Tomcat tomcat = new Tomcat();
+			tomcat.setBaseDir(TMP_DIR);
+			tomcat.setPort(this.port);
+			Context ctx = tomcat.addWebapp(tomcat.getHost(), "", path);
+			((StandardJarScanner) ctx.getJarScanner()).setScanAllDirectories(true);
+			Tomcat.addServlet(ctx, "loginController", new LoginController());
+			ctx.addServletMapping("/login", "loginController");
+			ctx.addWelcomeFile("index.jsp");
+			tomcat.start();
+			tomcat.getServer().await();
+		} catch (LifecycleException e) {
+			Logger.getLogger(e.getMessage());
+		}
 	}
 
-	public void createServerEmbedded() throws IOException, LifecycleException {
-		Tomcat tomcat = new Tomcat();
-		tomcat.setBaseDir(TMP_DIR);
-		tomcat.setPort(this.port);
+	public void createServerEmbedded()  {
+		try {
+			Tomcat tomcat = new Tomcat();
+			tomcat.setBaseDir(TMP_DIR);
+			tomcat.setPort(this.port);
 
-		String webappDirLocation = getRootPath();
-		Context ctx = tomcat.addWebapp(tomcat.getHost(), "", webappDirLocation + "web-content");
+			String webappDirLocation = getRootPath();
+			Context ctx = tomcat.addWebapp(tomcat.getHost(), "", webappDirLocation + "web-content");
 
-		((StandardJarScanner) ctx.getJarScanner()).setScanAllDirectories(true);
-		((StandardJarScanner) ctx.getJarScanner()).setScanClassPath(true);
-		((StandardJarScanner) ctx.getJarScanner()).setScanBootstrapClassPath(true);
-		((StandardJarScanner) ctx.getJarScanner()).setScanAllFiles(true);
+			((StandardJarScanner) ctx.getJarScanner()).setScanAllDirectories(true);
+			((StandardJarScanner) ctx.getJarScanner()).setScanClassPath(true);
+			((StandardJarScanner) ctx.getJarScanner()).setScanBootstrapClassPath(true);
+			((StandardJarScanner) ctx.getJarScanner()).setScanAllFiles(true);
 
-		Tomcat.addServlet(ctx, "loginController", new LoginController());
-		ctx.addServletMapping("/login", "loginController");
-		ctx.addWelcomeFile("index.jsp");
-		tomcat.start();
-		tomcat.getServer().await();
-
+			Tomcat.addServlet(ctx, "loginController", new LoginController());
+			ctx.addServletMapping("/login", "loginController");
+			ctx.addWelcomeFile("index.jsp");
+			tomcat.start();
+			tomcat.getServer().await();
+		} catch (LifecycleException e) {
+			Logger.getLogger(e.getMessage());
+		}
 	}
 
-	public void createServerEmbeddedWithXML() throws IOException, LifecycleException {
+	public void createServerEmbeddedWithXML() {
 		try {
 			Tomcat tomcat = new Tomcat();
 			tomcat.setBaseDir(TMP_DIR);
@@ -77,7 +90,7 @@ public class WebServer {
 
 			tomcat.start();
 			tomcat.getServer().await();
-		} catch (IOException | LifecycleException e){
+		} catch (LifecycleException e){
 			Logger.getLogger(e.getMessage());
 		}
 	}

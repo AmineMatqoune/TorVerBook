@@ -2,8 +2,6 @@ package torverbook.web.controllers;
 
 import java.io.IOException;
 import java.util.logging.Logger;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,7 +22,7 @@ public class LogoutController extends AuthenticatedController {
 				req.getSession().removeAttribute(RequestAttributes.AUTHENTICATED_ATTRIBUTE_NAME);
 			}
 			resp.sendRedirect(UrlRoutes.LOGIN_FULL_URL);
-		} catch (ServletException | IOException ex) {
+		} catch (IOException ex) {
 			Logger.getLogger(this.getClass().getSimpleName()).severe(ex.getMessage());
 		}
 	}

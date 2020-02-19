@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		String username = req.getParameter(RequestAttributes.USERNAME_ATTRIBUTE_NAME);
 		String password = req.getParameter(RequestAttributes.PW_ATTRIBUTE_NAME);
 

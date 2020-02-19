@@ -21,7 +21,7 @@ public class DashboardController extends AuthenticatedController {
 	private static AdDAO adDao = AdDAO.getInstance();
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			super.doGet(req, resp);
 			if (authenticatedUser) {

@@ -20,7 +20,7 @@ public class PersonalAdsController extends AuthenticatedController {
 	private static final long serialVersionUID = -7502812230747771542L;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			super.doGet(req, resp);
 			if (authenticatedUser) {

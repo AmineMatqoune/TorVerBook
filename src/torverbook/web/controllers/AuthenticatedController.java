@@ -2,8 +2,6 @@ package torverbook.web.controllers;
 
 import java.io.IOException;
 import java.util.logging.Logger;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +15,7 @@ public abstract class AuthenticatedController extends HttpServlet {
 	protected static boolean authenticatedUser = false;
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			Object authenticated = req.getSession().getAttribute(RequestAttributes.AUTHENTICATED_ATTRIBUTE_NAME);
 			boolean parsedToBooleanAuthenticated = authenticated == null ? Boolean.FALSE : (boolean) authenticated;
