@@ -2,10 +2,9 @@ package logic.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-
 import javafx.stage.Stage;
-import logic.account.AccountType;
 import logic.dao.AccountDAO;
+import logic.gui.Homepage;
 import logic.gui.LogInScene;
 import logic.gui.popup.ErrorPopup;
 import logic.gui.popup.InfoPopup;
@@ -36,11 +35,14 @@ public class LogInController {
 		guiController.setSignUpScene((Stage) LogInScene.getInstance().getScene().getWindow());
 	}
 
-	// metodo per caricare l'homepage per lo user/ruleChecker
+	/* metodo per caricare l'homepage per lo user/ruleChecker
+	*  applicazione del GoF Factory Method, più precisamente:
+	*  il vero oggetto homepage da instanziare si sa solo a runtime, 
+	*  in base al risultato si sa se si è loggato un utente o un rulechecker;
+	*  in entrambi i casi, è necessario presentare un messaggio di benvenuto.
+	*/
 	public void loadHomepage() {
-		if (accountDao.getAccountType() == AccountType.USER)
-			guiController.setHomepageScene((Stage) LogInScene.getInstance().getScene().getWindow());
-		else
-			guiController.setRCAdScene((Stage) LogInScene.getInstance().getScene().getWindow());
+		Homepage home = guiController.loadNextHomepage(accountDao.getAccountType(), (Stage) LogInScene.getInstance().getScene().getWindow());
+		home.salut();
 	}
 }

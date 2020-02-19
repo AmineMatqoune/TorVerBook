@@ -1,8 +1,10 @@
 package logic.controller;
 
 import javafx.stage.Stage;
+import logic.account.AccountType;
 import logic.gui.AddAdScene;
 import logic.gui.FavouriteListScene;
+import logic.gui.Homepage;
 import logic.gui.HomepageScene;
 import logic.gui.LogInScene;
 import logic.gui.MyAdsScene;
@@ -29,9 +31,10 @@ public class GUIController {
 		stage.setScene(signup.getScene());
 	}
 	
-	public void setHomepageScene(Stage stage) {
+	public Homepage setHomepageScene(Stage stage) {
 		HomepageScene homepage = HomepageScene.getInstance(); 
 		stage.setScene(homepage.getScene());
+		return homepage;
 	}
 	
 	public void setSettingsScene(Stage stage) {
@@ -69,9 +72,18 @@ public class GUIController {
 		stage.setScene(review.getScene());
 	}
 	
-	public void setRCAdScene(Stage stage) {
+	public Homepage setRCAdScene(Stage stage) {
 		AdRCScene ad = new AdRCScene();
 		stage.setScene(ad.getScene());
+		return ad;
+	}
+	
+	public Homepage loadNextHomepage(AccountType type, Stage stage) {
+		switch(type) {
+			case USER: return setHomepageScene(stage);
+			case RULE_CHECKER:return setRCAdScene(stage);
+			default: return null;
+		}			
 	}
 	
 	public static GUIController getInstance() {

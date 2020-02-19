@@ -20,8 +20,9 @@ import logic.ad.AdCategory;
 import logic.ad.AdType;
 import logic.controller.HomepageController;
 import logic.gui.popup.ErrorPopup;
+import logic.gui.popup.InfoPopup;
 
-public class HomepageScene extends DashBoardScene {
+public class HomepageScene extends DashBoardScene implements Homepage {
 
 	private static HomepageScene instance = null;
 	private HomepageController hpController = new HomepageController();
@@ -146,6 +147,12 @@ public class HomepageScene extends DashBoardScene {
 		hpController.searchList(categoryBox.getValue().toString(), typeBox.getValue().toString(), slider.getValue());
 	}
 
+	@Override
+	public void salut() {
+		new InfoPopup("Benvenuto nella piattaforma TorVerBook!", (Stage) centralPane.getScene().getWindow());
+		
+	}
+	
 	public static HomepageScene getInstance() {
 		if (instance == null)
 			instance = new HomepageScene();

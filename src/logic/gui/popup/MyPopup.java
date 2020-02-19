@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
@@ -37,6 +38,7 @@ public abstract class MyPopup {
 		label.setLayoutY(30);
 		label.setWrapText(true);
 		label.setFont(new Font("Arial Bold", 12));
+		label.setTextAlignment(TextAlignment.CENTER);
 		label.setAlignment(Pos.CENTER);
 		pane.getChildren().add(label);
 

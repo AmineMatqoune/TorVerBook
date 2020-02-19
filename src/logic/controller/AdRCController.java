@@ -68,8 +68,6 @@ public class AdRCController {
 		try {
 			AdDAO adDAO = AdDAO.getInstance();
 			if (adDAO.validateAdRC(id)) 
-				// la review viene convalidata ma
-				// bisogna aggiornare la lista dei review
 				return true;
 		} catch (SQLException e) {
 			new ErrorPopup(e.getMessage(), (Stage) scenePane.getScene().getWindow());
@@ -87,7 +85,7 @@ public class AdRCController {
 				SendMail send = new SendMail(userDAO.getEmail(username), scenePane);
 				if (violations >= 4) {
 					userDAO.toBan(username);
-					send.sendReportingEmail("A causa del superamente del numero limite di violazioni, sei sstato bannato.");
+					send.sendReportingEmail("A causa del superamente del numero limite di violazioni, sei stato bannato.");
 				}
 				else {
 					send.sendReportingEmail("Il tuo annuncio è stato rifiutato, e fino ad ora hai compiuto " + (violations+1) + ". Alla quinta violazione verrai bannato.\nCordiali saluti da TorVerBook");
