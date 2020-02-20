@@ -2,6 +2,7 @@ package logic.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+
 import javafx.stage.Stage;
 import logic.dao.AccountDAO;
 import logic.exceptions.InvalidCredentialsException;
@@ -9,6 +10,7 @@ import logic.gui.Homepage;
 import logic.gui.LogInScene;
 import logic.gui.popup.ErrorPopup;
 import logic.gui.popup.InfoPopup;
+import logic.utils.TestUtils;
 
 public class LogInController {
 
@@ -28,11 +30,11 @@ public class LogInController {
 		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());
 		} catch (InvalidCredentialsException e) {
-//			if(LogInScene.getInstance() == null) {
-				return false;
-//			}else {
-//				new InfoPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());								
-//			}
+			 if(TestUtils.isRunningTest()) {
+				 return false;
+			 }else {			 
+				new InfoPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());								
+			 }
 		}
 		return false;
 	}

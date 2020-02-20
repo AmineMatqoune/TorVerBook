@@ -1,15 +1,21 @@
 package logic.utils;
 
-import javax.mail.*;
-import javax.mail.internet.*;
+import java.util.Date;
+import java.util.Properties;
+import java.util.logging.Logger;
 
-import com.sun.istack.internal.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import logic.gui.popup.InfoPopup;
-
-import java.util.*;
 
 public class SendMail {
 	private Pane infoPane;
@@ -70,7 +76,7 @@ public class SendMail {
 	      transport.close();
 	 
 	    }catch(MessagingException e) {
-	    	Logger.getLogger(this.getClass()).severe("Impossible to send Report email!");
+	    	Logger.getLogger("Send Mail").severe("Impossible to send Report email!");
 	    }
 	}
 }
