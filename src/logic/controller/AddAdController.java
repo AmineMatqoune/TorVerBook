@@ -3,12 +3,21 @@ package logic.controller;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
+
+import org.eclipse.jdt.core.compiler.InvalidInputException;
+
 import javafx.stage.Stage;
 
 import logic.bean.AddAdBean;
 import logic.dao.AdDAO;
+import logic.exceptions.EmptyFieldException;
+import logic.exceptions.ExcessiveInputLengthException;
+import logic.exceptions.InsufficientFundsException;
+import logic.exceptions.InvalidInputValueException;
 import logic.gui.AddAdScene;
+import logic.gui.LogInScene;
 import logic.gui.popup.ErrorPopup;
+import logic.gui.popup.InfoPopup;
 
 public class AddAdController {
 
@@ -17,8 +26,9 @@ public class AddAdController {
 
 		AddAdBean adBean = new AddAdBean();
 		try {
-			if (!adBean.check())
-				return 0;
+			if (!adBean.check()) {
+				throw new InvalidInputException();
+			}
 
 			AdDAO adDAO = AdDAO.getInstance();
 			if (!adDAO.createNewAd())
@@ -26,6 +36,9 @@ public class AddAdController {
 		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) AddAdScene.getInstance().getScene().getWindow());
 			return 3;
+		}catch(InvalidInputValueException | EmptyFieldException
+				| ExcessiveInputLengthException | InvalidInputException | InsufficientFundsException e) {
+			new InfoPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());
 		}
 		return 2;
 	}

@@ -9,17 +9,18 @@ import org.junit.Test;
 
 import logic.account.AccountType;
 import logic.dao.AccountDAO;
+import logic.exceptions.InvalidCredentialsException;
 
 public class TestAccountDAO {
 	
 	@Test
-	public void testLogInCorrect() throws SQLException, ParseException {
+	public void testLogInCorrect() throws SQLException, ParseException, InvalidCredentialsException {
 		AccountDAO account = new AccountDAO();
 		assertEquals(true, account.logIn("Ludo98", "ludo.pwd"));
 	}
 	
 	@Test
-	public void testLogInWrong() throws SQLException, ParseException {
+	public void testLogInWrong() throws SQLException, ParseException, InvalidCredentialsException {
 		AccountDAO account = new AccountDAO();
 		assertEquals(false, account.logIn("notExistingUser", "notExistingUserPWD"));
 	}

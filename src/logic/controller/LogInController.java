@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import javafx.stage.Stage;
 import logic.dao.AccountDAO;
+import logic.exceptions.InvalidCredentialsException;
 import logic.gui.Homepage;
 import logic.gui.LogInScene;
 import logic.gui.popup.ErrorPopup;
@@ -19,14 +20,15 @@ public class LogInController {
 			// if log-in is successful, create user object and load homepage
 			if (accountDao.logIn(username, password)) {
 				return true;
-			} else {
-				if (accountDao.getErrorMessage().equals("USER_BANNED"))
-					new InfoPopup("Account bannato!", (Stage) LogInScene.getInstance().getScene().getWindow());
-				// Notify log-in error
-				return false;
+			} else if (accountDao.getErrorMessage().equals("USER_BANNED")) {
+				new InfoPopup("Account bannato!", (Stage) LogInScene.getInstance().getScene().getWindow());
 			}
+			// Notify log-in error
+			return false;
 		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());
+		} catch (InvalidCredentialsException e) {
+			new InfoPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());
 		}
 		return false;
 	}

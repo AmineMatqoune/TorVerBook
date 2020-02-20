@@ -1,7 +1,12 @@
 package logic.bean;
 
+import static logic.utils.DataValidationUtils.checkByMaxLength;
+import static logic.utils.DataValidationUtils.checkNotEmpty;
+
 import logic.account.Account;
 import logic.dao.AccountDAO;
+import logic.exceptions.EmptyFieldException;
+import logic.exceptions.ExcessiveInputLengthException;
 
 public class SettingsBean {
 
@@ -10,7 +15,7 @@ public class SettingsBean {
 	private AccountDAO accountDAO = AccountDAO.getInstance();
 
 	public SettingsBean() {
-		account =  accountDAO.getAccountObject();
+		account = accountDAO.getAccountObject();
 	}
 
 	// METODI PER IMPOSTARE STRINGHE NELLE TEXTFIELD
@@ -70,21 +75,12 @@ public class SettingsBean {
 		account.setPassword(password);
 	}
 
-	public boolean checkInfo(Account account) {
-		boolean expression = false;
-
-		if ((account.getName().length() > 15) || account.getName().equals(""))
-			return expression;
-		if ((account.getSurname().length() > 15) || account.getSurname().equals(""))
-			return expression;
-		if ((account.getUsername().length() > 20) || account.getUsername().equals(""))
-			return expression;
-		if ((account.getEmail().length() > 30) || account.getEmail().equals(""))
-			return expression;
-		if ((account.getPassword().length() > 30) || account.getPassword().equals(""))
-			return expression;
-
-		// no syntax errors found, return true
-		return !expression;
+	public boolean checkInfo(Account account) throws ExcessiveInputLengthException, EmptyFieldException {
+		return checkByMaxLength(account.getName(), 15) && checkNotEmpty(account.getName())
+				&& checkByMaxLength(account.getSurname(), 15) && checkNotEmpty(account.getSurname())
+				&& checkByMaxLength(account.getUsername(), 20) && checkNotEmpty(account.getUsername())
+				&& checkByMaxLength(account.getEmail(), 30) && checkNotEmpty(account.getEmail())
+				&& checkByMaxLength(account.getPassword(), 30) && checkNotEmpty(account.getPassword());
 	}
+
 }

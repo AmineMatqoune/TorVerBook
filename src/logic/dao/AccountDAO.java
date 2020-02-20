@@ -13,6 +13,7 @@ import logic.account.AccountType;
 import logic.account.RuleChecker;
 import logic.account.User;
 import logic.db.DBManager;
+import logic.exceptions.InvalidCredentialsException;
 import logic.exceptions.UsernameAlreadyExistsException;
 
 public class AccountDAO {
@@ -26,7 +27,8 @@ public class AccountDAO {
 	private String errorMessage = "";
 
 	// login case
-	public boolean logIn(String username, String password) throws SQLException, ParseException {
+	public boolean logIn(String username, String password)
+			throws SQLException, ParseException, InvalidCredentialsException {
 		dbManager = DBManager.getInstance();
 		errorMessage = "";
 		accountType = getAccountTypeByPrefix(username);
@@ -37,9 +39,9 @@ public class AccountDAO {
 		}
 		// if exists 1 row in result, then we succesfully logged in
 		if (result.first()) {
-			return createAccountObject(); 
+			return createAccountObject();
 		}
-		return false;
+		throw new InvalidCredentialsException();
 	}
 
 	public void registerUser(User user) throws SQLException, UsernameAlreadyExistsException {
@@ -47,7 +49,7 @@ public class AccountDAO {
 		if (dbManager.insertNewUser(user)) {
 			currentAccount = user;
 			accountType = USER;
-		}else {
+		} else {
 			throw new UsernameAlreadyExistsException(user.getUsername());
 		}
 	}
@@ -63,7 +65,7 @@ public class AccountDAO {
 			user.setNumViolations(result.getInt("NumViolations"));
 			user.setStatus(result.getInt("isBanned"));
 			currentAccount = user;
-			if(user.isBanned()) {
+			if (user.isBanned()) {
 				errorMessage = "USER_BANNED";
 				return false;
 			}
@@ -105,7 +107,7 @@ public class AccountDAO {
 		result.first();
 		return result.getInt("NumViolations");
 	}
-	
+
 	public String getEmail(String username) throws SQLException {
 		dbManager = DBManager.getInstance();
 		result = dbManager.getEmail(username);
@@ -132,7 +134,7 @@ public class AccountDAO {
 	public String getErrorMessage() {
 		return errorMessage;
 	}
-	
+
 	public AccountType getAccountType() {
 		return accountType;
 	}

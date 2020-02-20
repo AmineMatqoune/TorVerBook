@@ -11,12 +11,13 @@ import java.util.Date;
 import logic.ad.Ad;
 import logic.dao.AdDAO;
 import logic.dao.ReviewDAO;
+import logic.exceptions.InsufficientFundsException;
 import logic.review.Review;
 
 public final class User extends Account {
 
 	// User's account info
-	private boolean isBanned = false; 
+	private boolean isBanned = false;
 	private int numViolations;
 	private int money;
 
@@ -59,33 +60,31 @@ public final class User extends Account {
 		return ownReview;
 	}
 
-	public boolean addAd(Ad ad) {
-		if(pay(ad)) {               //se il pagamento va a buon fine, aggiungiamo l'ad alla lista
-			if(myAdList != null) {	
-				Ad[] newMyAdList = Arrays.copyOf(myAdList, myAdList.length + 1);
-				newMyAdList[myAdList.length] = ad;
-				myAdList = newMyAdList;
-			} else {
-				myAdList = new Ad[1];
-				myAdList[0] = ad;
-			}
-			return true;
+	public boolean addAd(Ad ad) throws InsufficientFundsException {
+		pay(ad); // se il pagamento va a buon fine, aggiungiamo l'ad alla lista
+		if (myAdList != null) {
+			Ad[] newMyAdList = Arrays.copyOf(myAdList, myAdList.length + 1);
+			newMyAdList[myAdList.length] = ad;
+			myAdList = newMyAdList;
+		} else {
+			myAdList = new Ad[1];
+			myAdList[0] = ad;
 		}
-		return false;
+		return true;
 	}
-	
-	//returns true if the user has enough money
-	private boolean pay(Ad ad) { 
+
+	// returns true if the user has enough money
+	private void pay(Ad ad) throws InsufficientFundsException {
 		LocalDate finish = LocalDate.parse(ad.getFinishHighlightStr(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		LocalDate start = LocalDate.parse(ad.getStartHighlightStr(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		int days = (int) Duration.between(start.atStartOfDay(), finish.atStartOfDay()).toDays();
-		//Ci siamo calcolati il costo finale dell'ad
-		int price = ad.getHighlight().getPricePerDay() * days;     
-		if(price <= money) {
+		// Ci siamo calcolati il costo finale dell'ad
+		int price = ad.getHighlight().getPricePerDay() * days;
+		if (price <= money) {
 			setMoney(getMoney() - price);
-			return true;
+		} else {
+			throw new InsufficientFundsException();
 		}
-		return false;
 	}
 
 	public int getMoney() {
@@ -93,31 +92,30 @@ public final class User extends Account {
 	}
 
 	public void saveInFavoriteList(Ad ad) {
-		if(favouriteAds != null) {
+		if (favouriteAds != null) {
 			Ad[] newFavouriteList = Arrays.copyOf(favouriteAds, favouriteAds.length + 1);
 			newFavouriteList[favouriteAds.length] = ad;
 			favouriteAds = newFavouriteList;
-		}
-		else {
+		} else {
 			favouriteAds = new Ad[1];
-			favouriteAds[0] = ad;			
+			favouriteAds[0] = ad;
 		}
 	}
-	
+
 	public void removeFromFavoriteList(Ad ad) {
 		favouriteAds = removeAd(favouriteAds, ad);
 	}
-	
+
 	private Ad[] removeAd(Ad[] favouriteList, Ad ad) {
 		Ad[] newList = null;
-		
-		if(favouriteList.length != 1) {
+
+		if (favouriteList.length != 1) {
 			int i;
 			int j = 0;
-			newList = new Ad[favouriteList.length-1];
-			
-			for(i = 0; i != favouriteList.length-1; i++) 
-				if(!favouriteList[i].equals(ad)) {
+			newList = new Ad[favouriteList.length - 1];
+
+			for (i = 0; i != favouriteList.length - 1; i++)
+				if (!favouriteList[i].equals(ad)) {
 					newList[j] = favouriteList[i];
 					j++;
 				}
@@ -133,12 +131,12 @@ public final class User extends Account {
 	private Ad[] redefineAdList(Ad[] adList, long id) {
 		Ad[] newList = null;
 
-		if(adList.length != 1) {
+		if (adList.length != 1) {
 			int i;
 			int j = 0;
-			newList = new Ad[adList.length-1];
-			for(i = 0; i != adList.length; i++) {
-				if(adList[i].getId() != id) {
+			newList = new Ad[adList.length - 1];
+			for (i = 0; i != adList.length; i++) {
+				if (adList[i].getId() != id) {
 					newList[j] = adList[i];
 					j++;
 				}

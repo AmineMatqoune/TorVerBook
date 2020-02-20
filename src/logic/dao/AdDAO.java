@@ -11,6 +11,7 @@ import logic.ad.Ad;
 import logic.bean.AdBean;
 import logic.bean.AddAdBean;
 import logic.db.DBManager;
+import logic.exceptions.InsufficientFundsException;
 import logic.highlight.Highlight;
 
 public class AdDAO {
@@ -118,7 +119,7 @@ public class AdDAO {
 	}
 	
 	
-	public boolean createNewAd() throws SQLException, ParseException {
+	public boolean createNewAd() throws SQLException, ParseException, InsufficientFundsException {
 		AddAdBean addAdBean = new AddAdBean();
 		User user = (User) AccountDAO.getInstance().getAccountObject();
 		//we create a temporary Ad object (ID = 0), once we added it to bd, we can update his real ID
