@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import torverbook.web.account.User;
 import torverbook.web.constants.RequestAttributes;
+import torverbook.web.constants.UrlRoutes;
 import torverbook.web.dao.AccountDAO;
 
 public class SignUpController extends HttpServlet {
@@ -21,6 +22,12 @@ public class SignUpController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		try {
+			Object authenticated = req.getSession().getAttribute(RequestAttributes.AUTHENTICATED_ATTRIBUTE_NAME);
+			boolean parsedToBooleanAuthenticated = authenticated == null ? Boolean.FALSE : (boolean) authenticated;
+			if (parsedToBooleanAuthenticated) {
+				resp.sendRedirect(UrlRoutes.DASHBOARD_FULL_URL);
+				return;
+			}
 			req.getRequestDispatcher("/sign-up.jsp").forward(req, resp);
 		} catch (ServletException | IOException ex) {
 			Logger.getLogger(this.getClass().getSimpleName()).severe(ex.getMessage());

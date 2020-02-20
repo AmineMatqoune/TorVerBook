@@ -78,8 +78,8 @@
 							placeholder="******************">
 					</div>
 					<div class="form-group col-lg-6">
-						<label for="password-input">Confirm Password:</label> <input
-							type="password" class="form-control" id="password-input"
+						<label for="password-confirm-input">Confirm Password:</label> <input
+							type="password" class="form-control" id="password-confirm-input"
 							name="password-confirm"
 							placeholder="******************">
 					</div>

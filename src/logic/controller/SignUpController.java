@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 import logic.account.User;
 import logic.bean.SignUpBean;
 import logic.dao.AccountDAO;
+import logic.exceptions.EmptyFieldException;
+import logic.exceptions.UsernameAlreadyExistsException;
 import logic.gui.SignUpScene;
 import logic.gui.popup.ErrorPopup;
 
@@ -39,7 +41,7 @@ public class SignUpController {
 			}
 			else //passwords don't match
 				return false;
-		} catch (SQLException | ParseException e) {
+		} catch (SQLException | ParseException | EmptyFieldException | UsernameAlreadyExistsException e) {
 			signUpScene = SignUpScene.getInstance();
 			new ErrorPopup(e.getMessage(), (Stage) signUpScene.getScene().getWindow());
 			return false;

@@ -39,34 +39,34 @@
 		<div class="row main-panels-container">
 			<panel class="left-panel col-lg-3"> <a
 				href="/dashboard">
-				<button>
+				<button id="home-btn">
 					<em class="fa fa-home" /></em> Home
 				</button>
 			</a> <a href="/settings">
-				<button>
+				<button id="settings-btn">
 					<em class="fa fa-gear" /></em> Settings
 				</button>
 			</a> <a href="/add-ad">
-				<button>
+				<button id="add-ad-btn">
 					<em class="fa fa-plus" /></em> Add Ad
 				</button>
 			</a> <a href="/personal-ads">
-				<button>
+				<button id="my-ads-btn">
 					<em class="fa fa-bookmark" /></em> My Ads
 				</button>
 			</a> <a href="/personal-reviews">
-				<button>
+				<button id="my-reviews-btn">
 					<em class="fa fa-th-list" /></em> My Reviews
 				</button>
 			</a> <a href="/favourite">
-				<button class="active">
+				<button class="active" id="favourites-btn">
 					<em class="fa fa-star" /></em> Favourite List
 				</button>
 			</a> <a href="/logout">
-				<button>
+				<button id="logout-btn">
 					<em class="fa fa-sign-out-alt" /></em> Logout
 				</button>
-			</a></panel>
+			</a> </panel>
 			<panel class="central-panel col-lg-6">
 			<div class="ads-container">
 				<%

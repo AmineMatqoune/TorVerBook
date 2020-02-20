@@ -13,6 +13,7 @@ import logic.account.AccountType;
 import logic.account.RuleChecker;
 import logic.account.User;
 import logic.db.DBManager;
+import logic.exceptions.UsernameAlreadyExistsException;
 
 public class AccountDAO {
 
@@ -41,11 +42,13 @@ public class AccountDAO {
 		return false;
 	}
 
-	public void registerUser(User user) throws SQLException {
+	public void registerUser(User user) throws SQLException, UsernameAlreadyExistsException {
 		dbManager = DBManager.getInstance();
 		if (dbManager.insertNewUser(user)) {
 			currentAccount = user;
 			accountType = USER;
+		}else {
+			throw new UsernameAlreadyExistsException(user.getUsername());
 		}
 	}
 

@@ -20,8 +20,8 @@ public class LogoutController extends AuthenticatedController {
 				req.getSession().removeAttribute(RequestAttributes.ACCOUNT_ATTRIBUTE_NAME);
 				req.getSession().removeAttribute(RequestAttributes.USERNAME_ATTRIBUTE_NAME);
 				req.getSession().removeAttribute(RequestAttributes.AUTHENTICATED_ATTRIBUTE_NAME);
+				resp.sendRedirect(UrlRoutes.LOGIN_FULL_URL);
 			}
-			resp.sendRedirect(UrlRoutes.LOGIN_FULL_URL);
 		} catch (IOException ex) {
 			Logger.getLogger(this.getClass().getSimpleName()).severe(ex.getMessage());
 		}

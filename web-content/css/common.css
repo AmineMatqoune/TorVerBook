@@ -88,7 +88,7 @@ header #header-title {
   width: 90%;
 }
 
-#content-container .user-auth-container button.sign-up-btn {
+#content-container .user-auth-container button#sign-up-btn {
   color: #17a2b8;
 }
 
