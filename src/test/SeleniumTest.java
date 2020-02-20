@@ -2,9 +2,12 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -14,6 +17,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import logic.ad.AdCategory;
 import logic.ad.AdType;
+import logic.dao.AccountDAO;
+import logic.exceptions.InvalidCredentialsException;
 import logic.highlight.HighlightType;
 import torverbook.web.bean.AddAdBean;
 
@@ -47,27 +52,35 @@ public class SeleniumTest {
 	@Test
 	public void testSignUp() {
 		Random random = new Random(85);
-		assertEquals(true, signUp("UtenteProva5" + random.nextInt()));
+		String trimmedRandomString = String.valueOf(random.nextInt()).substring(1, 6);
+		String generatedEmail = "Pippone" + trimmedRandomString + "@gmail.com";
+		assertEquals(true, signUp("UtenteProva" + trimmedRandomString, generatedEmail));
 	}
 
-	public boolean signUp(String username) {
+	public boolean signUp(String username, String email) {
 		System.setProperty(webChromeDriver, chromeDriverPath);
 		WebDriver driver = new ChromeDriver();
+		String tmpPW = "12345688";
 		driver.get(site);
 		while (!driver.getCurrentUrl().contains("signup")) {
 			driver.findElement(By.id("sign-up-btn")).click();
 		}
 		driver.findElement(By.id("first-name-input")).sendKeys("PippoNome");
 		driver.findElement(By.id("last-name-input")).sendKeys("PippoCognome");
-		driver.findElement(By.id("email-input")).sendKeys("Pippo@email.it");
+		driver.findElement(By.id("email-input")).sendKeys(email);
 		driver.findElement(By.id(usernameID)).sendKeys(username);
 		driver.findElement(By.id("phone-number-input")).sendKeys("0123456789");
 		driver.findElement(By.id("birth-date-input")).sendKeys("07-02-1997");
-		driver.findElement(By.id(passwordID)).sendKeys("123456");
-		driver.findElement(By.id("password-confirm-input")).sendKeys("123456");
+		driver.findElement(By.id(passwordID)).sendKeys(tmpPW);
+		driver.findElement(By.id("password-confirm-input")).sendKeys(tmpPW);
 		driver.findElement(By.id("register-btn")).click();
-		
-		return true;
+		boolean registered = false;
+		try {
+			registered = AccountDAO.getInstance().logIn(username, tmpPW);
+		} catch (SQLException | ParseException | InvalidCredentialsException e) {
+			Logger.getLogger("Sel").warning(e.getMessage());
+		}
+		return registered;
 	}
 
 	public boolean logIn(String username, String password) {
@@ -125,6 +138,7 @@ public class SeleniumTest {
 		for (int i = 0; i < titles.size(); i++) {
 			if (titles.get(i).getText().contains(adBean.getTitle())
 					&& descs.get(i).getText().contains(adBean.getDescription())) {
+				driver.close();
 				return true;
 			}
 		}
