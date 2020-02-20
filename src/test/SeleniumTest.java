@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,7 @@ public class SeleniumTest {
 	 * locale TomCat in maniera tale da poter testare Selenium, altrimenti il sito
 	 * risulta irraggiungibile
 	 */
-
+	
 //	@Test
 	public void testLogInSuccessfull() {
 		assertEquals(true, logIn("Amine139", "amine.pwd"));
@@ -37,6 +38,11 @@ public class SeleniumTest {
 		assertEquals(true, addAd(adBean));
 	}
 
+	@Test
+	public void testSignUp() {
+		
+	}
+	
 	public boolean logIn(String username, String password) {
 		System.setProperty("webdriver.chrome.driver", "driver/chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
@@ -83,9 +89,4 @@ public class SeleniumTest {
 		driver.findElement(By.id("ad-to-date-input")).sendKeys("04-04-2020");
 		return false;
 	}
-
-	private String adaptDateFormatToSelenium(LocalDate date) {
-		return String.format("%02d", date.getDayOfMonth()) + "-" + date.getMonthValue() + "-" + date.getYear();
-	}
-
 }

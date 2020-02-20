@@ -40,10 +40,12 @@ public class SignUpController {
 
 					// return to log-in page
 					loadLogIn();
-				} else // if user's inputs are wrong, signUp will not proceed
+				} else { // if user's inputs are wrong, signUp will not proceed
 					return false;
-			} else // passwords don't match
+				}
+			} else { // passwords don't match
 				return false;
+			}
 		} catch (SQLException | ParseException e) {
 			signUpScene = SignUpScene.getInstance();
 			new ErrorPopup(e.getMessage(), (Stage) signUpScene.getScene().getWindow());

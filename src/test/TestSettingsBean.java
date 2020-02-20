@@ -15,12 +15,23 @@ import logic.exceptions.ExcessiveInputLengthException;
 
 public class TestSettingsBean {
 
+	private String pwdLudo = "ludo.pwd";
+	private String emailLudo = "ludovico479@gmail.com";
+	private String nameLudo = "Ludovico";
+	private String usernameLudo = "Ludo98";
+	private String surnameLudo = "Di Iorio";
+	
+	private String pwdAbdel = "A3bdalla";
+	private String nameAbdel = "Abdel";
+	private String emailAbdel = "abdelrhmanabdalla15@gmail.com";
+	private String usernameAbdel = "CptPackage";
+	
 	// TEST CASE SVILUPPATO DA: Ludovico Di Iorio 0254277
 	@Test
 	public void testCheckInfoCorrect()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Ludovico", "Di Iorio", "Ludo98", "ludovico479@gmail.com", "ludo.pwd");
+		Account account = new User(nameLudo,surnameLudo, usernameLudo, emailLudo, pwdLudo);
 		assertEquals(true, sBean.checkInfo(account)); // mi aspetto true
 	}
 
@@ -28,7 +39,7 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongName()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("", "Di Iorio", "Ludo98", "ludovico479@gmail.com", "ludo.pwd");
+		Account account = new User("", surnameLudo, usernameLudo, emailLudo, pwdLudo);
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 
@@ -36,7 +47,7 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongSurname()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Ludovico", "", "Ludo98", "ludovico479@gmail.com", "ludo.pwd");
+		Account account = new User(nameLudo, "", usernameLudo, emailLudo, pwdLudo);
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 
@@ -44,7 +55,7 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongUsername()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Ludovico", "Di Iorio", "", "ludovico479@gmail.com", "ludo.pwd");
+		Account account = new User(nameLudo, surnameLudo, "", emailLudo, pwdLudo);
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 
@@ -52,7 +63,7 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongEmail()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Ludovico", "Di Iorio", "Ludo98", "", "ludo.pwd");
+		Account account = new User(nameLudo, surnameLudo, usernameLudo, "", pwdLudo);
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 
@@ -60,7 +71,7 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongPassword()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Ludovico", "Di Iorio", "Ludo98", "ludovico479@gmail.com", "");
+		Account account = new User(nameLudo, surnameLudo, usernameLudo, emailLudo, "");
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 
@@ -71,7 +82,7 @@ public class TestSettingsBean {
 	public void testCheckInfoCorrect2()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Abdel", "Abdel", "CptPackage", "abdelrhmanabdalla15@gmail.com", "A3bdalla");
+		Account account = new User(nameAbdel, nameAbdel, usernameAbdel, emailAbdel, pwdAbdel);
 		assertEquals(true, sBean.checkInfo(account)); // mi aspetto true
 	}
 
@@ -79,8 +90,8 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongName2()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("abcdefghijklmnopq", "Abdel", "CptPackage", "abdelrhmanabdalla15@gmail.com",
-				"A3bdalla");
+		Account account = new User("abcdefghijklmnopq", nameAbdel, usernameAbdel, emailAbdel,
+				pwdAbdel);
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 
@@ -88,8 +99,8 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongSurname2()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Abdel", "abcdefghijklmnopq", "CptPackage", "abdelrhmanabdalla15@gmail.com",
-				"A3bdalla");
+		Account account = new User(nameAbdel, "abcdefghijklmnopq", usernameAbdel, emailAbdel,
+				pwdAbdel);
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 
@@ -97,7 +108,7 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongUsername2()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Abdel", "Abdel", "fsg", "abdelrhmanabdalla15@gmail.com", "A3bdalla");
+		Account account = new User(nameAbdel, nameAbdel, "fsg", "abdelrhmanabdalla15@gmail.com", pwdAbdel);
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 
@@ -105,7 +116,7 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongEmail2()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Abdel", "Abdel", "CptPackage", "abcdefghijklmnopqrstuvwxyz123456", "A3bdalla");
+		Account account = new User(nameAbdel, nameAbdel, usernameAbdel, "abcdefghijklmnopqrstuvwxyz123456", pwdAbdel);
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
 
@@ -113,7 +124,7 @@ public class TestSettingsBean {
 	public void testCheckInfoWrongPassword2()
 			throws SQLException, ParseException, ExcessiveInputLengthException, EmptyFieldException {
 		SettingsBean sBean = new SettingsBean();
-		Account account = new User("Abdel", "Abdel", "CptPackage", "abdelrhmanabdalla15@gmail.com",
+		Account account = new User(nameAbdel, nameAbdel, usernameAbdel, emailAbdel,
 				"0123456789032145678901236547891");
 		assertEquals(false, sBean.checkInfo(account)); // mi aspetto false
 	}
