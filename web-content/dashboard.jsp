@@ -117,10 +117,12 @@
 					if (listObj != null) {
 						list = (List<Ad>) listObj;
 					}
+					
 					for (int i = 0; i < list.size(); i++) {
 						Ad ad = list.get(i);
+						String highlight = ad.getHighlightTypeStr().toLowerCase();
 				%>
-				<ad class="ad-container">
+				<ad class="ad-container <%= highlight %>">
 				<div class="title"><%=ad.getTitle()%></div>
 				<div class="info-container">
 					<span class="price"><em

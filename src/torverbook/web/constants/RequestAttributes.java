@@ -33,4 +33,7 @@ public class RequestAttributes {
 	public static final String AD_HIGHLIGHT_TO_DATE_ATTRIBUTE_NAME = "ad-highlight-to-date";
 	
 	public static final String ERROR_MESSAGE_ATTRIBUTE_NAME = "error-message";	
+
+	public static final String REVIEWS_ATTRIBUTE_NAME = "reviews";	
+
 }

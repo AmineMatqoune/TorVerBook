@@ -12,6 +12,7 @@ import torverbook.web.account.User;
 import torverbook.web.ad.Ad;
 import torverbook.web.bean.AddAdBean;
 import torverbook.web.db.DBManager;
+import torverbook.web.highlight.Highlight;
 
 public class AdDAO {
 
@@ -67,6 +68,9 @@ public class AdDAO {
 			ad.setType(result.getString("Type"));
 			ad.setStatus(result.getInt("isSold"));
 			ad.setQuantity(result.getInt("Quantity"));
+			Highlight highlight = new Highlight();
+			highlight.setHighlightType(result.getString("Highlight"));
+			ad.setHighlight(highlight);
 			myAds.add(ad);
 		}
 		return myAds;

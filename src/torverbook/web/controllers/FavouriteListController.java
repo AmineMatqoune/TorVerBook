@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import torverbook.web.account.Account;
 import torverbook.web.ad.Ad;
 import torverbook.web.constants.RequestAttributes;
 import torverbook.web.dao.AdDAO;
@@ -23,7 +24,9 @@ public class FavouriteListController extends AuthenticatedController {
 		try {
 			super.doGet(req, resp);
 			if (authenticatedUser) {
-				String username = (String) req.getSession().getAttribute(RequestAttributes.USERNAME_ATTRIBUTE_NAME);
+				String username = ((Account) req.getSession().getAttribute(RequestAttributes.ACCOUNT_ATTRIBUTE_NAME))
+						.getUsername();
+				System.out.println("Current:" + username);
 				List<Ad> ads = AdDAO.getInstance().loadFavouriteAds(username);
 				if (!ads.isEmpty()) {
 					req.setAttribute(RequestAttributes.ADS_LIST_ATTRIBUTE_NAME, ads);

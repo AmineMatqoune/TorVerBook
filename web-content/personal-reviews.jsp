@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="torverbook.web.review.Review"%>
+<%@page import="torverbook.web.constants.RequestAttributes"%>
 <html lang="Java">
 
 <head>
@@ -32,8 +36,7 @@
 	</header>
 	<div id="content-container">
 		<div class="row main-panels-container">
-			<panel class="left-panel col-lg-3"> <a
-				href="/dashboard">
+			<panel class="left-panel col-lg-3"> <a href="/dashboard">
 				<button id="home-btn">
 					<em class="fa fa-home" /></em> Home
 				</button>
@@ -63,6 +66,39 @@
 				</button>
 			</a> </panel>
 			<panel class="central-panel col-lg-6">
+			<div class="reviews-container">
+				<%
+					Object listObj = request.getAttribute(RequestAttributes.REVIEWS_ATTRIBUTE_NAME);
+					Review[] list = new Review[10];
+					if (listObj != null) {
+						list = (Review[]) listObj;
+					}
+
+					for (int i = 0; i < list.length; i++) {
+						Review review = list[i];
+						int reviewRank = Integer.valueOf(review.getRank().substring(0, 1));
+				%>
+				<review>
+				<div class="book-info">
+					<div class="book-description"><%=review.getText()%></div>
+					<div class="book-rating">
+						<%
+							for (int j = 0; j < reviewRank; j++) {
+						%>
+						<i class="fas fa-star" aria-hidden="true"></i>
+						<%
+							}
+						%>
+					</div>
+				</div>
+
+				<h6>
+					-<%=review.getWriter()%></h6>
+				</review>
+				<%
+					}
+				%>
+			</div>
 			</panel>
 
 			<panel class="right-panel col-lg-3">

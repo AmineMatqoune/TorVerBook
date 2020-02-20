@@ -195,11 +195,35 @@ header #header-title {
 }
 
 .central-panel .ads-container ad {
-  background: #00a8ff;
   display: flex;
   padding: 20px 20px;
   flex-direction: column;
+}
+
+.central-panel .ads-container ad.base {
+  background: #27ae60;
+  border: 1px solid #27ae60;
+}
+
+.central-panel .ads-container ad.medium {
+  background: #95a5a6;
+  border: 1px solid #95a5a6;
+}
+
+.central-panel .ads-container ad.super {
+  background: #00a8ff;
   border: 1px solid #0097e6;
+}
+
+.central-panel .ads-container ad.medium button {
+  background: #ecf0f1;
+  border-color: #ecf0f1;
+  color: #34495e;
+}
+
+.central-panel .ads-container ad.base button {
+  background: #2ecc71;
+  border-color: #2ecc71;
 }
 
 .central-panel .ads-container .title {
