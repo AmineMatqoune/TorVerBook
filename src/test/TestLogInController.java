@@ -8,8 +8,6 @@ import logic.controller.LogInController;
 
 public class TestLogInController {
 	
-	//TEST CASE SVILUPPATO DA: Amine Matqoune 0253478
-	
 	//CORRECT CREDENTIALS: Username = Amine139
 	//					   Password = amine.pwd
 	

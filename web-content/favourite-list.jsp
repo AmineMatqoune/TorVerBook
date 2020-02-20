@@ -37,8 +37,7 @@
 	</header>
 	<div id="content-container">
 		<div class="row main-panels-container">
-			<panel class="left-panel col-lg-3"> <a
-				href="/dashboard">
+			<panel class="left-panel col-lg-3"> <a href="/dashboard">
 				<button id="home-btn">
 					<em class="fa fa-home" /></em> Home
 				</button>
@@ -78,11 +77,12 @@
 					for (int i = 0; i < list.size(); i++) {
 						Ad ad = list.get(i);
 				%>
-				<ad id="<%= ad.getId() %>" class="ad-container">
+				<ad id="<%=ad.getId()%>" class="ad-container">
 				<div class="title"><%=ad.getTitle()%></div>
+				<i style="align-self: flex-end; color: #fad390; cursor: pointer;"
+					class="fas fa-star fa-2x" aria-hidden="true"></i>
 				<div class="info-container">
-					<span class="price">
-					<em
+					<span class="price"> <em
 						class="price-icon fa fa-money-check-alt"></em> <%=ad.getPrice()%></span>
 					<span class="quantity">(<%=ad.getQuantity()%> left)
 					</span>
