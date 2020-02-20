@@ -52,7 +52,7 @@
 						class="form-control" id="password-input" name="password"
 						placeholder="******************">
 				</div>
-				<button type="submit" class="btn btn-info">Login</button>
+				<button type="submit" class="btn btn-info" id="loginBtn">Login</button>
 				<hr />
 				<a href="/signup">
 					<button type="button" class="btn btn-light sign-up-btn">Sign

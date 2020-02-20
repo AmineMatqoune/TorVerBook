@@ -39,11 +39,11 @@
 		<div class="row main-panels-container">
 			<panel class="left-panel col-lg-3"> <a
 				href="/dashboard">
-				<button class="active">
+				<button class="active" id="HomeBtn">
 					<em class="fa fa-home" /></em> Home
 				</button>
 			</a> <a href="/settings">
-				<button>
+				<button id="SettingBtn">
 					<em class="fa fa-gear" /></em> Settings
 				</button>
 			</a> <a href="/add-ad">
