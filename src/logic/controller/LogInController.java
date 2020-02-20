@@ -28,7 +28,11 @@ public class LogInController {
 		} catch (SQLException | ParseException e) {
 			new ErrorPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());
 		} catch (InvalidCredentialsException e) {
-			new InfoPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());
+//			if(LogInScene.getInstance() == null) {
+				return false;
+//			}else {
+//				new InfoPopup(e.getMessage(), (Stage) LogInScene.getInstance().getScene().getWindow());								
+//			}
 		}
 		return false;
 	}

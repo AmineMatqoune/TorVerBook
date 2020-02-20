@@ -3,6 +3,8 @@ package logic.utils;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+import com.sun.istack.internal.logging.Logger;
+
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import logic.gui.popup.InfoPopup;
@@ -68,7 +70,7 @@ public class SendMail {
 	      transport.close();
 	 
 	    }catch(MessagingException e) {
-	    	new InfoPopup("Impossible to send Report email!", (Stage) infoPane.getScene().getWindow());
+	    	Logger.getLogger(this.getClass()).severe("Impossible to send Report email!");
 	    }
 	}
 }
