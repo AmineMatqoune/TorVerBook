@@ -28,8 +28,8 @@ public class DashboardController extends AuthenticatedController {
 				Object adTypeParam = req.getParameter(RequestAttributes.FILTER_TYPE_ATTRIBUTE_NAME);
 				Object adCategoryParam = req.getParameter(RequestAttributes.FILTER_CATEGORY_ATTRIBUTE_NAME);
 				Object adPriceParam = req.getParameter(RequestAttributes.FILTER_PRICE_ATTRIBUTE_NAME);
-				List<Ad> ads;
-
+				List<Ad> ads;				
+				
 				if (adTypeParam != null && adCategoryParam != null && adPriceParam != null) {
 					String adTypeFilter = (String) adTypeParam;
 					String adCategoryFilter = (String) adCategoryParam;

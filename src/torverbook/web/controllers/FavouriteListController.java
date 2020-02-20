@@ -26,7 +26,6 @@ public class FavouriteListController extends AuthenticatedController {
 			if (authenticatedUser) {
 				String username = ((Account) req.getSession().getAttribute(RequestAttributes.ACCOUNT_ATTRIBUTE_NAME))
 						.getUsername();
-				System.out.println("Current:" + username);
 				List<Ad> ads = AdDAO.getInstance().loadFavouriteAds(username);
 				if (!ads.isEmpty()) {
 					req.setAttribute(RequestAttributes.ADS_LIST_ATTRIBUTE_NAME, ads);

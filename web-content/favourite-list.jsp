@@ -81,7 +81,8 @@
 				<ad class="ad-container">
 				<div class="title"><%=ad.getTitle()%></div>
 				<div class="info-container">
-					<span class="price"><em
+					<span class="price">
+					<em
 						class="price-icon fa fa-money-check-alt"></em> <%=ad.getPrice()%></span>
 					<span class="quantity">(<%=ad.getQuantity()%> left)
 					</span>

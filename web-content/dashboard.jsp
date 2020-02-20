@@ -37,8 +37,7 @@
 	</header>
 	<div id="content-container">
 		<div class="row main-panels-container">
-			<panel class="left-panel col-lg-3"> <a
-				href="/dashboard">
+			<panel class="left-panel col-lg-3"> <a href="/dashboard">
 				<button class="active" id="home-btn">
 					<em class="fa fa-home" /></em> Home
 				</button>
@@ -117,18 +116,21 @@
 					if (listObj != null) {
 						list = (List<Ad>) listObj;
 					}
-					
+
 					for (int i = 0; i < list.size(); i++) {
 						Ad ad = list.get(i);
 						String highlight = ad.getHighlightTypeStr().toLowerCase();
 				%>
-				<ad class="ad-container <%= highlight %>">
+				<ad class="ad-container <%=highlight%>">
 				<div class="title"><%=ad.getTitle()%></div>
 				<div class="info-container">
-					<span class="price"><em
+					<div>
+					</div>
+					 <span class="price"><em
 						class="price-icon fa fa-money-check-alt"></em> <%=ad.getPrice()%></span>
 					<span class="quantity">(<%=ad.getQuantity()%> left)
 					</span>
+					<i class="fas fa-star fa-3x" aria-hidden="true"></i>					
 				</div>
 				<div class="description"><%=ad.getDescription()%></div>
 				<h6>
