@@ -78,7 +78,7 @@
 					for (int i = 0; i < list.size(); i++) {
 						Ad ad = list.get(i);
 				%>
-				<ad class="ad-container">
+				<ad id="<%= ad.getId() %>" class="ad-container">
 				<div class="title"><%=ad.getTitle()%></div>
 				<div class="info-container">
 					<span class="price">

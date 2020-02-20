@@ -121,7 +121,7 @@
 						Ad ad = list.get(i);
 						String highlight = ad.getHighlightTypeStr().toLowerCase();
 				%>
-				<ad class="ad-container <%=highlight%>">
+				<ad id="<%= ad.getId() %>" class="ad-container <%=highlight%>">
 				<div class="title"><%=ad.getTitle()%></div>
 				<div class="info-container">
 					 <span class="price"><em

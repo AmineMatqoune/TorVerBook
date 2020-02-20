@@ -89,7 +89,7 @@ public class ReviewRCController {
 				//la review viene convalidata ma
 				//bisogna aggiornare la lista dei review
 				int violations = userDAO.getNumViolation(writer);
-				SendMail send = new SendMail(userDAO.getEmail(writer), scenePane);
+				SendMail send = new SendMail(userDAO.getEmail(writer));
 				if(violations >= 4) {
 					//banniamo
 					userDAO.toBan(writer);

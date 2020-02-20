@@ -82,7 +82,7 @@ public class AdRCController {
 				AccountDAO userDAO = AccountDAO.getInstance();
 				String username = retrieveUsernameById(id);
 				int violations = userDAO.getNumViolation(username);
-				SendMail send = new SendMail(userDAO.getEmail(username), scenePane);
+				SendMail send = new SendMail(userDAO.getEmail(username));
 				if (violations >= 4) {
 					userDAO.toBan(username);
 					send.sendReportingEmail(

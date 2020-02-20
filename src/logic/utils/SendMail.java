@@ -15,16 +15,12 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import javafx.scene.layout.Pane;
-
 public class SendMail {
-	private Pane infoPane;
 	
 	private String recipient;
 	private String mittente = "torverbook.info@libero.it";
 	
-	public SendMail(String recipient, Pane pane) {
-		infoPane = pane;
+	public SendMail(String recipient) {
 		this.recipient = recipient;
 	}
 	
