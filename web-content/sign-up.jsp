@@ -84,7 +84,7 @@
 							placeholder="******************">
 					</div>
 				</div>
-				<button type="submit" class="btn btn-light sign-up-btn">Sign
+				<button type="submit" class="btn btn-light sign-up-btn" id="register-btn">Sign
 					Up</button>
 			</form>
 		</div>
