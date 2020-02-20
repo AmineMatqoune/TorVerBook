@@ -110,6 +110,15 @@
             <classpath refid="TorVerBook.classpath"/>
         </java>
     </target>
+    <target name="TestLogInController">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestLogInController" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="TorVerBook.classpath"/>
+        </junit>
+    </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">
             <fileset dir="${junit.output.dir}">

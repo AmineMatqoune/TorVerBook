@@ -124,13 +124,10 @@
 				<ad class="ad-container <%=highlight%>">
 				<div class="title"><%=ad.getTitle()%></div>
 				<div class="info-container">
-					<div>
-					</div>
 					 <span class="price"><em
 						class="price-icon fa fa-money-check-alt"></em> <%=ad.getPrice()%></span>
 					<span class="quantity">(<%=ad.getQuantity()%> left)
 					</span>
-					<i class="fas fa-star fa-3x" aria-hidden="true"></i>					
 				</div>
 				<div class="description"><%=ad.getDescription()%></div>
 				<h6>
