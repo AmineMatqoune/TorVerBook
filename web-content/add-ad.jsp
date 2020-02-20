@@ -141,7 +141,7 @@
 						class="form-control" id="ad-to-date-input" placeholder=""
 						name="<%=RequestAttributes.AD_HIGHLIGHT_TO_DATE_ATTRIBUTE_NAME%>">
 				</div>
-				<button class="btn btn-light btn-md">Add Ad</button>
+				<button id="add-new-ad-btn" class="btn btn-light btn-md">Add Ad</button>
 			</form>
 			</panel>
 
